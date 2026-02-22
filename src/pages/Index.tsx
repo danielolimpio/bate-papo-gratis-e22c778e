@@ -7,11 +7,28 @@ import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
 import { useTheme } from "@/hooks/useTheme";
 
+type TabType = "tudo" | "nao-lidas" | "grupos";
+
 export default function Index() {
   const { isDark, toggle } = useTheme();
-  const [activeConversation, setActiveConversation] = useState<string | null>("c1");
+  const [activeTab, setActiveTab] = useState<TabType>("tudo");
+  const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
+
+  // When "Tudo" tab is active and no conversation selected, show general chat
+  const chatMode = activeTab === "tudo" && !activeConversation ? "general" : "private";
+
+  const handleTabChange = (tab: TabType) => {
+    setActiveTab(tab);
+    if (tab === "tudo") {
+      setActiveConversation(null); // go back to general chat
+    }
+  };
+
+  const handleSelectConversation = (id: string) => {
+    setActiveConversation(id);
+  };
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-chat-bg">
@@ -31,15 +48,18 @@ export default function Index() {
         </div>
         <ConversationList
           activeConversationId={activeConversation}
-          onSelect={setActiveConversation}
+          onSelect={handleSelectConversation}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
         />
       </div>
 
       {/* Center - chat */}
       <ChatArea
         conversationId={activeConversation}
+        chatMode={chatMode}
         onInfoClick={() => {}}
         onAvatarClick={setProfileUserId}
       />

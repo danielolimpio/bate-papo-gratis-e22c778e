@@ -85,6 +85,21 @@ export const conversations: Conversation[] = [
   { id: "c8", participantId: "6", lastMessage: "Até mais! 👋", lastMessageTime: "3d", unreadCount: 0 },
 ];
 
+export const generalChatMessages: Message[] = [
+  { id: "g1", conversationId: "general", senderId: "1", text: "Oi gente! Alguém de SP aqui? 😊", timestamp: "13:00", isRead: true },
+  { id: "g2", conversationId: "general", senderId: "2", text: "Eu! Sou de SP sim!", timestamp: "13:02", isRead: true },
+  { id: "g3", conversationId: "general", senderId: "5", text: "Boa tarde pessoal! Sou de Salvador 🌴", timestamp: "13:05", isRead: true },
+  { id: "g4", conversationId: "general", senderId: "3", text: "Que legal, adoro Salvador! Quero visitar um dia", timestamp: "13:07", isRead: true },
+  { id: "g5", conversationId: "general", senderId: "7", text: "Alguém quer bater papo? Tô entediada 😅", timestamp: "13:10", isRead: true },
+  { id: "g6", conversationId: "general", senderId: "10", text: "Eu aceito! De onde você é?", timestamp: "13:12", isRead: true },
+  { id: "g7", conversationId: "general", senderId: "7", text: "Porto Alegre! E vc?", timestamp: "13:13", isRead: true },
+  { id: "g8", conversationId: "general", senderId: "10", text: "Goiânia! Prazer 🤝", timestamp: "13:14", isRead: true },
+  { id: "g9", conversationId: "general", senderId: "12", text: "Eae galera, bom dia pra quem tá chegando agora!", timestamp: "13:20", isRead: true },
+  { id: "g10", conversationId: "general", senderId: "9", text: "Bom diaa! ☀️ Primeira vez aqui no WoomChat", timestamp: "13:22", isRead: true },
+  { id: "g11", conversationId: "general", senderId: "1", text: "Bem-vinda Beatriz! Aqui é muito legal 💜", timestamp: "13:25", isRead: true },
+  { id: "g12", conversationId: "general", senderId: "4", text: "Alguém de Curitiba? Bora marcar um café ☕", timestamp: "13:30", isRead: true },
+];
+
 export const messagesByConversation: Record<string, Message[]> = {
   c1: [
     { id: "m1", conversationId: "c1", senderId: "1", text: "Oi! Vi seu perfil e achei super interessante 😊", timestamp: "14:30", isRead: true },
