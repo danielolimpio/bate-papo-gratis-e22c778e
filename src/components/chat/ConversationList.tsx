@@ -2,14 +2,18 @@ import { Search, MoreHorizontal, Edit } from "lucide-react";
 import { conversations, users, type Conversation } from "@/data/mockData";
 import { useMemo } from "react";
 
+type TabType = "tudo" | "nao-lidas" | "grupos";
+
 interface Props {
   activeConversationId: string | null;
   onSelect: (id: string) => void;
   searchQuery: string;
   onSearchChange: (q: string) => void;
+  activeTab: TabType;
+  onTabChange: (tab: TabType) => void;
 }
 
-export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange }: Props) {
+export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange }: Props) {
   const filtered = useMemo(() => {
     if (!searchQuery) return conversations;
     const q = searchQuery.toLowerCase();
@@ -49,9 +53,21 @@ export default function ConversationList({ activeConversationId, onSelect, searc
 
       {/* Tabs */}
       <div className="flex items-center gap-[2px] px-3 pb-1.5">
-        <button className="rounded-full bg-primary/10 px-3 py-[5px] text-xs font-semibold text-primary">Tudo</button>
-        <button className="rounded-full px-3 py-[5px] text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">Não lidas</button>
-        <button className="rounded-full px-3 py-[5px] text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">Grupos</button>
+        {(["tudo", "nao-lidas", "grupos"] as TabType[]).map((tab) => {
+          const labels: Record<TabType, string> = { tudo: "Tudo", "nao-lidas": "Não lidas", grupos: "Grupos" };
+          const isActive = activeTab === tab;
+          return (
+            <button
+              key={tab}
+              onClick={() => onTabChange(tab)}
+              className={`rounded-full px-3 py-[5px] text-xs font-semibold transition-colors ${
+                isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"
+              }`}
+            >
+              {labels[tab]}
+            </button>
+          );
+        })}
       </div>
 
       {/* List */}
