@@ -1,0 +1,158 @@
+import { useState, useRef, useEffect } from "react";
+import { Phone, Video, Info, ThumbsUp, Smile, Image, Mic, Send } from "lucide-react";
+import { users, messagesByConversation, conversations, type Message } from "@/data/mockData";
+
+interface Props {
+  conversationId: string | null;
+  onInfoClick: () => void;
+  onAvatarClick: (userId: string) => void;
+}
+
+export default function ChatArea({ conversationId, onInfoClick, onAvatarClick }: Props) {
+  const [input, setInput] = useState("");
+  const [localMessages, setLocalMessages] = useState<Record<string, Message[]>>({ ...messagesByConversation });
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  const conv = conversations.find((c) => c.id === conversationId);
+  const participant = conv ? users.find((u) => u.id === conv.participantId) : null;
+  const messages = conversationId ? localMessages[conversationId] || [] : [];
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages.length]);
+
+  const handleSend = () => {
+    if (!input.trim() || !conversationId) return;
+    const newMsg: Message = {
+      id: `m-${Date.now()}`,
+      conversationId,
+      senderId: "me",
+      text: input.trim(),
+      timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
+      isRead: false,
+    };
+    setLocalMessages((prev) => ({
+      ...prev,
+      [conversationId]: [...(prev[conversationId] || []), newMsg],
+    }));
+    setInput("");
+  };
+
+  if (!conversationId || !participant) {
+    return (
+      <div className="flex flex-1 items-center justify-center bg-chat-bg">
+        <div className="text-center">
+          <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
+            <Send size={32} className="text-muted-foreground" />
+          </div>
+          <h2 className="text-xl font-semibold text-foreground">WoomChat</h2>
+          <p className="text-sm text-muted-foreground mt-1">Selecione uma conversa para começar</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-1 flex-col bg-chat-bg">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-chat-divider px-4 py-2">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => onAvatarClick(participant.id)}>
+          <div className="relative">
+            <img src={participant.avatar} alt={participant.name} className="h-10 w-10 rounded-full object-cover" />
+            {participant.isOnline && (
+              <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-chat-bg bg-online" />
+            )}
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">{participant.name}</h3>
+            <p className="text-xs text-muted-foreground">
+              {participant.isOnline ? "Online agora" : `Online ${participant.lastSeen}`}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1">
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <Phone size={20} className="text-primary" />
+          </button>
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <Video size={20} className="text-primary" />
+          </button>
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors" onClick={onInfoClick}>
+            <Info size={20} className="text-primary" />
+          </button>
+        </div>
+      </div>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-4 py-4">
+        {/* Profile intro */}
+        <div className="mb-6 flex flex-col items-center">
+          <img
+            src={participant.avatar}
+            alt={participant.name}
+            className="h-16 w-16 rounded-full object-cover mb-2 cursor-pointer"
+            onClick={() => onAvatarClick(participant.id)}
+          />
+          <h4 className="font-semibold text-foreground">{participant.name}</h4>
+          <p className="text-xs text-muted-foreground">WoomChat</p>
+          <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-center">
+            <p className="text-xs text-muted-foreground">
+              🔒 As mensagens são protegidas com criptografia de ponta a ponta.
+            </p>
+          </div>
+        </div>
+
+        {messages.map((msg) => (
+          <div key={msg.id} className={`mb-2 flex ${msg.senderId === "me" ? "justify-end" : "justify-start"}`}>
+            <div
+              className={`max-w-[65%] rounded-2xl px-3 py-2 text-sm ${
+                msg.senderId === "me"
+                  ? "bg-chat-bubble-sent text-chat-bubble-sent-fg rounded-br-sm"
+                  : "bg-chat-bubble-received text-chat-bubble-received-fg rounded-bl-sm"
+              }`}
+            >
+              {msg.text}
+              <span className={`ml-2 text-[10px] ${msg.senderId === "me" ? "text-chat-bubble-sent-fg/70" : "text-muted-foreground"}`}>
+                {msg.timestamp}
+              </span>
+            </div>
+          </div>
+        ))}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Input */}
+      <div className="flex items-center gap-2 border-t border-chat-divider px-4 py-2">
+        <div className="flex items-center gap-1">
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <Mic size={20} className="text-primary" />
+          </button>
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <Image size={20} className="text-primary" />
+          </button>
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <Smile size={20} className="text-primary" />
+          </button>
+        </div>
+        <div className="flex flex-1 items-center rounded-full bg-chat-input-bg px-4 py-2">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
+            placeholder="Aa"
+            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
+          />
+        </div>
+        {input.trim() ? (
+          <button onClick={handleSend} className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <Send size={20} className="text-primary" />
+          </button>
+        ) : (
+          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+            <ThumbsUp size={20} className="text-primary" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
