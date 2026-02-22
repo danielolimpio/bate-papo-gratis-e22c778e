@@ -12,13 +12,11 @@ export default function NewUserCard() {
       const newUser = generateRandomNewUser();
       setUser(newUser);
       setVisible(true);
-      setTimeout(() => setVisible(false), 4000);
+      setTimeout(() => setVisible(false), 5000);
     };
 
-    // First one after 3s
-    const firstTimeout = setTimeout(show, 3000);
-    // Then every 5s
-    const interval = setInterval(show, 5000);
+    const firstTimeout = setTimeout(show, 5000);
+    const interval = setInterval(show, 17000);
 
     return () => {
       clearTimeout(firstTimeout);
