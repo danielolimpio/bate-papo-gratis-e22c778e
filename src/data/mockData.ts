@@ -46,6 +46,16 @@ import profileF25 from "@/assets/profiles/profile-f25.jpg";
 import profileF26 from "@/assets/profiles/profile-f26.jpg";
 import profileF27 from "@/assets/profiles/profile-f27.jpg";
 import profileM13 from "@/assets/profiles/profile-m13.jpg";
+import profileF28 from "@/assets/profiles/profile-f28.jpg";
+import profileF29 from "@/assets/profiles/profile-f29.jpg";
+import profileF30 from "@/assets/profiles/profile-f30.jpg";
+import profileF31 from "@/assets/profiles/profile-f31.jpg";
+import profileF32 from "@/assets/profiles/profile-f32.jpg";
+import profileF33 from "@/assets/profiles/profile-f33.jpg";
+import profileF34 from "@/assets/profiles/profile-f34.jpg";
+import profileF35 from "@/assets/profiles/profile-f35.jpg";
+import profileF36 from "@/assets/profiles/profile-f36.jpg";
+import profileF37 from "@/assets/profiles/profile-f37.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -153,6 +163,16 @@ export const users: UserProfile[] = [
   { id: "50", name: "Soraia Guimarães Leal", age: 33, gender: "Feminino", interest: "Homens", city: "Eunápolis", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF26, photos: [profileF26], isOnline: false, lastSeen: "há 25min" },
   { id: "51", name: "Raíssa Coutinho", age: 23, gender: "Feminino", interest: "Homens", city: "Santarém", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF27, photos: [profileF27], isOnline: false, lastSeen: "há 3min" },
   { id: "52", name: "Ademilson Serpa Maciel", age: 36, gender: "Masculino", interest: "Mulheres", city: "Catalão", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM13, photos: [profileM13], isOnline: false, lastSeen: "há 40min" },
+  { id: "53", name: "Cleide Novaes Ximenes", age: 30, gender: "Feminino", interest: "Homens", city: "Alto Paraíso", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF28, photos: [profileF28], isOnline: false, lastSeen: "há 9min" },
+  { id: "54", name: "Paloma Drumond", age: 31, gender: "Feminino", interest: "Homens", city: "Itacoatiara", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF29, photos: [profileF29], isOnline: false, lastSeen: "há 14min" },
+  { id: "55", name: "Wedna Figueiredo Lira", age: 34, gender: "Feminino", interest: "Homens", city: "Crato", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF30, photos: [profileF30], isOnline: false, lastSeen: "há 28min" },
+  { id: "56", name: "Lorrane Alcântara", age: 33, gender: "Feminino", interest: "Homens", city: "Pimenta Bueno", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF31, photos: [profileF31], isOnline: false, lastSeen: "há 5min" },
+  { id: "57", name: "Daiane Rossoni Pavan", age: 26, gender: "Feminino", interest: "Homens", city: "Frederico Westphalen", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF32, photos: [profileF32], isOnline: false, lastSeen: "há 33min" },
+  { id: "58", name: "Mariluce Serafim", age: 42, gender: "Feminino", interest: "Homens", city: "Uruçuí", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF33, photos: [profileF33], isOnline: false, lastSeen: "há 2h" },
+  { id: "59", name: "Jucilene Rabelo Maia", age: 45, gender: "Feminino", interest: "Homens", city: "Barra do Garças", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF34, photos: [profileF34], isOnline: false, lastSeen: "há 1h" },
+  { id: "60", name: "Analice Benvindo", age: 35, gender: "Feminino", interest: "Homens", city: "Ourinhos", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF35, photos: [profileF35], isOnline: false, lastSeen: "há 11min" },
+  { id: "61", name: "Jeniffer Tupinambá Soares", age: 25, gender: "Feminino", interest: "Homens", city: "Xinguara", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF36, photos: [profileF36], isOnline: false, lastSeen: "há 19min" },
+  { id: "62", name: "Sirlene Hayashida", age: 28, gender: "Feminino", interest: "Homens", city: "Naviraí", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF37, photos: [profileF37], isOnline: false, lastSeen: "há 6min" },
 ];
 
 export const conversations: Conversation[] = [
