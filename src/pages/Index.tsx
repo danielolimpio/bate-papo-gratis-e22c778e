@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Moon, Sun, MessageCircle } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import ConversationList from "@/components/chat/ConversationList";
 import ChatArea from "@/components/chat/ChatArea";
 import RightPanel from "@/components/chat/RightPanel";
 import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
 import { useTheme } from "@/hooks/useTheme";
+import logoDark from "@/assets/logo-dark.png";
+import logoLight from "@/assets/logo-light.png";
 
 type TabType = "tudo" | "nao-lidas" | "grupos";
 
@@ -36,11 +38,8 @@ export default function Index() {
       <div className="flex w-[340px] flex-shrink-0 flex-col border-r border-chat-divider bg-chat-sidebar">
         {/* Logo bar */}
         <div className="flex items-center justify-between px-4 py-2.5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-              <MessageCircle size={16} className="text-primary-foreground" />
-            </div>
-            <span className="text-sm font-bold text-foreground">woomchat.com</span>
+          <div className="flex items-center">
+            <img src={isDark ? logoDark : logoLight} alt="WoomChat" className="h-8" />
           </div>
           <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
             {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
