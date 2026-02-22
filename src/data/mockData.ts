@@ -16,6 +16,16 @@ import profileF4 from "@/assets/profiles/profile-f4.jpg";
 import profileM4 from "@/assets/profiles/profile-m4.jpg";
 import profileM5 from "@/assets/profiles/profile-m5.jpg";
 import profileF5 from "@/assets/profiles/profile-f5.jpg";
+import profileM6 from "@/assets/profiles/profile-m6.jpg";
+import profileM7 from "@/assets/profiles/profile-m7.jpg";
+import profileM8 from "@/assets/profiles/profile-m8.jpg";
+import profileF6 from "@/assets/profiles/profile-f6.jpg";
+import profileM9 from "@/assets/profiles/profile-m9.jpg";
+import profileF7 from "@/assets/profiles/profile-f7.jpg";
+import profileM10 from "@/assets/profiles/profile-m10.jpg";
+import profileM11 from "@/assets/profiles/profile-m11.jpg";
+import profileF8 from "@/assets/profiles/profile-f8.jpg";
+import profileF9 from "@/assets/profiles/profile-f9.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -93,6 +103,16 @@ export const users: UserProfile[] = [
   { id: "20", name: "Edenilson Prado Meireles", age: 45, gender: "Masculino", interest: "Mulheres", city: "Parnaíba", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileM4, photos: [profileM4], isOnline: false, lastSeen: "há 1h" },
   { id: "21", name: "Josenildo Tavares Cruz", age: 35, gender: "Masculino", interest: "Mulheres", city: "Caruaru", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileM5, photos: [profileM5], isOnline: false, lastSeen: "há 6h" },
   { id: "22", name: "Valdirene Coelho Batista", age: 39, gender: "Feminino", interest: "Homens", city: "Sobral", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF5, photos: [profileF5], isOnline: false, lastSeen: "há 20min" },
+  { id: "23", name: "Haroldo Siqueira", age: 40, gender: "Masculino", interest: "Mulheres", city: "Uberaba", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileM6, photos: [profileM6], isOnline: false, lastSeen: "há 10min" },
+  { id: "24", name: "Ednaldo Conceição Freitas", age: 43, gender: "Masculino", interest: "Mulheres", city: "Ilhéus", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM7, photos: [profileM7], isOnline: false, lastSeen: "há 50min" },
+  { id: "25", name: "Wanderson Lacerda", age: 28, gender: "Masculino", interest: "Mulheres", city: "Marabá", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileM8, photos: [profileM8], isOnline: false, lastSeen: "há 25min" },
+  { id: "26", name: "Iracema Vidal", age: 24, gender: "Feminino", interest: "Homens", city: "Chapecó", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF6, photos: [profileF6], isOnline: false, lastSeen: "há 2h" },
+  { id: "27", name: "Otoniel Brito Cavalcante", age: 33, gender: "Masculino", interest: "Mulheres", city: "Altamira", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileM9, photos: [profileM9], isOnline: false, lastSeen: "há 1h" },
+  { id: "28", name: "Tainá Felício Rezende", age: 30, gender: "Feminino", interest: "Homens", city: "Juazeiro do Norte", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF7, photos: [profileF7], isOnline: false, lastSeen: "há 35min" },
+  { id: "29", name: "Kleberson Duarte", age: 21, gender: "Masculino", interest: "Mulheres", city: "Boa Vista", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileM10, photos: [profileM10], isOnline: false, lastSeen: "há 5min" },
+  { id: "30", name: "Nilton Assunção Borges", age: 58, gender: "Masculino", interest: "Mulheres", city: "Poços de Caldas", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileM11, photos: [profileM11], isOnline: false, lastSeen: "há 3h" },
+  { id: "31", name: "Keila Yoshida Ferraz", age: 29, gender: "Feminino", interest: "Homens", city: "Londrina", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF8, photos: [profileF8], isOnline: false, lastSeen: "há 40min" },
+  { id: "32", name: "Mirela Brandão", age: 22, gender: "Feminino", interest: "Homens", city: "Petrolina", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF9, photos: [profileF9], isOnline: false, lastSeen: "há 15min" },
 ];
 
 export const conversations: Conversation[] = [
