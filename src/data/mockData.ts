@@ -6,6 +6,16 @@ import avatar5 from "@/assets/avatars/avatar5.jpg";
 import avatar6 from "@/assets/avatars/avatar6.jpg";
 import avatar7 from "@/assets/avatars/avatar7.jpg";
 import avatar8 from "@/assets/avatars/avatar8.jpg";
+import profileM1 from "@/assets/profiles/profile-m1.jpg";
+import profileF1 from "@/assets/profiles/profile-f1.jpg";
+import profileF2 from "@/assets/profiles/profile-f2.jpg";
+import profileM2 from "@/assets/profiles/profile-m2.jpg";
+import profileF3 from "@/assets/profiles/profile-f3.jpg";
+import profileM3 from "@/assets/profiles/profile-m3.jpg";
+import profileF4 from "@/assets/profiles/profile-f4.jpg";
+import profileM4 from "@/assets/profiles/profile-m4.jpg";
+import profileM5 from "@/assets/profiles/profile-m5.jpg";
+import profileF5 from "@/assets/profiles/profile-f5.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -72,6 +82,17 @@ export const users: UserProfile[] = [
   { id: "10", name: "Diego Souza", age: 29, gender: "Masculino", interest: "Ambos", city: "Goiânia", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: avatar6, photos: [avatar6, avatar4], isOnline: true },
   { id: "11", name: "Priscila Martins", age: 26, gender: "Feminino", interest: "Homens", city: "Brasília", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: avatar1, photos: [avatar1], isOnline: false, lastSeen: "há 1h" },
   { id: "12", name: "André Nascimento", age: 31, gender: "Masculino", interest: "Mulheres", city: "Campinas", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: avatar4, photos: [avatar4], isOnline: true },
+  // Perfis fictícios com fotos reais
+  { id: "13", name: "Erivaldo Souza Bonfim", age: 52, gender: "Masculino", interest: "Mulheres", city: "Itabuna", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileM1, photos: [profileM1], isOnline: false, lastSeen: "há 15min" },
+  { id: "14", name: "Zenaide Teixeira Lopes", age: 42, gender: "Feminino", interest: "Homens", city: "Bauru", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF1, photos: [profileF1], isOnline: false, lastSeen: "há 45min" },
+  { id: "15", name: "Rosimeire Farias Queiroz", age: 44, gender: "Feminino", interest: "Homens", city: "Imperatriz", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF2, photos: [profileF2], isOnline: false, lastSeen: "há 1h" },
+  { id: "16", name: "Genivaldo Ramos Teles", age: 47, gender: "Masculino", interest: "Mulheres", city: "Montes Claros", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM2, photos: [profileM2], isOnline: false, lastSeen: "há 2h" },
+  { id: "17", name: "Edileusa Moreira Gomes", age: 36, gender: "Feminino", interest: "Homens", city: "Arapiraca", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF3, photos: [profileF3], isOnline: false, lastSeen: "há 30min" },
+  { id: "18", name: "Cleiton Bastos Nogueira", age: 38, gender: "Masculino", interest: "Mulheres", city: "Ji-Paraná", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileM3, photos: [profileM3], isOnline: false, lastSeen: "há 3h" },
+  { id: "19", name: "Neusa Aparecida Braga", age: 55, gender: "Feminino", interest: "Homens", city: "Três Lagoas", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF4, photos: [profileF4], isOnline: false, lastSeen: "há 4h" },
+  { id: "20", name: "Edenilson Prado Meireles", age: 45, gender: "Masculino", interest: "Mulheres", city: "Parnaíba", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileM4, photos: [profileM4], isOnline: false, lastSeen: "há 1h" },
+  { id: "21", name: "Josenildo Tavares Cruz", age: 35, gender: "Masculino", interest: "Mulheres", city: "Caruaru", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileM5, photos: [profileM5], isOnline: false, lastSeen: "há 6h" },
+  { id: "22", name: "Valdirene Coelho Batista", age: 39, gender: "Feminino", interest: "Homens", city: "Sobral", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF5, photos: [profileF5], isOnline: false, lastSeen: "há 20min" },
 ];
 
 export const conversations: Conversation[] = [
