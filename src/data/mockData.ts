@@ -36,6 +36,16 @@ import profileF16 from "@/assets/profiles/profile-f16.jpg";
 import profileF17 from "@/assets/profiles/profile-f17.jpg";
 import profileF18 from "@/assets/profiles/profile-f18.jpg";
 import profileF19 from "@/assets/profiles/profile-f19.jpg";
+import profileM12 from "@/assets/profiles/profile-m12.jpg";
+import profileF20 from "@/assets/profiles/profile-f20.jpg";
+import profileF21 from "@/assets/profiles/profile-f21.jpg";
+import profileF22 from "@/assets/profiles/profile-f22.jpg";
+import profileF23 from "@/assets/profiles/profile-f23.jpg";
+import profileF24 from "@/assets/profiles/profile-f24.jpg";
+import profileF25 from "@/assets/profiles/profile-f25.jpg";
+import profileF26 from "@/assets/profiles/profile-f26.jpg";
+import profileF27 from "@/assets/profiles/profile-f27.jpg";
+import profileM13 from "@/assets/profiles/profile-m13.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -133,6 +143,16 @@ export const users: UserProfile[] = [
   { id: "40", name: "Joelma Quirino Souza", age: 23, gender: "Feminino", interest: "Homens", city: "Parintins", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF17, photos: [profileF17], isOnline: false, lastSeen: "há 1h" },
   { id: "41", name: "Meire Cavalcanti", age: 41, gender: "Feminino", interest: "Homens", city: "Mossoró", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF18, photos: [profileF18], isOnline: false, lastSeen: "há 45min" },
   { id: "42", name: "Rosângela Torquato Melo", age: 44, gender: "Feminino", interest: "Homens", city: "Araguaína", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF19, photos: [profileF19], isOnline: false, lastSeen: "há 22min" },
+  { id: "43", name: "Oziel Fontenele", age: 29, gender: "Masculino", interest: "Mulheres", city: "Luís Eduardo Magalhães", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileM12, photos: [profileM12], isOnline: false, lastSeen: "há 7min" },
+  { id: "44", name: "Nayara Pires Monteiro", age: 24, gender: "Feminino", interest: "Homens", city: "Valença", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF20, photos: [profileF20], isOnline: false, lastSeen: "há 18min" },
+  { id: "45", name: "Ivaneide Beltrão Aguiar", age: 32, gender: "Feminino", interest: "Homens", city: "Tefé", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF21, photos: [profileF21], isOnline: false, lastSeen: "há 1h" },
+  { id: "46", name: "Elizângela Portela", age: 31, gender: "Feminino", interest: "Homens", city: "Gurupi", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF22, photos: [profileF22], isOnline: false, lastSeen: "há 35min" },
+  { id: "47", name: "Creusa Dantas Vieira", age: 37, gender: "Feminino", interest: "Homens", city: "Itajaí", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF23, photos: [profileF23], isOnline: false, lastSeen: "há 2h" },
+  { id: "48", name: "Josicleia Matias", age: 35, gender: "Feminino", interest: "Homens", city: "Sinop", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF24, photos: [profileF24], isOnline: false, lastSeen: "há 50min" },
+  { id: "49", name: "Thalita Venâncio Dutra", age: 27, gender: "Feminino", interest: "Homens", city: "Barreiras", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF25, photos: [profileF25], isOnline: false, lastSeen: "há 10min" },
+  { id: "50", name: "Soraia Guimarães Leal", age: 33, gender: "Feminino", interest: "Homens", city: "Eunápolis", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF26, photos: [profileF26], isOnline: false, lastSeen: "há 25min" },
+  { id: "51", name: "Raíssa Coutinho", age: 23, gender: "Feminino", interest: "Homens", city: "Santarém", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF27, photos: [profileF27], isOnline: false, lastSeen: "há 3min" },
+  { id: "52", name: "Ademilson Serpa Maciel", age: 36, gender: "Masculino", interest: "Mulheres", city: "Catalão", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM13, photos: [profileM13], isOnline: false, lastSeen: "há 40min" },
 ];
 
 export const conversations: Conversation[] = [
