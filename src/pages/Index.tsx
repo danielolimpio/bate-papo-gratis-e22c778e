@@ -47,7 +47,6 @@ export default function Index() {
       {/* Right panel */}
       <div className="w-[300px] flex-shrink-0 hidden lg:block">
         <RightPanel
-          conversationId={activeConversation}
           onProfileClick={setProfileUserId}
         />
       </div>

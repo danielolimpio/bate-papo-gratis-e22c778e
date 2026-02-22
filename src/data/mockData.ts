@@ -108,13 +108,20 @@ export const messagesByConversation: Record<string, Message[]> = {
 };
 
 // Fake users for new registration cards
-const fakeNames = [
-  "Paula Pereira", "Amanda Rocha", "Bruno Silva", "Larissa Campos",
-  "Gabriel Araújo", "Isabela Nunes", "Mateus Cardoso", "Carolina Vieira",
-  "Pedro Henrique", "Natália Gomes", "Rodrigo Barbosa", "Letícia Duarte",
-  "Felipe Moraes", "Vanessa Castro", "Leonardo Reis", "Bruna Correia",
-  "Gustavo Pinto", "Mariana Teixeira", "Caio Monteiro", "Renata Machado",
+const femaleNames = [
+  "Paula Pereira", "Amanda Rocha", "Larissa Campos", "Isabela Nunes",
+  "Carolina Vieira", "Natália Gomes", "Letícia Duarte", "Vanessa Castro",
+  "Bruna Correia", "Mariana Teixeira", "Renata Machado",
 ];
+
+const maleNames = [
+  "Bruno Silva", "Gabriel Araújo", "Mateus Cardoso", "Pedro Henrique",
+  "Rodrigo Barbosa", "Felipe Moraes", "Leonardo Reis", "Gustavo Pinto",
+  "Caio Monteiro", "Diego Fernandes",
+];
+
+const femaleAvatarIndices = [0, 2, 4, 6]; // avatar1, avatar3, avatar5, avatar7
+const maleAvatarIndices = [1, 3, 5, 7];   // avatar2, avatar4, avatar6, avatar8
 
 const cities = [
   "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília",
@@ -125,12 +132,16 @@ const cities = [
 const statuses: RelationshipStatus[] = ["Solteiro(a)", "Casado(a)", "Separado(a)", "Namorando", "Viúvo(a)", "Enrolado(a)"];
 
 export function generateRandomNewUser() {
-  const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+  const isFemale = Math.random() > 0.5;
+  const gender: Gender = isFemale ? "Feminino" : "Masculino";
+  const names = isFemale ? femaleNames : maleNames;
+  const avatarPool = isFemale ? femaleAvatarIndices : maleAvatarIndices;
+
+  const name = names[Math.floor(Math.random() * names.length)];
   const age = Math.floor(Math.random() * 20) + 20;
   const city = cities[Math.floor(Math.random() * cities.length)];
   const status = statuses[Math.floor(Math.random() * statuses.length)];
-  const avatarIdx = Math.floor(Math.random() * avatars.length);
-  const gender: Gender = Math.random() > 0.5 ? "Feminino" : "Masculino";
+  const avatarIdx = avatarPool[Math.floor(Math.random() * avatarPool.length)];
 
   return {
     id: `fake-${Date.now()}-${Math.random()}`,
