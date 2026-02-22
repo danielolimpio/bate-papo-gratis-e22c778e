@@ -22,36 +22,36 @@ export default function ConversationList({ activeConversationId, onSelect, searc
   return (
     <div className="flex h-full flex-col bg-chat-sidebar">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3">
-        <h1 className="text-2xl font-bold text-foreground">Conversas</h1>
-        <div className="flex items-center gap-2">
-          <button className="rounded-full bg-secondary p-2 hover:bg-chat-hover transition-colors">
-            <MoreHorizontal size={18} className="text-foreground" />
+      <div className="flex items-center justify-between px-4 pt-1 pb-2">
+        <h1 className="text-xl font-bold text-foreground">Conversas</h1>
+        <div className="flex items-center gap-1">
+          <button className="rounded-full bg-secondary p-[7px] hover:bg-chat-hover transition-colors">
+            <MoreHorizontal size={16} className="text-foreground" />
           </button>
-          <button className="rounded-full bg-secondary p-2 hover:bg-chat-hover transition-colors">
-            <Edit size={18} className="text-foreground" />
+          <button className="rounded-full bg-secondary p-[7px] hover:bg-chat-hover transition-colors">
+            <Edit size={16} className="text-foreground" />
           </button>
         </div>
       </div>
 
       {/* Search */}
-      <div className="px-4 pb-2">
-        <div className="flex items-center gap-2 rounded-full bg-secondary px-3 py-2">
-          <Search size={16} className="text-muted-foreground" />
+      <div className="px-3 pb-2">
+        <div className="flex items-center gap-2 rounded-full bg-secondary px-3 py-[6px]">
+          <Search size={15} className="text-muted-foreground flex-shrink-0" />
           <input
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Pesquisar no WoomChat"
-            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
+            className="w-full bg-transparent text-[13px] text-foreground placeholder:text-muted-foreground outline-none"
           />
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 px-4 pb-2">
-        <button className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Tudo</button>
-        <button className="rounded-full px-3 py-1 text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">Não lidas</button>
-        <button className="rounded-full px-3 py-1 text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">Grupos</button>
+      <div className="flex items-center gap-[2px] px-3 pb-1.5">
+        <button className="rounded-full bg-primary/10 px-3 py-[5px] text-xs font-semibold text-primary">Tudo</button>
+        <button className="rounded-full px-3 py-[5px] text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">Não lidas</button>
+        <button className="rounded-full px-3 py-[5px] text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">Grupos</button>
       </div>
 
       {/* List */}
@@ -76,25 +76,25 @@ function ConversationItem({ conversation, isActive, onSelect }: { conversation: 
   return (
     <div
       onClick={onSelect}
-      className={`flex cursor-pointer items-center gap-3 px-3 py-2 mx-1 rounded-lg transition-colors ${
+      className={`flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md transition-colors ${
         isActive ? "bg-chat-active" : "hover:bg-chat-hover"
       }`}
     >
       <div className="relative flex-shrink-0">
-        <img src={user.avatar} alt={user.name} className="h-12 w-12 rounded-full object-cover" />
+        <img src={user.avatar} alt={user.name} className="h-[48px] w-[48px] rounded-full object-cover" />
         {user.isOnline && (
-          <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-chat-sidebar bg-online" />
+          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-chat-sidebar bg-online" />
         )}
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-semibold text-foreground truncate">{user.name}</span>
-          <span className="text-xs text-muted-foreground flex-shrink-0">{conversation.lastMessageTime}</span>
+          <span className="text-[13px] font-semibold text-foreground truncate">{user.name}</span>
+          <span className="text-[11px] text-muted-foreground flex-shrink-0">· {conversation.lastMessageTime}</span>
         </div>
-        <p className="text-xs text-muted-foreground truncate">{conversation.lastMessage}</p>
+        <p className="text-[12px] text-muted-foreground truncate mt-[1px]">{conversation.lastMessage}</p>
       </div>
       {conversation.unreadCount > 0 && (
-        <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+        <span className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
           {conversation.unreadCount}
         </span>
       )}

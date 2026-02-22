@@ -55,7 +55,7 @@ export default function ChatArea({ conversationId, onInfoClick, onAvatarClick }:
   return (
     <div className="flex flex-1 flex-col bg-chat-bg">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-chat-divider px-4 py-2">
+      <div className="flex items-center justify-between border-b border-chat-divider px-4 py-[10px]">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => onAvatarClick(participant.id)}>
           <div className="relative">
             <img src={participant.avatar} alt={participant.name} className="h-10 w-10 rounded-full object-cover" />
@@ -122,7 +122,7 @@ export default function ChatArea({ conversationId, onInfoClick, onAvatarClick }:
       </div>
 
       {/* Input */}
-      <div className="flex items-center gap-2 border-t border-chat-divider px-4 py-2">
+      <div className="flex items-center gap-1 border-t border-chat-divider px-3 py-[8px]">
         <div className="flex items-center gap-1">
           <button className="rounded-full p-2 hover:bg-secondary transition-colors">
             <Mic size={20} className="text-primary" />
