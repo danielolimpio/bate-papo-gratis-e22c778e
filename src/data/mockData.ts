@@ -26,6 +26,16 @@ import profileM10 from "@/assets/profiles/profile-m10.jpg";
 import profileM11 from "@/assets/profiles/profile-m11.jpg";
 import profileF8 from "@/assets/profiles/profile-f8.jpg";
 import profileF9 from "@/assets/profiles/profile-f9.jpg";
+import profileF10 from "@/assets/profiles/profile-f10.jpg";
+import profileF11 from "@/assets/profiles/profile-f11.jpg";
+import profileF12 from "@/assets/profiles/profile-f12.jpg";
+import profileF13 from "@/assets/profiles/profile-f13.jpg";
+import profileF14 from "@/assets/profiles/profile-f14.jpg";
+import profileF15 from "@/assets/profiles/profile-f15.jpg";
+import profileF16 from "@/assets/profiles/profile-f16.jpg";
+import profileF17 from "@/assets/profiles/profile-f17.jpg";
+import profileF18 from "@/assets/profiles/profile-f18.jpg";
+import profileF19 from "@/assets/profiles/profile-f19.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -113,6 +123,16 @@ export const users: UserProfile[] = [
   { id: "30", name: "Nilton Assunção Borges", age: 58, gender: "Masculino", interest: "Mulheres", city: "Poços de Caldas", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileM11, photos: [profileM11], isOnline: false, lastSeen: "há 3h" },
   { id: "31", name: "Keila Yoshida Ferraz", age: 29, gender: "Feminino", interest: "Homens", city: "Londrina", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF8, photos: [profileF8], isOnline: false, lastSeen: "há 40min" },
   { id: "32", name: "Mirela Brandão", age: 22, gender: "Feminino", interest: "Homens", city: "Petrolina", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF9, photos: [profileF9], isOnline: false, lastSeen: "há 15min" },
+  { id: "33", name: "Graciele Sampaio", age: 34, gender: "Feminino", interest: "Homens", city: "Tangará da Serra", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF10, photos: [profileF10], isOnline: false, lastSeen: "há 8min" },
+  { id: "34", name: "Suelen Pimentel Rocha", age: 26, gender: "Feminino", interest: "Homens", city: "Tucuruí", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF11, photos: [profileF11], isOnline: false, lastSeen: "há 12min" },
+  { id: "35", name: "Daiany Esteves", age: 25, gender: "Feminino", interest: "Homens", city: "Lavras", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF12, photos: [profileF12], isOnline: false, lastSeen: "há 55min" },
+  { id: "36", name: "Queliane Furtado", age: 28, gender: "Feminino", interest: "Homens", city: "Caxias", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF13, photos: [profileF13], isOnline: false, lastSeen: "há 30min" },
+  { id: "37", name: "Teresinha Amorim Leite", age: 54, gender: "Feminino", interest: "Homens", city: "Patos de Minas", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF14, photos: [profileF14], isOnline: false, lastSeen: "há 2h" },
+  { id: "38", name: "Leidiane Bispo Cardoso", age: 27, gender: "Feminino", interest: "Homens", city: "Itapetinga", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF15, photos: [profileF15], isOnline: false, lastSeen: "há 18min" },
+  { id: "39", name: "Giselda Pacheco", age: 48, gender: "Feminino", interest: "Homens", city: "Bagé", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF16, photos: [profileF16], isOnline: false, lastSeen: "há 4h" },
+  { id: "40", name: "Joelma Quirino Souza", age: 23, gender: "Feminino", interest: "Homens", city: "Parintins", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF17, photos: [profileF17], isOnline: false, lastSeen: "há 1h" },
+  { id: "41", name: "Meire Cavalcanti", age: 41, gender: "Feminino", interest: "Homens", city: "Mossoró", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF18, photos: [profileF18], isOnline: false, lastSeen: "há 45min" },
+  { id: "42", name: "Rosângela Torquato Melo", age: 44, gender: "Feminino", interest: "Homens", city: "Araguaína", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF19, photos: [profileF19], isOnline: false, lastSeen: "há 22min" },
 ];
 
 export const conversations: Conversation[] = [
