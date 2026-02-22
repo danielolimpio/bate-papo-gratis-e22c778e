@@ -16,9 +16,9 @@ export default function Index() {
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-chat-bg">
       {/* Left sidebar - conversations */}
-      <div className="flex w-[340px] flex-shrink-0 flex-col border-r border-chat-divider">
+      <div className="flex w-[340px] flex-shrink-0 flex-col border-r border-chat-divider bg-chat-sidebar">
         {/* Logo bar */}
-        <div className="flex items-center justify-between border-b border-chat-divider px-4 py-2">
+        <div className="flex items-center justify-between px-4 py-2.5">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
               <MessageCircle size={16} className="text-primary-foreground" />
