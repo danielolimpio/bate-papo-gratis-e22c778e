@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import heroCouple from "@/assets/hero-couple.jpg";
 import logoDark from "@/assets/logo-dark.png";
 
@@ -25,7 +25,12 @@ export default function Landing() {
       <div className="relative z-10 flex flex-1 items-center justify-center px-4 md:justify-start md:px-0">
         <div className="flex flex-col items-center w-full md:w-1/2">
           {/* Logo */}
-          <img src={logoDark} alt="WoomChat" className="h-14 mb-8 drop-shadow-lg" />
+          <img src={logoDark} alt="WoomChat" className="h-14 mb-3 drop-shadow-lg" />
+
+          {/* Tagline below logo */}
+          <p className="text-white text-lg md:text-xl font-medium mb-8 drop-shadow-md text-center tracking-wide">
+            ✨ Entre para a Sala de Bate-Papo! ✨
+          </p>
 
           {/* Gender selection card */}
           <div className="w-full max-w-sm rounded-2xl bg-white/95 backdrop-blur-sm p-8 shadow-2xl">
@@ -60,21 +65,26 @@ export default function Landing() {
               Fazer Login
             </button>
           </div>
+
+          {/* Free environment text */}
+          <p className="mt-5 text-white text-base font-medium drop-shadow-md tracking-wide">
+            💚 Ambiente 100% gratuito.
+          </p>
         </div>
       </div>
 
       {/* Footer */}
       <footer className="relative z-10 w-full py-6 text-center">
         <nav className="flex flex-wrap items-center justify-center gap-4 mb-3 text-sm text-white/80">
-          <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
+          <Link to="/politica-de-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
           <span className="text-white/40">|</span>
-          <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
+          <Link to="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</Link>
           <span className="text-white/40">|</span>
-          <a href="#" className="hover:text-white transition-colors">Política de Cookies</a>
+          <Link to="/politica-de-cookies" className="hover:text-white transition-colors">Política de Cookies</Link>
           <span className="text-white/40">|</span>
-          <a href="#" className="hover:text-white transition-colors">Quem Somos</a>
+          <Link to="/quem-somos" className="hover:text-white transition-colors">Quem Somos</Link>
           <span className="text-white/40">|</span>
-          <a href="#" className="hover:text-white transition-colors">Namoro Seguro</a>
+          <Link to="/namoro-seguro" className="hover:text-white transition-colors">Namoro Seguro</Link>
         </nav>
         <p className="text-xs text-white/60">
           Copyright 2026 |{" "}

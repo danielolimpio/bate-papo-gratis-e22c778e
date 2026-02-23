@@ -7,6 +7,11 @@ import Landing from "./pages/Landing";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
+import TermosDeUso from "./pages/TermosDeUso";
+import PoliticaCookies from "./pages/PoliticaCookies";
+import QuemSomos from "./pages/QuemSomos";
+import NamoroSeguro from "./pages/NamoroSeguro";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +25,11 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/saladebatepapo" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
+          <Route path="/termos-de-uso" element={<TermosDeUso />} />
+          <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
+          <Route path="/quem-somos" element={<QuemSomos />} />
+          <Route path="/namoro-seguro" element={<NamoroSeguro />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
