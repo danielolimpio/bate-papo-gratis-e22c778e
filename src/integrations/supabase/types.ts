@@ -14,13 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          age: number
+          avatar_url: string | null
+          city: string
+          created_at: string
+          full_name: string
+          gender: string
+          id: string
+          relationship_status: string
+          sexual_preference: string
+          updated_at: string
+        }
+        Insert: {
+          age: number
+          avatar_url?: string | null
+          city: string
+          created_at?: string
+          full_name: string
+          gender: string
+          id: string
+          relationship_status: string
+          sexual_preference: string
+          updated_at?: string
+        }
+        Update: {
+          age?: number
+          avatar_url?: string | null
+          city?: string
+          created_at?: string
+          full_name?: string
+          gender?: string
+          id?: string
+          relationship_status?: string
+          sexual_preference?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_own_profile: { Args: { profile_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
