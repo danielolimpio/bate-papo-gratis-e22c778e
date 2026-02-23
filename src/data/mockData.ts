@@ -66,6 +66,16 @@ import profileF42 from "@/assets/profiles/profile-f42.jpg";
 import profileM16 from "@/assets/profiles/profile-m16.jpg";
 import profileM17 from "@/assets/profiles/profile-m17.jpg";
 import profileF43 from "@/assets/profiles/profile-f43.jpg";
+import profileF44 from "@/assets/profiles/profile-f44.jpg";
+import profileF45 from "@/assets/profiles/profile-f45.jpg";
+import profileF46 from "@/assets/profiles/profile-f46.jpg";
+import profileF47 from "@/assets/profiles/profile-f47.jpg";
+import profileF48 from "@/assets/profiles/profile-f48.jpg";
+import profileF49 from "@/assets/profiles/profile-f49.jpg";
+import profileF50 from "@/assets/profiles/profile-f50.jpg";
+import profileF51 from "@/assets/profiles/profile-f51.jpg";
+import profileF52 from "@/assets/profiles/profile-f52.jpg";
+import profileF53 from "@/assets/profiles/profile-f53.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -193,6 +203,16 @@ export const users: UserProfile[] = [
   { id: "70", name: "Weslley Furlan Domingos", age: 39, gender: "Masculino", interest: "Mulheres", city: "Chapecó", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM16, photos: [profileM16], isOnline: false, lastSeen: "há 55min" },
   { id: "71", name: "Erivaldo Sena Cavalcante", age: 35, gender: "Masculino", interest: "Mulheres", city: "Caruaru", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileM17, photos: [profileM17], isOnline: false, lastSeen: "há 15min" },
   { id: "72", name: "Isadora Benevenuto Gama", age: 22, gender: "Feminino", interest: "Homens", city: "Ouro Preto", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF43, photos: [profileF43], isOnline: false, lastSeen: "há 3min" },
+  { id: "73", name: "Edilaine Fonseca Medeiros", age: 34, gender: "Feminino", interest: "Homens", city: "Miracema", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF44, photos: [profileF44], isOnline: false, lastSeen: "há 22min" },
+  { id: "74", name: "Tâmara Queiroz", age: 30, gender: "Feminino", interest: "Homens", city: "Jacobina", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF45, photos: [profileF45], isOnline: false, lastSeen: "há 8min" },
+  { id: "75", name: "Danúbia Estrela Pavan", age: 28, gender: "Feminino", interest: "Homens", city: "Ponta Grossa", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF46, photos: [profileF46], isOnline: false, lastSeen: "há 14min" },
+  { id: "76", name: "Sabrina Colares", age: 24, gender: "Feminino", interest: "Homens", city: "Cametá", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF47, photos: [profileF47], isOnline: false, lastSeen: "há 5min" },
+  { id: "77", name: "Regiane Buriti Gondim", age: 29, gender: "Feminino", interest: "Homens", city: "Garanhuns", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF48, photos: [profileF48], isOnline: false, lastSeen: "há 33min" },
+  { id: "78", name: "Tainá Belém Cordeiro", age: 21, gender: "Feminino", interest: "Homens", city: "Bragança", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF49, photos: [profileF49], isOnline: false, lastSeen: "há 11min" },
+  { id: "79", name: "Noêmia Saldanha", age: 42, gender: "Feminino", interest: "Homens", city: "Itajubá", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF50, photos: [profileF50], isOnline: false, lastSeen: "há 1h" },
+  { id: "80", name: "Kátia Melgaço Duarte", age: 40, gender: "Feminino", interest: "Homens", city: "Paranaguá", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF51, photos: [profileF51], isOnline: false, lastSeen: "há 45min" },
+  { id: "81", name: "Yasmim Tupã Borges", age: 19, gender: "Feminino", interest: "Homens", city: "Registro", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF52, photos: [profileF52], isOnline: false, lastSeen: "há 6min" },
+  { id: "82", name: "Raiany Conceição Bispo", age: 27, gender: "Feminino", interest: "Homens", city: "Jequié", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF53, photos: [profileF53], isOnline: false, lastSeen: "há 18min" },
 ];
 
 export const conversations: Conversation[] = [
