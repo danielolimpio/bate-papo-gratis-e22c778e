@@ -218,7 +218,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           </button>
         ) : (
           <button onClick={handleThumbsUp} className="rounded-full p-2 hover:bg-secondary transition-colors">
-            <ThumbsUp size={20} className="text-primary" />
+            <span className="text-xl leading-none">👍</span>
           </button>
         )}
       </div>
