@@ -17,6 +17,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
   const [localMessages, setLocalMessages] = useState<Record<string, Message[]>>({ ...messagesByConversation });
   const [localGeneralMessages, setLocalGeneralMessages] = useState<Message[]>([...generalChatMessages]);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isGeneral = chatMode === "general";
 
@@ -65,6 +66,30 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
 
   const handleThumbsUp = () => {
     sendMessage("👍");
+  };
+
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !conversationId) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      const newMsg: Message = {
+        id: `m-${Date.now()}`,
+        conversationId: conversationId,
+        senderId: "me",
+        text: "",
+        image: dataUrl,
+        timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
+        isRead: false,
+      };
+      setLocalMessages((prev) => ({
+        ...prev,
+        [conversationId]: [...(prev[conversationId] || []), newMsg],
+      }));
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
   };
 
   // No conversation selected and not general
@@ -183,7 +208,10 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
                       : "bg-chat-bubble-received text-chat-bubble-received-fg rounded-bl-sm"
                   }`}
                 >
-                  {msg.text}
+                  {msg.image && (
+                    <img src={msg.image} alt="Foto" className="max-w-[240px] rounded-lg mb-1" />
+                  )}
+                  {msg.text && msg.text}
                   <span className={`ml-2 text-[10px] ${msg.senderId === "me" ? "text-chat-bubble-sent-fg/70" : "text-muted-foreground"}`}>
                     {msg.timestamp}
                   </span>
@@ -208,9 +236,18 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
             <Mic size={20} className="text-primary" />
           </button>
           {!isGeneral && (
-            <button className="rounded-full p-2 hover:bg-secondary transition-colors">
-              <Image size={20} className="text-primary" />
-            </button>
+            <>
+              <button onClick={() => fileInputRef.current?.click()} className="rounded-full p-2 hover:bg-secondary transition-colors">
+                <Image size={20} className="text-primary" />
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageSelect}
+              />
+            </>
           )}
           <button
             onClick={() => setShowEmoji((v) => !v)}

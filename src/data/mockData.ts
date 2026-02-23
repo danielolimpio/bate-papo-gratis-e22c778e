@@ -139,6 +139,7 @@ export interface Message {
   conversationId: string;
   senderId: string;
   text: string;
+  image?: string;
   timestamp: string;
   isRead: boolean;
 }
