@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { Phone, Video, Info, ThumbsUp, Smile, Image, Mic, Send, Users, MessageCircle } from "lucide-react";
+import { Phone, Video, Info, ThumbsUp, Smile, Image, Mic, Send, MessageCircle } from "lucide-react";
 import { users, messagesByConversation, conversations, generalChatMessages, type Message } from "@/data/mockData";
+import StackedAvatars from "./StackedAvatars";
 
 interface Props {
   conversationId: string | null;
@@ -71,9 +72,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
       <div className="flex items-center justify-between border-b border-chat-divider px-4 py-[10px]">
         {isGeneral ? (
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-              <Users size={20} className="text-primary-foreground" />
-            </div>
+            <StackedAvatars size={40} />
             <div>
               <h3 className="text-sm font-semibold text-foreground">Sala Geral</h3>
               <p className="text-xs text-muted-foreground">
@@ -137,9 +136,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
 
         {isGeneral && (
           <div className="mb-4 flex flex-col items-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary mb-2">
-              <MessageCircle size={28} className="text-primary-foreground" />
-            </div>
+            <StackedAvatars size={64} />
             <h4 className="font-semibold text-foreground">Sala Geral do WoomChat</h4>
             <p className="text-xs text-muted-foreground mt-1">Todos os membros podem ver e enviar mensagens aqui</p>
           </div>
