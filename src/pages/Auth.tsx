@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useTheme } from "@/hooks/useTheme";
 import logoDark from "@/assets/logo-dark.png";
@@ -32,7 +32,10 @@ const preferenceOptions = [
 export default function Auth() {
   const { isDark, toggle } = useTheme();
   const navigate = useNavigate();
-  const [mode, setMode] = useState<Mode>("login");
+  const [searchParams] = useSearchParams();
+  const initialMode = searchParams.get("mode") === "register" ? "register" : "login";
+  const initialGender = searchParams.get("gender") || "";
+  const [mode, setMode] = useState<Mode>(initialMode);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -45,7 +48,7 @@ export default function Auth() {
   // Register fields
   const [fullName, setFullName] = useState("");
   const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState(initialGender);
   const [relationshipStatus, setRelationshipStatus] = useState("");
   const [sexualPreference, setSexualPreference] = useState("");
   const [city, setCity] = useState("");
@@ -59,7 +62,7 @@ export default function Auth() {
     if (error) {
       setError(error.message === "Invalid login credentials" ? "Email ou senha incorretos" : error.message);
     } else {
-      navigate("/");
+      navigate("/saladebatepapo");
     }
   };
 
