@@ -76,6 +76,16 @@ import profileF50 from "@/assets/profiles/profile-f50.jpg";
 import profileF51 from "@/assets/profiles/profile-f51.jpg";
 import profileF52 from "@/assets/profiles/profile-f52.jpg";
 import profileF53 from "@/assets/profiles/profile-f53.jpg";
+import profileF54 from "@/assets/profiles/profile-f54.jpg";
+import profileF55 from "@/assets/profiles/profile-f55.jpg";
+import profileM18 from "@/assets/profiles/profile-m18.jpg";
+import profileF56 from "@/assets/profiles/profile-f56.jpg";
+import profileF57 from "@/assets/profiles/profile-f57.jpg";
+import profileF58 from "@/assets/profiles/profile-f58.jpg";
+import profileM19 from "@/assets/profiles/profile-m19.jpg";
+import profileF59 from "@/assets/profiles/profile-f59.jpg";
+import profileF60 from "@/assets/profiles/profile-f60.jpg";
+import profileF61 from "@/assets/profiles/profile-f61.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -213,6 +223,16 @@ export const users: UserProfile[] = [
   { id: "80", name: "Kátia Melgaço Duarte", age: 40, gender: "Feminino", interest: "Homens", city: "Paranaguá", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF51, photos: [profileF51], isOnline: false, lastSeen: "há 45min" },
   { id: "81", name: "Yasmim Tupã Borges", age: 19, gender: "Feminino", interest: "Homens", city: "Registro", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF52, photos: [profileF52], isOnline: false, lastSeen: "há 6min" },
   { id: "82", name: "Raiany Conceição Bispo", age: 27, gender: "Feminino", interest: "Homens", city: "Jequié", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF53, photos: [profileF53], isOnline: false, lastSeen: "há 18min" },
+  { id: "83", name: "Eleonora Velloso", age: 26, gender: "Feminino", interest: "Homens", city: "Lençóis Paulista", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF54, photos: [profileF54], isOnline: false, lastSeen: "há 9min" },
+  { id: "84", name: "Morgana Witzel Tavares", age: 28, gender: "Feminino", interest: "Homens", city: "Gramado", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF55, photos: [profileF55], isOnline: false, lastSeen: "há 20min" },
+  { id: "85", name: "Tadeu Venâncio Prado", age: 29, gender: "Masculino", interest: "Mulheres", city: "Arraial do Cabo", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileM18, photos: [profileM18], isOnline: false, lastSeen: "há 12min" },
+  { id: "86", name: "Samira Bittencourt", age: 27, gender: "Feminino", interest: "Homens", city: "Presidente Prudente", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF56, photos: [profileF56], isOnline: false, lastSeen: "há 7min" },
+  { id: "87", name: "Geovana Linhares Mota", age: 23, gender: "Feminino", interest: "Homens", city: "Açailândia", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF57, photos: [profileF57], isOnline: false, lastSeen: "há 15min" },
+  { id: "88", name: "Sayuri Taniguchi", age: 32, gender: "Feminino", interest: "Homens", city: "Marília", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF58, photos: [profileF58], isOnline: false, lastSeen: "há 40min" },
+  { id: "89", name: "Clóvis Drummond Faria", age: 44, gender: "Masculino", interest: "Mulheres", city: "Divinópolis", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM19, photos: [profileM19], isOnline: false, lastSeen: "há 1h" },
+  { id: "90", name: "Viviane Castanheira Lopes", age: 36, gender: "Feminino", interest: "Homens", city: "Volta Redonda", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF59, photos: [profileF59], isOnline: false, lastSeen: "há 25min" },
+  { id: "91", name: "Rosecleide Fagundes", age: 33, gender: "Feminino", interest: "Homens", city: "Cascavel", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF60, photos: [profileF60], isOnline: false, lastSeen: "há 5min" },
+  { id: "92", name: "Sheila Magalhães Branco", age: 35, gender: "Feminino", interest: "Homens", city: "Teresópolis", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF61, photos: [profileF61], isOnline: false, lastSeen: "há 30min" },
 ];
 
 export const conversations: Conversation[] = [
