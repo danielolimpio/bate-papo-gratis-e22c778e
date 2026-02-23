@@ -22,42 +22,44 @@ export default function Landing() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-1 flex-col items-start justify-center px-8 md:px-16 lg:px-24">
-        {/* Logo */}
-        <img src={logoDark} alt="WoomChat" className="h-14 mb-8 drop-shadow-lg" />
+      <div className="relative z-10 flex flex-1 items-center justify-center px-4 md:justify-start md:px-0">
+        <div className="flex flex-col items-center w-full md:w-1/2">
+          {/* Logo */}
+          <img src={logoDark} alt="WoomChat" className="h-14 mb-8 drop-shadow-lg" />
 
-        {/* Gender selection card */}
-        <div className="w-full max-w-sm rounded-2xl bg-white/95 backdrop-blur-sm p-8 shadow-2xl">
-          <h2 className="text-center text-2xl font-semibold text-gray-800 mb-6">
-            Você é
-          </h2>
+          {/* Gender selection card */}
+          <div className="w-full max-w-sm rounded-2xl bg-white/95 backdrop-blur-sm p-8 shadow-2xl">
+            <h2 className="text-center text-2xl font-semibold text-gray-800 mb-6">
+              Você é
+            </h2>
 
-          <button
-            onClick={() => handleGenderSelect("masculino")}
-            className="w-full mb-4 rounded-full bg-red-500 py-3.5 text-base font-semibold text-white hover:bg-red-600 transition-colors"
-          >
-            Homem
-          </button>
+            <button
+              onClick={() => handleGenderSelect("masculino")}
+              className="w-full mb-4 rounded-full bg-emerald-600 py-3.5 text-base font-semibold text-white hover:bg-emerald-700 transition-colors"
+            >
+              Homem
+            </button>
 
-          <button
-            onClick={() => handleGenderSelect("feminino")}
-            className="w-full mb-6 rounded-full bg-red-500 py-3.5 text-base font-semibold text-white hover:bg-red-600 transition-colors"
-          >
-            Mulher
-          </button>
+            <button
+              onClick={() => handleGenderSelect("feminino")}
+              className="w-full mb-6 rounded-full bg-emerald-600 py-3.5 text-base font-semibold text-white hover:bg-emerald-700 transition-colors"
+            >
+              Mulher
+            </button>
 
-          <div className="flex items-center gap-3 mb-5">
-            <div className="flex-1 h-px bg-gray-300" />
-            <span className="text-sm text-gray-500">ou</span>
-            <div className="flex-1 h-px bg-gray-300" />
+            <div className="flex items-center gap-3 mb-5">
+              <div className="flex-1 h-px bg-gray-300" />
+              <span className="text-sm text-gray-500">ou</span>
+              <div className="flex-1 h-px bg-gray-300" />
+            </div>
+
+            <button
+              onClick={() => navigate("/auth?mode=login")}
+              className="w-full rounded-full border-2 border-gray-300 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Fazer Login
+            </button>
           </div>
-
-          <button
-            onClick={() => navigate("/auth?mode=login")}
-            className="w-full rounded-full border-2 border-gray-300 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Fazer Login
-          </button>
         </div>
       </div>
 
