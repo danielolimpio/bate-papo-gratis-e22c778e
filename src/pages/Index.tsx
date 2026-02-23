@@ -6,6 +6,7 @@ import RightPanel from "@/components/chat/RightPanel";
 import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
 import { useTheme } from "@/hooks/useTheme";
+import { useOnlineUsers } from "@/hooks/useOnlineUsers";
 import logoDark from "@/assets/logo-dark.png";
 import logoLight from "@/assets/logo-light.png";
 
@@ -13,6 +14,7 @@ type TabType = "tudo" | "nao-lidas" | "grupos";
 
 export default function Index() {
   const { isDark, toggle } = useTheme();
+  const onlineIds = useOnlineUsers();
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -67,6 +69,7 @@ export default function Index() {
       <div className="w-[300px] flex-shrink-0 hidden lg:block">
         <RightPanel
           onProfileClick={setProfileUserId}
+          onlineIds={onlineIds}
         />
       </div>
 

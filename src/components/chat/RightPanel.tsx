@@ -4,12 +4,14 @@ import { useState } from "react";
 
 interface Props {
   onProfileClick: (userId: string) => void;
+  onlineIds: Set<string>;
 }
 
-export default function RightPanel({ onProfileClick }: Props) {
+export default function RightPanel({ onProfileClick, onlineIds }: Props) {
   const [search, setSearch] = useState("");
-  const onlineUsers = users.filter((u) => u.isOnline);
-  const offlineUsers = users.filter((u) => !u.isOnline);
+
+  const onlineUsers = users.filter((u) => onlineIds.has(u.id));
+  const offlineUsers = users.filter((u) => !onlineIds.has(u.id));
 
   const filterFn = (u: typeof users[0]) =>
     u.name.toLowerCase().includes(search.toLowerCase());

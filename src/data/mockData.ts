@@ -86,6 +86,16 @@ import profileM19 from "@/assets/profiles/profile-m19.jpg";
 import profileF59 from "@/assets/profiles/profile-f59.jpg";
 import profileF60 from "@/assets/profiles/profile-f60.jpg";
 import profileF61 from "@/assets/profiles/profile-f61.jpg";
+import profileF62 from "@/assets/profiles/profile-f62.jpg";
+import profileF63 from "@/assets/profiles/profile-f63.jpg";
+import profileF64 from "@/assets/profiles/profile-f64.jpg";
+import profileF65 from "@/assets/profiles/profile-f65.jpg";
+import profileF66 from "@/assets/profiles/profile-f66.jpg";
+import profileF67 from "@/assets/profiles/profile-f67.jpg";
+import profileF68 from "@/assets/profiles/profile-f68.jpg";
+import profileF69 from "@/assets/profiles/profile-f69.jpg";
+import profileF70 from "@/assets/profiles/profile-f70.jpg";
+import profileF71 from "@/assets/profiles/profile-f71.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -124,6 +134,19 @@ export interface Message {
 }
 
 const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8];
+
+// All profile photos for randomization
+const allProfilePhotos = [
+  profileF1, profileF2, profileF3, profileF4, profileF5, profileF6, profileF7, profileF8, profileF9, profileF10,
+  profileF11, profileF12, profileF13, profileF14, profileF15, profileF16, profileF17, profileF18, profileF19, profileF20,
+  profileF21, profileF22, profileF23, profileF24, profileF25, profileF26, profileF27, profileF28, profileF29, profileF30,
+  profileF31, profileF32, profileF33, profileF34, profileF35, profileF36, profileF37, profileF38, profileF39, profileF40,
+  profileF41, profileF42, profileF43, profileF44, profileF45, profileF46, profileF47, profileF48, profileF49, profileF50,
+  profileF51, profileF52, profileF53, profileF54, profileF55, profileF56, profileF57, profileF58, profileF59, profileF60,
+  profileF61, profileF62, profileF63, profileF64, profileF65, profileF66, profileF67, profileF68, profileF69, profileF70, profileF71,
+  profileM1, profileM2, profileM3, profileM4, profileM5, profileM6, profileM7, profileM8, profileM9, profileM10,
+  profileM11, profileM12, profileM13, profileM14, profileM15, profileM16, profileM17, profileM18, profileM19,
+];
 
 export const currentUser: UserProfile = {
   id: "me",
@@ -233,6 +256,16 @@ export const users: UserProfile[] = [
   { id: "90", name: "Viviane Castanheira Lopes", age: 36, gender: "Feminino", interest: "Homens", city: "Volta Redonda", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF59, photos: [profileF59], isOnline: false, lastSeen: "há 25min" },
   { id: "91", name: "Rosecleide Fagundes", age: 33, gender: "Feminino", interest: "Homens", city: "Cascavel", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF60, photos: [profileF60], isOnline: false, lastSeen: "há 5min" },
   { id: "92", name: "Sheila Magalhães Branco", age: 35, gender: "Feminino", interest: "Homens", city: "Teresópolis", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF61, photos: [profileF61], isOnline: false, lastSeen: "há 30min" },
+  { id: "93", name: "Lorena Palhares", age: 24, gender: "Feminino", interest: "Homens", city: "Itaúna", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF62, photos: [profileF62], isOnline: false, lastSeen: "há 7min" },
+  { id: "94", name: "Cristiane Lacerda Braga", age: 33, gender: "Feminino", interest: "Homens", city: "Caratinga", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF63, photos: [profileF63], isOnline: false, lastSeen: "há 22min" },
+  { id: "95", name: "Natasha Belmonte Couto", age: 30, gender: "Feminino", interest: "Homens", city: "Teófilo Otoni", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF64, photos: [profileF64], isOnline: false, lastSeen: "há 14min" },
+  { id: "96", name: "Tamiris Gondim", age: 27, gender: "Feminino", interest: "Homens", city: "Formosa", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF65, photos: [profileF65], isOnline: false, lastSeen: "há 3min" },
+  { id: "97", name: "Déborah Castilho Freire", age: 31, gender: "Feminino", interest: "Ambos", city: "Ituiutaba", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF66, photos: [profileF66], isOnline: false, lastSeen: "há 18min" },
+  { id: "98", name: "Monalisa Sena Ribas", age: 35, gender: "Feminino", interest: "Homens", city: "Itapeva", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF67, photos: [profileF67], isOnline: false, lastSeen: "há 40min" },
+  { id: "99", name: "Rafaela Queiroga", age: 23, gender: "Feminino", interest: "Homens", city: "Alagoinhas", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF68, photos: [profileF68], isOnline: false, lastSeen: "há 9min" },
+  { id: "100", name: "Nívea Cordeiro Assis", age: 26, gender: "Feminino", interest: "Homens", city: "São Roque", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF69, photos: [profileF69], isOnline: false, lastSeen: "há 28min" },
+  { id: "101", name: "Graziele Furquim", age: 29, gender: "Feminino", interest: "Homens", city: "Curvelo", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF70, photos: [profileF70], isOnline: false, lastSeen: "há 11min" },
+  { id: "102", name: "Talita Melgaço Dutra", age: 25, gender: "Feminino", interest: "Homens", city: "Ubá", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF71, photos: [profileF71], isOnline: false, lastSeen: "há 5min" },
 ];
 
 export const conversations: Conversation[] = [
@@ -283,49 +316,37 @@ export const messagesByConversation: Record<string, Message[]> = {
   ],
 };
 
-// Fake users for new registration cards
-const femaleNames = [
-  "Paula Pereira", "Amanda Rocha", "Larissa Campos", "Isabela Nunes",
-  "Carolina Vieira", "Natália Gomes", "Letícia Duarte", "Vanessa Castro",
-  "Bruna Correia", "Mariana Teixeira", "Renata Machado",
-];
-
-const maleNames = [
-  "Bruno Silva", "Gabriel Araújo", "Mateus Cardoso", "Pedro Henrique",
-  "Rodrigo Barbosa", "Felipe Moraes", "Leonardo Reis", "Gustavo Pinto",
-  "Caio Monteiro", "Diego Fernandes",
-];
-
-const femaleAvatarIndices = [0, 2, 4, 6]; // avatar1, avatar3, avatar5, avatar7
-const maleAvatarIndices = [1, 3, 5, 7];   // avatar2, avatar4, avatar6, avatar8
-
-const cities = [
-  "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília",
-  "Curitiba", "Fortaleza", "Recife", "Porto Alegre", "Manaus",
-  "Goiânia", "Campinas", "Guarulhos", "Florianópolis", "Vitória",
-];
-
+// Randomization for cards and online status
 const statuses: RelationshipStatus[] = ["Solteiro(a)", "Casado(a)", "Separado(a)", "Namorando", "Viúvo(a)", "Enrolado(a)"];
 
-export function generateRandomNewUser() {
-  const isFemale = Math.random() > 0.5;
-  const gender: Gender = isFemale ? "Feminino" : "Masculino";
-  const names = isFemale ? femaleNames : maleNames;
-  const avatarPool = isFemale ? femaleAvatarIndices : maleAvatarIndices;
+const cardCities = [
+  "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília",
+  "Curitiba", "Fortaleza", "Recife", "Porto Alegre", "Manaus",
+  "Goiânia", "Campinas", "Florianópolis", "Vitória", "Belém",
+];
 
-  const name = names[Math.floor(Math.random() * names.length)];
+export function generateRandomNewUser() {
+  // Pick a random user from the existing list for realistic photos
+  const randomUser = users[Math.floor(Math.random() * users.length)];
   const age = Math.floor(Math.random() * 20) + 20;
-  const city = cities[Math.floor(Math.random() * cities.length)];
+  const city = cardCities[Math.floor(Math.random() * cardCities.length)];
   const status = statuses[Math.floor(Math.random() * statuses.length)];
-  const avatarIdx = avatarPool[Math.floor(Math.random() * avatarPool.length)];
 
   return {
     id: `fake-${Date.now()}-${Math.random()}`,
-    name,
-    age,
-    gender,
-    city,
+    name: randomUser.name,
+    age: randomUser.age,
+    gender: randomUser.gender,
+    city: randomUser.city,
     relationshipStatus: status,
-    avatar: avatars[avatarIdx],
+    avatar: randomUser.avatar,
   };
+}
+
+// Randomize ~10% of users as online, rotating every 3-5 min
+export function getRandomOnlineUserIds(): Set<string> {
+  const nonMeUsers = users.filter(u => u.id !== "me");
+  const count = Math.max(2, Math.floor(nonMeUsers.length * 0.10));
+  const shuffled = [...nonMeUsers].sort(() => Math.random() - 0.5);
+  return new Set(shuffled.slice(0, count).map(u => u.id));
 }

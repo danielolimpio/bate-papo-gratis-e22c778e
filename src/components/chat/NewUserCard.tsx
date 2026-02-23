@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { generateRandomNewUser } from "@/data/mockData";
+import { users } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 
+type CardType = "register" | "online";
+
 export default function NewUserCard() {
-  const [user, setUser] = useState<ReturnType<typeof generateRandomNewUser> | null>(null);
+  const [user, setUser] = useState<typeof users[0] | null>(null);
+  const [cardType, setCardType] = useState<CardType>("register");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const show = () => {
-      const newUser = generateRandomNewUser();
-      setUser(newUser);
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+      setUser(randomUser);
+      setCardType(Math.random() > 0.5 ? "register" : "online");
       setVisible(true);
       setTimeout(() => setVisible(false), 5000);
     };
@@ -36,7 +40,9 @@ export default function NewUserCard() {
         >
           <img src={user.avatar} alt={user.name} className="h-11 w-11 rounded-full object-cover flex-shrink-0" />
           <div className="min-w-0 flex-1">
-            <p className="text-xs text-muted-foreground">Novo registro ✨</p>
+            <p className="text-xs text-muted-foreground">
+              {cardType === "register" ? "Novo registro ✨" : "Acabou de entrar 🟢"}
+            </p>
             <p className="text-sm font-semibold text-foreground truncate">{user.name}</p>
             <p className="text-xs text-muted-foreground">{user.age} anos • {user.city}</p>
           </div>
