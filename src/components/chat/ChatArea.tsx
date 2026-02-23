@@ -30,13 +30,13 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const sendMessage = (text: string) => {
+    if (!text.trim()) return;
     const newMsg: Message = {
       id: `m-${Date.now()}`,
       conversationId: isGeneral ? "general" : conversationId || "",
       senderId: "me",
-      text: input.trim(),
+      text: text.trim(),
       timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
       isRead: false,
     };
@@ -48,7 +48,16 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
         [conversationId]: [...(prev[conversationId] || []), newMsg],
       }));
     }
+  };
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    sendMessage(input);
     setInput("");
+  };
+
+  const handleThumbsUp = () => {
+    sendMessage("👍");
   };
 
   // No conversation selected and not general
@@ -208,7 +217,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
             <Send size={20} className="text-primary" />
           </button>
         ) : (
-          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+          <button onClick={handleThumbsUp} className="rounded-full p-2 hover:bg-secondary transition-colors">
             <ThumbsUp size={20} className="text-primary" />
           </button>
         )}
