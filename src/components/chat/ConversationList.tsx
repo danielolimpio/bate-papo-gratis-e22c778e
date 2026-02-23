@@ -11,9 +11,10 @@ interface Props {
   onSearchChange: (q: string) => void;
   activeTab: TabType;
   onTabChange: (tab: TabType) => void;
+  readConversations: Set<string>;
 }
 
-export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange }: Props) {
+export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations }: Props) {
   const filtered = useMemo(() => {
     if (!searchQuery) return conversations;
     const q = searchQuery.toLowerCase();
@@ -77,6 +78,7 @@ export default function ConversationList({ activeConversationId, onSelect, searc
             key={conv.id}
             conversation={conv}
             isActive={activeConversationId === conv.id}
+            isRead={readConversations.has(conv.id)}
             onSelect={() => onSelect(conv.id)}
           />
         ))}
@@ -85,7 +87,7 @@ export default function ConversationList({ activeConversationId, onSelect, searc
   );
 }
 
-function ConversationItem({ conversation, isActive, onSelect }: { conversation: Conversation; isActive: boolean; onSelect: () => void }) {
+function ConversationItem({ conversation, isActive, isRead, onSelect }: { conversation: Conversation; isActive: boolean; isRead: boolean; onSelect: () => void }) {
   const user = users.find((u) => u.id === conversation.participantId);
   if (!user) return null;
 
@@ -109,7 +111,7 @@ function ConversationItem({ conversation, isActive, onSelect }: { conversation: 
         </div>
         <p className="text-[12px] text-muted-foreground truncate mt-[1px]">{conversation.lastMessage}</p>
       </div>
-      {conversation.unreadCount > 0 && (
+      {!isRead && conversation.unreadCount > 0 && (
         <span className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
           {conversation.unreadCount}
         </span>
