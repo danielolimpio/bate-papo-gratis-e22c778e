@@ -19,6 +19,7 @@ export default function Index() {
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [readConversations, setReadConversations] = useState<Set<string>>(new Set());
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
   // When "Tudo" tab is active and no conversation selected, show general chat
@@ -33,6 +34,7 @@ export default function Index() {
 
   const handleSelectConversation = (id: string) => {
     setActiveConversation(id);
+    setReadConversations((prev) => new Set(prev).add(id));
   };
 
   return (
@@ -55,6 +57,7 @@ export default function Index() {
           onSearchChange={setSearchQuery}
           activeTab={activeTab}
           onTabChange={handleTabChange}
+          readConversations={readConversations}
         />
       </div>
 
