@@ -185,9 +185,11 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           <button className="rounded-full p-2 hover:bg-secondary transition-colors">
             <Mic size={20} className="text-primary" />
           </button>
-          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
-            <Image size={20} className="text-primary" />
-          </button>
+          {!isGeneral && (
+            <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+              <Image size={20} className="text-primary" />
+            </button>
+          )}
           <button className="rounded-full p-2 hover:bg-secondary transition-colors">
             <Smile size={20} className="text-primary" />
           </button>
