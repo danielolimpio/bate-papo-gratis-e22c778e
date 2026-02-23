@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Phone, Video, Info, ThumbsUp, Smile, Image, Mic, Send, MessageCircle } from "lucide-react";
+import { Phone, Video, Info, Smile, Image, Mic, Send } from "lucide-react";
+import EmojiPicker from "./EmojiPicker";
 import { users, messagesByConversation, conversations, generalChatMessages, type Message } from "@/data/mockData";
 import StackedAvatars from "./StackedAvatars";
 
@@ -12,6 +13,7 @@ interface Props {
 
 export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvatarClick }: Props) {
   const [input, setInput] = useState("");
+  const [showEmoji, setShowEmoji] = useState(false);
   const [localMessages, setLocalMessages] = useState<Record<string, Message[]>>({ ...messagesByConversation });
   const [localGeneralMessages, setLocalGeneralMessages] = useState<Message[]>([...generalChatMessages]);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -189,7 +191,13 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
       </div>
 
       {/* Input */}
-      <div className="flex items-center gap-1 border-t border-chat-divider px-3 py-[8px]">
+      <div className="relative flex items-center gap-1 border-t border-chat-divider px-3 py-[8px]">
+        {showEmoji && (
+          <EmojiPicker
+            onSelect={(emoji) => setInput((prev) => prev + emoji)}
+            onClose={() => setShowEmoji(false)}
+          />
+        )}
         <div className="flex items-center gap-1">
           <button className="rounded-full p-2 hover:bg-secondary transition-colors">
             <Mic size={20} className="text-primary" />
@@ -199,7 +207,10 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               <Image size={20} className="text-primary" />
             </button>
           )}
-          <button className="rounded-full p-2 hover:bg-secondary transition-colors">
+          <button
+            onClick={() => setShowEmoji((v) => !v)}
+            className="rounded-full p-2 hover:bg-secondary transition-colors"
+          >
             <Smile size={20} className="text-primary" />
           </button>
         </div>
