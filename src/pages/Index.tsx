@@ -7,6 +7,7 @@ import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
+import { conversations } from "@/data/mockData";
 import logoDark from "@/assets/logo-dark.png";
 import logoLight from "@/assets/logo-light.png";
 
@@ -81,8 +82,14 @@ export default function Index() {
         <ProfileModal
           userId={profileUserId}
           onClose={() => setProfileUserId(null)}
-          onStartChat={(id) => {
-            setActiveConversation(id);
+          onStartChat={(userId) => {
+            const conv = conversations.find((c) => c.participantId === userId);
+            if (conv) {
+              setActiveConversation(conv.id);
+            } else {
+              // Create a temporary conversation id for users without existing conversations
+              setActiveConversation(`temp-${userId}`);
+            }
             setProfileUserId(null);
           }}
         />

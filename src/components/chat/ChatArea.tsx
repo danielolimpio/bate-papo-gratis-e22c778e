@@ -21,7 +21,12 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
   const isGeneral = chatMode === "general";
 
   const conv = !isGeneral ? conversations.find((c) => c.id === conversationId) : null;
-  const participant = conv ? users.find((u) => u.id === conv.participantId) : null;
+  const tempUserId = !conv && conversationId?.startsWith("temp-") ? conversationId.replace("temp-", "") : null;
+  const participant = conv
+    ? users.find((u) => u.id === conv.participantId)
+    : tempUserId
+    ? users.find((u) => u.id === tempUserId)
+    : null;
   const messages = isGeneral
     ? localGeneralMessages
     : conversationId
