@@ -22,7 +22,7 @@ export default function Landing() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4">
+      <div className="relative z-10 flex flex-1 flex-col items-start justify-center px-8 md:px-16 lg:px-24">
         {/* Logo */}
         <img src={logoDark} alt="WoomChat" className="h-14 mb-8 drop-shadow-lg" />
 
