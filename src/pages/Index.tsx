@@ -78,7 +78,14 @@ export default function Index() {
 
       {/* Profile modal */}
       {profileUserId && (
-        <ProfileModal userId={profileUserId} onClose={() => setProfileUserId(null)} />
+        <ProfileModal
+          userId={profileUserId}
+          onClose={() => setProfileUserId(null)}
+          onStartChat={(id) => {
+            setActiveConversation(id);
+            setProfileUserId(null);
+          }}
+        />
       )}
     </div>
   );
