@@ -10,8 +10,6 @@ interface Props {
 export default function RightPanel({ onProfileClick, onlineIds }: Props) {
   const [search, setSearch] = useState("");
 
-  const onlineUsers = users.filter((u) => onlineIds.has(u.id));
-  const offlineUsers = users.filter((u) => !onlineIds.has(u.id));
 
   const filterFn = (u: typeof users[0]) =>
     u.name.toLowerCase().includes(search.toLowerCase());
@@ -26,32 +24,38 @@ export default function RightPanel({ onProfileClick, onlineIds }: Props) {
       </div>
 
       <div className="py-1 px-1">
-        {onlineUsers.filter(filterFn).map((u) => (
-          <div
-            key={u.id}
-            className="flex items-center gap-[10px] cursor-pointer hover:bg-chat-hover rounded-md px-[10px] py-[6px] transition-colors"
-            onClick={() => onProfileClick(u.id)}
-          >
-            <div className="relative flex-shrink-0">
-              <img src={u.avatar} alt={u.name} className="h-8 w-8 rounded-full object-cover" />
-              <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online" />
+        {users.filter(filterFn).sort((a, b) => {
+          const aOnline = onlineIds.has(a.id);
+          const bOnline = onlineIds.has(b.id);
+          if (aOnline && !bOnline) return -1;
+          if (!aOnline && bOnline) return 1;
+          return 0;
+        }).map((u) => {
+          const isOnline = onlineIds.has(u.id);
+          return (
+            <div
+              key={u.id}
+              className="flex items-center gap-[10px] cursor-pointer hover:bg-chat-hover rounded-md px-[10px] py-[6px] transition-all duration-700 ease-in-out"
+              onClick={() => onProfileClick(u.id)}
+            >
+              <div className="relative flex-shrink-0">
+                <img
+                  src={u.avatar}
+                  alt={u.name}
+                  className="h-8 w-8 rounded-full object-cover transition-opacity duration-700 ease-in-out"
+                  style={{ opacity: isOnline ? 1 : 0.6 }}
+                />
+                <span
+                  className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online transition-all duration-700 ease-in-out"
+                  style={{ opacity: isOnline ? 1 : 0, transform: isOnline ? 'scale(1)' : 'scale(0)' }}
+                />
+              </div>
+              <span className={`text-[13px] truncate transition-colors duration-700 ease-in-out ${isOnline ? 'text-foreground' : 'text-muted-foreground'}`}>
+                {u.name}
+              </span>
             </div>
-            <span className="text-[13px] text-foreground truncate">{u.name}</span>
-          </div>
-        ))}
-
-        {offlineUsers.filter(filterFn).map((u) => (
-          <div
-            key={u.id}
-            className="flex items-center gap-[10px] cursor-pointer hover:bg-chat-hover rounded-md px-[10px] py-[6px] transition-colors"
-            onClick={() => onProfileClick(u.id)}
-          >
-            <div className="relative flex-shrink-0">
-              <img src={u.avatar} alt={u.name} className="h-8 w-8 rounded-full object-cover opacity-60" />
-            </div>
-            <span className="text-[13px] text-muted-foreground truncate">{u.name}</span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
