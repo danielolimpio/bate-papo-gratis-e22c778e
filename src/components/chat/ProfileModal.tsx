@@ -1,4 +1,4 @@
-import { X, ChevronLeft, ChevronRight, MapPin, Heart, User2 } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, MapPin, Heart, User2, MessageCircle } from "lucide-react";
 import { users, type UserProfile } from "@/data/mockData";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,11 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 interface Props {
   userId: string | null;
   onClose: () => void;
+  onStartChat?: (userId: string) => void;
 }
 
-export default function ProfileModal({ userId, onClose }: Props) {
+export default function ProfileModal({ userId, onClose, onStartChat }: Props) {
   const user = users.find((u) => u.id === userId);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [matched, setMatched] = useState(false);
 
   if (!user) return null;
 
@@ -90,6 +92,38 @@ export default function ProfileModal({ userId, onClose }: Props) {
                 <span className="text-xs text-muted-foreground">Online agora</span>
               </div>
             )}
+
+            {/* Action buttons */}
+            <div className="mt-5 flex items-center gap-3">
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setMatched((v) => !v)}
+                className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
+                  matched
+                    ? "bg-destructive text-destructive-foreground"
+                    : "bg-secondary text-foreground hover:bg-chat-hover"
+                }`}
+              >
+                <motion.div
+                  animate={matched ? { scale: [1, 1.3, 1] } : {}}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Heart size={18} fill={matched ? "currentColor" : "none"} />
+                </motion.div>
+                {matched ? "Match!" : "Match"}
+              </motion.button>
+
+              <button
+                onClick={() => {
+                  if (onStartChat) onStartChat(user.id);
+                  onClose();
+                }}
+                className="flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                <MessageCircle size={18} />
+                Conversar
+              </button>
+            </div>
           </div>
         </motion.div>
       </motion.div>
