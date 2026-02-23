@@ -56,6 +56,16 @@ import profileF34 from "@/assets/profiles/profile-f34.jpg";
 import profileF35 from "@/assets/profiles/profile-f35.jpg";
 import profileF36 from "@/assets/profiles/profile-f36.jpg";
 import profileF37 from "@/assets/profiles/profile-f37.jpg";
+import profileM14 from "@/assets/profiles/profile-m14.jpg";
+import profileF38 from "@/assets/profiles/profile-f38.jpg";
+import profileF39 from "@/assets/profiles/profile-f39.jpg";
+import profileF40 from "@/assets/profiles/profile-f40.jpg";
+import profileF41 from "@/assets/profiles/profile-f41.jpg";
+import profileM15 from "@/assets/profiles/profile-m15.jpg";
+import profileF42 from "@/assets/profiles/profile-f42.jpg";
+import profileM16 from "@/assets/profiles/profile-m16.jpg";
+import profileM17 from "@/assets/profiles/profile-m17.jpg";
+import profileF43 from "@/assets/profiles/profile-f43.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -173,6 +183,16 @@ export const users: UserProfile[] = [
   { id: "60", name: "Analice Benvindo", age: 35, gender: "Feminino", interest: "Homens", city: "Ourinhos", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF35, photos: [profileF35], isOnline: false, lastSeen: "há 11min" },
   { id: "61", name: "Jeniffer Tupinambá Soares", age: 25, gender: "Feminino", interest: "Homens", city: "Xinguara", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF36, photos: [profileF36], isOnline: false, lastSeen: "há 19min" },
   { id: "62", name: "Sirlene Hayashida", age: 28, gender: "Feminino", interest: "Homens", city: "Naviraí", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF37, photos: [profileF37], isOnline: false, lastSeen: "há 6min" },
+  { id: "63", name: "Cleiton Barroso Queiroga", age: 30, gender: "Masculino", interest: "Mulheres", city: "Juazeiro do Norte", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileM14, photos: [profileM14], isOnline: false, lastSeen: "há 12min" },
+  { id: "64", name: "Valdirene Alcântara Braga", age: 38, gender: "Feminino", interest: "Homens", city: "Imperatriz", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileF38, photos: [profileF38], isOnline: false, lastSeen: "há 45min" },
+  { id: "65", name: "Tainá Rebouças", age: 23, gender: "Feminino", interest: "Homens", city: "Sobral", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF39, photos: [profileF39], isOnline: false, lastSeen: "há 8min" },
+  { id: "66", name: "Keyla Brandão Rezende", age: 34, gender: "Feminino", interest: "Homens", city: "Poços de Caldas", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF40, photos: [profileF40], isOnline: false, lastSeen: "há 20min" },
+  { id: "67", name: "Emilly Takahashi", age: 25, gender: "Feminino", interest: "Homens", city: "Londrina", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF41, photos: [profileF41], isOnline: false, lastSeen: "há 4min" },
+  { id: "68", name: "Genivaldo Quaresma Brito", age: 57, gender: "Masculino", interest: "Mulheres", city: "Parnaíba", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileM15, photos: [profileM15], isOnline: false, lastSeen: "há 1h" },
+  { id: "69", name: "Dinalva Cerqueira", age: 40, gender: "Feminino", interest: "Homens", city: "Vitória da Conquista", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF42, photos: [profileF42], isOnline: false, lastSeen: "há 30min" },
+  { id: "70", name: "Weslley Furlan Domingos", age: 39, gender: "Masculino", interest: "Mulheres", city: "Chapecó", relationshipStatus: "Casado(a)", showRelationshipStatus: false, avatar: profileM16, photos: [profileM16], isOnline: false, lastSeen: "há 55min" },
+  { id: "71", name: "Erivaldo Sena Cavalcante", age: 35, gender: "Masculino", interest: "Mulheres", city: "Caruaru", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileM17, photos: [profileM17], isOnline: false, lastSeen: "há 15min" },
+  { id: "72", name: "Isadora Benevenuto Gama", age: 22, gender: "Feminino", interest: "Homens", city: "Ouro Preto", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF43, photos: [profileF43], isOnline: false, lastSeen: "há 3min" },
 ];
 
 export const conversations: Conversation[] = [
