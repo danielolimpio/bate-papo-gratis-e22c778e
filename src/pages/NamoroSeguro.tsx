@@ -1,74 +1,132 @@
 import LegalLayout from "@/components/LegalLayout";
+import { Shield, AlertTriangle, Ban, Eye, UserCheck, Lock, Heart, CheckCircle, XCircle } from "lucide-react";
 
 export default function NamoroSeguro() {
   return (
     <LegalLayout title="Namoro Seguro">
-      <p className="text-lg leading-relaxed mb-6">
-        Sua segurança é nossa prioridade. No WoomChat, trabalhamos para que você tenha a melhor experiência ao conhecer novas pessoas. 
-        Confira nossas dicas e políticas para um namoro online seguro.
-      </p>
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+          <Shield size={13} />
+          Sua segurança é nossa prioridade
+        </div>
+        <p className="text-gray-600">
+          No WoomChat, trabalhamos para que você tenha a melhor experiência ao conhecer novas pessoas. Confira nossas dicas e políticas para um namoro online seguro.
+        </p>
+      </div>
 
-      <h2 className="text-xl font-semibold mt-8 mb-3">Dicas de Segurança</h2>
-      <ol className="list-decimal pl-6 space-y-2 mt-2">
-        <li>Nunca envie dinheiro para outro membro.</li>
-        <li>Exponha claramente suas expectativas para evitar mal-entendidos.</li>
-        <li>Faça videochamadas com seu parceiro de vez em quando.</li>
-        <li>Não compartilhe sua senha, acesso à sua conta ou qualquer documento de identidade oficial com ninguém.</li>
-      </ol>
+      <h2><Shield size={18} className="text-emerald-600 shrink-0" /> Dicas de Segurança</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+        {[
+          { icon: Ban, text: "Nunca envie dinheiro para outro membro", color: "border-red-200 bg-red-50" },
+          { icon: Eye, text: "Exponha claramente suas expectativas para evitar mal-entendidos", color: "border-blue-200 bg-blue-50" },
+          { icon: UserCheck, text: "Faça videochamadas com seu parceiro de vez em quando", color: "border-purple-200 bg-purple-50" },
+          { icon: Lock, text: "Não compartilhe sua senha ou documentos de identidade", color: "border-amber-200 bg-amber-50" },
+        ].map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <div key={i} className={`rounded-xl p-4 border ${item.color} flex items-start gap-3`}>
+              <Icon size={18} className="shrink-0 mt-0.5 opacity-70" />
+              <span className="text-sm font-medium text-gray-800">{item.text}</span>
+            </div>
+          );
+        })}
+      </div>
 
-      <div className="bg-amber-50 border-l-4 border-amber-400 p-4 mt-6 mb-6 rounded-r-lg">
-        <p className="font-semibold text-amber-800">NOTA! Recomendamos enfaticamente que nossos membros sigam estas diretrizes:</p>
-        <ul className="list-disc pl-6 mt-2 space-y-2 text-amber-900">
-          <li>Nunca inclua seu sobrenome, endereço de e-mail, endereço residencial, número de telefone, local de trabalho ou qualquer outra informação de identificação em seu perfil na Internet ou em suas primeiras mensagens. Pare de se comunicar com qualquer pessoa que o pressione para fornecer informações pessoais ou financeiras.</li>
-          <li>Se optar por ter um encontro presencial com outro membro, avise sempre alguém da sua família ou um amigo para onde vai e quando vai voltar. Nunca aceite ser buscado em casa. Providencie sempre o seu próprio transporte de ida e volta para o encontro e encontre-se num local público com muitas pessoas por perto.</li>
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mt-6">
+        <div className="flex items-center gap-2 font-bold text-amber-800 text-sm mb-3">
+          <AlertTriangle size={16} />
+          NOTA IMPORTANTE
+        </div>
+        <ul className="space-y-3 text-sm text-amber-900">
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
+            Nunca inclua seu sobrenome, endereço de e-mail, endereço residencial, número de telefone, local de trabalho ou qualquer outra informação de identificação em seu perfil ou nas primeiras mensagens.
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
+            Se optar por um encontro presencial, avise alguém da sua família. Nunca aceite ser buscado em casa. Providencie seu próprio transporte e encontre-se em local público.
+          </li>
         </ul>
       </div>
 
-      <h2 className="text-xl font-semibold mt-8 mb-3">Golpes e Reembolsos</h2>
-      <ol className="list-decimal pl-6 space-y-2 mt-2">
-        <li>Um membro se identifica incorretamente (ou seja, usa o perfil de outro membro sem permissão para se comunicar com você). Tomaremos as devidas providências contra esse membro.</li>
-        <li>Um membro solicitou dinheiro ou presentes caros. Baniremos esse membro permanentemente.</li>
-        <li>Um membro apresentou informações falsas e deliberadas em seu perfil, incluindo idade, filhos, sexo e estado civil. Baniremos esse membro permanentemente.</li>
-      </ol>
+      <h2><AlertTriangle size={18} className="text-emerald-600 shrink-0" /> Golpes e Reembolsos</h2>
+      <div className="space-y-2 mt-3">
+        {[
+          "Um membro se identifica incorretamente (usa perfil de outro sem permissão). Tomaremos providências.",
+          "Um membro solicitou dinheiro ou presentes caros. Banimento permanente.",
+          "Um membro apresentou informações falsas deliberadas (idade, filhos, sexo, estado civil). Banimento permanente.",
+        ].map((item, i) => (
+          <div key={i} className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-lg p-3">
+            <XCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
+            <span className="text-sm text-gray-700">{item}</span>
+          </div>
+        ))}
+      </div>
 
-      <h2 className="text-xl font-semibold mt-8 mb-3">Não é Golpe</h2>
-      <ol className="list-decimal pl-6 space-y-2 mt-2">
-        <li>Ocorreram alguns erros na tradução de uma carta.</li>
-        <li>Se um membro não responder a todas as perguntas em um e-mail.</li>
-        <li>Se, em qualquer nível da sua comunicação, o membro decidir parar de desenvolver o relacionamento.</li>
-        <li>Se um membro tiver fotos de parentes, amigos, ex-parceiros e outras informações pessoais publicadas em qualquer rede social.</li>
-        <li>Se um membro usa anéis nos dedos, isso não significa que a pessoa seja casada, independentemente do dedo em que o anel esteja.</li>
-        <li>Se um membro usar um apelido.</li>
-      </ol>
+      <h2><CheckCircle size={18} className="text-emerald-600 shrink-0" /> Não é Golpe</h2>
+      <div className="space-y-2 mt-3">
+        {[
+          "Ocorreram alguns erros na tradução de uma carta.",
+          "Se um membro não responder a todas as perguntas em um e-mail.",
+          "Se o membro decidir parar de desenvolver o relacionamento.",
+          "Se um membro tiver fotos de parentes/amigos publicadas em redes sociais.",
+          "Se um membro usa anéis nos dedos — não significa que é casado(a).",
+          "Se um membro usar um apelido.",
+        ].map((item, i) => (
+          <div key={i} className="flex items-start gap-3 bg-emerald-50 border border-emerald-100 rounded-lg p-3">
+            <CheckCircle size={16} className="text-emerald-500 shrink-0 mt-0.5" />
+            <span className="text-sm text-gray-700">{item}</span>
+          </div>
+        ))}
+      </div>
 
-      <h2 className="text-xl font-semibold mt-8 mb-3">Exploração e Tráfico de Seres Humanos</h2>
-      <p>Mantemos uma política de tolerância zero contra qualquer forma de exploração ou tráfico de seres humanos. Isso inclui:</p>
-      <ol className="list-decimal pl-6 space-y-2 mt-2">
-        <li>Conteúdo que explore indivíduos de forma sexual ou violenta, particularmente menores de 18 anos.</li>
-        <li>Conteúdo que incite, promova ou facilite o tráfico de seres humanos, incluindo exploração sexual, trabalho forçado ou escravidão moderna.</li>
-        <li>Conteúdo que utilize a plataforma para coagir ou solicitar atividades ilegais, como prostituição ou serviços de acompanhantes.</li>
-      </ol>
-      <p className="mt-3">Colaboramos ativamente com as autoridades policiais e organizações de combate ao tráfico de pessoas para investigar e solucionar essas violações. Incentivamos os usuários a denunciarem imediatamente qualquer comportamento ou conteúdo suspeito.</p>
+      <h2><Ban size={18} className="text-emerald-600 shrink-0" /> Exploração e Tráfico de Seres Humanos</h2>
+      <div className="bg-red-50 rounded-xl p-5 mt-3 border border-red-200">
+        <p className="text-sm text-red-800 font-semibold mb-3">Mantemos uma política de tolerância zero contra qualquer forma de exploração ou tráfico.</p>
+        <ol className="list-decimal pl-5 space-y-2 text-sm text-red-900">
+          <li>Conteúdo que explore indivíduos de forma sexual ou violenta, particularmente menores de 18 anos.</li>
+          <li>Conteúdo que incite, promova ou facilite o tráfico de seres humanos.</li>
+          <li>Conteúdo que utilize a plataforma para coagir ou solicitar atividades ilegais.</li>
+        </ol>
+        <p className="text-sm text-red-800 mt-3">Colaboramos ativamente com as autoridades policiais para investigar e solucionar essas violações.</p>
+      </div>
 
-      <h2 className="text-xl font-semibold mt-8 mb-3">Compromissos Adicionais de Segurança</h2>
-      <p>Para criar um ambiente seguro, também implementamos as seguintes medidas:</p>
-      <ol className="list-decimal pl-6 space-y-2 mt-2">
-        <li><strong>Verificação e triagem:</strong> Os usuários são incentivados a verificar suas contas, e nossa equipe pode realizar verificações para reduzir atividades fraudulentas.</li>
-        <li><strong>Ferramentas de denúncia:</strong> Recursos de denúncia fáceis de usar estão disponíveis para que os usuários sinalizem conteúdo inadequado ou prejudicial, que é analisado prontamente por nossa equipe de moderação.</li>
-        <li><strong>Proteção da Privacidade:</strong> Priorizamos a privacidade do usuário, restringindo a coleta ou o compartilhamento não autorizados de informações pessoais.</li>
-      </ol>
+      <h2><Shield size={18} className="text-emerald-600 shrink-0" /> Compromissos Adicionais de Segurança</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+        {[
+          { icon: UserCheck, title: "Verificação", desc: "Incentivamos verificação de contas e realizamos verificações para reduzir fraudes" },
+          { icon: AlertTriangle, title: "Denúncia", desc: "Recursos de denúncia fáceis de usar, analisados prontamente pela moderação" },
+          { icon: Lock, title: "Privacidade", desc: "Restringimos coleta ou compartilhamento não autorizado de informações pessoais" },
+        ].map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <div key={i} className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-2">
+                <Icon size={16} />
+              </div>
+              <p className="font-semibold text-xs text-gray-900 mb-1">{item.title}</p>
+              <p className="text-xs text-gray-500">{item.desc}</p>
+            </div>
+          );
+        })}
+      </div>
 
-      <h2 className="text-xl font-semibold mt-8 mb-3">Responsabilidades do Usuário</h2>
-      <ol className="list-decimal pl-6 space-y-2 mt-2">
-        <li>Evite compartilhar informações sensíveis, como endereços residenciais, dados financeiros ou documentos de identificação pessoal.</li>
-        <li>Evite encontrar-se pessoalmente com alguém sem as devidas precauções, como informar um amigo de confiança, encontrar-se em um local público e garantir um transporte seguro.</li>
-      </ol>
+      <h2><UserCheck size={18} className="text-emerald-600 shrink-0" /> Responsabilidades do Usuário</h2>
+      <div className="space-y-2 mt-3">
+        <div className="flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <Shield size={16} className="text-gray-500 shrink-0 mt-0.5" />
+          <span className="text-sm text-gray-700">Evite compartilhar informações sensíveis, como endereços, dados financeiros ou documentos de identificação pessoal.</span>
+        </div>
+        <div className="flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <Shield size={16} className="text-gray-500 shrink-0 mt-0.5" />
+          <span className="text-sm text-gray-700">Evite encontrar-se pessoalmente sem precauções: informe um amigo, encontre-se em local público e garanta transporte seguro.</span>
+        </div>
+      </div>
 
-      <p className="mt-6">Nossa plataforma está comprometida em promover uma comunidade segura, respeitosa e confiável. Violações dessas políticas resultarão na suspensão imediata da conta e em possíveis medidas legais.</p>
-
-      <div className="mt-8 p-6 bg-gray-50 rounded-xl text-center">
-        <p className="text-gray-600">Atenciosamente,</p>
-        <p className="font-semibold text-gray-800">Equipe de Suporte do WoomChat</p>
+      <div className="mt-10 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl p-6 text-center shadow-lg">
+        <Heart className="mx-auto text-white/80 mb-2" size={28} />
+        <p className="text-white font-medium text-sm">Nossa plataforma está comprometida em promover uma comunidade segura, respeitosa e confiável.</p>
+        <p className="text-white/80 text-xs mt-2">Atenciosamente, Equipe de Suporte do WoomChat</p>
       </div>
     </LegalLayout>
   );
