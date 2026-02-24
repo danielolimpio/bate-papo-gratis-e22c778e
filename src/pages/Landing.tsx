@@ -28,8 +28,8 @@ export default function Landing() {
           <img src={logoDark} alt="WoomChat" className="h-14 mb-3 drop-shadow-lg" />
 
           {/* Tagline below logo */}
-          <p className="text-white text-lg md:text-xl font-medium mb-8 drop-shadow-md text-center tracking-wide">
-            ✨ Entre para a Sala de Bate-Papo! ✨
+          <p className="text-white text-2xl md:text-3xl mb-8 drop-shadow-md text-center" style={{ fontFamily: "'Dancing Script', cursive" }}>
+            Entre para a Sala de Bate-Papo!
           </p>
 
           {/* Gender selection card */}
