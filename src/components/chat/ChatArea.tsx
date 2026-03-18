@@ -100,7 +100,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
             <Send size={32} className="text-muted-foreground" />
           </div>
-          <h2 className="text-xl font-semibold text-foreground">WoomChat</h2>
+          <h2 className="text-xl font-semibold text-foreground">Bate-Papo Grátis</h2>
           <p className="text-sm text-muted-foreground mt-1">Selecione uma conversa para começar</p>
         </div>
       </div>
