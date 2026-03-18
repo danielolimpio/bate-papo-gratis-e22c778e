@@ -100,7 +100,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
             <Send size={32} className="text-muted-foreground" />
           </div>
-          <h2 className="text-xl font-semibold text-foreground">WoomChat</h2>
+          <h2 className="text-xl font-semibold text-foreground">Bate-Papo Grátis</h2>
           <p className="text-sm text-muted-foreground mt-1">Selecione uma conversa para começar</p>
         </div>
       </div>
@@ -166,7 +166,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               onClick={() => onAvatarClick(participant.id)}
             />
             <h4 className="font-semibold text-foreground">{participant.name}</h4>
-            <p className="text-xs text-muted-foreground">WoomChat</p>
+            <p className="text-xs text-muted-foreground">Bate-Papo Grátis</p>
             <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-center">
               <p className="text-xs text-muted-foreground">
                 🔒 As mensagens são protegidas com criptografia de ponta a ponta.
@@ -178,7 +178,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
         {isGeneral && (
           <div className="mb-4 flex flex-col items-center">
             <StackedAvatars size={64} />
-            <h4 className="font-semibold text-foreground">Sala Geral do WoomChat</h4>
+            <h4 className="font-semibold text-foreground">Sala Geral do Bate-Papo Grátis</h4>
             <p className="text-xs text-muted-foreground mt-1">Todos os membros podem ver e enviar mensagens aqui</p>
           </div>
         )}

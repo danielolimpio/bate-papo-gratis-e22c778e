@@ -5,16 +5,16 @@ export default function NamoroSeguro() {
   return (
     <LegalLayout title="Namoro Seguro">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+        <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
           <Shield size={13} />
           Sua segurança é nossa prioridade
         </div>
         <p className="text-gray-600">
-          No WoomChat, trabalhamos para que você tenha a melhor experiência ao conhecer novas pessoas. Confira nossas dicas e políticas para um namoro online seguro.
+          No Bate-Papo Grátis, trabalhamos para que você tenha a melhor experiência ao conhecer novas pessoas. Confira nossas dicas e políticas para um namoro online seguro.
         </p>
       </div>
 
-      <h2><Shield size={18} className="text-emerald-600 shrink-0" /> Dicas de Segurança</h2>
+      <h2><Shield size={18} className="text-blue-600 shrink-0" /> Dicas de Segurança</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
         {[
           { icon: Ban, text: "Nunca envie dinheiro para outro membro", color: "border-red-200 bg-red-50" },
@@ -49,7 +49,7 @@ export default function NamoroSeguro() {
         </ul>
       </div>
 
-      <h2><AlertTriangle size={18} className="text-emerald-600 shrink-0" /> Golpes e Reembolsos</h2>
+      <h2><AlertTriangle size={18} className="text-blue-600 shrink-0" /> Golpes e Reembolsos</h2>
       <div className="space-y-2 mt-3">
         {[
           "Um membro se identifica incorretamente (usa perfil de outro sem permissão). Tomaremos providências.",
@@ -63,7 +63,7 @@ export default function NamoroSeguro() {
         ))}
       </div>
 
-      <h2><CheckCircle size={18} className="text-emerald-600 shrink-0" /> Não é Golpe</h2>
+      <h2><CheckCircle size={18} className="text-blue-600 shrink-0" /> Não é Golpe</h2>
       <div className="space-y-2 mt-3">
         {[
           "Ocorreram alguns erros na tradução de uma carta.",
@@ -73,14 +73,14 @@ export default function NamoroSeguro() {
           "Se um membro usa anéis nos dedos — não significa que é casado(a).",
           "Se um membro usar um apelido.",
         ].map((item, i) => (
-          <div key={i} className="flex items-start gap-3 bg-emerald-50 border border-emerald-100 rounded-lg p-3">
-            <CheckCircle size={16} className="text-emerald-500 shrink-0 mt-0.5" />
+          <div key={i} className="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-lg p-3">
+            <CheckCircle size={16} className="text-blue-500 shrink-0 mt-0.5" />
             <span className="text-sm text-gray-700">{item}</span>
           </div>
         ))}
       </div>
 
-      <h2><Ban size={18} className="text-emerald-600 shrink-0" /> Exploração e Tráfico de Seres Humanos</h2>
+      <h2><Ban size={18} className="text-blue-600 shrink-0" /> Exploração e Tráfico de Seres Humanos</h2>
       <div className="bg-red-50 rounded-xl p-5 mt-3 border border-red-200">
         <p className="text-sm text-red-800 font-semibold mb-3">Mantemos uma política de tolerância zero contra qualquer forma de exploração ou tráfico.</p>
         <ol className="list-decimal pl-5 space-y-2 text-sm text-red-900">
@@ -91,7 +91,7 @@ export default function NamoroSeguro() {
         <p className="text-sm text-red-800 mt-3">Colaboramos ativamente com as autoridades policiais para investigar e solucionar essas violações.</p>
       </div>
 
-      <h2><Shield size={18} className="text-emerald-600 shrink-0" /> Compromissos Adicionais de Segurança</h2>
+      <h2><Shield size={18} className="text-blue-600 shrink-0" /> Compromissos Adicionais de Segurança</h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
         {[
           { icon: UserCheck, title: "Verificação", desc: "Incentivamos verificação de contas e realizamos verificações para reduzir fraudes" },
@@ -101,7 +101,7 @@ export default function NamoroSeguro() {
           const Icon = item.icon;
           return (
             <div key={i} className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm text-center">
-              <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-2">
+              <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-2">
                 <Icon size={16} />
               </div>
               <p className="font-semibold text-xs text-gray-900 mb-1">{item.title}</p>
@@ -111,7 +111,7 @@ export default function NamoroSeguro() {
         })}
       </div>
 
-      <h2><UserCheck size={18} className="text-emerald-600 shrink-0" /> Responsabilidades do Usuário</h2>
+      <h2><UserCheck size={18} className="text-blue-600 shrink-0" /> Responsabilidades do Usuário</h2>
       <div className="space-y-2 mt-3">
         <div className="flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-lg p-3">
           <Shield size={16} className="text-gray-500 shrink-0 mt-0.5" />
@@ -123,10 +123,10 @@ export default function NamoroSeguro() {
         </div>
       </div>
 
-      <div className="mt-10 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl p-6 text-center shadow-lg">
+      <div className="mt-10 bg-gradient-to-r from-blue-600 to-amber-500 rounded-2xl p-6 text-center shadow-lg">
         <Heart className="mx-auto text-white/80 mb-2" size={28} />
         <p className="text-white font-medium text-sm">Nossa plataforma está comprometida em promover uma comunidade segura, respeitosa e confiável.</p>
-        <p className="text-white/80 text-xs mt-2">Atenciosamente, Equipe de Suporte do WoomChat</p>
+        <p className="text-white/80 text-xs mt-2">Atenciosamente, Equipe de Suporte do Bate-Papo Grátis</p>
       </div>
     </LegalLayout>
   );

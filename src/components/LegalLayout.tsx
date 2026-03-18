@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Shield, FileText, Cookie, Users, Heart } from "lucide-react";
-import logoLight from "@/assets/logo-light.png";
+import logo from "@/assets/logo-batepapo.png";
 
 const navItems = [
   { to: "/politica-de-privacidade", label: "Privacidade", icon: Shield },
@@ -21,14 +21,14 @@ function LegalLayout({ title, children }: { title: string; children: React.React
             Voltar
           </Link>
           <Link to="/" className="inline-block">
-            <img src={logoLight} alt="WoomChat" className="h-9" />
+            <img src={logo} alt="Bate-Papo Grátis" className="h-9" />
           </Link>
           <div className="w-16" />
         </div>
       </header>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 py-12 px-6">
+      <div className="bg-gradient-to-r from-blue-600 to-amber-500 py-12 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">{title}</h1>
           <div className="h-1 w-16 bg-white/40 rounded-full mx-auto mt-4" />
@@ -47,8 +47,8 @@ function LegalLayout({ title, children }: { title: string; children: React.React
                 to={item.to}
                 className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold shadow-md transition-all ${
                   isActive
-                    ? "bg-emerald-600 text-white shadow-emerald-200"
-                    : "bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 shadow-gray-200/60"
+                    ? "bg-blue-600 text-white shadow-blue-200"
+                    : "bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-700 shadow-gray-200/60"
                 }`}
               >
                 <Icon size={13} />
@@ -75,15 +75,15 @@ function LegalLayout({ title, children }: { title: string; children: React.React
             {navItems.map((item, i) => (
               <span key={item.to} className="inline-flex items-center gap-1">
                 {i > 0 && <span className="text-gray-300 mr-3">·</span>}
-                <Link to={item.to} className="text-gray-500 hover:text-emerald-600 transition-colors font-medium">
+                <Link to={item.to} className="text-gray-500 hover:text-blue-600 transition-colors font-medium">
                   {item.label}
                 </Link>
               </span>
             ))}
           </nav>
           <p className="text-xs text-gray-400 text-center">
-            Copyright 2026 | <a href="https://woomchat.com" className="hover:text-emerald-600 transition-colors">Woomchat.com</a> | Todos os direitos reservados | Desenvolvido por{" "}
-            <a href="https://danielolimpio.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600 transition-colors">Daniel Olímpio</a>
+            Copyright 2026 | <a href="https://batepapogratis.com" className="hover:text-blue-600 transition-colors">batepapogratis.com</a> | Todos os direitos reservados | Desenvolvido por{" "}
+            <a href="https://danielolimpio.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-600 transition-colors">Daniel Olímpio</a>
           </p>
         </div>
       </footer>
