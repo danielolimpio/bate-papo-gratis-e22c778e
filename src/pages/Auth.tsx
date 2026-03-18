@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useTheme } from "@/hooks/useTheme";
-import logoDark from "@/assets/logo-dark.png";
-import logoLight from "@/assets/logo-light.png";
+import logo from "@/assets/logo-batepapo.png";
 import { Moon, Sun, Eye, EyeOff } from "lucide-react";
 
 type Mode = "login" | "register";
@@ -123,7 +122,7 @@ export default function Auth() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-6">
-          <img src={isDark ? logoDark : logoLight} alt="WoomChat" className="h-12" />
+          <img src={logo} alt="Bate-Papo Grátis" className="h-12" />
         </div>
 
         <div className="rounded-2xl border border-chat-divider bg-chat-sidebar p-6 shadow-lg">
@@ -331,7 +330,7 @@ export default function Auth() {
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground">
-          Ao se cadastrar, você concorda com os Termos de Uso e Política de Privacidade do WoomChat.
+          Ao se cadastrar, você concorda com os Termos de Uso e Política de Privacidade do Bate-Papo Grátis.
         </p>
       </div>
     </div>

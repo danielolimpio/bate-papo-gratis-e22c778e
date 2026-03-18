@@ -301,7 +301,7 @@ export const generalChatMessages: Message[] = [
   { id: "g7", conversationId: "general", senderId: "7", text: "Porto Alegre! E vc?", timestamp: "13:13", isRead: true },
   { id: "g8", conversationId: "general", senderId: "10", text: "Goiânia! Prazer 🤝", timestamp: "13:14", isRead: true },
   { id: "g9", conversationId: "general", senderId: "12", text: "Eae galera, bom dia pra quem tá chegando agora!", timestamp: "13:20", isRead: true },
-  { id: "g10", conversationId: "general", senderId: "9", text: "Bom diaa! ☀️ Primeira vez aqui no WoomChat", timestamp: "13:22", isRead: true },
+  { id: "g10", conversationId: "general", senderId: "9", text: "Bom diaa! ☀️ Primeira vez aqui no Bate-Papo Grátis", timestamp: "13:22", isRead: true },
   { id: "g11", conversationId: "general", senderId: "1", text: "Bem-vinda Beatriz! Aqui é muito legal 💜", timestamp: "13:25", isRead: true },
   { id: "g12", conversationId: "general", senderId: "4", text: "Alguém de Curitiba? Bora marcar um café ☕", timestamp: "13:30", isRead: true },
 ];

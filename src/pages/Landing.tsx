@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import heroCouple from "@/assets/hero-couple.jpg";
-import logoDark from "@/assets/logo-dark.png";
+import logo from "@/assets/logo-batepapo.png";
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function Landing() {
       <div className="relative z-10 flex flex-1 items-center justify-center px-4 md:justify-start md:px-0">
         <div className="flex flex-col items-center w-full md:w-1/2">
           {/* Logo */}
-          <img src={logoDark} alt="WoomChat" className="h-14 mb-3 drop-shadow-lg" />
+          <img src={logo} alt="Bate-Papo Grátis" className="h-14 mb-3 drop-shadow-lg" />
 
           {/* Tagline below logo */}
           <p className="text-white text-2xl md:text-3xl mb-8 drop-shadow-md text-center" style={{ fontFamily: "'Dancing Script', cursive" }}>
@@ -40,14 +40,14 @@ export default function Landing() {
 
             <button
               onClick={() => handleGenderSelect("masculino")}
-              className="w-full mb-4 rounded-full bg-emerald-600 py-3.5 text-base font-semibold text-white hover:bg-emerald-700 transition-colors"
+              className="w-full mb-4 rounded-full bg-blue-600 py-3.5 text-base font-semibold text-white hover:bg-blue-700 transition-colors"
             >
               Homem
             </button>
 
             <button
               onClick={() => handleGenderSelect("feminino")}
-              className="w-full mb-6 rounded-full bg-emerald-600 py-3.5 text-base font-semibold text-white hover:bg-emerald-700 transition-colors"
+              className="w-full mb-6 rounded-full bg-amber-500 py-3.5 text-base font-semibold text-white hover:bg-amber-600 transition-colors"
             >
               Mulher
             </button>
@@ -88,7 +88,7 @@ export default function Landing() {
         </nav>
         <p className="text-xs text-white/60">
           Copyright 2026 |{" "}
-          <a href="https://woomchat.com" className="hover:text-white transition-colors">Woomchat.com</a>
+          <a href="https://batepapogratis.com" className="hover:text-white transition-colors">batepapogratis.com</a>
           {" "}| Todos os direitos reservados | Desenvolvido por{" "}
           <a href="https://danielolimpio.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline">
             Daniel Olímpio
