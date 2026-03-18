@@ -166,7 +166,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               onClick={() => onAvatarClick(participant.id)}
             />
             <h4 className="font-semibold text-foreground">{participant.name}</h4>
-            <p className="text-xs text-muted-foreground">WoomChat</p>
+            <p className="text-xs text-muted-foreground">Bate-Papo Grátis</p>
             <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-center">
               <p className="text-xs text-muted-foreground">
                 🔒 As mensagens são protegidas com criptografia de ponta a ponta.
