@@ -5,8 +5,10 @@ import ChatArea from "@/components/chat/ChatArea";
 import RightPanel from "@/components/chat/RightPanel";
 import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
+import UserProfileMenu from "@/components/chat/UserProfileMenu";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { conversations } from "@/data/mockData";
 import logo from "@/assets/logo-batepapo.png";
 
