@@ -160,9 +160,9 @@ export default function UserProfileMenu({ profile, onProfileUpdated }: Props) {
       )}
 
       {/* Edit Profile Modal */}
-      {showEditModal && (
+      {showEditModal && profile && (
         <EditProfileModal
-          profile={profile!}
+          profile={profile}
           onClose={() => setShowEditModal(false)}
           onSaved={() => { setShowEditModal(false); onProfileUpdated(); }}
         />
