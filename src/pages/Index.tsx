@@ -45,9 +45,12 @@ export default function Index() {
           <div className="flex items-center">
             <img src={logo} alt="Bate-Papo Grátis" className="h-8" />
           </div>
-          <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
-            {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
-          </button>
+          <div className="flex items-center gap-1">
+            <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
+              {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
+            </button>
+            <UserProfileMenu profile={profile} onProfileUpdated={refreshProfile} />
+          </div>
         </div>
         <ConversationList
           activeConversationId={activeConversation}
