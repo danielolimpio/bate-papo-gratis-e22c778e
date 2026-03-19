@@ -115,19 +115,12 @@ export default function UserProfileMenu({ profile, onProfileUpdated }: Props) {
 
             <div className="py-1">
               <button
-                onClick={() => { fileInputRef.current?.click(); }}
+                onClick={(e) => { e.stopPropagation(); setShowMenu(false); setTimeout(() => fileInputRef.current?.click(), 100); }}
                 className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
               >
                 <Camera size={16} className="text-primary" />
                 {uploading ? "Enviando..." : "Alterar foto"}
               </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleUploadAvatar}
-              />
 
               <button
                 onClick={() => { setShowMenu(false); setShowEditModal(true); }}
