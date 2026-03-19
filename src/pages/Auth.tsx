@@ -78,34 +78,26 @@ export default function Auth() {
       return;
     }
     setLoading(true);
-    const { data, error: signUpError } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: window.location.origin },
+      options: {
+        emailRedirectTo: window.location.origin,
+        data: {
+          full_name: fullName.trim(),
+          age: parseInt(age),
+          gender,
+          relationship_status: relationshipStatus,
+          sexual_preference: sexualPreference,
+          city: city.trim(),
+        },
+      },
     });
+    setLoading(false);
     if (signUpError) {
-      setLoading(false);
       setError(signUpError.message);
       return;
     }
-    // Insert profile
-    if (data.user) {
-      const { error: profileError } = await supabase.from("profiles").insert({
-        id: data.user.id,
-        full_name: fullName.trim(),
-        age: parseInt(age),
-        gender,
-        relationship_status: relationshipStatus,
-        sexual_preference: sexualPreference,
-        city: city.trim(),
-      });
-      if (profileError) {
-        setLoading(false);
-        setError("Erro ao criar perfil: " + profileError.message);
-        return;
-      }
-    }
-    setLoading(false);
     setSuccess("Cadastro realizado! Verifique seu email para confirmar a conta.");
   };
 
