@@ -165,6 +165,14 @@ export default function UserProfileMenu({ profile, onProfileUpdated }: Props) {
       {showPasswordModal && (
         <ChangePasswordModal onClose={() => setShowPasswordModal(false)} />
       )}
+      {/* Hidden file input outside dropdown */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleUploadAvatar}
+      />
     </div>
   );
 }
