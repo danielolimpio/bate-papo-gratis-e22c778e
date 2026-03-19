@@ -12,6 +12,7 @@ import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import QuemSomos from "./pages/QuemSomos";
 import NamoroSeguro from "./pages/NamoroSeguro";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/saladebatepapo" element={<Index />} />
+          <Route path="/saladebatepapo" element={<ProtectedRoute><Index /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
           <Route path="/termos-de-uso" element={<TermosDeUso />} />

@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { Phone, Video, Info, Smile, Image, Mic, Send } from "lucide-react";
+import { Phone, Video, Smile, Image, Mic, Send, User } from "lucide-react";
 import EmojiPicker from "./EmojiPicker";
-import { users, messagesByConversation, conversations, generalChatMessages, type Message } from "@/data/mockData";
+import { useMessages } from "@/hooks/useMessages";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { users, conversations } from "@/data/mockData";
 import StackedAvatars from "./StackedAvatars";
 
 interface Props {
@@ -14,12 +16,13 @@ interface Props {
 export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvatarClick }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
-  const [localMessages, setLocalMessages] = useState<Record<string, Message[]>>({ ...messagesByConversation });
-  const [localGeneralMessages, setLocalGeneralMessages] = useState<Message[]>([...generalChatMessages]);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isGeneral = chatMode === "general";
+  const room = isGeneral ? "general" : conversationId || "general";
+
+  const { messages, loading, sendMessage } = useMessages(room);
+  const { user, profile } = useCurrentUser();
 
   const conv = !isGeneral ? conversations.find((c) => c.id === conversationId) : null;
   const tempUserId = !conv && conversationId?.startsWith("temp-") ? conversationId.replace("temp-", "") : null;
@@ -28,68 +31,20 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     : tempUserId
     ? users.find((u) => u.id === tempUserId)
     : null;
-  const messages = isGeneral
-    ? localGeneralMessages
-    : conversationId
-    ? localMessages[conversationId] || []
-    : [];
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length]);
 
-  const sendMessage = (text: string) => {
-    if (!text.trim()) return;
-    const newMsg: Message = {
-      id: `m-${Date.now()}`,
-      conversationId: isGeneral ? "general" : conversationId || "",
-      senderId: "me",
-      text: text.trim(),
-      timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-      isRead: false,
-    };
-    if (isGeneral) {
-      setLocalGeneralMessages((prev) => [...prev, newMsg]);
-    } else if (conversationId) {
-      setLocalMessages((prev) => ({
-        ...prev,
-        [conversationId]: [...(prev[conversationId] || []), newMsg],
-      }));
-    }
-  };
-
-  const handleSend = () => {
-    if (!input.trim()) return;
-    sendMessage(input);
+  const handleSend = async () => {
+    if (!input.trim() || !user) return;
+    await sendMessage(input, user.id);
     setInput("");
   };
 
-  const handleThumbsUp = () => {
-    sendMessage("👍");
-  };
-
-  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !conversationId) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result as string;
-      const newMsg: Message = {
-        id: `m-${Date.now()}`,
-        conversationId: conversationId,
-        senderId: "me",
-        text: "",
-        image: dataUrl,
-        timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-        isRead: false,
-      };
-      setLocalMessages((prev) => ({
-        ...prev,
-        [conversationId]: [...(prev[conversationId] || []), newMsg],
-      }));
-    };
-    reader.readAsDataURL(file);
-    e.target.value = "";
+  const handleThumbsUp = async () => {
+    if (!user) return;
+    await sendMessage("👍", user.id);
   };
 
   // No conversation selected and not general
@@ -107,6 +62,10 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     );
   }
 
+  const formatTime = (dateStr: string) => {
+    return new Date(dateStr).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  };
+
   return (
     <div className="flex flex-1 flex-col bg-chat-bg">
       {/* Header */}
@@ -116,9 +75,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
             <StackedAvatars size={40} />
             <div>
               <h3 className="text-sm font-semibold text-foreground">Sala Geral</h3>
-              <p className="text-xs text-muted-foreground">
-                {users.filter((u) => u.isOnline).length} online agora
-              </p>
+              <p className="text-xs text-muted-foreground">Chat em tempo real</p>
             </div>
           </div>
         ) : (
@@ -148,13 +105,24 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               </button>
             </>
           )}
-          
         </div>
       </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4">
-        {/* Profile intro - only for private */}
+        {isGeneral && (
+          <div className="mb-4 flex flex-col items-center">
+            <StackedAvatars size={64} />
+            <h4 className="font-semibold text-foreground">Sala Geral do Bate-Papo Grátis</h4>
+            <p className="text-xs text-muted-foreground mt-1">Todos os membros podem ver e enviar mensagens aqui</p>
+            <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-center">
+              <p className="text-xs text-muted-foreground">
+                🔒 As mensagens são protegidas com criptografia de ponta a ponta.
+              </p>
+            </div>
+          </div>
+        )}
+
         {!isGeneral && participant && (
           <div className="mb-6 flex flex-col items-center">
             <img
@@ -173,45 +141,42 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           </div>
         )}
 
-        {isGeneral && (
-          <div className="mb-4 flex flex-col items-center">
-            <StackedAvatars size={64} />
-            <h4 className="font-semibold text-foreground">Sala Geral do Bate-Papo Grátis</h4>
-            <p className="text-xs text-muted-foreground mt-1">Todos os membros podem ver e enviar mensagens aqui</p>
+        {loading && (
+          <div className="flex justify-center py-8">
+            <div className="text-sm text-muted-foreground">Carregando mensagens...</div>
           </div>
         )}
 
         {messages.map((msg) => {
-          const sender = msg.senderId !== "me" ? users.find((u) => u.id === msg.senderId) : null;
+          const isMe = msg.user_id === user?.id;
           return (
-            <div key={msg.id} className={`mb-2 flex ${msg.senderId === "me" ? "justify-end" : "justify-start"}`}>
-              {/* Show avatar in general chat for others */}
-              {isGeneral && msg.senderId !== "me" && sender && (
-                <img
-                  src={sender.avatar}
-                  alt={sender.name}
-                  className="h-7 w-7 rounded-full object-cover mr-2 mt-1 cursor-pointer flex-shrink-0"
-                  onClick={() => onAvatarClick(sender.id)}
-                />
+            <div key={msg.id} className={`mb-2 flex ${isMe ? "justify-end" : "justify-start"}`}>
+              {/* Avatar for others */}
+              {!isMe && (
+                <div className="h-7 w-7 rounded-full overflow-hidden mr-2 mt-1 flex-shrink-0">
+                  {msg.sender_avatar ? (
+                    <img src={msg.sender_avatar} alt={msg.sender_name} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-primary text-primary-foreground text-[10px] font-bold">
+                      {msg.sender_name?.charAt(0)?.toUpperCase() || <User size={12} />}
+                    </div>
+                  )}
+                </div>
               )}
               <div>
-                {/* Show name in general chat */}
-                {isGeneral && msg.senderId !== "me" && sender && (
-                  <p className="text-[11px] text-muted-foreground mb-0.5 ml-1">{sender.name}</p>
+                {!isMe && (
+                  <p className="text-[11px] text-muted-foreground mb-0.5 ml-1">{msg.sender_name}</p>
                 )}
                 <div
                   className={`max-w-[65%] rounded-2xl px-3 py-2 text-sm ${
-                    msg.senderId === "me"
+                    isMe
                       ? "bg-chat-bubble-sent text-chat-bubble-sent-fg rounded-br-sm"
                       : "bg-chat-bubble-received text-chat-bubble-received-fg rounded-bl-sm"
                   }`}
                 >
-                  {msg.image && (
-                    <img src={msg.image} alt="Foto" className="max-w-[240px] rounded-lg mb-1" />
-                  )}
-                  {msg.text && msg.text}
-                  <span className={`ml-2 text-[10px] ${msg.senderId === "me" ? "text-chat-bubble-sent-fg/70" : "text-muted-foreground"}`}>
-                    {msg.timestamp}
+                  {msg.content}
+                  <span className={`ml-2 text-[10px] ${isMe ? "text-chat-bubble-sent-fg/70" : "text-muted-foreground"}`}>
+                    {formatTime(msg.created_at)}
                   </span>
                 </div>
               </div>
@@ -233,20 +198,6 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           <button className="rounded-full p-2 hover:bg-secondary transition-colors">
             <Mic size={20} className="text-primary" />
           </button>
-          {!isGeneral && (
-            <>
-              <button onClick={() => fileInputRef.current?.click()} className="rounded-full p-2 hover:bg-secondary transition-colors">
-                <Image size={20} className="text-primary" />
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageSelect}
-              />
-            </>
-          )}
           <button
             onClick={() => setShowEmoji((v) => !v)}
             className="rounded-full p-2 hover:bg-secondary transition-colors"
