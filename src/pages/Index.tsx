@@ -5,8 +5,10 @@ import ChatArea from "@/components/chat/ChatArea";
 import RightPanel from "@/components/chat/RightPanel";
 import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
+import UserProfileMenu from "@/components/chat/UserProfileMenu";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { conversations } from "@/data/mockData";
 import logo from "@/assets/logo-batepapo.png";
 
@@ -15,6 +17,7 @@ type TabType = "tudo" | "nao-lidas" | "grupos";
 export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
+  const { profile, refreshProfile } = useCurrentUser();
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,9 +45,12 @@ export default function Index() {
           <div className="flex items-center">
             <img src={logo} alt="Bate-Papo Grátis" className="h-8" />
           </div>
-          <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
-            {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
-          </button>
+          <div className="flex items-center gap-1">
+            <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
+              {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
+            </button>
+            <UserProfileMenu profile={profile} onProfileUpdated={refreshProfile} />
+          </div>
         </div>
         <ConversationList
           activeConversationId={activeConversation}
