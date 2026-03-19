@@ -16,6 +16,16 @@ export interface ChatMessage {
 export function useMessages(room: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(true);
+  const { playSound, showVisualNotification, requestPermission } = useChatNotification();
+  const currentUserIdRef = useRef<string | null>(null);
+
+  // Request notification permission on mount
+  useEffect(() => {
+    requestPermission();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      currentUserIdRef.current = session?.user?.id ?? null;
+    });
+  }, [requestPermission]);
 
   // Fetch messages with profile join
   const fetchMessages = useCallback(async () => {
