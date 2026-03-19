@@ -95,6 +95,14 @@ export function useMessages(room: string) {
             if (prev.some((m) => m.id === enriched.id)) return prev;
             return [...prev, enriched];
           });
+
+          // Notify only for messages from others
+          if (enriched.user_id !== currentUserIdRef.current) {
+            playSound();
+            if (document.hidden) {
+              showVisualNotification(enriched.sender_name || "Novo", enriched.content);
+            }
+          }
         }
       )
       .subscribe();
