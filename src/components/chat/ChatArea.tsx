@@ -148,9 +148,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               </button>
             </>
           )}
-          <button className="rounded-full p-2 hover:bg-secondary transition-colors" onClick={onInfoClick}>
-            <Info size={20} className="text-primary" />
-          </button>
+          
         </div>
       </div>
 
