@@ -106,6 +106,16 @@ import profileF78 from "@/assets/profiles/profile-f78.jpg";
 import profileF79 from "@/assets/profiles/profile-f79.jpg";
 import profileF80 from "@/assets/profiles/profile-f80.jpg";
 import profileF81 from "@/assets/profiles/profile-f81.jpg";
+import profileF82 from "@/assets/profiles/profile-f82.jpg";
+import profileF83 from "@/assets/profiles/profile-f83.jpg";
+import profileF84 from "@/assets/profiles/profile-f84.jpg";
+import profileF85 from "@/assets/profiles/profile-f85.jpg";
+import profileF86 from "@/assets/profiles/profile-f86.jpg";
+import profileF87 from "@/assets/profiles/profile-f87.jpg";
+import profileF88 from "@/assets/profiles/profile-f88.jpg";
+import profileF89 from "@/assets/profiles/profile-f89.jpg";
+import profileF90 from "@/assets/profiles/profile-f90.jpg";
+import profileF91 from "@/assets/profiles/profile-f91.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
