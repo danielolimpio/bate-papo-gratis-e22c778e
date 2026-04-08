@@ -31,7 +31,7 @@ interface Props {
   onProfileUpdated: () => void;
 }
 
-export default function UserProfileMenu({ profile, onProfileUpdated }: Props) {
+export default function UserProfileMenu({ profile, email, onProfileUpdated }: Props) {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
