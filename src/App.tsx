@@ -27,6 +27,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/saladebatepapo" element={<ProtectedRoute><Index /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
           <Route path="/termos-de-uso" element={<TermosDeUso />} />
           <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
