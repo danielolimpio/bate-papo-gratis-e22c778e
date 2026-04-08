@@ -39,6 +39,25 @@ export default function Auth() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotLoading, setForgotLoading] = useState(false);
+  const [forgotMsg, setForgotMsg] = useState("");
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setForgotMsg("");
+    setForgotLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setForgotLoading(false);
+    if (error) {
+      setForgotMsg(error.message);
+    } else {
+      setForgotMsg("Email enviado! Verifique sua caixa de entrada.");
+    }
+  };
 
   // Login fields
   const [email, setEmail] = useState("");
@@ -186,6 +205,13 @@ export default function Auth() {
               >
                 {loading ? "Entrando..." : "Entrar"}
               </button>
+              <button
+                type="button"
+                onClick={() => setShowForgot(true)}
+                className="w-full text-center text-xs text-primary hover:underline mt-2"
+              >
+                Esqueceu sua senha?
+              </button>
             </form>
           ) : (
             <form onSubmit={handleRegister} className="space-y-3">
@@ -325,6 +351,52 @@ export default function Auth() {
           Ao se cadastrar, você concorda com os Termos de Uso e Política de Privacidade do Bate-Papo Grátis.
         </p>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgot && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+          <div className="w-full max-w-sm rounded-2xl border border-chat-divider bg-chat-sidebar p-6 shadow-xl">
+            <h2 className="text-lg font-bold text-foreground mb-2">Recuperar Senha</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Digite seu email cadastrado. Enviaremos um link para redefinir sua senha.
+            </p>
+            {forgotMsg && (
+              <div className={`mb-4 rounded-lg px-3 py-2 text-sm ${forgotMsg.includes("enviado") ? "bg-online/10 text-online" : "bg-destructive/10 text-destructive"}`}>
+                {forgotMsg}
+              </div>
+            )}
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  className="w-full rounded-lg border border-chat-divider bg-chat-input-bg px-3 py-2.5 text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="seu@email.com"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => { setShowForgot(false); setForgotMsg(""); }}
+                  className="flex-1 rounded-lg border border-chat-divider py-2.5 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={forgotLoading}
+                  className="flex-1 rounded-lg bg-primary py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {forgotLoading ? "Enviando..." : "Enviar Link"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
