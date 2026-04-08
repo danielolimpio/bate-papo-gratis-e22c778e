@@ -186,6 +186,13 @@ export default function Auth() {
               >
                 {loading ? "Entrando..." : "Entrar"}
               </button>
+              <button
+                type="button"
+                onClick={() => setShowForgot(true)}
+                className="w-full text-center text-xs text-primary hover:underline mt-2"
+              >
+                Esqueceu sua senha?
+              </button>
             </form>
           ) : (
             <form onSubmit={handleRegister} className="space-y-3">
