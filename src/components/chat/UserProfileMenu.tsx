@@ -110,7 +110,7 @@ export default function UserProfileMenu({ profile, email, onProfileUpdated }: Pr
               </div>
               <div className="overflow-hidden">
                 <p className="text-sm font-semibold text-foreground truncate">{profile?.full_name}</p>
-                <p className="text-[11px] text-muted-foreground">{profile?.city}</p>
+                <p className="text-[11px] text-muted-foreground truncate">{email}</p>
               </div>
             </div>
 

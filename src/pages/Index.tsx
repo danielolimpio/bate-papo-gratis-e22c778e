@@ -49,7 +49,7 @@ export default function Index() {
             <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
               {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
             </button>
-            <UserProfileMenu profile={profile} onProfileUpdated={refreshProfile} />
+            <UserProfileMenu profile={profile} email={user?.email || ""} onProfileUpdated={refreshProfile} />
           </div>
         </div>
         <ConversationList
