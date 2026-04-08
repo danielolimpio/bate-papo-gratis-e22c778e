@@ -17,7 +17,7 @@ type TabType = "tudo" | "nao-lidas" | "grupos";
 export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
-  const { profile, refreshProfile } = useCurrentUser();
+  const { user, profile, refreshProfile } = useCurrentUser();
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,7 +49,7 @@ export default function Index() {
             <button onClick={toggle} className="rounded-full p-2 hover:bg-secondary transition-colors">
               {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
             </button>
-            <UserProfileMenu profile={profile} onProfileUpdated={refreshProfile} />
+            <UserProfileMenu profile={profile} email={user?.email || ""} onProfileUpdated={refreshProfile} />
           </div>
         </div>
         <ConversationList

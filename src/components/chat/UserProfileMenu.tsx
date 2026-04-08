@@ -27,10 +27,11 @@ const preferenceOptions = [
 
 interface Props {
   profile: UserProfile | null;
+  email: string;
   onProfileUpdated: () => void;
 }
 
-export default function UserProfileMenu({ profile, onProfileUpdated }: Props) {
+export default function UserProfileMenu({ profile, email, onProfileUpdated }: Props) {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -109,7 +110,7 @@ export default function UserProfileMenu({ profile, onProfileUpdated }: Props) {
               </div>
               <div className="overflow-hidden">
                 <p className="text-sm font-semibold text-foreground truncate">{profile?.full_name}</p>
-                <p className="text-[11px] text-muted-foreground">{profile?.city}</p>
+                <p className="text-[11px] text-muted-foreground truncate">{email}</p>
               </div>
             </div>
 
