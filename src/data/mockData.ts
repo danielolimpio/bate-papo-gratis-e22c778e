@@ -106,6 +106,16 @@ import profileF78 from "@/assets/profiles/profile-f78.jpg";
 import profileF79 from "@/assets/profiles/profile-f79.jpg";
 import profileF80 from "@/assets/profiles/profile-f80.jpg";
 import profileF81 from "@/assets/profiles/profile-f81.jpg";
+import profileF82 from "@/assets/profiles/profile-f82.jpg";
+import profileF83 from "@/assets/profiles/profile-f83.jpg";
+import profileF84 from "@/assets/profiles/profile-f84.jpg";
+import profileF85 from "@/assets/profiles/profile-f85.jpg";
+import profileF86 from "@/assets/profiles/profile-f86.jpg";
+import profileF87 from "@/assets/profiles/profile-f87.jpg";
+import profileF88 from "@/assets/profiles/profile-f88.jpg";
+import profileF89 from "@/assets/profiles/profile-f89.jpg";
+import profileF90 from "@/assets/profiles/profile-f90.jpg";
+import profileF91 from "@/assets/profiles/profile-f91.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -156,6 +166,7 @@ const allProfilePhotos = [
   profileF51, profileF52, profileF53, profileF54, profileF55, profileF56, profileF57, profileF58, profileF59, profileF60,
   profileF61, profileF62, profileF63, profileF64, profileF65, profileF66, profileF67, profileF68, profileF69, profileF70, profileF71,
   profileF72, profileF73, profileF74, profileF75, profileF76, profileF77, profileF78, profileF79, profileF80, profileF81,
+  profileF82, profileF83, profileF84, profileF85, profileF86, profileF87, profileF88, profileF89, profileF90, profileF91,
   profileM1, profileM2, profileM3, profileM4, profileM5, profileM6, profileM7, profileM8, profileM9, profileM10,
   profileM11, profileM12, profileM13, profileM14, profileM15, profileM16, profileM17, profileM18, profileM19,
 ];
@@ -278,6 +289,16 @@ export const users: UserProfile[] = [
   { id: "110", name: "Evelin Quaresma", age: 21, gender: "Feminino", interest: "Homens", city: "Conceição do Araguaia", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF79, photos: [profileF79], isOnline: false, lastSeen: "há 10min" },
   { id: "111", name: "Isabelly Cadorin Faria", age: 24, gender: "Feminino", interest: "Homens", city: "Campo Mourão", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF80, photos: [profileF80], isOnline: false, lastSeen: "há 22min" },
   { id: "112", name: "Adrielle Sarmento Braga", age: 32, gender: "Feminino", interest: "Homens", city: "Alfenas", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF81, photos: [profileF81], isOnline: false, lastSeen: "há 17min" },
+  { id: "113", name: "Thayla Rezende", age: 23, gender: "Feminino", interest: "Homens", city: "Florianópolis", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF82, photos: [profileF82], isOnline: false, lastSeen: "há 5min" },
+  { id: "114", name: "Ketlen Oliveira Martins", age: 27, gender: "Feminino", interest: "Homens", city: "Goiânia", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF83, photos: [profileF83], isOnline: false, lastSeen: "há 12min" },
+  { id: "115", name: "Mileny Costa", age: 24, gender: "Feminino", interest: "Ambos", city: "Fortaleza", relationshipStatus: "Enrolado(a)", showRelationshipStatus: false, avatar: profileF84, photos: [profileF84], isOnline: false, lastSeen: "há 8min" },
+  { id: "116", name: "Sabrina Lopes Ferreira", age: 29, gender: "Feminino", interest: "Homens", city: "Manaus", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF85, photos: [profileF85], isOnline: false, lastSeen: "há 20min" },
+  { id: "117", name: "Duda Valentina", age: 21, gender: "Feminino", interest: "Homens", city: "Recife", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF86, photos: [profileF86], isOnline: false, lastSeen: "há 3min" },
+  { id: "118", name: "Ághata Monteiro Duarte", age: 26, gender: "Feminino", interest: "Homens", city: "Vitória", relationshipStatus: "Namorando", showRelationshipStatus: false, avatar: profileF87, photos: [profileF87], isOnline: false, lastSeen: "há 9min" },
+  { id: "119", name: "Jhennyfer Souza", age: 28, gender: "Feminino", interest: "Homens", city: "Belém", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF88, photos: [profileF88], isOnline: false, lastSeen: "há 14min" },
+  { id: "120", name: "Raíssa Queiroz Lima", age: 25, gender: "Feminino", interest: "Ambos", city: "Santos", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF89, photos: [profileF89], isOnline: false, lastSeen: "há 6min" },
+  { id: "121", name: "Nayara Dias", age: 30, gender: "Feminino", interest: "Homens", city: "Niterói", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF90, photos: [profileF90], isOnline: false, lastSeen: "há 11min" },
+  { id: "122", name: "Emilly Cristina Barros", age: 22, gender: "Feminino", interest: "Homens", city: "Curitiba", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF91, photos: [profileF91], isOnline: false, lastSeen: "há 2min" },
 ];
 
 export const conversations: Conversation[] = [
