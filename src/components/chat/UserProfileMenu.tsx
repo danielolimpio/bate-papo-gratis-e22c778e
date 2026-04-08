@@ -27,6 +27,7 @@ const preferenceOptions = [
 
 interface Props {
   profile: UserProfile | null;
+  email: string;
   onProfileUpdated: () => void;
 }
 
