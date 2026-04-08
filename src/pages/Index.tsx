@@ -17,7 +17,7 @@ type TabType = "tudo" | "nao-lidas" | "grupos";
 export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
-  const { profile, refreshProfile } = useCurrentUser();
+  const { user, profile, refreshProfile } = useCurrentUser();
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
