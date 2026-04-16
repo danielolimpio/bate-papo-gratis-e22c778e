@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Phone, Video, Smile, Image, Mic, Send, User } from "lucide-react";
 import EmojiPicker from "./EmojiPicker";
-import { useMessages } from "@/hooks/useMessages";
+import { useMessages, type ChatMessage } from "@/hooks/useMessages";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useFakeReplies } from "@/hooks/useFakeReplies";
+import { useGeneralRoomActivity } from "@/hooks/useGeneralRoomActivity";
 import { users, conversations } from "@/data/mockData";
 import StackedAvatars from "./StackedAvatars";
 
@@ -40,6 +41,17 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     user?.id ?? null,
     injectLocalMessage
   );
+
+  // Synthetic activity in the General Room (seed last 72h + new msg every 5–10 min)
+  const injectGeneral = useCallback(
+    (msg: ChatMessage) => {
+      // Seeded (past) messages shouldn't ping; live ones should.
+      const isPast = Date.now() - new Date(msg.created_at).getTime() > 60 * 1000;
+      injectLocalMessage(msg, { silent: isPast });
+    },
+    [injectLocalMessage]
+  );
+  useGeneralRoomActivity(isGeneral, injectGeneral);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
