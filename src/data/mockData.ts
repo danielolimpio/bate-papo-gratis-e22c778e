@@ -116,6 +116,16 @@ import profileF88 from "@/assets/profiles/profile-f88.jpg";
 import profileF89 from "@/assets/profiles/profile-f89.jpg";
 import profileF90 from "@/assets/profiles/profile-f90.jpg";
 import profileF91 from "@/assets/profiles/profile-f91.jpg";
+import profileF92 from "@/assets/profiles/profile-f92.jpg";
+import profileF93 from "@/assets/profiles/profile-f93.jpg";
+import profileF94 from "@/assets/profiles/profile-f94.jpg";
+import profileF95 from "@/assets/profiles/profile-f95.jpg";
+import profileF96 from "@/assets/profiles/profile-f96.jpg";
+import profileF97 from "@/assets/profiles/profile-f97.jpg";
+import profileF98 from "@/assets/profiles/profile-f98.jpg";
+import profileF99 from "@/assets/profiles/profile-f99.jpg";
+import profileF100 from "@/assets/profiles/profile-f100.jpg";
+import profileF101 from "@/assets/profiles/profile-f101.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -167,6 +177,7 @@ const allProfilePhotos = [
   profileF61, profileF62, profileF63, profileF64, profileF65, profileF66, profileF67, profileF68, profileF69, profileF70, profileF71,
   profileF72, profileF73, profileF74, profileF75, profileF76, profileF77, profileF78, profileF79, profileF80, profileF81,
   profileF82, profileF83, profileF84, profileF85, profileF86, profileF87, profileF88, profileF89, profileF90, profileF91,
+  profileF92, profileF93, profileF94, profileF95, profileF96, profileF97, profileF98, profileF99, profileF100, profileF101,
   profileM1, profileM2, profileM3, profileM4, profileM5, profileM6, profileM7, profileM8, profileM9, profileM10,
   profileM11, profileM12, profileM13, profileM14, profileM15, profileM16, profileM17, profileM18, profileM19,
 ];
