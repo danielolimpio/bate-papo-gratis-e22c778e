@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { users } from "@/data/mockData";
 
 const nonMeUsers = users.filter(u => u.id !== "me");
-const ONLINE_COUNT = Math.max(2, Math.floor(nonMeUsers.length * 0.10));
+const ONLINE_COUNT = Math.max(3, Math.floor(nonMeUsers.length * 0.20));
 
 function getInitialOnlineIds(): Set<string> {
   const shuffled = [...nonMeUsers].sort(() => Math.random() - 0.5);
