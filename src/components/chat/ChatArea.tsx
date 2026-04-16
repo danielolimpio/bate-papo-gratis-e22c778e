@@ -3,6 +3,7 @@ import { Phone, Video, Smile, Image, Mic, Send, User } from "lucide-react";
 import EmojiPicker from "./EmojiPicker";
 import { useMessages } from "@/hooks/useMessages";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useFakeReplies } from "@/hooks/useFakeReplies";
 import { users, conversations } from "@/data/mockData";
 import StackedAvatars from "./StackedAvatars";
 
@@ -21,7 +22,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
   const isGeneral = chatMode === "general";
   const room = isGeneral ? "general" : conversationId || "general";
 
-  const { messages, loading, sendMessage } = useMessages(room);
+  const { messages, loading, sendMessage, injectLocalMessage } = useMessages(room);
   const { user, profile } = useCurrentUser();
 
   const conv = !isGeneral ? conversations.find((c) => c.id === conversationId) : null;
@@ -31,6 +32,14 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     : tempUserId
     ? users.find((u) => u.id === tempUserId)
     : null;
+
+  // Schedule fake replies from fictional participants in private chats
+  useFakeReplies(
+    !isGeneral && participant ? participant.id : null,
+    messages,
+    user?.id ?? null,
+    injectLocalMessage
+  );
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

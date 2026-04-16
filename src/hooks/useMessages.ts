@@ -121,5 +121,17 @@ export function useMessages(room: string) {
     });
   };
 
-  return { messages, loading, sendMessage };
+  const injectLocalMessage = useCallback((msg: ChatMessage) => {
+    setMessages((prev) => {
+      if (prev.some((m) => m.id === msg.id)) return prev;
+      // Notify like a real incoming message
+      playSound();
+      if (document.hidden) {
+        showVisualNotification(msg.sender_name || "Mensagem", msg.content);
+      }
+      return [...prev, msg];
+    });
+  }, [playSound, showVisualNotification]);
+
+  return { messages, loading, sendMessage, injectLocalMessage };
 }

@@ -1,30 +1,74 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { users } from "@/data/mockData";
+import { users, getRandomFreshName, getRandomProfilePhoto } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 
 type CardType = "register" | "online";
 
+interface DisplayUser {
+  name: string;
+  age: number;
+  city: string;
+  avatar: string;
+}
+
+const cities = [
+  "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília",
+  "Curitiba", "Fortaleza", "Recife", "Porto Alegre", "Manaus",
+  "Goiânia", "Campinas", "Florianópolis", "Vitória", "Belém",
+  "Niterói", "Santos", "Ribeirão Preto", "Sorocaba", "Joinville",
+];
+
+function pickRandomDisplayUser(type: CardType): DisplayUser {
+  // For "register" -> always fresh random name + random photo (simulates new signup)
+  // For "online" -> pick an existing profile coming online
+  if (type === "register") {
+    return {
+      name: getRandomFreshName(),
+      age: Math.floor(Math.random() * 22) + 19,
+      city: cities[Math.floor(Math.random() * cities.length)],
+      avatar: getRandomProfilePhoto(),
+    };
+  }
+  const u = users[Math.floor(Math.random() * users.length)];
+  return { name: u.name, age: u.age, city: u.city, avatar: u.avatar };
+}
+
 export default function NewUserCard() {
-  const [user, setUser] = useState<typeof users[0] | null>(null);
+  const [user, setUser] = useState<DisplayUser | null>(null);
   const [cardType, setCardType] = useState<CardType>("register");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let hideTimer: ReturnType<typeof setTimeout>;
+    let nextTimer: ReturnType<typeof setTimeout>;
+
     const show = () => {
-      const randomUser = users[Math.floor(Math.random() * users.length)];
-      setUser(randomUser);
-      setCardType(Math.random() > 0.5 ? "register" : "online");
+      const type: CardType = Math.random() > 0.5 ? "register" : "online";
+      setUser(pickRandomDisplayUser(type));
+      setCardType(type);
       setVisible(true);
-      setTimeout(() => setVisible(false), 5000);
+      hideTimer = setTimeout(() => setVisible(false), 5000);
     };
 
-    const firstTimeout = setTimeout(show, 5000);
-    const interval = setInterval(show, 17000);
+    const scheduleNext = () => {
+      // Random interval 15-22s for natural feel
+      const delay = 15000 + Math.random() * 7000;
+      nextTimer = setTimeout(() => {
+        show();
+        scheduleNext();
+      }, delay);
+    };
+
+    const firstTimeout = setTimeout(() => {
+      show();
+      scheduleNext();
+    }, 5000);
 
     return () => {
       clearTimeout(firstTimeout);
-      clearInterval(interval);
+      clearTimeout(hideTimer);
+      clearTimeout(nextTimer);
     };
   }, []);
 

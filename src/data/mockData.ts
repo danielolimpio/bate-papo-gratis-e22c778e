@@ -116,6 +116,16 @@ import profileF88 from "@/assets/profiles/profile-f88.jpg";
 import profileF89 from "@/assets/profiles/profile-f89.jpg";
 import profileF90 from "@/assets/profiles/profile-f90.jpg";
 import profileF91 from "@/assets/profiles/profile-f91.jpg";
+import profileF92 from "@/assets/profiles/profile-f92.jpg";
+import profileF93 from "@/assets/profiles/profile-f93.jpg";
+import profileF94 from "@/assets/profiles/profile-f94.jpg";
+import profileF95 from "@/assets/profiles/profile-f95.jpg";
+import profileF96 from "@/assets/profiles/profile-f96.jpg";
+import profileF97 from "@/assets/profiles/profile-f97.jpg";
+import profileF98 from "@/assets/profiles/profile-f98.jpg";
+import profileF99 from "@/assets/profiles/profile-f99.jpg";
+import profileF100 from "@/assets/profiles/profile-f100.jpg";
+import profileF101 from "@/assets/profiles/profile-f101.jpg";
 
 export type Gender = "Masculino" | "Feminino" | "Outro";
 export type Interest = "Homens" | "Mulheres" | "Ambos";
@@ -167,6 +177,7 @@ const allProfilePhotos = [
   profileF61, profileF62, profileF63, profileF64, profileF65, profileF66, profileF67, profileF68, profileF69, profileF70, profileF71,
   profileF72, profileF73, profileF74, profileF75, profileF76, profileF77, profileF78, profileF79, profileF80, profileF81,
   profileF82, profileF83, profileF84, profileF85, profileF86, profileF87, profileF88, profileF89, profileF90, profileF91,
+  profileF92, profileF93, profileF94, profileF95, profileF96, profileF97, profileF98, profileF99, profileF100, profileF101,
   profileM1, profileM2, profileM3, profileM4, profileM5, profileM6, profileM7, profileM8, profileM9, profileM10,
   profileM11, profileM12, profileM13, profileM14, profileM15, profileM16, profileM17, profileM18, profileM19,
 ];
@@ -299,6 +310,16 @@ export const users: UserProfile[] = [
   { id: "120", name: "Raíssa Queiroz Lima", age: 25, gender: "Feminino", interest: "Ambos", city: "Santos", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF89, photos: [profileF89], isOnline: false, lastSeen: "há 6min" },
   { id: "121", name: "Nayara Dias", age: 30, gender: "Feminino", interest: "Homens", city: "Niterói", relationshipStatus: "Viúvo(a)", showRelationshipStatus: true, avatar: profileF90, photos: [profileF90], isOnline: false, lastSeen: "há 11min" },
   { id: "122", name: "Emilly Cristina Barros", age: 22, gender: "Feminino", interest: "Homens", city: "Curitiba", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF91, photos: [profileF91], isOnline: false, lastSeen: "há 2min" },
+  { id: "123", name: "Lorena Pissolato", age: 24, gender: "Feminino", interest: "Homens", city: "Vitória", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF92, photos: [profileF92], isOnline: false, lastSeen: "há 4min" },
+  { id: "124", name: "Naty Bertoldo", age: 22, gender: "Feminino", interest: "Homens", city: "Juiz de Fora", relationshipStatus: "Enrolado(a)", showRelationshipStatus: true, avatar: profileF93, photos: [profileF93], isOnline: false, lastSeen: "há 9min" },
+  { id: "125", name: "Yasmin Holanda", age: 25, gender: "Feminino", interest: "Homens", city: "Maceió", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF94, photos: [profileF94], isOnline: false, lastSeen: "há 6min" },
+  { id: "126", name: "Suzy Camargo", age: 28, gender: "Feminino", interest: "Homens", city: "Cuiabá", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF95, photos: [profileF95], isOnline: false, lastSeen: "há 13min" },
+  { id: "127", name: "Damaris Vilar Quintela", age: 26, gender: "Feminino", interest: "Homens", city: "Aracaju", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF96, photos: [profileF96], isOnline: false, lastSeen: "há 7min" },
+  { id: "128", name: "Lavínia Schettini", age: 23, gender: "Feminino", interest: "Ambos", city: "Niterói", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF97, photos: [profileF97], isOnline: false, lastSeen: "há 3min" },
+  { id: "129", name: "Manu Caetano", age: 27, gender: "Feminino", interest: "Homens", city: "Campo Grande", relationshipStatus: "Namorando", showRelationshipStatus: true, avatar: profileF98, photos: [profileF98], isOnline: false, lastSeen: "há 18min" },
+  { id: "130", name: "Heloíse Wanderley", age: 29, gender: "Feminino", interest: "Homens", city: "Teresina", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF99, photos: [profileF99], isOnline: false, lastSeen: "há 15min" },
+  { id: "131", name: "Tati Bezerra", age: 26, gender: "Feminino", interest: "Homens", city: "São Luís", relationshipStatus: "Separado(a)", showRelationshipStatus: true, avatar: profileF100, photos: [profileF100], isOnline: false, lastSeen: "há 8min" },
+  { id: "132", name: "Anaís Vetorello Prado", age: 24, gender: "Feminino", interest: "Homens", city: "Joinville", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF101, photos: [profileF101], isOnline: false, lastSeen: "há 5min" },
 ];
 
 export const conversations: Conversation[] = [
@@ -376,10 +397,32 @@ export function generateRandomNewUser() {
   };
 }
 
-// Randomize ~10% of users as online, rotating every 3-5 min
+// Randomize ~20% of users as online, rotating periodically
 export function getRandomOnlineUserIds(): Set<string> {
   const nonMeUsers = users.filter(u => u.id !== "me");
-  const count = Math.max(2, Math.floor(nonMeUsers.length * 0.10));
+  const count = Math.max(3, Math.floor(nonMeUsers.length * 0.20));
   const shuffled = [...nonMeUsers].sort(() => Math.random() - 0.5);
   return new Set(shuffled.slice(0, count).map(u => u.id));
+}
+
+// Pool of fresh-sounding names for "new registration" cards
+const freshFirstNames = [
+  "Ana", "Bia", "Caroline", "Letícia", "Júlia", "Manuela", "Sophia", "Helena", "Valentina", "Lara",
+  "Heloísa", "Cecília", "Isabela", "Mariana", "Lívia", "Antonella", "Olívia", "Rafaela", "Bruna", "Clara",
+  "Lucas", "Pedro", "Gabriel", "Matheus", "Rafael", "Bruno", "Felipe", "Diego", "Thiago", "Gustavo",
+  "Leonardo", "Vinícius", "Eduardo", "Caio", "Henrique", "Murilo", "Davi", "Igor", "André", "Renato",
+];
+const freshLastNames = [
+  "Silva", "Souza", "Oliveira", "Ferreira", "Santos", "Almeida", "Pereira", "Lima", "Gomes", "Ribeiro",
+  "Carvalho", "Araújo", "Fernandes", "Barbosa", "Cardoso", "Rocha", "Dias", "Nascimento", "Moreira", "Mendes",
+];
+
+export function getRandomFreshName(): string {
+  const f = freshFirstNames[Math.floor(Math.random() * freshFirstNames.length)];
+  const l = freshLastNames[Math.floor(Math.random() * freshLastNames.length)];
+  return `${f} ${l}`;
+}
+
+export function getRandomProfilePhoto(): string {
+  return allProfilePhotos[Math.floor(Math.random() * allProfilePhotos.length)];
 }
