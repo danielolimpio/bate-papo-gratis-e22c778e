@@ -121,15 +121,22 @@ export function useMessages(room: string) {
     });
   };
 
-  const injectLocalMessage = useCallback((msg: ChatMessage) => {
+  const injectLocalMessage = useCallback((msg: ChatMessage, opts?: { silent?: boolean }) => {
     setMessages((prev) => {
       if (prev.some((m) => m.id === msg.id)) return prev;
-      // Notify like a real incoming message
-      playSound();
-      if (document.hidden) {
-        showVisualNotification(msg.sender_name || "Mensagem", msg.content);
+      // Notify like a real incoming message (unless silent, e.g. seeded history)
+      if (!opts?.silent) {
+        playSound();
+        if (document.hidden) {
+          showVisualNotification(msg.sender_name || "Mensagem", msg.content);
+        }
       }
-      return [...prev, msg];
+      // Keep messages sorted by created_at and trim to last 72h
+      const cutoff = Date.now() - 72 * 60 * 60 * 1000;
+      const merged = [...prev, msg]
+        .filter((m) => new Date(m.created_at).getTime() >= cutoff)
+        .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+      return merged;
     });
   }, [playSound, showVisualNotification]);
 
