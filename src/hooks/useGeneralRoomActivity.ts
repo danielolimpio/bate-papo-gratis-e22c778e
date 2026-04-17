@@ -39,7 +39,22 @@ type Tag =
   | "coffee_morning"
   | "tired_night"
   | "weekend"
-  | "feeling";
+  | "feeling"
+  | "afternoon_coffee"
+  | "happy_hour"
+  | "late_night_philo"
+  | "late_night_confession"
+  | "sunset"
+  | "sunrise"
+  | "saturday_morning"
+  | "sunday_vibes"
+  | "monday_blues"
+  | "friday_hype"
+  | "question_book"
+  | "answer_book"
+  | "question_travel"
+  | "answer_travel"
+  | "nostalgia";
 
 interface Phrase {
   text: string;
