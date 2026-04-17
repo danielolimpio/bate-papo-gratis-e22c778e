@@ -3,250 +3,277 @@ import { users } from "@/data/mockData";
 import type { ChatMessage } from "./useMessages";
 
 /**
- * Pool of varied, natural Brazilian Portuguese chat messages.
- * Used to populate the General Room with synthetic activity.
+ * Pools de mensagens organizadas por período do dia e contexto.
+ * Cada mensagem possui tags para permitir respostas coerentes.
  */
-const MESSAGE_POOL = [
-  "oi pessoal, td bem por aí?",
-  "boa noite gente ✨",
-  "alguém de SP aqui?",
-  "que dia corrido hj 😅",
-  "acabei de chegar do trabalho, exausta",
-  "alguém pra um papo?",
-  "to amando esse chat, parece q voltei pra 2010 kkk",
-  "saudade de bate papo assim",
-  "bom dia galera ☀️",
-  "café da manhã e já no chat haha",
-  "alguém de Minas?",
-  "Curitiba na área 🙋‍♀️",
-  "to chegando agora, oi pra todos",
-  "que sono hj meu deus",
-  "alguém viu o jogo ontem?",
-  "tava precisando rir um pouco",
-  "boa tarde 💙",
-  "to no almoço, oi rapidão",
-  "vcs trabalham com o quê?",
-  "to de folga hj, q delícia",
-  "fim de semana chegando ❤️",
-  "alguém cozinhando algo bom?",
-  "fiz lasanha hj, tá divina",
-  "queria viajar agora",
-  "praia ou montanha?",
-  "praia sempre 🌊",
-  "montanha pra mim, friozinho ❄️",
-  "alguém solteiro por aqui?",
-  "to solteira faz tempo já rs",
-  "complicado conhecer gente nova",
-  "esse chat ajuda né",
-  "to gostando daqui",
-  "primeira vez que entro",
-  "bem vindo então 😊",
-  "obrigada gente",
-  "alguém ouvindo música? indica aí",
-  "to ouvindo Marisa Monte",
-  "amo demais",
-  "Caetano sempre",
-  "hj tô na vibe sertanejo",
-  "kkk cada um",
-  "vou fazer um chá, jaja volto",
-  "boa, traz pra mim tbm",
-  "kkkkk",
-  "alguém aqui adora ler?",
-  "tô lendo um romance bom",
-  "indica aí",
-  "depois te mando no privado",
-  "combinado",
-  "bom dia, q dia lindo!",
-  "aqui tá chovendo 🌧️",
-  "amo dia de chuva",
-  "eu não, me dá preguiça kkk",
-  "to com fome de novo",
-  "pizza no fds 🍕",
-  "to dentro",
-  "marca aí então",
-  "alguém de Recife?",
-  "Salvador presente 🌞",
-  "Rio aqui ❤️",
-  "Belém na área",
-  "POA mandando bjs",
-  "alguém viu uma série boa recente?",
-  "to vendo um dorama, viciei",
-  "qual?",
-  "te conto no privado kk",
-  "filme bom hj?",
-  "queria assistir algo leve",
-  "comédia romântica sempre",
-  "indico Simplesmente Acontece, clássico",
-  "amo esse 😍",
-  "boa noite genteee",
-  "vou dormir, amanhã trabalho cedo",
-  "boa noite, bons sonhos",
-  "durma bem 🌙",
-  "alguém acordado?",
-  "insônia aqui tbm",
-  "bora conversar então",
-  "bora",
-  "que calor hj 🥵",
-  "aqui tá frio, troca?",
-  "kkkkkk Brasil né",
-  "alguém apaixonado?",
-  "complicado responder isso kkk",
-  "to tentando esquecer alguém ngl",
-  "dor de cotovelo é foda",
-  "passa, juro",
-  "obrigada 🥺",
-  "força aí",
-  "valeu galera, vcs são gente boa",
-  "esse chat virou minha terapia kk",
-  "mds eu tbm",
-  "voltei",
-  "demorou hein",
-  "to no ônibus indo pra casa",
-  "boa viagem",
-  "alguém de bike igual eu?",
-  "amo pedalar",
-  "tô tentando começar a correr",
-  "boa, faz bem demais",
-  "academia hj? ninguém? só eu? kk",
-  "fui ontem, hj descanso",
-  "bom dia amores ☕",
-  "café e chat, combinação perfeita",
-  "alguém do Sul aqui?",
-  "Florianópolis 🏝️",
-  "que inveja",
-  "tô em casa fazendo nada kkk",
-  "melhor coisa",
-  "domingo é pra isso mesmo",
-  "alguém me indica um lugar bom pra viajar barato?",
-  "Chapada Diamantina, paraíso",
-  "anotado",
-  "Bonito MS tbm é incrível",
-  "quero conhecer 😍",
-  "tô aprendendo inglês, alguém ajuda?",
-  "posso treinar contigo",
-  "manda no pv",
-  "que legal a galera daqui",
-  "bem acolhedor né",
-  "verdade",
-  "vou fazer janta, ate mais tarde",
-  "tchau, bom apetite",
-  "obg ❤️",
-  "alguém viu o pôr do sol hj?",
-  "lindo dms",
-  "tirei foto, depois posto",
-  "bora marcar um encontro virtual?",
-  "kkk como assim",
-  "tipo todo mundo entrar no mesmo horário",
-  "boa ideia",
-  "amanhã 21h?",
-  "tô dentro",
-  "eu tbm",
-  "fechou então",
-  "alguém de signo de leão? 🦁",
-  "leoninaa aqui",
-  "kkk amei",
-  "sou de peixes",
-  "câncer presente",
-  "virginiana sumida kk",
-  "alguém aqui gosta de cozinhar?",
-  "amo demais",
-  "qual prato favorito?",
-  "estrogonofe sempre",
-  "macarrão alho e óleo, simples e bom",
-  "feijoada no domingo é sagrado",
-  "aff to com fome agora",
-  "kkkkk culpa nossa",
-  "to no trabalho mas fingindo q n tô",
-  "kkkkkkk relatable",
-  "chefe passou agr, fingi q tava trabalhando",
-  "kkkkk clássico",
-  "boa tarde galera 💛",
-  "alguém ansioso pelo fds?",
-  "demais",
-  "sexta chega logo",
-  "ainda é terça 😭",
-  "naoooo",
-  "essa semana tá longa",
-  "aguenta firme",
-  "vamos juntos",
-  "✨",
-  "alguém apaixonado por gato? 🐱",
-  "tenho 3 em casa kk",
-  "amo gato",
-  "cachorro pra mim sempre",
-  "tenho os dois e amo",
-  "melhor escolha",
-  "bom dia, q dia lindo pra recomeçar",
-  "verdade, motivacional ❤️",
-  "alguém precisando de carinho hj?",
-  "eu eu eu",
-  "vai ficar tudo bem 🤗",
-  "obrigada gente, choro",
-  "tmj sempre",
-  "essa galera é especial",
-  "concordo",
-  "to começando faculdade ano q vem",
-  "que legal, vai estudar o quê?",
-  "psicologia",
-  "amei a área",
-  "boa sorte",
-  "obrigada 💕",
-  "alguém aqui é freelancer?",
-  "sim, designer",
-  "trabalho remoto é tudo",
-  "concordo",
-  "queria conseguir um trampo remoto",
-  "vai conseguir, fé",
-  "obrigada moça",
-  "boa noite gente, vou desligar",
-  "boa noite ❤️",
-  "até amanhã",
-  "amanhã tem mais",
-  "bjs galera",
-  "tchauu",
+
+type Tag =
+  | "greet_morning"
+  | "greet_afternoon"
+  | "greet_evening"
+  | "greet_night"
+  | "greet_lateNight"
+  | "greet_generic"
+  | "reply_greet"
+  | "question_city"
+  | "answer_city"
+  | "question_mood"
+  | "answer_mood"
+  | "question_food"
+  | "answer_food"
+  | "question_music"
+  | "answer_music"
+  | "question_movie"
+  | "answer_movie"
+  | "smalltalk"
+  | "laugh"
+  | "agree"
+  | "compliment"
+  | "goodbye_night"
+  | "goodbye_generic"
+  | "weather"
+  | "work_morning"
+  | "work_afternoon"
+  | "lunch"
+  | "dinner"
+  | "coffee_morning"
+  | "tired_night"
+  | "weekend"
+  | "feeling";
+
+interface Phrase {
+  text: string;
+  tags: Tag[];
+  /** períodos válidos: m=manhã 5-11, a=tarde 12-17, e=noite 18-22, n=madrugada 23-4. Vazio = qualquer */
+  periods?: Array<"m" | "a" | "e" | "n">;
+  /** tags que esta mensagem responde bem */
+  repliesTo?: Tag[];
+}
+
+const PHRASES: Phrase[] = [
+  // ===== SAUDAÇÕES POR PERÍODO =====
+  { text: "bom dia galera ☀️", tags: ["greet_morning"], periods: ["m"] },
+  { text: "bom diaaa ❤️", tags: ["greet_morning"], periods: ["m"] },
+  { text: "bom dia, q dia lindo!", tags: ["greet_morning"], periods: ["m"] },
+  { text: "bom dia amores ☕", tags: ["greet_morning"], periods: ["m"] },
+  { text: "bom dia gente, acordando agora", tags: ["greet_morning"], periods: ["m"] },
+  { text: "bom dia, q dia lindo pra recomeçar", tags: ["greet_morning"], periods: ["m"] },
+  { text: "café da manhã e já no chat haha", tags: ["greet_morning", "coffee_morning"], periods: ["m"] },
+
+  { text: "boa tarde 💙", tags: ["greet_afternoon"], periods: ["a"] },
+  { text: "boa tarde galera 💛", tags: ["greet_afternoon"], periods: ["a"] },
+  { text: "boa tarde pessoal", tags: ["greet_afternoon"], periods: ["a"] },
+  { text: "tarde gente, td bem?", tags: ["greet_afternoon", "question_mood"], periods: ["a"] },
+
+  { text: "boa noite gente ✨", tags: ["greet_evening"], periods: ["e"] },
+  { text: "boa noite genteee", tags: ["greet_evening"], periods: ["e"] },
+  { text: "boa noite ❤️", tags: ["greet_evening"], periods: ["e"] },
+  { text: "noite pessoal, td bem por aí?", tags: ["greet_evening", "question_mood"], periods: ["e"] },
+  { text: "cheguei do trampo, boa noite", tags: ["greet_evening"], periods: ["e"] },
+
+  { text: "alguém acordado a essa hora? 🌙", tags: ["greet_lateNight"], periods: ["n"] },
+  { text: "insônia bateu de novo", tags: ["greet_lateNight", "tired_night"], periods: ["n"] },
+  { text: "madrugada e eu aqui kk", tags: ["greet_lateNight"], periods: ["n"] },
+  { text: "ngm dorme nesse chat? 😅", tags: ["greet_lateNight"], periods: ["n"] },
+
+  { text: "oi pessoal", tags: ["greet_generic"] },
+  { text: "oiee", tags: ["greet_generic"] },
+  { text: "cheguei agora, oi pra todos", tags: ["greet_generic"] },
+
+  // ===== RESPOSTAS A SAUDAÇÕES =====
+  { text: "bom dia 💕", tags: ["reply_greet"], periods: ["m"], repliesTo: ["greet_morning", "greet_generic"] },
+  { text: "bom dia pra vc tbm ❤️", tags: ["reply_greet"], periods: ["m"], repliesTo: ["greet_morning"] },
+  { text: "boa tarde 🌻", tags: ["reply_greet"], periods: ["a"], repliesTo: ["greet_afternoon", "greet_generic"] },
+  { text: "boa tardee", tags: ["reply_greet"], periods: ["a"], repliesTo: ["greet_afternoon"] },
+  { text: "boa noite ✨", tags: ["reply_greet"], periods: ["e", "n"], repliesTo: ["greet_evening", "greet_generic"] },
+  { text: "noite linda", tags: ["reply_greet"], periods: ["e"], repliesTo: ["greet_evening"] },
+  { text: "oii td bem?", tags: ["reply_greet", "question_mood"], repliesTo: ["greet_generic", "greet_morning", "greet_afternoon", "greet_evening"] },
+  { text: "oi 🤗", tags: ["reply_greet"], repliesTo: ["greet_generic"] },
+  { text: "tbm to acordada, vamo conversar", tags: ["reply_greet"], periods: ["n"], repliesTo: ["greet_lateNight"] },
+  { text: "insônia aqui tbm", tags: ["reply_greet", "tired_night"], periods: ["n"], repliesTo: ["greet_lateNight"] },
+
+  // ===== HUMOR / COMO VAI =====
+  { text: "td bem por aí?", tags: ["question_mood"] },
+  { text: "como vcs tão hj?", tags: ["question_mood"] },
+  { text: "alguém pra um papo?", tags: ["question_mood", "smalltalk"] },
+  { text: "tudo ótimo, e vc?", tags: ["answer_mood"], repliesTo: ["question_mood"] },
+  { text: "to bem, cansada mas bem kk", tags: ["answer_mood"], repliesTo: ["question_mood"] },
+  { text: "td certo por aqui ✨", tags: ["answer_mood"], repliesTo: ["question_mood"] },
+  { text: "to numa vibe boa hj", tags: ["answer_mood", "feeling"], repliesTo: ["question_mood"] },
+
+  // ===== CIDADE =====
+  { text: "alguém de SP aqui?", tags: ["question_city"] },
+  { text: "alguém de Minas?", tags: ["question_city"] },
+  { text: "alguém de Recife?", tags: ["question_city"] },
+  { text: "alguém do Sul aqui?", tags: ["question_city"] },
+  { text: "Curitiba na área 🙋‍♀️", tags: ["answer_city"], repliesTo: ["question_city"] },
+  { text: "Salvador presente 🌞", tags: ["answer_city"], repliesTo: ["question_city"] },
+  { text: "Rio aqui ❤️", tags: ["answer_city"], repliesTo: ["question_city"] },
+  { text: "POA mandando bjs", tags: ["answer_city"], repliesTo: ["question_city"] },
+  { text: "Florianópolis 🏝️", tags: ["answer_city"], repliesTo: ["question_city"] },
+  { text: "Belém na área", tags: ["answer_city"], repliesTo: ["question_city"] },
+  { text: "SP aqui também", tags: ["answer_city"], repliesTo: ["question_city"] },
+
+  // ===== COMIDA =====
+  { text: "qual prato favorito de vcs?", tags: ["question_food"] },
+  { text: "alguém cozinhando algo bom?", tags: ["question_food"] },
+  { text: "almoço hj? indica aí", tags: ["question_food"], periods: ["m", "a"] },
+  { text: "estrogonofe sempre 😋", tags: ["answer_food"], repliesTo: ["question_food"] },
+  { text: "macarrão alho e óleo, simples e bom", tags: ["answer_food"], repliesTo: ["question_food"] },
+  { text: "feijoada no domingo é sagrado", tags: ["answer_food"], repliesTo: ["question_food"] },
+  { text: "fiz lasanha hj, tá divina", tags: ["answer_food"], repliesTo: ["question_food"] },
+  { text: "pizza sempre salva 🍕", tags: ["answer_food"], repliesTo: ["question_food"] },
+
+  // ===== MÚSICA =====
+  { text: "alguém ouvindo música? indica aí", tags: ["question_music"] },
+  { text: "qual a trilha sonora de vcs hj?", tags: ["question_music"] },
+  { text: "to ouvindo Marisa Monte 🎶", tags: ["answer_music"], repliesTo: ["question_music"] },
+  { text: "Caetano sempre", tags: ["answer_music"], repliesTo: ["question_music"] },
+  { text: "hj tô na vibe sertanejo", tags: ["answer_music"], repliesTo: ["question_music"] },
+  { text: "Djavan no repeat", tags: ["answer_music"], repliesTo: ["question_music"] },
+
+  // ===== FILME / SÉRIE =====
+  { text: "alguém viu uma série boa recente?", tags: ["question_movie"] },
+  { text: "indica um filme leve aí", tags: ["question_movie"] },
+  { text: "to vendo um dorama, viciei", tags: ["answer_movie"], repliesTo: ["question_movie"] },
+  { text: "indico Simplesmente Acontece, clássico", tags: ["answer_movie"], repliesTo: ["question_movie"] },
+  { text: "tô maratonando Round 6 de novo kk", tags: ["answer_movie"], repliesTo: ["question_movie"] },
+  { text: "comédia romântica sempre", tags: ["answer_movie"], repliesTo: ["question_movie"] },
+
+  // ===== TRABALHO MANHÃ =====
+  { text: "indo pro trampo, q preguiça", tags: ["work_morning"], periods: ["m"] },
+  { text: "reunião 9h, socorro", tags: ["work_morning"], periods: ["m"] },
+  { text: "café e bora encarar o dia", tags: ["work_morning", "coffee_morning"], periods: ["m"] },
+
+  // ===== TRABALHO TARDE =====
+  { text: "to no trabalho mas fingindo q n tô kk", tags: ["work_afternoon"], periods: ["a"] },
+  { text: "que tarde longaaa", tags: ["work_afternoon"], periods: ["a"] },
+  { text: "chefe passou agr, fingi q tava trabalhando", tags: ["work_afternoon"], periods: ["a"] },
+
+  // ===== ALMOÇO / JANTA =====
+  { text: "to no almoço, oi rapidão", tags: ["lunch", "greet_generic"], periods: ["a"] },
+  { text: "horário do almoço, q delícia", tags: ["lunch"], periods: ["a"] },
+  { text: "vou fazer janta, até mais tarde", tags: ["dinner", "goodbye_generic"], periods: ["e"] },
+  { text: "janta saindo do forno 🍝", tags: ["dinner"], periods: ["e"] },
+
+  // ===== NOITE / CANSAÇO =====
+  { text: "que sono mds", tags: ["tired_night"], periods: ["e", "n"] },
+  { text: "vou dormir, amanhã trabalho cedo", tags: ["tired_night", "goodbye_night"], periods: ["e", "n"] },
+  { text: "exausta do dia, mas vim dar oi", tags: ["greet_evening", "tired_night"], periods: ["e"] },
+
+  // ===== DESPEDIDAS =====
+  { text: "boa noite, bons sonhos", tags: ["goodbye_night", "reply_greet"], periods: ["e", "n"], repliesTo: ["goodbye_night", "tired_night"] },
+  { text: "durma bem 🌙", tags: ["goodbye_night", "reply_greet"], periods: ["e", "n"], repliesTo: ["goodbye_night", "tired_night"] },
+  { text: "até amanhã gente", tags: ["goodbye_night"], periods: ["e", "n"] },
+  { text: "bjs, até mais", tags: ["goodbye_generic"] },
+  { text: "vou nessa, bom dia pra vcs", tags: ["goodbye_generic"], periods: ["m"] },
+  { text: "tchau galera, boa tarde", tags: ["goodbye_generic"], periods: ["a"] },
+
+  // ===== CLIMA =====
+  { text: "que calor hj 🥵", tags: ["weather", "smalltalk"] },
+  { text: "aqui tá chovendo 🌧️", tags: ["weather", "smalltalk"] },
+  { text: "frio gostoso hj ❄️", tags: ["weather", "smalltalk"] },
+  { text: "amo dia de chuva", tags: ["weather", "feeling"], repliesTo: ["weather"] },
+  { text: "aqui tá um sol lindo ☀️", tags: ["weather"], periods: ["m", "a"] },
+
+  // ===== FDS =====
+  { text: "fim de semana chegando ❤️", tags: ["weekend"] },
+  { text: "ansiosa pelo fds 🙏", tags: ["weekend"] },
+  { text: "alguém com plano pro sábado?", tags: ["weekend", "smalltalk"] },
+  { text: "domingão de descanso 🛋️", tags: ["weekend"] },
+
+  // ===== SMALLTALK / RISADAS / CONCORDÂNCIA =====
+  { text: "kkkkkk", tags: ["laugh"], repliesTo: ["smalltalk", "work_afternoon", "feeling"] },
+  { text: "hahahaha mds", tags: ["laugh"], repliesTo: ["smalltalk", "work_afternoon"] },
+  { text: "kkkk relatable demais", tags: ["laugh"], repliesTo: ["work_afternoon", "tired_night"] },
+  { text: "verdade", tags: ["agree"], repliesTo: ["feeling", "weekend", "weather", "smalltalk"] },
+  { text: "concordo plenamente", tags: ["agree"], repliesTo: ["feeling", "weekend"] },
+  { text: "tmj sempre", tags: ["agree", "compliment"] },
+  { text: "vc é gente boa demais 💕", tags: ["compliment"], repliesTo: ["feeling", "answer_mood"] },
+  { text: "amo essa galera daqui", tags: ["compliment", "feeling"] },
+
+  // ===== FEELING / GERAL =====
+  { text: "esse chat virou minha terapia kk", tags: ["feeling"] },
+  { text: "tava precisando rir um pouco", tags: ["feeling"] },
+  { text: "saudade de bate papo assim", tags: ["feeling"] },
+  { text: "amo conversar com vcs", tags: ["feeling", "compliment"] },
+  { text: "to numa fase boa, sentindo paz", tags: ["feeling"] },
+  { text: "alguém precisando de carinho hj?", tags: ["feeling", "question_mood"] },
+  { text: "vai ficar tudo bem 🤗", tags: ["compliment"], repliesTo: ["feeling"] },
+
+  // ===== SMALLTALK GENÉRICO =====
+  { text: "alguém de signo de leão? 🦁", tags: ["smalltalk"] },
+  { text: "leoninaa aqui", tags: ["smalltalk"], repliesTo: ["smalltalk"] },
+  { text: "sou de peixes 🐟", tags: ["smalltalk"], repliesTo: ["smalltalk"] },
+  { text: "alguém apaixonado por gato? 🐱", tags: ["smalltalk"] },
+  { text: "tenho 3 em casa kk", tags: ["smalltalk"], repliesTo: ["smalltalk"] },
+  { text: "cachorro pra mim sempre 🐶", tags: ["smalltalk"], repliesTo: ["smalltalk"] },
 ];
 
-const usedRecent: string[] = []; // last 30 to avoid repeats
+function periodOf(d: Date): "m" | "a" | "e" | "n" {
+  const h = d.getHours();
+  if (h >= 5 && h <= 11) return "m";
+  if (h >= 12 && h <= 17) return "a";
+  if (h >= 18 && h <= 22) return "e";
+  return "n";
+}
 
-function pickMessage(): string {
-  let attempts = 0;
-  while (attempts < 20) {
-    const m = MESSAGE_POOL[Math.floor(Math.random() * MESSAGE_POOL.length)];
-    if (!usedRecent.includes(m)) {
-      usedRecent.push(m);
-      if (usedRecent.length > 30) usedRecent.shift();
-      return m;
-    }
-    attempts++;
+const usedRecent: string[] = [];
+
+function pickPhrase(when: Date, lastTags: Tag[] | null): Phrase {
+  const period = periodOf(when);
+
+  // 1) Candidatos: filtra por período válido
+  let candidates = PHRASES.filter(
+    (p) => !p.periods || p.periods.includes(period)
+  );
+
+  // 2) Se houver mensagem anterior, 60% das vezes tenta responder no contexto
+  if (lastTags && lastTags.length && Math.random() < 0.6) {
+    const replies = candidates.filter(
+      (p) => p.repliesTo && p.repliesTo.some((t) => lastTags.includes(t))
+    );
+    if (replies.length) candidates = replies;
   }
-  return MESSAGE_POOL[Math.floor(Math.random() * MESSAGE_POOL.length)];
+
+  // 3) Evita repetição recente
+  const fresh = candidates.filter((p) => !usedRecent.includes(p.text));
+  const pool = fresh.length ? fresh : candidates;
+
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  usedRecent.push(chosen.text);
+  if (usedRecent.length > 40) usedRecent.shift();
+  return chosen;
 }
 
 function pickUser() {
   return users[Math.floor(Math.random() * users.length)];
 }
 
-function makeMsg(createdAt: Date): ChatMessage {
+function makeMsg(createdAt: Date, lastTags: Tag[] | null): { msg: ChatMessage; tags: Tag[] } {
   const u = pickUser();
+  const phrase = pickPhrase(createdAt, lastTags);
   return {
-    id: `synthetic-general-${createdAt.getTime()}-${Math.random().toString(36).slice(2, 8)}`,
-    user_id: u.id,
-    room: "general",
-    content: pickMessage(),
-    image_url: null,
-    created_at: createdAt.toISOString(),
-    sender_name: u.name,
-    sender_avatar: u.avatar,
+    msg: {
+      id: `synthetic-general-${createdAt.getTime()}-${Math.random().toString(36).slice(2, 8)}`,
+      user_id: u.id,
+      room: "general",
+      content: phrase.text,
+      image_url: null,
+      created_at: createdAt.toISOString(),
+      sender_name: u.name,
+      sender_avatar: u.avatar,
+    },
+    tags: phrase.tags,
   };
 }
 
 /**
- * Populates the General Room with synthetic chat activity.
- * - Seeds the last ~72h of history on mount (visual only, not persisted).
- * - Continuously injects new messages every 5–10 minutes.
- * - Messages older than 72h are not shown (the seed already respects that window).
- *
- * NOTE: Messages are local-only (injected via injectLocalMessage); they are NOT saved to DB.
+ * Popula a Sala Geral com atividade sintética coerente:
+ * - Mensagens respeitam o horário do dia (bom dia só de manhã, etc).
+ * - 60% de chance de responder em contexto à mensagem anterior.
+ * - Evita repetição recente (últimas 40).
+ * - Seed das últimas 72h + injeção a cada 5–10 min.
  */
 export function useGeneralRoomActivity(
   enabled: boolean,
@@ -254,32 +281,34 @@ export function useGeneralRoomActivity(
 ) {
   const seededRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastTagsRef = useRef<Tag[] | null>(null);
 
   useEffect(() => {
     if (!enabled) return;
     if (seededRef.current) return;
     seededRef.current = true;
 
-    // ---- SEED last 72h of history ----
+    // ---- SEED últimas 72h ----
     const now = Date.now();
-    const seedMessages: ChatMessage[] = [];
-    // ~6–12 messages per hour over ~72h => spread evenly with jitter.
     let t = now - 72 * 60 * 60 * 1000;
+    let lastTags: Tag[] | null = null;
     while (t < now - 30 * 1000) {
-      // gap 5–10 min
       const gap = (5 + Math.random() * 5) * 60 * 1000;
       t += gap;
       if (t >= now) break;
-      seedMessages.push(makeMsg(new Date(t)));
+      const { msg, tags } = makeMsg(new Date(t), lastTags);
+      injectMessage(msg, { silent: true });
+      lastTags = tags;
     }
-    // Inject in chronological order silently
-    seedMessages.forEach((m) => injectMessage(m, { silent: true }));
+    lastTagsRef.current = lastTags;
 
-    // ---- Schedule live messages every 5–10 min ----
+    // ---- Mensagens ao vivo a cada 5–10 min ----
     const scheduleNext = () => {
       const delay = (5 + Math.random() * 5) * 60 * 1000;
       timerRef.current = setTimeout(() => {
-        injectMessage(makeMsg(new Date()));
+        const { msg, tags } = makeMsg(new Date(), lastTagsRef.current);
+        injectMessage(msg);
+        lastTagsRef.current = tags;
         scheduleNext();
       }, delay);
     };
