@@ -377,26 +377,82 @@ function makeMsg(createdAt: Date, lastTags: Tag[] | null): { msg: ChatMessage; t
 }
 
 /**
+ * Templates de resposta para quando o usuário REAL envia mensagem.
+ * {nome} é substituído pelo primeiro nome do usuário.
+ */
+const REPLY_TO_REAL_USER: string[] = [
+  "oi {nome}! td bem? 💕",
+  "oiee {nome} 🤗",
+  "{nome}, seja bem-vinda(o) ❤️",
+  "olá {nome}, td bom?",
+  "{nome} 👋 que bom te ver por aqui",
+  "oi {nome}, de onde vc é?",
+  "{nome}, td bem contigo?",
+  "ei {nome}! 😊",
+  "oi {nome}, primeira vez aqui?",
+  "{nome} chegou! 🎉",
+  "oie {nome}, como foi seu dia?",
+  "opa {nome}, blz?",
+  "{nome} ❤️ tmj",
+  "oi {nome}, conta novidades aí",
+  "{nome} 🌹 td certo?",
+  "olá {nome}, prazer!",
+  "{nome}, vc é nova(o) por aqui né?",
+  "salveee {nome}",
+  "oi {nome}, q nome lindo 💫",
+  "{nome}, bem vinda(o) ao chat 🤗",
+];
+
+function firstName(full: string | null | undefined): string {
+  if (!full) return "amiga";
+  const n = full.trim().split(/\s+/)[0];
+  return n || "amiga";
+}
+
+function makeReplyToUser(name: string, when: Date): ChatMessage {
+  const u = pickUser();
+  const tpl = REPLY_TO_REAL_USER[Math.floor(Math.random() * REPLY_TO_REAL_USER.length)];
+  const text = tpl.replace(/\{nome\}/g, name);
+  return {
+    id: `synthetic-reply-${when.getTime()}-${Math.random().toString(36).slice(2, 8)}`,
+    user_id: u.id,
+    room: "general",
+    content: text,
+    image_url: null,
+    created_at: when.toISOString(),
+    sender_name: u.name,
+    sender_avatar: u.avatar,
+  };
+}
+
+/**
  * Popula a Sala Geral com atividade sintética coerente:
- * - Mensagens respeitam o horário do dia (bom dia só de manhã, etc).
+ * - Mensagens respeitam o horário do dia.
  * - 60% de chance de responder em contexto à mensagem anterior.
- * - Evita repetição recente (últimas 40).
+ * - Quando o usuário REAL envia, 1–3 perfis fictícios respondem citando o nome.
  * - Seed das últimas 72h + injeção a cada 5–10 min.
  */
 export function useGeneralRoomActivity(
   enabled: boolean,
-  injectMessage: (msg: ChatMessage, opts?: { silent?: boolean }) => void
+  injectMessage: (msg: ChatMessage, opts?: { silent?: boolean }) => void,
+  options?: {
+    currentUserId?: string | null;
+    currentUserName?: string | null;
+    messages?: ChatMessage[];
+  }
 ) {
   const seededRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastTagsRef = useRef<Tag[] | null>(null);
+  const repliedToMsgIdsRef = useRef<Set<string>>(new Set());
+  const replyTimersRef = useRef<Array<ReturnType<typeof setTimeout>>>([]);
 
+  // ---- Seed + agendamento contínuo ----
   useEffect(() => {
     if (!enabled) return;
     if (seededRef.current) return;
     seededRef.current = true;
 
-    // ---- SEED últimas 72h ----
     const now = Date.now();
     let t = now - 72 * 60 * 60 * 1000;
     let lastTags: Tag[] | null = null;
@@ -410,7 +466,6 @@ export function useGeneralRoomActivity(
     }
     lastTagsRef.current = lastTags;
 
-    // ---- Mensagens ao vivo a cada 5–10 min ----
     const scheduleNext = () => {
       const delay = (5 + Math.random() * 5) * 60 * 1000;
       timerRef.current = setTimeout(() => {
@@ -424,6 +479,43 @@ export function useGeneralRoomActivity(
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      replyTimersRef.current.forEach((tm) => clearTimeout(tm));
+      replyTimersRef.current = [];
     };
   }, [enabled, injectMessage]);
+
+  // ---- Detecta mensagens do USUÁRIO REAL e agenda respostas nominativas ----
+  useEffect(() => {
+    if (!enabled) return;
+    const { currentUserId, currentUserName, messages } = options || {};
+    if (!currentUserId || !messages || messages.length === 0) return;
+
+    const name = firstName(currentUserName);
+
+    // Olha apenas mensagens recentes (últimos 60s) do usuário real ainda não respondidas
+    const cutoff = Date.now() - 60 * 1000;
+    const fresh = messages.filter(
+      (m) =>
+        m.user_id === currentUserId &&
+        new Date(m.created_at).getTime() >= cutoff &&
+        !repliedToMsgIdsRef.current.has(m.id)
+    );
+
+    fresh.forEach((m) => {
+      repliedToMsgIdsRef.current.add(m.id);
+      // 1 a 3 respostas
+      const count = 1 + Math.floor(Math.random() * 3);
+      for (let i = 0; i < count; i++) {
+        const delay = 5000 + Math.random() * 25000 + i * (3000 + Math.random() * 5000);
+        const tm = setTimeout(() => {
+          const reply = makeReplyToUser(name, new Date());
+          injectMessage(reply);
+          // marca tag de saudação para manter coerência do fluxo seguinte
+          lastTagsRef.current = ["greet_generic", "reply_greet"];
+        }, delay);
+        replyTimersRef.current.push(tm);
+      }
+    });
+  }, [enabled, injectMessage, options]);
 }
+
