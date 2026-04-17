@@ -223,7 +223,99 @@ const PHRASES: Phrase[] = [
   { text: "alguém apaixonado por gato? 🐱", tags: ["smalltalk"] },
   { text: "tenho 3 em casa kk", tags: ["smalltalk"], repliesTo: ["smalltalk"] },
   { text: "cachorro pra mim sempre 🐶", tags: ["smalltalk"], repliesTo: ["smalltalk"] },
-];
+
+  // ===== CAFÉ DA TARDE (15h-17h) =====
+  { text: "hora do cafezinho da tarde ☕", tags: ["afternoon_coffee"], periods: ["a"] },
+  { text: "café com bolo de fubá, alguém? 🍰", tags: ["afternoon_coffee", "question_food"], periods: ["a"] },
+  { text: "16h, hora sagrada do café", tags: ["afternoon_coffee"], periods: ["a"] },
+  { text: "tô precisando de um café URGENTE", tags: ["afternoon_coffee", "tired_night"], periods: ["a"] },
+  { text: "cafézin pra aguentar até as 18h kk", tags: ["afternoon_coffee", "work_afternoon"], periods: ["a"] },
+  { text: "biscoito com café é vida ❤️", tags: ["afternoon_coffee"], periods: ["a"], repliesTo: ["afternoon_coffee"] },
+  { text: "to no café da tarde aqui no escritório", tags: ["afternoon_coffee", "work_afternoon"], periods: ["a"] },
+  { text: "pão de queijo quentinho agora seria perfeito", tags: ["afternoon_coffee", "answer_food"], periods: ["a"], repliesTo: ["afternoon_coffee", "question_food"] },
+
+  // ===== HAPPY HOUR (18h-21h) =====
+  { text: "sextou! quem tá no happy hour? 🍻", tags: ["happy_hour", "friday_hype"], periods: ["e"] },
+  { text: "cervejinha gelada chamando", tags: ["happy_hour"], periods: ["e"] },
+  { text: "alguém pra um chopp virtual? 🍺", tags: ["happy_hour"], periods: ["e"] },
+  { text: "happy hour com a galera do trampo hj", tags: ["happy_hour"], periods: ["e"] },
+  { text: "to indo encontrar uns amigos no bar 🍷", tags: ["happy_hour"], periods: ["e"] },
+  { text: "vinho e Netflix, meu happy hour kk", tags: ["happy_hour"], periods: ["e"], repliesTo: ["happy_hour"] },
+  { text: "caipirinha aqui em casa, alguém quer? 🍋", tags: ["happy_hour"], periods: ["e"] },
+  { text: "tô no boteco, mandando bjs pra vcs", tags: ["happy_hour", "greet_evening"], periods: ["e"] },
+  { text: "porção de batata frita salvou o dia 🍟", tags: ["happy_hour", "answer_food"], periods: ["e"], repliesTo: ["happy_hour"] },
+
+  // ===== MADRUGADA FILOSÓFICA =====
+  { text: "será q a gente nasceu pra isso mesmo?", tags: ["late_night_philo"], periods: ["n"] },
+  { text: "fico pensando no sentido de tudo isso 3am vibes", tags: ["late_night_philo"], periods: ["n"] },
+  { text: "vcs acreditam em alma gêmea? 🌌", tags: ["late_night_philo", "question_mood"], periods: ["n"] },
+  { text: "a vida passa rápido demais né", tags: ["late_night_philo", "feeling"], periods: ["n"] },
+  { text: "tô pensando em tudo q deixei pra trás", tags: ["late_night_philo", "nostalgia"], periods: ["n"] },
+  { text: "as melhores conversas acontecem de madrugada", tags: ["late_night_philo"], periods: ["n"], repliesTo: ["greet_lateNight", "late_night_philo"] },
+  { text: "queria entender pq insisto nas mesmas pessoas", tags: ["late_night_philo", "late_night_confession"], periods: ["n"] },
+  { text: "olho pro teto e fico só pensando 🌙", tags: ["late_night_philo"], periods: ["n"] },
+  { text: "verdade, madrugada deixa tudo mais profundo", tags: ["late_night_philo", "agree"], periods: ["n"], repliesTo: ["late_night_philo"] },
+
+  // ===== CONFISSÃO DE MADRUGADA =====
+  { text: "ngm vai ler msm né, vou desabafar kk", tags: ["late_night_confession"], periods: ["n"] },
+  { text: "ainda penso nele toda noite 🥺", tags: ["late_night_confession"], periods: ["n"] },
+  { text: "to com saudade de quem nem merece", tags: ["late_night_confession"], periods: ["n"] },
+  { text: "passa, juro q passa", tags: ["compliment"], repliesTo: ["late_night_confession"] },
+  { text: "força aí, todo mundo já passou por isso", tags: ["compliment", "agree"], repliesTo: ["late_night_confession"] },
+  { text: "te entendo demais 🫂", tags: ["compliment"], repliesTo: ["late_night_confession"] },
+
+  // ===== POR DO SOL / FIM DE TARDE =====
+  { text: "que pôr do sol lindo hj 🌅", tags: ["sunset"], periods: ["a", "e"] },
+  { text: "céu rosa hj, tô apaixonada", tags: ["sunset"], periods: ["e"] },
+  { text: "fui na janela ver o sol se pôr ❤️", tags: ["sunset", "feeling"], periods: ["e"] },
+  { text: "esse fim de tarde tá uma poesia", tags: ["sunset"], periods: ["e"], repliesTo: ["sunset"] },
+
+  // ===== AMANHECER =====
+  { text: "acordei antes do despertador, q raiva kk", tags: ["sunrise"], periods: ["m"] },
+  { text: "vi o sol nascer hj, raro 🌄", tags: ["sunrise"], periods: ["m"] },
+  { text: "manhã fresquinha, q delícia", tags: ["sunrise", "weather"], periods: ["m"] },
+
+  // ===== SÁBADO DE MANHÃ =====
+  { text: "sábado de manhã sem alarme = paraíso", tags: ["saturday_morning", "weekend"], periods: ["m"] },
+  { text: "feirinha de sábado hj 🥬", tags: ["saturday_morning"], periods: ["m"] },
+  { text: "panqueca pro café, alguém? 🥞", tags: ["saturday_morning", "question_food"], periods: ["m"] },
+
+  // ===== DOMINGO VIBES =====
+  { text: "domingão de pijama o dia todo 🛌", tags: ["sunday_vibes", "weekend"] },
+  { text: "almoço de família domingo é tudo", tags: ["sunday_vibes"], periods: ["a"] },
+  { text: "ansiedade de domingo à noite chegando 😩", tags: ["sunday_vibes", "monday_blues"], periods: ["e"] },
+  { text: "domingo passa voando né", tags: ["sunday_vibes"], repliesTo: ["sunday_vibes"] },
+
+  // ===== SEGUNDA / MONDAY BLUES =====
+  { text: "segunda já chegando, socorro", tags: ["monday_blues"], periods: ["e"] },
+  { text: "odeio acordar segunda 😭", tags: ["monday_blues"], periods: ["m"] },
+  { text: "segunda nem é tão ruim assim né? .... é sim", tags: ["monday_blues"], periods: ["m"], repliesTo: ["monday_blues"] },
+
+  // ===== SEXTA HYPE =====
+  { text: "SEXTOOOOU 🎉", tags: ["friday_hype"] },
+  { text: "sexta-feira, melhor dia da semana", tags: ["friday_hype"] },
+  { text: "finalmente sexta, q semanaaa", tags: ["friday_hype", "feeling"] },
+
+  // ===== LIVROS =====
+  { text: "alguém aqui adora ler? indica um livro", tags: ["question_book"] },
+  { text: "to lendo um romance bom dms", tags: ["answer_book"], repliesTo: ["question_book"] },
+  { text: "amo Clarice Lispector ❤️", tags: ["answer_book"], repliesTo: ["question_book"] },
+  { text: "indico A Hipótese do Amor, viciei", tags: ["answer_book"], repliesTo: ["question_book"] },
+  { text: "tô relendo Harry Potter pela 10ª vez kk", tags: ["answer_book"], repliesTo: ["question_book"] },
+
+  // ===== VIAGEM =====
+  { text: "queria viajar agora 😩", tags: ["question_travel", "feeling"] },
+  { text: "indica um destino barato aí", tags: ["question_travel"] },
+  { text: "Chapada Diamantina, paraíso na terra", tags: ["answer_travel"], repliesTo: ["question_travel"] },
+  { text: "Bonito MS é incrível, recomendo", tags: ["answer_travel"], repliesTo: ["question_travel"] },
+  { text: "praia do Rosa em SC, magia pura 🌊", tags: ["answer_travel"], repliesTo: ["question_travel"] },
+  { text: "Jericoacoara, sem palavras", tags: ["answer_travel"], repliesTo: ["question_travel"] },
+
+  // ===== NOSTALGIA =====
+  { text: "saudade de quando a vida era simples", tags: ["nostalgia", "feeling"] },
+  { text: "lembrei da minha infância agora 🥺", tags: ["nostalgia"] },
+  { text: "esse chat me lembra os tempos do MSN kk", tags: ["nostalgia", "feeling"] },
+  { text: "mds eu tbm, era tão bom", tags: ["nostalgia", "agree"], repliesTo: ["nostalgia"] },
 
 function periodOf(d: Date): "m" | "a" | "e" | "n" {
   const h = d.getHours();
