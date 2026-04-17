@@ -316,6 +316,7 @@ const PHRASES: Phrase[] = [
   { text: "lembrei da minha infância agora 🥺", tags: ["nostalgia"] },
   { text: "esse chat me lembra os tempos do MSN kk", tags: ["nostalgia", "feeling"] },
   { text: "mds eu tbm, era tão bom", tags: ["nostalgia", "agree"], repliesTo: ["nostalgia"] },
+];
 
 function periodOf(d: Date): "m" | "a" | "e" | "n" {
   const h = d.getHours();
