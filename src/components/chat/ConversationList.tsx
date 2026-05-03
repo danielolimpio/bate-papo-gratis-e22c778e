@@ -1,5 +1,6 @@
 import { Search, MoreHorizontal, Edit } from "lucide-react";
 import { conversations, users, type Conversation } from "@/data/mockData";
+import StackedAvatars from "./StackedAvatars";
 import { useMemo } from "react";
 
 type TabType = "tudo" | "nao-lidas" | "grupos";
