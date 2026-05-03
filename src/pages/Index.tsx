@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, ArrowLeft } from "lucide-react";
 import ConversationList from "@/components/chat/ConversationList";
 import ChatArea from "@/components/chat/ChatArea";
 import RightPanel from "@/components/chat/RightPanel";
@@ -26,21 +26,41 @@ export default function Index() {
 
   const chatMode = activeTab === "tudo" && !activeConversation ? "general" : "private";
 
+  // On mobile, when a conversation/general is open, hide sidebar and show chat full-screen.
+  // We treat "any selected room" as: activeConversation !== null OR user explicitly opened general.
+  const [mobileView, setMobileView] = useState<"list" | "chat">("list");
+
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
     if (tab === "tudo") {
       setActiveConversation(null);
+      setMobileView("list");
     }
   };
 
   const handleSelectConversation = (id: string) => {
     setActiveConversation(id);
     setReadConversations((prev) => new Set(prev).add(id));
+    setMobileView("chat");
+  };
+
+  const handleSelectGeneral = () => {
+    setActiveTab("tudo");
+    setActiveConversation(null);
+    setMobileView("chat");
+  };
+
+  const handleBackToList = () => {
+    setMobileView("list");
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-chat-bg">
-      <div className="flex w-[340px] flex-shrink-0 flex-col border-r border-chat-divider bg-chat-sidebar">
+    <div className="flex h-[100dvh] w-screen overflow-hidden bg-chat-bg">
+      <div
+        className={`${
+          mobileView === "list" ? "flex" : "hidden"
+        } md:flex w-full md:w-[300px] lg:w-[340px] flex-shrink-0 flex-col border-r border-chat-divider bg-chat-sidebar`}
+      >
         <div className="flex items-center justify-between px-4 py-2.5">
           <div className="flex items-center">
             <img src={logo} alt="Bate-Papo Grátis" className="h-8" />
@@ -61,19 +81,23 @@ export default function Index() {
           onTabChange={handleTabChange}
           readConversations={readConversations}
           isGeneralActive={chatMode === "general"}
-          onSelectGeneral={() => {
-            setActiveTab("tudo");
-            setActiveConversation(null);
-          }}
+          onSelectGeneral={handleSelectGeneral}
         />
       </div>
 
-      <ChatArea
-        conversationId={activeConversation}
-        chatMode={chatMode}
-        onInfoClick={() => {}}
-        onAvatarClick={setProfileUserId}
-      />
+      <div
+        className={`${
+          mobileView === "chat" ? "flex" : "hidden"
+        } md:flex flex-1 min-w-0`}
+      >
+        <ChatArea
+          conversationId={activeConversation}
+          chatMode={chatMode}
+          onInfoClick={() => {}}
+          onAvatarClick={setProfileUserId}
+          onBack={handleBackToList}
+        />
+      </div>
 
       <div className="w-[300px] flex-shrink-0 hidden lg:block">
         <RightPanel
@@ -96,6 +120,7 @@ export default function Index() {
               setActiveConversation(`temp-${userId}`);
             }
             setProfileUserId(null);
+            setMobileView("chat");
           }}
         />
       )}
