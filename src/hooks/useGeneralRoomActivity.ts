@@ -145,7 +145,7 @@ const PHRASES: Phrase[] = [
   { text: "almoço hj? indica aí", tags: ["question_food"], periods: ["m", "a"] },
   { text: "estrogonofe sempre 😋", tags: ["answer_food"], repliesTo: ["question_food"] },
   { text: "macarrão alho e óleo, simples e bom", tags: ["answer_food"], repliesTo: ["question_food"] },
-  { text: "feijoada no domingo é sagrado", tags: ["answer_food"], repliesTo: ["question_food"] },
+  { text: "feijoada no domingo é sagrado", tags: ["answer_food"], days: [0], repliesTo: ["question_food"] },
   { text: "fiz lasanha hj, tá divina", tags: ["answer_food"], repliesTo: ["question_food"] },
   { text: "pizza sempre salva 🍕", tags: ["answer_food"], repliesTo: ["question_food"] },
 
