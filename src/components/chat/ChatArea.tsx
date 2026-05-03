@@ -51,7 +51,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     },
     [injectLocalMessage]
   );
-  useGeneralRoomActivity(isGeneral, injectGeneral, {
+  const { typingUsers } = useGeneralRoomActivity(isGeneral, injectGeneral, {
     currentUserId: user?.id ?? null,
     currentUserName: profile?.full_name ?? null,
     messages,
