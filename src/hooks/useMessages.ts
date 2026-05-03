@@ -56,6 +56,8 @@ export function useMessages(room: string) {
   }, [room]);
 
   useEffect(() => {
+    setMessages([]);
+    setLoading(true);
     fetchMessages();
 
     // Subscribe to real-time inserts
