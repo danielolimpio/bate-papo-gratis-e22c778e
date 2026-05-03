@@ -13,9 +13,11 @@ interface Props {
   activeTab: TabType;
   onTabChange: (tab: TabType) => void;
   readConversations: Set<string>;
+  isGeneralActive?: boolean;
+  onSelectGeneral?: () => void;
 }
 
-export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations }: Props) {
+export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations, isGeneralActive, onSelectGeneral }: Props) {
   const filtered = useMemo(() => {
     if (!searchQuery) return conversations;
     const q = searchQuery.toLowerCase();
