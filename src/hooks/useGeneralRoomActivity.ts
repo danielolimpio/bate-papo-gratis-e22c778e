@@ -286,25 +286,25 @@ const PHRASES: Phrase[] = [
   { text: "manhã fresquinha, q delícia", tags: ["sunrise", "weather"], periods: ["m"] },
 
   // ===== SÁBADO DE MANHÃ =====
-  { text: "sábado de manhã sem alarme = paraíso", tags: ["saturday_morning", "weekend"], periods: ["m"] },
-  { text: "feirinha de sábado hj 🥬", tags: ["saturday_morning"], periods: ["m"] },
-  { text: "panqueca pro café, alguém? 🥞", tags: ["saturday_morning", "question_food"], periods: ["m"] },
+  { text: "sábado de manhã sem alarme = paraíso", tags: ["saturday_morning", "weekend"], days: [6], periods: ["m"] },
+  { text: "feirinha de sábado hj 🥬", tags: ["saturday_morning"], days: [6], periods: ["m"] },
+  { text: "panqueca pro café, alguém? 🥞", tags: ["saturday_morning", "question_food"], days: [6], periods: ["m"] },
 
   // ===== DOMINGO VIBES =====
-  { text: "domingão de pijama o dia todo 🛌", tags: ["sunday_vibes", "weekend"] },
-  { text: "almoço de família domingo é tudo", tags: ["sunday_vibes"], periods: ["a"] },
-  { text: "ansiedade de domingo à noite chegando 😩", tags: ["sunday_vibes", "monday_blues"], periods: ["e"] },
-  { text: "domingo passa voando né", tags: ["sunday_vibes"], repliesTo: ["sunday_vibes"] },
+  { text: "domingão de pijama o dia todo 🛌", tags: ["sunday_vibes", "weekend"], days: [0] },
+  { text: "almoço de família domingo é tudo", tags: ["sunday_vibes"], days: [0], periods: ["a"] },
+  { text: "ansiedade de domingo à noite chegando 😩", tags: ["sunday_vibes", "monday_blues"], days: [0], periods: ["e"] },
+  { text: "domingo passa voando né", tags: ["sunday_vibes"], days: [0], repliesTo: ["sunday_vibes"] },
 
   // ===== SEGUNDA / MONDAY BLUES =====
-  { text: "segunda já chegando, socorro", tags: ["monday_blues"], periods: ["e"] },
-  { text: "odeio acordar segunda 😭", tags: ["monday_blues"], periods: ["m"] },
-  { text: "segunda nem é tão ruim assim né? .... é sim", tags: ["monday_blues"], periods: ["m"], repliesTo: ["monday_blues"] },
+  { text: "segunda já chegando, socorro", tags: ["monday_blues"], days: [0], periods: ["e"] },
+  { text: "odeio acordar segunda 😭", tags: ["monday_blues"], days: [1], periods: ["m"] },
+  { text: "segunda nem é tão ruim assim né? .... é sim", tags: ["monday_blues"], days: [1], periods: ["m"], repliesTo: ["monday_blues"] },
 
   // ===== SEXTA HYPE =====
-  { text: "SEXTOOOOU 🎉", tags: ["friday_hype"] },
-  { text: "sexta-feira, melhor dia da semana", tags: ["friday_hype"] },
-  { text: "finalmente sexta, q semanaaa", tags: ["friday_hype", "feeling"] },
+  { text: "SEXTOOOOU 🎉", tags: ["friday_hype"], days: [5] },
+  { text: "sexta-feira, melhor dia da semana", tags: ["friday_hype"], days: [5] },
+  { text: "finalmente sexta, q semanaaa", tags: ["friday_hype", "feeling"], days: [5] },
 
   // ===== LIVROS =====
   { text: "alguém aqui adora ler? indica um livro", tags: ["question_book"] },
