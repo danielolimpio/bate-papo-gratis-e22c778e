@@ -93,34 +93,45 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
   };
 
   return (
-    <div className="flex flex-1 flex-col bg-chat-bg">
+    <div className="flex flex-1 flex-col bg-chat-bg min-w-0 w-full">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-chat-divider px-4 py-[10px]">
-        {isGeneral ? (
-          <div className="flex items-center gap-3">
-            <StackedAvatars size={40} />
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">Sala de Bate Papo</h3>
-              <p className="text-xs text-muted-foreground">Chat em tempo real</p>
+      <div className="flex items-center justify-between border-b border-chat-divider px-3 sm:px-4 py-[10px] gap-2">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="md:hidden rounded-full p-2 hover:bg-secondary transition-colors flex-shrink-0"
+              aria-label="Voltar"
+            >
+              <ArrowLeft size={20} className="text-foreground" />
+            </button>
+          )}
+          {isGeneral ? (
+            <div className="flex items-center gap-3 min-w-0">
+              <StackedAvatars size={40} />
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-foreground truncate">Sala de Bate Papo</h3>
+                <p className="text-xs text-muted-foreground truncate">Chat em tempo real</p>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => onAvatarClick(participant!.id)}>
-            <div className="relative">
-              <img src={participant!.avatar} alt={participant!.name} className="h-10 w-10 rounded-full object-cover" />
-              {participant!.isOnline && (
-                <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-chat-bg bg-online" />
-              )}
+          ) : (
+            <div className="flex items-center gap-3 cursor-pointer min-w-0" onClick={() => onAvatarClick(participant!.id)}>
+              <div className="relative flex-shrink-0">
+                <img src={participant!.avatar} alt={participant!.name} className="h-10 w-10 rounded-full object-cover" />
+                {participant!.isOnline && (
+                  <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-chat-bg bg-online" />
+                )}
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-foreground truncate">{participant!.name}</h3>
+                <p className="text-xs text-muted-foreground truncate">
+                  {participant!.isOnline ? "Online agora" : `Online ${participant!.lastSeen}`}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">{participant!.name}</h3>
-              <p className="text-xs text-muted-foreground">
-                {participant!.isOnline ? "Online agora" : `Online ${participant!.lastSeen}`}
-              </p>
-            </div>
-          </div>
-        )}
-        <div className="flex items-center gap-1">
+          )}
+        </div>
+        <div className="flex items-center gap-1 flex-shrink-0">
           {!isGeneral && (
             <>
               <button className="rounded-full p-2 hover:bg-secondary transition-colors">
