@@ -73,30 +73,51 @@ export function useMessages(room: string) {
   // the current room's state/cache.
   const fetchMessages = useCallback(async () => {
     const fetchRoom = room;
-    const { data } = await supabase
+    const cutoffIso = new Date(Date.now() - retentionMs(fetchRoom)).toISOString();
+    const { data: msgs, error } = await supabase
       .from("messages")
-      .select("*, profiles:user_id(full_name, avatar_url)")
+      .select("id, user_id, room, content, image_url, created_at")
       .eq("room", fetchRoom)
+      .gte("created_at", cutoffIso)
       .order("created_at", { ascending: true })
-      .limit(200);
+      .limit(500);
 
     if (roomRef.current !== fetchRoom) return; // room changed mid-flight
+    if (error || !msgs) {
+      setLoading(false);
+      return;
+    }
 
-    if (data) {
-      const fetched: ChatMessage[] = data.map((m: any) => ({
+    // Fetch sender profiles in a single query
+    const userIds = Array.from(new Set(msgs.map((m: any) => m.user_id)));
+    let profilesMap = new Map<string, { full_name: string; avatar_url: string | null }>();
+    if (userIds.length > 0) {
+      const { data: profs } = await supabase
+        .from("profiles")
+        .select("id, full_name, avatar_url")
+        .in("id", userIds);
+      profs?.forEach((p: any) =>
+        profilesMap.set(p.id, { full_name: p.full_name, avatar_url: p.avatar_url })
+      );
+    }
+    if (roomRef.current !== fetchRoom) return;
+
+    const fetched: ChatMessage[] = msgs.map((m: any) => {
+      const p = profilesMap.get(m.user_id);
+      return {
         id: m.id,
         user_id: m.user_id,
         room: m.room,
         content: m.content,
         image_url: m.image_url,
         created_at: m.created_at,
-        sender_name: m.profiles?.full_name || "Anônimo",
-        sender_avatar: m.profiles?.avatar_url
-          ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${m.profiles.avatar_url}`
+        sender_name: p?.full_name || "Anônimo",
+        sender_avatar: p?.avatar_url
+          ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${p.avatar_url}`
           : null,
-      }));
-      setMessages((prev) => pruneByRetention(fetchRoom, mergeUnique(prev, fetched)));
-    }
+      };
+    });
+    setMessages((prev) => pruneByRetention(fetchRoom, mergeUnique(prev, fetched)));
     setLoading(false);
   }, [room]);
 
