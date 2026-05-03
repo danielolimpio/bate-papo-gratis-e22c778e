@@ -51,7 +51,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     },
     [injectLocalMessage]
   );
-  useGeneralRoomActivity(isGeneral, injectGeneral, {
+  const { typingUsers } = useGeneralRoomActivity(isGeneral, injectGeneral, {
     currentUserId: user?.id ?? null,
     currentUserName: profile?.full_name ?? null,
     messages,
@@ -208,6 +208,34 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
             </div>
           );
         })}
+        {isGeneral && typingUsers.length > 0 && (
+          <div className="mb-2 flex items-end gap-2">
+            <div className="flex -space-x-2">
+              {typingUsers.slice(0, 3).map((tu) => (
+                <img
+                  key={tu.id}
+                  src={tu.avatar}
+                  alt={tu.name}
+                  className="h-6 w-6 rounded-full border-2 border-chat-bg object-cover"
+                />
+              ))}
+            </div>
+            <div className="rounded-2xl rounded-bl-sm bg-chat-bubble-received px-3 py-2">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] text-chat-bubble-received-fg">
+                  {typingUsers.length === 1
+                    ? `${typingUsers[0].name.split(" ")[0]} está digitando`
+                    : `${typingUsers.length} pessoas digitando`}
+                </span>
+                <span className="flex gap-0.5">
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.3s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.15s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground" />
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
         <div ref={bottomRef} />
       </div>
 
