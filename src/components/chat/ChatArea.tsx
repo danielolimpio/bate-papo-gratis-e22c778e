@@ -99,7 +99,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           <div className="flex items-center gap-3">
             <StackedAvatars size={40} />
             <div>
-              <h3 className="text-sm font-semibold text-foreground">Sala Geral</h3>
+              <h3 className="text-sm font-semibold text-foreground">Sala de Bate Papo</h3>
               <p className="text-xs text-muted-foreground">Chat em tempo real</p>
             </div>
           </div>
