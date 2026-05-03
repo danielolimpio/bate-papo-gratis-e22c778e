@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { users, getRandomFreshName, getRandomProfilePhoto } from "@/data/mockData";
+import { users, getRandomFreshUser } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 
 type CardType = "register" | "online";
@@ -20,14 +20,15 @@ const cities = [
 ];
 
 function pickRandomDisplayUser(type: CardType): DisplayUser {
-  // For "register" -> always fresh random name + random photo (simulates new signup)
+  // For "register" -> fresh random name + photo of the SAME gender (no mismatches)
   // For "online" -> pick an existing profile coming online
   if (type === "register") {
+    const fresh = getRandomFreshUser();
     return {
-      name: getRandomFreshName(),
+      name: fresh.name,
       age: Math.floor(Math.random() * 22) + 19,
       city: cities[Math.floor(Math.random() * cities.length)],
-      avatar: getRandomProfilePhoto(),
+      avatar: fresh.avatar,
     };
   }
   const u = users[Math.floor(Math.random() * users.length)];
