@@ -99,7 +99,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
           <div className="flex items-center gap-3">
             <StackedAvatars size={40} />
             <div>
-              <h3 className="text-sm font-semibold text-foreground">Sala Geral</h3>
+              <h3 className="text-sm font-semibold text-foreground">Sala de Bate Papo</h3>
               <p className="text-xs text-muted-foreground">Chat em tempo real</p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
         {isGeneral && (
           <div className="mb-4 flex flex-col items-center">
             <StackedAvatars size={64} />
-            <h4 className="font-semibold text-foreground">Sala Geral do Bate-Papo Grátis</h4>
+            <h4 className="font-semibold text-foreground">Sala de Bate Papo do Bate-Papo Grátis</h4>
             <p className="text-xs text-muted-foreground mt-1">Todos os membros podem ver e enviar mensagens aqui</p>
             <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-center">
               <p className="text-xs text-muted-foreground">
