@@ -76,6 +76,25 @@ export default function ConversationList({ activeConversationId, onSelect, searc
 
       {/* List */}
       <div className="flex-1 overflow-y-auto">
+        {/* Pinned: Sala de Bate Papo */}
+        <div
+          onClick={onSelectGeneral}
+          className={`flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md transition-colors ${
+            isGeneralActive ? "bg-chat-active" : "hover:bg-chat-hover"
+          }`}
+        >
+          <div className="relative flex-shrink-0 w-[48px] h-[48px] flex items-center justify-center">
+            <StackedAvatars size={48} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between">
+              <span className="text-[13px] font-semibold text-foreground truncate">Sala de Bate Papo</span>
+              <span className="text-[11px] text-primary font-semibold flex-shrink-0">📌</span>
+            </div>
+            <p className="text-[12px] text-muted-foreground truncate mt-[1px]">Converse com todos em tempo real</p>
+          </div>
+        </div>
+
         {filtered.map((conv) => (
           <ConversationItem
             key={conv.id}
