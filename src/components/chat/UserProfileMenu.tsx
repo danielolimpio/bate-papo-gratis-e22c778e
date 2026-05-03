@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Camera, Lock, LogOut, Pencil, User, X, Eye, EyeOff } from "lucide-react";
 import type { UserProfile } from "@/hooks/useCurrentUser";
+import { toast } from "@/components/ui/use-toast";
 
 const relationshipOptions = [
   { value: "solteiro", label: "Solteiro(a)" },
@@ -28,7 +29,7 @@ const preferenceOptions = [
 interface Props {
   profile: UserProfile | null;
   email: string;
-  onProfileUpdated: () => void;
+  onProfileUpdated: () => Promise<void> | void;
 }
 
 export default function UserProfileMenu({ profile, email, onProfileUpdated }: Props) {
@@ -45,30 +46,76 @@ export default function UserProfileMenu({ profile, email, onProfileUpdated }: Pr
 
   const handleUploadAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file || !profile) return;
+    if (!file) return;
+
+    if (!profile) {
+      toast({
+        variant: "destructive",
+        title: "Perfil ainda carregando",
+        description: "Aguarde um instante e tente enviar a foto novamente.",
+      });
+      e.target.value = "";
+      return;
+    }
+
     setUploading(true);
 
     const fileExt = file.name.split(".").pop();
     const filePath = `${profile.id}/avatar.${fileExt}`;
 
-    // Remove old avatar if exists
-    if (profile.avatar_url) {
-      await supabase.storage.from("avatars").remove([profile.avatar_url]);
+    if (!file.type.startsWith("image/")) {
+      toast({
+        variant: "destructive",
+        title: "Arquivo inválido",
+        description: "Selecione uma imagem para usar como foto de perfil.",
+      });
+      setUploading(false);
+      e.target.value = "";
+      return;
     }
 
-    const { error: uploadError } = await supabase.storage
-      .from("avatars")
-      .upload(filePath, file, { upsert: true });
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        variant: "destructive",
+        title: "Imagem muito grande",
+        description: "Escolha uma imagem com até 5MB.",
+      });
+      setUploading(false);
+      e.target.value = "";
+      return;
+    }
 
-    if (!uploadError) {
-      await supabase
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(filePath, file, { upsert: true, contentType: file.type });
+
+      if (uploadError) throw uploadError;
+
+      const { error: profileError } = await supabase
         .from("profiles")
         .update({ avatar_url: filePath })
         .eq("id", profile.id);
-      onProfileUpdated();
+
+      if (profileError) throw profileError;
+
+      await onProfileUpdated();
+
+      toast({
+        title: "Foto atualizada",
+        description: "Sua foto de perfil foi salva com sucesso.",
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Não foi possível salvar sua foto agora.";
+      toast({
+        variant: "destructive",
+        title: "Falha ao enviar a foto",
+        description: message,
+      });
+    } finally {
+      setUploading(false);
+      e.target.value = "";
     }
-    setUploading(false);
-    e.target.value = "";
   };
 
   const handleLogout = async () => {
@@ -124,7 +171,18 @@ export default function UserProfileMenu({ profile, email, onProfileUpdated }: Pr
               </button>
 
               <button
-                onClick={() => { setShowMenu(false); setShowEditModal(true); }}
+                onClick={() => {
+                  setShowMenu(false);
+                  if (!profile) {
+                    toast({
+                      variant: "destructive",
+                      title: "Perfil ainda carregando",
+                      description: "Aguarde um instante e tente editar novamente.",
+                    });
+                    return;
+                  }
+                  setShowEditModal(true);
+                }}
                 className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
               >
                 <Pencil size={16} className="text-primary" />
@@ -158,7 +216,10 @@ export default function UserProfileMenu({ profile, email, onProfileUpdated }: Pr
         <EditProfileModal
           profile={profile}
           onClose={() => setShowEditModal(false)}
-          onSaved={() => { setShowEditModal(false); onProfileUpdated(); }}
+          onSaved={async () => {
+            setShowEditModal(false);
+            await onProfileUpdated();
+          }}
         />
       )}
 
@@ -185,7 +246,7 @@ function EditProfileModal({
 }: {
   profile: UserProfile;
   onClose: () => void;
-  onSaved: () => void;
+  onSaved: () => Promise<void> | void;
 }) {
   const [fullName, setFullName] = useState(profile.full_name);
   const [age, setAge] = useState(String(profile.age));
@@ -222,6 +283,10 @@ function EditProfileModal({
     if (updateError) {
       setError(updateError.message);
     } else {
+      toast({
+        title: "Perfil atualizado",
+        description: "Suas alterações foram salvas com sucesso.",
+      });
       onSaved();
     }
   };
