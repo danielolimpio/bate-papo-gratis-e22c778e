@@ -43,9 +43,20 @@ export function useMessages(room: string) {
   const [loading, setLoading] = useState(cached.length === 0);
   const { playSound, showVisualNotification, requestPermission } = useChatNotification();
   const currentUserIdRef = useRef<string | null>(null);
+  const roomRef = useRef(room);
 
-  // Keep cache in sync with state for this room
+  // Reset state synchronously when room changes so we never leak
+  // messages from a previous room into the new room (and its cache).
+  if (roomRef.current !== room) {
+    roomRef.current = room;
+    const next = roomCache.get(room) ?? [];
+    setMessages(next);
+    setLoading(next.length === 0);
+  }
+
+  // Keep cache in sync with state — but only for the room these messages belong to.
   useEffect(() => {
+    if (roomRef.current !== room) return;
     roomCache.set(room, pruneByRetention(room, messages));
   }, [room, messages]);
 
@@ -57,14 +68,19 @@ export function useMessages(room: string) {
     });
   }, [requestPermission]);
 
-  // Fetch messages with profile join, merge with cache
+  // Fetch messages with profile join, merge with cache.
+  // Guarded so a late response from a previous room cannot contaminate
+  // the current room's state/cache.
   const fetchMessages = useCallback(async () => {
+    const fetchRoom = room;
     const { data } = await supabase
       .from("messages")
       .select("*, profiles:user_id(full_name, avatar_url)")
-      .eq("room", room)
+      .eq("room", fetchRoom)
       .order("created_at", { ascending: true })
       .limit(200);
+
+    if (roomRef.current !== fetchRoom) return; // room changed mid-flight
 
     if (data) {
       const fetched: ChatMessage[] = data.map((m: any) => ({
@@ -79,13 +95,13 @@ export function useMessages(room: string) {
           ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${m.profiles.avatar_url}`
           : null,
       }));
-      setMessages((prev) => pruneByRetention(room, mergeUnique(prev, fetched)));
+      setMessages((prev) => pruneByRetention(fetchRoom, mergeUnique(prev, fetched)));
     }
     setLoading(false);
   }, [room]);
 
   useEffect(() => {
-    // Hydrate from cache (already done in initial state); only show loading if empty
+    // Hydrate from cache for the new room (state was already reset above)
     const initial = roomCache.get(room) ?? [];
     setMessages(pruneByRetention(room, initial));
     setLoading(initial.length === 0);
