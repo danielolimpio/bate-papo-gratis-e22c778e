@@ -405,10 +405,12 @@ export function getRandomOnlineUserIds(): Set<string> {
   return new Set(shuffled.slice(0, count).map(u => u.id));
 }
 
-// Pool of fresh-sounding names for "new registration" cards
-const freshFirstNames = [
+// Pool of fresh-sounding names for "new registration" cards, separated by gender
+const freshFemaleFirst = [
   "Ana", "Bia", "Caroline", "Letícia", "Júlia", "Manuela", "Sophia", "Helena", "Valentina", "Lara",
   "Heloísa", "Cecília", "Isabela", "Mariana", "Lívia", "Antonella", "Olívia", "Rafaela", "Bruna", "Clara",
+];
+const freshMaleFirst = [
   "Lucas", "Pedro", "Gabriel", "Matheus", "Rafael", "Bruno", "Felipe", "Diego", "Thiago", "Gustavo",
   "Leonardo", "Vinícius", "Eduardo", "Caio", "Henrique", "Murilo", "Davi", "Igor", "André", "Renato",
 ];
@@ -417,12 +419,41 @@ const freshLastNames = [
   "Carvalho", "Araújo", "Fernandes", "Barbosa", "Cardoso", "Rocha", "Dias", "Nascimento", "Moreira", "Mendes",
 ];
 
+const femaleProfilePhotos = [
+  profileF1, profileF2, profileF3, profileF4, profileF5, profileF6, profileF7, profileF8, profileF9, profileF10,
+  profileF11, profileF12, profileF13, profileF14, profileF15, profileF16, profileF17, profileF18, profileF19, profileF20,
+  profileF21, profileF22, profileF23, profileF24, profileF25, profileF26, profileF27, profileF28, profileF29, profileF30,
+  profileF31, profileF32, profileF33, profileF34, profileF35, profileF36, profileF37, profileF38, profileF39, profileF40,
+  profileF41, profileF42, profileF43, profileF44, profileF45, profileF46, profileF47, profileF48, profileF49, profileF50,
+  profileF51, profileF52, profileF53, profileF54, profileF55, profileF56, profileF57, profileF58, profileF59, profileF60,
+  profileF61, profileF62, profileF63, profileF64, profileF65, profileF66, profileF67, profileF68, profileF69, profileF70, profileF71,
+  profileF72, profileF73, profileF74, profileF75, profileF76, profileF77, profileF78, profileF79, profileF80, profileF81,
+  profileF82, profileF83, profileF84, profileF85, profileF86, profileF87, profileF88, profileF89, profileF90, profileF91,
+  profileF92, profileF93, profileF94, profileF95, profileF96, profileF97, profileF98, profileF99, profileF100, profileF101,
+];
+const maleProfilePhotos = [
+  profileM1, profileM2, profileM3, profileM4, profileM5, profileM6, profileM7, profileM8, profileM9, profileM10,
+  profileM11, profileM12, profileM13, profileM14, profileM15, profileM16, profileM17, profileM18, profileM19,
+];
+
+/** Generates a coherent fresh user (name + photo of the same gender). */
+export function getRandomFreshUser(): { name: string; avatar: string; gender: Gender } {
+  const female = Math.random() < 0.5;
+  const first = female
+    ? freshFemaleFirst[Math.floor(Math.random() * freshFemaleFirst.length)]
+    : freshMaleFirst[Math.floor(Math.random() * freshMaleFirst.length)];
+  const last = freshLastNames[Math.floor(Math.random() * freshLastNames.length)];
+  const pool = female ? femaleProfilePhotos : maleProfilePhotos;
+  const avatar = pool[Math.floor(Math.random() * pool.length)];
+  return { name: `${first} ${last}`, avatar, gender: female ? "Feminino" : "Masculino" };
+}
+
+/** @deprecated kept for backwards-compat — prefer getRandomFreshUser */
 export function getRandomFreshName(): string {
-  const f = freshFirstNames[Math.floor(Math.random() * freshFirstNames.length)];
-  const l = freshLastNames[Math.floor(Math.random() * freshLastNames.length)];
-  return `${f} ${l}`;
+  return getRandomFreshUser().name;
 }
 
 export function getRandomProfilePhoto(): string {
   return allProfilePhotos[Math.floor(Math.random() * allProfilePhotos.length)];
 }
+
