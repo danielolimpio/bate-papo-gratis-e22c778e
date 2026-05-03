@@ -1,6 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { users } from "@/data/mockData";
 import type { ChatMessage } from "./useMessages";
+
+export interface TypingUser {
+  id: string;
+  name: string;
+  avatar: string;
+}
 
 /**
  * Pools de mensagens organizadas por período do dia e contexto.
