@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, ArrowLeft } from "lucide-react";
 import ConversationList from "@/components/chat/ConversationList";
 import ChatArea from "@/components/chat/ChatArea";
 import RightPanel from "@/components/chat/RightPanel";
