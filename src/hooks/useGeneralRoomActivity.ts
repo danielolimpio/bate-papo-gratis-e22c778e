@@ -446,12 +446,35 @@ export function useGeneralRoomActivity(
     currentUserName?: string | null;
     messages?: ChatMessage[];
   }
-) {
+): { typingUsers: TypingUser[] } {
   const seededRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastTagsRef = useRef<Tag[] | null>(null);
   const repliedToMsgIdsRef = useRef<Set<string>>(new Set());
   const replyTimersRef = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+  const typingTimersRef = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+
+  const [typingUsers, setTypingUsers] = useState<TypingUser[]>([]);
+
+  const addTyping = useCallback((u: TypingUser) => {
+    setTypingUsers((prev) => (prev.find((x) => x.id === u.id) ? prev : [...prev, u]));
+  }, []);
+  const removeTyping = useCallback((id: string) => {
+    setTypingUsers((prev) => prev.filter((x) => x.id !== id));
+  }, []);
+
+  /** Mostra "digitando..." por `duration`ms e então executa `commit`. */
+  const showTypingThen = useCallback(
+    (userId: string, name: string, avatar: string, duration: number, commit: () => void) => {
+      addTyping({ id: userId, name, avatar });
+      const tm = setTimeout(() => {
+        removeTyping(userId);
+        commit();
+      }, duration);
+      typingTimersRef.current.push(tm);
+    },
+    [addTyping, removeTyping]
+  );
 
   // ---- Seed + agendamento contínuo ----
   useEffect(() => {
@@ -475,9 +498,24 @@ export function useGeneralRoomActivity(
     const scheduleNext = () => {
       const delay = (5 + Math.random() * 5) * 60 * 1000;
       timerRef.current = setTimeout(() => {
-        const { msg, tags } = makeMsg(new Date(), lastTagsRef.current);
-        injectMessage(msg);
-        lastTagsRef.current = tags;
+        // Pré-monta a mensagem para sabermos quem está "digitando"
+        const u = pickUser();
+        const phrase = pickPhrase(new Date(), lastTagsRef.current);
+        const typingMs = 2000 + Math.random() * 4000; // 2–6s
+        showTypingThen(u.id, u.name, u.avatar, typingMs, () => {
+          const msg: ChatMessage = {
+            id: `synthetic-general-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+            user_id: u.id,
+            room: "general",
+            content: phrase.text,
+            image_url: null,
+            created_at: new Date().toISOString(),
+            sender_name: u.name,
+            sender_avatar: u.avatar,
+          };
+          injectMessage(msg);
+          lastTagsRef.current = phrase.tags;
+        });
         scheduleNext();
       }, delay);
     };
@@ -487,8 +525,10 @@ export function useGeneralRoomActivity(
       if (timerRef.current) clearTimeout(timerRef.current);
       replyTimersRef.current.forEach((tm) => clearTimeout(tm));
       replyTimersRef.current = [];
+      typingTimersRef.current.forEach((tm) => clearTimeout(tm));
+      typingTimersRef.current = [];
     };
-  }, [enabled, injectMessage]);
+  }, [enabled, injectMessage, showTypingThen]);
 
   // ---- Detecta mensagens do USUÁRIO REAL e agenda respostas nominativas ----
   useEffect(() => {
@@ -498,7 +538,6 @@ export function useGeneralRoomActivity(
 
     const name = firstName(currentUserName);
 
-    // Olha apenas mensagens recentes (últimos 60s) do usuário real ainda não respondidas
     const cutoff = Date.now() - 60 * 1000;
     const fresh = messages.filter(
       (m) =>
@@ -509,19 +548,34 @@ export function useGeneralRoomActivity(
 
     fresh.forEach((m) => {
       repliedToMsgIdsRef.current.add(m.id);
-      // 1 a 3 respostas
       const count = 1 + Math.floor(Math.random() * 3);
       for (let i = 0; i < count; i++) {
         const delay = 5000 + Math.random() * 25000 + i * (3000 + Math.random() * 5000);
         const tm = setTimeout(() => {
-          const reply = makeReplyToUser(name, new Date());
-          injectMessage(reply);
-          // marca tag de saudação para manter coerência do fluxo seguinte
-          lastTagsRef.current = ["greet_generic", "reply_greet"];
+          const u = pickUser();
+          const tpl = REPLY_TO_REAL_USER[Math.floor(Math.random() * REPLY_TO_REAL_USER.length)];
+          const text = tpl.replace(/\{nome\}/g, name);
+          const typingMs = 2000 + Math.random() * 3000; // 2–5s
+          showTypingThen(u.id, u.name, u.avatar, typingMs, () => {
+            const reply: ChatMessage = {
+              id: `synthetic-reply-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+              user_id: u.id,
+              room: "general",
+              content: text,
+              image_url: null,
+              created_at: new Date().toISOString(),
+              sender_name: u.name,
+              sender_avatar: u.avatar,
+            };
+            injectMessage(reply);
+            lastTagsRef.current = ["greet_generic", "reply_greet"];
+          });
         }, delay);
         replyTimersRef.current.push(tm);
       }
     });
-  }, [enabled, injectMessage, options]);
+  }, [enabled, injectMessage, options, showTypingThen]);
+
+  return { typingUsers };
 }
 
