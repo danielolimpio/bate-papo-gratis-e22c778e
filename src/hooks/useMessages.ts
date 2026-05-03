@@ -43,9 +43,20 @@ export function useMessages(room: string) {
   const [loading, setLoading] = useState(cached.length === 0);
   const { playSound, showVisualNotification, requestPermission } = useChatNotification();
   const currentUserIdRef = useRef<string | null>(null);
+  const roomRef = useRef(room);
 
-  // Keep cache in sync with state for this room
+  // Reset state synchronously when room changes so we never leak
+  // messages from a previous room into the new room (and its cache).
+  if (roomRef.current !== room) {
+    roomRef.current = room;
+    const next = roomCache.get(room) ?? [];
+    setMessages(next);
+    setLoading(next.length === 0);
+  }
+
+  // Keep cache in sync with state — but only for the room these messages belong to.
   useEffect(() => {
+    if (roomRef.current !== room) return;
     roomCache.set(room, pruneByRetention(room, messages));
   }, [room, messages]);
 
