@@ -67,6 +67,10 @@ interface Phrase {
   tags: Tag[];
   /** períodos válidos: m=manhã 5-11, a=tarde 12-17, e=noite 18-22, n=madrugada 23-4. Vazio = qualquer */
   periods?: Array<"m" | "a" | "e" | "n">;
+  /** dias da semana válidos (0=dom..6=sáb). Vazio = qualquer */
+  days?: number[];
+  /** datas comemorativas válidas (chaves de HOLIDAYS). Se definido, SÓ aparece nessas datas. */
+  holidays?: string[];
   /** tags que esta mensagem responde bem */
   repliesTo?: Tag[];
 }
