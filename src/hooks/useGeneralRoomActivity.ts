@@ -245,10 +245,10 @@ const PHRASES: Phrase[] = [
   { text: "pão de queijo quentinho agora seria perfeito", tags: ["afternoon_coffee", "answer_food"], periods: ["a"], repliesTo: ["afternoon_coffee", "question_food"] },
 
   // ===== HAPPY HOUR (18h-21h) =====
-  { text: "sextou! quem tá no happy hour? 🍻", tags: ["happy_hour", "friday_hype"], periods: ["e"] },
+  { text: "sextou! quem tá no happy hour? 🍻", tags: ["happy_hour", "friday_hype"], days: [5], periods: ["e"] },
   { text: "cervejinha gelada chamando", tags: ["happy_hour"], periods: ["e"] },
   { text: "alguém pra um chopp virtual? 🍺", tags: ["happy_hour"], periods: ["e"] },
-  { text: "happy hour com a galera do trampo hj", tags: ["happy_hour"], periods: ["e"] },
+  { text: "happy hour com a galera do trampo hj", tags: ["happy_hour"], days: [1, 2, 3, 4, 5], periods: ["e"] },
   { text: "to indo encontrar uns amigos no bar 🍷", tags: ["happy_hour"], periods: ["e"] },
   { text: "vinho e Netflix, meu happy hour kk", tags: ["happy_hour"], periods: ["e"], repliesTo: ["happy_hour"] },
   { text: "caipirinha aqui em casa, alguém quer? 🍋", tags: ["happy_hour"], periods: ["e"] },
