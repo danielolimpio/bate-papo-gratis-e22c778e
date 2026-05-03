@@ -60,6 +60,11 @@ export default function Index() {
           activeTab={activeTab}
           onTabChange={handleTabChange}
           readConversations={readConversations}
+          isGeneralActive={chatMode === "general"}
+          onSelectGeneral={() => {
+            setActiveTab("tudo");
+            setActiveConversation(null);
+          }}
         />
       </div>
 
