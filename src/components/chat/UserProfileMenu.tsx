@@ -29,7 +29,7 @@ const preferenceOptions = [
 interface Props {
   profile: UserProfile | null;
   email: string;
-  onProfileUpdated: () => void;
+  onProfileUpdated: () => Promise<void> | void;
 }
 
 export default function UserProfileMenu({ profile, email, onProfileUpdated }: Props) {
@@ -246,7 +246,7 @@ function EditProfileModal({
 }: {
   profile: UserProfile;
   onClose: () => void;
-  onSaved: () => void;
+  onSaved: () => Promise<void> | void;
 }) {
   const [fullName, setFullName] = useState(profile.full_name);
   const [age, setAge] = useState(String(profile.age));
