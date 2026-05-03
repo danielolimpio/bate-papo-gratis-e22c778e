@@ -202,10 +202,10 @@ const PHRASES: Phrase[] = [
   { text: "aqui tá um sol lindo ☀️", tags: ["weather"], periods: ["m", "a"] },
 
   // ===== FDS =====
-  { text: "fim de semana chegando ❤️", tags: ["weekend"] },
-  { text: "ansiosa pelo fds 🙏", tags: ["weekend"] },
-  { text: "alguém com plano pro sábado?", tags: ["weekend", "smalltalk"] },
-  { text: "domingão de descanso 🛋️", tags: ["weekend"] },
+  { text: "fim de semana chegando ❤️", tags: ["weekend"], days: [3, 4, 5] },
+  { text: "ansiosa pelo fds 🙏", tags: ["weekend"], days: [3, 4, 5] },
+  { text: "alguém com plano pro sábado?", tags: ["weekend", "smalltalk"], days: [4, 5] },
+  { text: "domingão de descanso 🛋️", tags: ["weekend"], days: [0] },
 
   // ===== SMALLTALK / RISADAS / CONCORDÂNCIA =====
   { text: "kkkkkk", tags: ["laugh"], repliesTo: ["smalltalk", "work_afternoon", "feeling"] },
