@@ -224,8 +224,8 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               <div className="flex items-center gap-1.5">
                 <span className="text-[11px] text-chat-bubble-received-fg">
                   {typingUsers.length === 1
-                    ? `${typingUsers[0].name.split(" ")[0]} está digitando`
-                    : `${typingUsers.length} pessoas digitando`}
+                    ? `${typingUsers[0].name.split(" ")[0]} está digitando…`
+                    : `${typingUsers.length} pessoas estão digitando…`}
                 </span>
                 <span className="flex gap-0.5">
                   <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.3s]" />
