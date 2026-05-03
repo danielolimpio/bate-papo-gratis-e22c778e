@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Phone, Video, Smile, Image, Mic, Send, User } from "lucide-react";
+import { Phone, Video, Smile, Image, Mic, Send, User, ArrowLeft } from "lucide-react";
 import EmojiPicker from "./EmojiPicker";
 import { useMessages, type ChatMessage } from "@/hooks/useMessages";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
@@ -13,9 +13,10 @@ interface Props {
   chatMode: "general" | "private";
   onInfoClick: () => void;
   onAvatarClick: (userId: string) => void;
+  onBack?: () => void;
 }
 
-export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvatarClick }: Props) {
+export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvatarClick, onBack }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
