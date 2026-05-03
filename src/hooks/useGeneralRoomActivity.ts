@@ -67,6 +67,10 @@ interface Phrase {
   tags: Tag[];
   /** períodos válidos: m=manhã 5-11, a=tarde 12-17, e=noite 18-22, n=madrugada 23-4. Vazio = qualquer */
   periods?: Array<"m" | "a" | "e" | "n">;
+  /** dias da semana válidos (0=dom..6=sáb). Vazio = qualquer */
+  days?: number[];
+  /** datas comemorativas válidas (chaves de HOLIDAYS). Se definido, SÓ aparece nessas datas. */
+  holidays?: string[];
   /** tags que esta mensagem responde bem */
   repliesTo?: Tag[];
 }
@@ -141,7 +145,7 @@ const PHRASES: Phrase[] = [
   { text: "almoço hj? indica aí", tags: ["question_food"], periods: ["m", "a"] },
   { text: "estrogonofe sempre 😋", tags: ["answer_food"], repliesTo: ["question_food"] },
   { text: "macarrão alho e óleo, simples e bom", tags: ["answer_food"], repliesTo: ["question_food"] },
-  { text: "feijoada no domingo é sagrado", tags: ["answer_food"], repliesTo: ["question_food"] },
+  { text: "feijoada no domingo é sagrado", tags: ["answer_food"], days: [0], repliesTo: ["question_food"] },
   { text: "fiz lasanha hj, tá divina", tags: ["answer_food"], repliesTo: ["question_food"] },
   { text: "pizza sempre salva 🍕", tags: ["answer_food"], repliesTo: ["question_food"] },
 
@@ -198,10 +202,10 @@ const PHRASES: Phrase[] = [
   { text: "aqui tá um sol lindo ☀️", tags: ["weather"], periods: ["m", "a"] },
 
   // ===== FDS =====
-  { text: "fim de semana chegando ❤️", tags: ["weekend"] },
-  { text: "ansiosa pelo fds 🙏", tags: ["weekend"] },
-  { text: "alguém com plano pro sábado?", tags: ["weekend", "smalltalk"] },
-  { text: "domingão de descanso 🛋️", tags: ["weekend"] },
+  { text: "fim de semana chegando ❤️", tags: ["weekend"], days: [3, 4, 5] },
+  { text: "ansiosa pelo fds 🙏", tags: ["weekend"], days: [3, 4, 5] },
+  { text: "alguém com plano pro sábado?", tags: ["weekend", "smalltalk"], days: [4, 5] },
+  { text: "domingão de descanso 🛋️", tags: ["weekend"], days: [0] },
 
   // ===== SMALLTALK / RISADAS / CONCORDÂNCIA =====
   { text: "kkkkkk", tags: ["laugh"], repliesTo: ["smalltalk", "work_afternoon", "feeling"] },
@@ -241,10 +245,10 @@ const PHRASES: Phrase[] = [
   { text: "pão de queijo quentinho agora seria perfeito", tags: ["afternoon_coffee", "answer_food"], periods: ["a"], repliesTo: ["afternoon_coffee", "question_food"] },
 
   // ===== HAPPY HOUR (18h-21h) =====
-  { text: "sextou! quem tá no happy hour? 🍻", tags: ["happy_hour", "friday_hype"], periods: ["e"] },
+  { text: "sextou! quem tá no happy hour? 🍻", tags: ["happy_hour", "friday_hype"], days: [5], periods: ["e"] },
   { text: "cervejinha gelada chamando", tags: ["happy_hour"], periods: ["e"] },
   { text: "alguém pra um chopp virtual? 🍺", tags: ["happy_hour"], periods: ["e"] },
-  { text: "happy hour com a galera do trampo hj", tags: ["happy_hour"], periods: ["e"] },
+  { text: "happy hour com a galera do trampo hj", tags: ["happy_hour"], days: [1, 2, 3, 4, 5], periods: ["e"] },
   { text: "to indo encontrar uns amigos no bar 🍷", tags: ["happy_hour"], periods: ["e"] },
   { text: "vinho e Netflix, meu happy hour kk", tags: ["happy_hour"], periods: ["e"], repliesTo: ["happy_hour"] },
   { text: "caipirinha aqui em casa, alguém quer? 🍋", tags: ["happy_hour"], periods: ["e"] },
@@ -282,25 +286,25 @@ const PHRASES: Phrase[] = [
   { text: "manhã fresquinha, q delícia", tags: ["sunrise", "weather"], periods: ["m"] },
 
   // ===== SÁBADO DE MANHÃ =====
-  { text: "sábado de manhã sem alarme = paraíso", tags: ["saturday_morning", "weekend"], periods: ["m"] },
-  { text: "feirinha de sábado hj 🥬", tags: ["saturday_morning"], periods: ["m"] },
-  { text: "panqueca pro café, alguém? 🥞", tags: ["saturday_morning", "question_food"], periods: ["m"] },
+  { text: "sábado de manhã sem alarme = paraíso", tags: ["saturday_morning", "weekend"], days: [6], periods: ["m"] },
+  { text: "feirinha de sábado hj 🥬", tags: ["saturday_morning"], days: [6], periods: ["m"] },
+  { text: "panqueca pro café, alguém? 🥞", tags: ["saturday_morning", "question_food"], days: [6], periods: ["m"] },
 
   // ===== DOMINGO VIBES =====
-  { text: "domingão de pijama o dia todo 🛌", tags: ["sunday_vibes", "weekend"] },
-  { text: "almoço de família domingo é tudo", tags: ["sunday_vibes"], periods: ["a"] },
-  { text: "ansiedade de domingo à noite chegando 😩", tags: ["sunday_vibes", "monday_blues"], periods: ["e"] },
-  { text: "domingo passa voando né", tags: ["sunday_vibes"], repliesTo: ["sunday_vibes"] },
+  { text: "domingão de pijama o dia todo 🛌", tags: ["sunday_vibes", "weekend"], days: [0] },
+  { text: "almoço de família domingo é tudo", tags: ["sunday_vibes"], days: [0], periods: ["a"] },
+  { text: "ansiedade de domingo à noite chegando 😩", tags: ["sunday_vibes", "monday_blues"], days: [0], periods: ["e"] },
+  { text: "domingo passa voando né", tags: ["sunday_vibes"], days: [0], repliesTo: ["sunday_vibes"] },
 
   // ===== SEGUNDA / MONDAY BLUES =====
-  { text: "segunda já chegando, socorro", tags: ["monday_blues"], periods: ["e"] },
-  { text: "odeio acordar segunda 😭", tags: ["monday_blues"], periods: ["m"] },
-  { text: "segunda nem é tão ruim assim né? .... é sim", tags: ["monday_blues"], periods: ["m"], repliesTo: ["monday_blues"] },
+  { text: "segunda já chegando, socorro", tags: ["monday_blues"], days: [0], periods: ["e"] },
+  { text: "odeio acordar segunda 😭", tags: ["monday_blues"], days: [1], periods: ["m"] },
+  { text: "segunda nem é tão ruim assim né? .... é sim", tags: ["monday_blues"], days: [1], periods: ["m"], repliesTo: ["monday_blues"] },
 
   // ===== SEXTA HYPE =====
-  { text: "SEXTOOOOU 🎉", tags: ["friday_hype"] },
-  { text: "sexta-feira, melhor dia da semana", tags: ["friday_hype"] },
-  { text: "finalmente sexta, q semanaaa", tags: ["friday_hype", "feeling"] },
+  { text: "SEXTOOOOU 🎉", tags: ["friday_hype"], days: [5] },
+  { text: "sexta-feira, melhor dia da semana", tags: ["friday_hype"], days: [5] },
+  { text: "finalmente sexta, q semanaaa", tags: ["friday_hype", "feeling"], days: [5] },
 
   // ===== LIVROS =====
   { text: "alguém aqui adora ler? indica um livro", tags: ["question_book"] },
@@ -322,6 +326,42 @@ const PHRASES: Phrase[] = [
   { text: "lembrei da minha infância agora 🥺", tags: ["nostalgia"] },
   { text: "esse chat me lembra os tempos do MSN kk", tags: ["nostalgia", "feeling"] },
   { text: "mds eu tbm, era tão bom", tags: ["nostalgia", "agree"], repliesTo: ["nostalgia"] },
+
+  // ===== DATAS COMEMORATIVAS =====
+  // Ano Novo
+  { text: "FELIZ ANO NOVO GENTE 🎆🎉", tags: ["smalltalk", "feeling"], holidays: ["new_year"] },
+  { text: "q 2026 seja leve pra todos nós ❤️", tags: ["feeling"], holidays: ["new_year"] },
+  { text: "ressaca de ano novo bateu forte kk", tags: ["feeling"], holidays: ["new_year_day"] },
+  // Carnaval
+  { text: "carnaval chegando, alguém vai pular?", tags: ["smalltalk"], holidays: ["carnival_week"] },
+  { text: "bloquinho hj, glitter no rosto e vamo 🎭", tags: ["feeling"], holidays: ["carnival"] },
+  // Páscoa
+  { text: "feliz Páscoa gente 🐰🍫", tags: ["smalltalk", "feeling"], holidays: ["easter"] },
+  { text: "ovo de chocolate é vida ❤️", tags: ["answer_food"], holidays: ["easter"] },
+  // Dia das Mães
+  { text: "feliz dia das mães pra todas as mães daqui ❤️", tags: ["feeling", "compliment"], holidays: ["mothers_day"] },
+  // Dia dos Namorados
+  { text: "feliz dia dos namorados 💕", tags: ["feeling"], holidays: ["valentines_br"] },
+  { text: "solteira no dia dos namorados, mas tô bem kk", tags: ["feeling"], holidays: ["valentines_br"] },
+  // Festa Junina
+  { text: "arraiá no fds, quem vai? 🤠🌽", tags: ["smalltalk"], holidays: ["june_party"] },
+  { text: "quentão e pamonha salvam o inverno 🔥", tags: ["answer_food"], holidays: ["june_party"] },
+  // Dia dos Pais
+  { text: "feliz dia dos pais pra todos os pais 👨‍👧", tags: ["feeling", "compliment"], holidays: ["fathers_day"] },
+  // Independência
+  { text: "feriado de 7 de setembro, descansando 🇧🇷", tags: ["feeling"], holidays: ["independence"] },
+  // Dia das Crianças
+  { text: "feliz dia das crianças pra criança q mora em nós 🧸", tags: ["feeling"], holidays: ["children_day"] },
+  // Finados
+  { text: "feriado de finados, dia de lembrar quem se foi 🕯️", tags: ["feeling", "nostalgia"], holidays: ["finados"] },
+  // Black Friday
+  { text: "black friday hj, alguém comprando algo? 🛍️", tags: ["smalltalk"], holidays: ["black_friday"] },
+  // Natal
+  { text: "feliz Natal gente 🎄❤️", tags: ["feeling"], holidays: ["christmas"] },
+  { text: "ceia de natal é tudo de bom 🍷", tags: ["answer_food"], holidays: ["christmas"] },
+  { text: "clima de natal já tomou conta da casa 🎅", tags: ["feeling"], holidays: ["christmas_week"] },
+  // Réveillon
+  { text: "ano vai virar, q emoção 🥂", tags: ["feeling"], holidays: ["new_year_eve"] },
 ];
 
 function periodOf(d: Date): "m" | "a" | "e" | "n" {
@@ -332,15 +372,56 @@ function periodOf(d: Date): "m" | "a" | "e" | "n" {
   return "n";
 }
 
+/** Retorna chaves de feriados/datas comemorativas ativas para a data fornecida (fuso BR). */
+function holidaysOf(d: Date): string[] {
+  // Garantimos data em fuso BR (America/Sao_Paulo) usando offset
+  const br = new Date(d.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+  const m = br.getMonth() + 1; // 1-12
+  const day = br.getDate();
+  const out: string[] = [];
+
+  if (m === 1 && day === 1) out.push("new_year", "new_year_day");
+  if (m === 12 && day === 31) out.push("new_year_eve");
+  if (m === 2 && day === 14) out.push("valentines_intl");
+  if (m === 6 && day === 12) out.push("valentines_br");
+  if (m === 4 && day >= 21 && day <= 22) out.push("tiradentes");
+  if (m === 5 && day === 1) out.push("labor_day");
+  // Dia das Mães: 2º domingo de maio
+  if (m === 5 && br.getDay() === 0 && day >= 8 && day <= 14) out.push("mothers_day");
+  // Dia dos Pais: 2º domingo de agosto
+  if (m === 8 && br.getDay() === 0 && day >= 8 && day <= 14) out.push("fathers_day");
+  if (m === 6 && day >= 12 && day <= 29) out.push("june_party");
+  if (m === 9 && day === 7) out.push("independence");
+  if (m === 10 && day === 12) out.push("children_day");
+  if (m === 11 && day === 2) out.push("finados");
+  if (m === 11 && day === 15) out.push("republic");
+  // Black Friday: última sexta de novembro
+  if (m === 11 && br.getDay() === 5 && day >= 23 && day <= 29) out.push("black_friday");
+  if (m === 12 && day === 25) out.push("christmas");
+  if (m === 12 && day >= 20 && day <= 26) out.push("christmas_week");
+  // Páscoa e carnaval são móveis — usamos aproximação por mês
+  if (m === 3 || m === 4) {
+    // Páscoa quase sempre cai entre 22/3 e 25/4 — não calculamos exatamente,
+    // mas marcamos um intervalo amplo apenas para "easter_season" não obrigatório.
+  }
+  return out;
+}
+
 const usedRecent: string[] = [];
 
 function pickPhrase(when: Date, lastTags: Tag[] | null): Phrase {
   const period = periodOf(when);
+  const day = new Date(when.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" })).getDay();
+  const activeHolidays = holidaysOf(when);
 
-  // 1) Candidatos: filtra por período válido
-  let candidates = PHRASES.filter(
-    (p) => !p.periods || p.periods.includes(period)
-  );
+  // 1) Filtra por período, dia da semana e datas comemorativas
+  let candidates = PHRASES.filter((p) => {
+    if (p.periods && !p.periods.includes(period)) return false;
+    if (p.days && !p.days.includes(day)) return false;
+    // Se a frase é "exclusiva de feriado", só entra no pool quando o feriado está ativo
+    if (p.holidays && !p.holidays.some((h) => activeHolidays.includes(h))) return false;
+    return true;
+  });
 
   // 2) Se houver mensagem anterior, 60% das vezes tenta responder no contexto
   if (lastTags && lastTags.length && Math.random() < 0.6) {
