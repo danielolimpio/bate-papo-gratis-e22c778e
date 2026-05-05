@@ -407,60 +407,76 @@ function holidaysOf(d: Date): string[] {
   return out;
 }
 
-const usedRecent: string[] = [];
+// ---------- Deterministic RNG (so all devices see the same Sala Geral) ----------
+function mulberry32(a: number) {
+  return function () {
+    a |= 0;
+    a = (a + 0x6D2B79F5) | 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-function pickPhrase(when: Date, lastTags: Tag[] | null): Phrase {
+const SLOT_MS = 7 * 60 * 1000; // 1 mensagem sintética a cada 7 min (alinhada globalmente)
+
+function slotIndex(when: Date): number {
+  return Math.floor(when.getTime() / SLOT_MS);
+}
+
+function slotRng(slot: number) {
+  return mulberry32(slot * 2654435761);
+}
+
+function pickPhraseDet(when: Date, lastTags: Tag[] | null, rng: () => number): Phrase {
   const period = periodOf(when);
   const day = new Date(when.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" })).getDay();
   const activeHolidays = holidaysOf(when);
 
-  // 1) Filtra por período, dia da semana e datas comemorativas
   let candidates = PHRASES.filter((p) => {
     if (p.periods && !p.periods.includes(period)) return false;
     if (p.days && !p.days.includes(day)) return false;
-    // Se a frase é "exclusiva de feriado", só entra no pool quando o feriado está ativo
     if (p.holidays && !p.holidays.some((h) => activeHolidays.includes(h))) return false;
     return true;
   });
 
-  // 2) Se houver mensagem anterior, 60% das vezes tenta responder no contexto
-  if (lastTags && lastTags.length && Math.random() < 0.6) {
+  if (lastTags && lastTags.length && rng() < 0.6) {
     const replies = candidates.filter(
       (p) => p.repliesTo && p.repliesTo.some((t) => lastTags.includes(t))
     );
     if (replies.length) candidates = replies;
   }
-
-  // 3) Evita repetição recente
-  const fresh = candidates.filter((p) => !usedRecent.includes(p.text));
-  const pool = fresh.length ? fresh : candidates;
-
-  const chosen = pool[Math.floor(Math.random() * pool.length)];
-  usedRecent.push(chosen.text);
-  if (usedRecent.length > 40) usedRecent.shift();
-  return chosen;
+  return candidates[Math.floor(rng() * candidates.length)] || PHRASES[0];
 }
 
-function pickUser() {
-  return users[Math.floor(Math.random() * users.length)];
+function pickUserDet(rng: () => number) {
+  return users[Math.floor(rng() * users.length)];
 }
 
-function makeMsg(createdAt: Date, lastTags: Tag[] | null): { msg: ChatMessage; tags: Tag[] } {
-  const u = pickUser();
-  const phrase = pickPhrase(createdAt, lastTags);
+function makeSlotMsg(slot: number, lastTags: Tag[] | null): { msg: ChatMessage; tags: Tag[] } {
+  const when = new Date(slot * SLOT_MS);
+  const rng = slotRng(slot);
+  const u = pickUserDet(rng);
+  const phrase = pickPhraseDet(when, lastTags, rng);
   return {
     msg: {
-      id: `synthetic-general-${createdAt.getTime()}-${Math.random().toString(36).slice(2, 8)}`,
+      id: `synthetic-general-${slot}`,
       user_id: u.id,
       room: "general",
       content: phrase.text,
       image_url: null,
-      created_at: createdAt.toISOString(),
+      created_at: when.toISOString(),
       sender_name: u.name,
       sender_avatar: u.avatar,
     },
     tags: phrase.tags,
   };
+}
+
+// Legacy (ainda usado para respostas a usuário real — random local é OK aqui)
+function pickUser() {
+  return users[Math.floor(Math.random() * users.length)];
 }
 
 /**
@@ -557,46 +573,37 @@ export function useGeneralRoomActivity(
     [addTyping, removeTyping]
   );
 
-  // ---- Seed + agendamento contínuo ----
+  // ---- Seed determinístico + agendamento por "slots" globais (mesmo conteúdo p/ todos) ----
   useEffect(() => {
     if (!enabled) return;
     if (seededRef.current) return;
     seededRef.current = true;
 
     const now = Date.now();
-    let t = now - 72 * 60 * 60 * 1000;
+    const currentSlot = slotIndex(new Date(now));
+    const startSlot = slotIndex(new Date(now - 72 * 60 * 60 * 1000));
+
     let lastTags: Tag[] | null = null;
-    while (t < now - 30 * 1000) {
-      const gap = (5 + Math.random() * 5) * 60 * 1000;
-      t += gap;
-      if (t >= now) break;
-      const { msg, tags } = makeMsg(new Date(t), lastTags);
+    for (let s = startSlot; s <= currentSlot; s++) {
+      const { msg, tags } = makeSlotMsg(s, lastTags);
+      // Apenas slots já passados são "silenciosos" (sem som)
       injectMessage(msg, { silent: true });
       lastTags = tags;
     }
     lastTagsRef.current = lastTags;
 
+    let nextSlot = currentSlot + 1;
     const scheduleNext = () => {
-      const delay = (5 + Math.random() * 5) * 60 * 1000;
+      const fireAt = nextSlot * SLOT_MS;
+      const delay = Math.max(1000, fireAt - Date.now());
       timerRef.current = setTimeout(() => {
-        // Pré-monta a mensagem para sabermos quem está "digitando"
-        const u = pickUser();
-        const phrase = pickPhrase(new Date(), lastTagsRef.current);
-        const typingMs = 2000 + Math.random() * 4000; // 2–6s
-        showTypingThen(u.id, u.name, u.avatar, typingMs, () => {
-          const msg: ChatMessage = {
-            id: `synthetic-general-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-            user_id: u.id,
-            room: "general",
-            content: phrase.text,
-            image_url: null,
-            created_at: new Date().toISOString(),
-            sender_name: u.name,
-            sender_avatar: u.avatar,
-          };
+        const { msg, tags } = makeSlotMsg(nextSlot, lastTagsRef.current);
+        const typingMs = 2500;
+        showTypingThen(msg.user_id, msg.sender_name || "", msg.sender_avatar || "", typingMs, () => {
           injectMessage(msg);
-          lastTagsRef.current = phrase.tags;
+          lastTagsRef.current = tags;
         });
+        nextSlot += 1;
         scheduleNext();
       }, delay);
     };

@@ -49,7 +49,7 @@ export default function ConversationList({ activeConversationId, onSelect, searc
           <input
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Pesquisar no WoomChat"
+            placeholder="Pesquisar no Bate-Papo Grátis"
             className="w-full bg-transparent text-[13px] text-foreground placeholder:text-muted-foreground outline-none"
           />
         </div>
