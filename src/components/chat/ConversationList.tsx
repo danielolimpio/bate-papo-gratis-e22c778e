@@ -20,7 +20,7 @@ interface Props {
   onSelectMatchUser: (userId: string) => void;
 }
 
-export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations, isGeneralActive, onSelectGeneral }: Props) {
+export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations, isGeneralActive, onSelectGeneral, matches, onSelectMatchUser }: Props) {
   const filtered = useMemo(() => {
     if (!searchQuery) return conversations;
     const q = searchQuery.toLowerCase();
