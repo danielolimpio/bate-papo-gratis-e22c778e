@@ -322,16 +322,7 @@ export const users: UserProfile[] = [
   { id: "132", name: "Anaís Vetorello Prado", age: 24, gender: "Feminino", interest: "Homens", city: "Joinville", relationshipStatus: "Solteiro(a)", showRelationshipStatus: true, avatar: profileF101, photos: [profileF101], isOnline: false, lastSeen: "há 5min" },
 ];
 
-export const conversations: Conversation[] = [
-  { id: "c1", participantId: "1", lastMessage: "Oi, tudo bem? 😊", lastMessageTime: "2min", unreadCount: 2 },
-  { id: "c2", participantId: "3", lastMessage: "Vamos sair hoje?", lastMessageTime: "15min", unreadCount: 0 },
-  { id: "c3", participantId: "5", lastMessage: "Que foto linda!", lastMessageTime: "1h", unreadCount: 1 },
-  { id: "c4", participantId: "7", lastMessage: "Bom dia! ☀️", lastMessageTime: "3h", unreadCount: 0 },
-  { id: "c5", participantId: "4", lastMessage: "Haha, muito engraçado 😂", lastMessageTime: "5h", unreadCount: 0 },
-  { id: "c6", participantId: "2", lastMessage: "Vou te mandar as fotos", lastMessageTime: "1d", unreadCount: 0 },
-  { id: "c7", participantId: "8", lastMessage: "Valeu, obrigado!", lastMessageTime: "2d", unreadCount: 0 },
-  { id: "c8", participantId: "6", lastMessage: "Até mais! 👋", lastMessageTime: "3d", unreadCount: 0 },
-];
+export const conversations: Conversation[] = [];
 
 export const generalChatMessages: Message[] = [
   { id: "g1", conversationId: "general", senderId: "1", text: "Oi gente! Alguém de SP aqui? 😊", timestamp: "13:00", isRead: true },
