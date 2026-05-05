@@ -9,10 +9,11 @@ import UserProfileMenu from "@/components/chat/UserProfileMenu";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useMatches } from "@/hooks/useMatches";
 import { conversations } from "@/data/mockData";
 import logo from "@/assets/logo-batepapo.png";
 
-type TabType = "tudo" | "nao-lidas" | "grupos";
+type TabType = "tudo" | "nao-lidas" | "grupos" | "matchs";
 
 export default function Index() {
   const { isDark, toggle } = useTheme();
