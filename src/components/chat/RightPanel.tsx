@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { users } from "@/data/mockData";
 import { useState } from "react";
 
@@ -9,6 +9,7 @@ interface Props {
 
 export default function RightPanel({ onProfileClick, onlineIds }: Props) {
   const [search, setSearch] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
 
 
   const filterFn = (u: typeof users[0]) =>
@@ -16,11 +17,37 @@ export default function RightPanel({ onProfileClick, onlineIds }: Props) {
 
   return (
     <div className="flex h-full flex-col bg-chat-right-panel border-l border-chat-divider overflow-y-auto">
-      <div className="flex items-center justify-between px-4 py-[10px] border-b border-chat-divider">
-        <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wide">Contatos</h3>
-        <button className="rounded-full p-1.5 hover:bg-secondary transition-colors">
-          <Search size={15} className="text-muted-foreground" />
-        </button>
+      <div className="flex items-center justify-between px-4 py-[10px] border-b border-chat-divider gap-2">
+        {searchOpen ? (
+          <div className="flex items-center gap-2 flex-1 rounded-full bg-secondary px-3 py-[6px]">
+            <Search size={14} className="text-muted-foreground flex-shrink-0" />
+            <input
+              autoFocus
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar contatos"
+              className="w-full bg-transparent text-[13px] text-foreground placeholder:text-muted-foreground outline-none"
+            />
+            <button
+              onClick={() => { setSearch(""); setSearchOpen(false); }}
+              className="rounded-full p-1 hover:bg-chat-hover transition-colors"
+              aria-label="Fechar busca"
+            >
+              <X size={14} className="text-muted-foreground" />
+            </button>
+          </div>
+        ) : (
+          <>
+            <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wide">Contatos</h3>
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="rounded-full p-1.5 hover:bg-secondary transition-colors"
+              aria-label="Buscar contatos"
+            >
+              <Search size={15} className="text-muted-foreground" />
+            </button>
+          </>
+        )}
       </div>
 
       <div className="py-1 px-1">
