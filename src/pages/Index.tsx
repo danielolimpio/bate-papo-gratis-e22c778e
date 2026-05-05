@@ -84,6 +84,10 @@ export default function Index() {
           readConversations={readConversations}
           isGeneralActive={chatMode === "general"}
           onSelectGeneral={handleSelectGeneral}
+          matches={matches}
+          onSelectMatchUser={(userId) => {
+            setProfileUserId(userId);
+          }}
         />
       </div>
 
