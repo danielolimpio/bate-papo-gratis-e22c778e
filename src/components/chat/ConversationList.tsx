@@ -1,9 +1,10 @@
-import { Search, MoreHorizontal, Edit } from "lucide-react";
+import { Search, MoreHorizontal, Edit, Heart } from "lucide-react";
 import { conversations, users, type Conversation } from "@/data/mockData";
 import StackedAvatars from "./StackedAvatars";
 import { useMemo } from "react";
+import type { MatchEntry } from "@/hooks/useMatches";
 
-type TabType = "tudo" | "nao-lidas" | "grupos";
+type TabType = "tudo" | "nao-lidas" | "grupos" | "matchs";
 
 interface Props {
   activeConversationId: string | null;
@@ -15,9 +16,11 @@ interface Props {
   readConversations: Set<string>;
   isGeneralActive?: boolean;
   onSelectGeneral?: () => void;
+  matches: MatchEntry[];
+  onSelectMatchUser: (userId: string) => void;
 }
 
-export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations, isGeneralActive, onSelectGeneral }: Props) {
+export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations, isGeneralActive, onSelectGeneral, matches, onSelectMatchUser }: Props) {
   const filtered = useMemo(() => {
     if (!searchQuery) return conversations;
     const q = searchQuery.toLowerCase();
@@ -56,15 +59,15 @@ export default function ConversationList({ activeConversationId, onSelect, searc
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-[2px] px-3 pb-1.5">
-        {(["tudo", "nao-lidas", "grupos"] as TabType[]).map((tab) => {
-          const labels: Record<TabType, string> = { tudo: "Tudo", "nao-lidas": "Não lidas", grupos: "Grupos" };
+      <div className="flex items-center gap-[2px] px-3 pb-1.5 overflow-x-auto">
+        {(["tudo", "nao-lidas", "grupos", "matchs"] as TabType[]).map((tab) => {
+          const labels: Record<TabType, string> = { tudo: "Tudo", "nao-lidas": "Não lidas", grupos: "Grupos", matchs: "Matchs" };
           const isActive = activeTab === tab;
           return (
             <button
               key={tab}
               onClick={() => onTabChange(tab)}
-              className={`rounded-full px-3 py-[5px] text-xs font-semibold transition-colors ${
+              className={`rounded-full px-3 py-[5px] text-xs font-semibold transition-colors whitespace-nowrap ${
                 isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"
               }`}
             >
@@ -76,33 +79,95 @@ export default function ConversationList({ activeConversationId, onSelect, searc
 
       {/* List */}
       <div className="flex-1 overflow-y-auto">
-        {/* Pinned: Sala de Bate Papo */}
-        <div
-          onClick={onSelectGeneral}
-          className={`flex cursor-pointer flex-col items-center gap-2 px-3 py-3 mx-[6px] mb-1 rounded-md transition-colors ${
-            isGeneralActive ? "bg-chat-active" : "hover:bg-chat-hover"
-          }`}
-        >
-          <StackedAvatars size={40} />
-          <div className="w-full text-center">
-            <div className="flex items-center justify-center gap-1.5">
-              <span className="text-[13px] font-semibold text-foreground">Sala de Bate Papo</span>
-              <span className="text-[11px] text-primary">📌</span>
+        {activeTab === "matchs" ? (
+          <MatchesList matches={matches} onSelect={onSelectMatchUser} />
+        ) : (
+          <>
+            {/* Pinned: Sala de Bate Papo */}
+            <div
+              onClick={onSelectGeneral}
+              className={`flex cursor-pointer flex-col items-center gap-2 px-3 py-3 mx-[6px] mb-1 rounded-md transition-colors ${
+                isGeneralActive ? "bg-chat-active" : "hover:bg-chat-hover"
+              }`}
+            >
+              <StackedAvatars size={40} />
+              <div className="w-full text-center">
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-[13px] font-semibold text-foreground">Sala de Bate Papo</span>
+                  <span className="text-[11px] text-primary">📌</span>
+                </div>
+                <p className="text-[12px] text-muted-foreground truncate mt-[1px]">Converse com todos em tempo real</p>
+              </div>
             </div>
-            <p className="text-[12px] text-muted-foreground truncate mt-[1px]">Converse com todos em tempo real</p>
-          </div>
-        </div>
 
-        {filtered.map((conv) => (
-          <ConversationItem
-            key={conv.id}
-            conversation={conv}
-            isActive={activeConversationId === conv.id}
-            isRead={readConversations.has(conv.id)}
-            onSelect={() => onSelect(conv.id)}
-          />
-        ))}
+            {filtered.map((conv) => (
+              <ConversationItem
+                key={conv.id}
+                conversation={conv}
+                isActive={activeConversationId === conv.id}
+                isRead={readConversations.has(conv.id)}
+                onSelect={() => onSelect(conv.id)}
+              />
+            ))}
+          </>
+        )}
       </div>
+    </div>
+  );
+}
+
+function MatchesList({ matches, onSelect }: { matches: MatchEntry[]; onSelect: (userId: string) => void }) {
+  if (matches.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center px-6 py-12 text-center">
+        <div className="rounded-full bg-primary/10 p-4 mb-3">
+          <Heart size={28} className="text-primary" />
+        </div>
+        <p className="text-[13px] font-semibold text-foreground">Nenhum match ainda</p>
+        <p className="text-[12px] text-muted-foreground mt-1">
+          Curta perfis para começar a fazer matches.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="py-1">
+      {matches.map((m) => {
+        const u = users.find((x) => x.id === m.userId);
+        if (!u) return null;
+        const isGiven = m.type === "given";
+        return (
+          <div
+            key={m.userId}
+            onClick={() => onSelect(m.userId)}
+            className="flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md hover:bg-chat-hover transition-colors"
+          >
+            <div className="relative flex-shrink-0">
+              <img src={u.avatar} alt={u.name} className="h-[48px] w-[48px] rounded-full object-cover" />
+              <span
+                className={`absolute -bottom-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-chat-sidebar ${
+                  isGiven ? "bg-primary" : "bg-pink-500"
+                }`}
+              >
+                <Heart size={10} className="text-white" fill="currentColor" />
+              </span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="text-[13px] font-semibold text-foreground truncate block">{u.name}</span>
+              <span
+                className={`inline-block mt-0.5 rounded-full px-2 py-[2px] text-[10px] font-semibold ${
+                  isGiven
+                    ? "bg-primary/15 text-primary"
+                    : "bg-pink-500/15 text-pink-600 dark:text-pink-400"
+                }`}
+              >
+                {isGiven ? "Você deu Match" : "Você recebeu Match"}
+              </span>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

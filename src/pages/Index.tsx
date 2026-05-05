@@ -9,15 +9,17 @@ import UserProfileMenu from "@/components/chat/UserProfileMenu";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useMatches } from "@/hooks/useMatches";
 import { conversations } from "@/data/mockData";
 import logo from "@/assets/logo-batepapo.png";
 
-type TabType = "tudo" | "nao-lidas" | "grupos";
+type TabType = "tudo" | "nao-lidas" | "grupos" | "matchs";
 
 export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
   const { user, profile, refreshProfile } = useCurrentUser();
+  const { matches, addMatch, hasMatch } = useMatches(user?.id ?? null);
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -82,6 +84,10 @@ export default function Index() {
           readConversations={readConversations}
           isGeneralActive={chatMode === "general"}
           onSelectGeneral={handleSelectGeneral}
+          matches={matches}
+          onSelectMatchUser={(userId) => {
+            setProfileUserId(userId);
+          }}
         />
       </div>
 
@@ -112,6 +118,8 @@ export default function Index() {
         <ProfileModal
           userId={profileUserId}
           onClose={() => setProfileUserId(null)}
+          isMatched={hasMatch(profileUserId)}
+          onMatch={(userId) => addMatch(userId, "given")}
           onStartChat={(userId) => {
             const conv = conversations.find((c) => c.participantId === userId);
             if (conv) {
