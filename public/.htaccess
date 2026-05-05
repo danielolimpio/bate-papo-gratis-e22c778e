@@ -1,6 +1,16 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Canonical domain: batepapogratis.com (no www)
+  RewriteCond %{HTTP_HOST} ^www\.batepapogratis\.com$ [NC]
+  RewriteRule ^(.*)$ https://batepapogratis.com/$1 [L,R=301]
+
+  # SPA fallback for React Router
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
