@@ -407,60 +407,76 @@ function holidaysOf(d: Date): string[] {
   return out;
 }
 
-const usedRecent: string[] = [];
+// ---------- Deterministic RNG (so all devices see the same Sala Geral) ----------
+function mulberry32(a: number) {
+  return function () {
+    a |= 0;
+    a = (a + 0x6D2B79F5) | 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-function pickPhrase(when: Date, lastTags: Tag[] | null): Phrase {
+const SLOT_MS = 7 * 60 * 1000; // 1 mensagem sintética a cada 7 min (alinhada globalmente)
+
+function slotIndex(when: Date): number {
+  return Math.floor(when.getTime() / SLOT_MS);
+}
+
+function slotRng(slot: number) {
+  return mulberry32(slot * 2654435761);
+}
+
+function pickPhraseDet(when: Date, lastTags: Tag[] | null, rng: () => number): Phrase {
   const period = periodOf(when);
   const day = new Date(when.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" })).getDay();
   const activeHolidays = holidaysOf(when);
 
-  // 1) Filtra por período, dia da semana e datas comemorativas
   let candidates = PHRASES.filter((p) => {
     if (p.periods && !p.periods.includes(period)) return false;
     if (p.days && !p.days.includes(day)) return false;
-    // Se a frase é "exclusiva de feriado", só entra no pool quando o feriado está ativo
     if (p.holidays && !p.holidays.some((h) => activeHolidays.includes(h))) return false;
     return true;
   });
 
-  // 2) Se houver mensagem anterior, 60% das vezes tenta responder no contexto
-  if (lastTags && lastTags.length && Math.random() < 0.6) {
+  if (lastTags && lastTags.length && rng() < 0.6) {
     const replies = candidates.filter(
       (p) => p.repliesTo && p.repliesTo.some((t) => lastTags.includes(t))
     );
     if (replies.length) candidates = replies;
   }
-
-  // 3) Evita repetição recente
-  const fresh = candidates.filter((p) => !usedRecent.includes(p.text));
-  const pool = fresh.length ? fresh : candidates;
-
-  const chosen = pool[Math.floor(Math.random() * pool.length)];
-  usedRecent.push(chosen.text);
-  if (usedRecent.length > 40) usedRecent.shift();
-  return chosen;
+  return candidates[Math.floor(rng() * candidates.length)] || PHRASES[0];
 }
 
-function pickUser() {
-  return users[Math.floor(Math.random() * users.length)];
+function pickUserDet(rng: () => number) {
+  return users[Math.floor(rng() * users.length)];
 }
 
-function makeMsg(createdAt: Date, lastTags: Tag[] | null): { msg: ChatMessage; tags: Tag[] } {
-  const u = pickUser();
-  const phrase = pickPhrase(createdAt, lastTags);
+function makeSlotMsg(slot: number, lastTags: Tag[] | null): { msg: ChatMessage; tags: Tag[] } {
+  const when = new Date(slot * SLOT_MS);
+  const rng = slotRng(slot);
+  const u = pickUserDet(rng);
+  const phrase = pickPhraseDet(when, lastTags, rng);
   return {
     msg: {
-      id: `synthetic-general-${createdAt.getTime()}-${Math.random().toString(36).slice(2, 8)}`,
+      id: `synthetic-general-${slot}`,
       user_id: u.id,
       room: "general",
       content: phrase.text,
       image_url: null,
-      created_at: createdAt.toISOString(),
+      created_at: when.toISOString(),
       sender_name: u.name,
       sender_avatar: u.avatar,
     },
     tags: phrase.tags,
   };
+}
+
+// Legacy (ainda usado para respostas a usuário real — random local é OK aqui)
+function pickUser() {
+  return users[Math.floor(Math.random() * users.length)];
 }
 
 /**
