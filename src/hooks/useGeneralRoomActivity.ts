@@ -573,46 +573,37 @@ export function useGeneralRoomActivity(
     [addTyping, removeTyping]
   );
 
-  // ---- Seed + agendamento contínuo ----
+  // ---- Seed determinístico + agendamento por "slots" globais (mesmo conteúdo p/ todos) ----
   useEffect(() => {
     if (!enabled) return;
     if (seededRef.current) return;
     seededRef.current = true;
 
     const now = Date.now();
-    let t = now - 72 * 60 * 60 * 1000;
+    const currentSlot = slotIndex(new Date(now));
+    const startSlot = slotIndex(new Date(now - 72 * 60 * 60 * 1000));
+
     let lastTags: Tag[] | null = null;
-    while (t < now - 30 * 1000) {
-      const gap = (5 + Math.random() * 5) * 60 * 1000;
-      t += gap;
-      if (t >= now) break;
-      const { msg, tags } = makeMsg(new Date(t), lastTags);
+    for (let s = startSlot; s <= currentSlot; s++) {
+      const { msg, tags } = makeSlotMsg(s, lastTags);
+      // Apenas slots já passados são "silenciosos" (sem som)
       injectMessage(msg, { silent: true });
       lastTags = tags;
     }
     lastTagsRef.current = lastTags;
 
+    let nextSlot = currentSlot + 1;
     const scheduleNext = () => {
-      const delay = (5 + Math.random() * 5) * 60 * 1000;
+      const fireAt = nextSlot * SLOT_MS;
+      const delay = Math.max(1000, fireAt - Date.now());
       timerRef.current = setTimeout(() => {
-        // Pré-monta a mensagem para sabermos quem está "digitando"
-        const u = pickUser();
-        const phrase = pickPhrase(new Date(), lastTagsRef.current);
-        const typingMs = 2000 + Math.random() * 4000; // 2–6s
-        showTypingThen(u.id, u.name, u.avatar, typingMs, () => {
-          const msg: ChatMessage = {
-            id: `synthetic-general-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-            user_id: u.id,
-            room: "general",
-            content: phrase.text,
-            image_url: null,
-            created_at: new Date().toISOString(),
-            sender_name: u.name,
-            sender_avatar: u.avatar,
-          };
+        const { msg, tags } = makeSlotMsg(nextSlot, lastTagsRef.current);
+        const typingMs = 2500;
+        showTypingThen(msg.user_id, msg.sender_name || "", msg.sender_avatar || "", typingMs, () => {
           injectMessage(msg);
-          lastTagsRef.current = phrase.tags;
+          lastTagsRef.current = tags;
         });
+        nextSlot += 1;
         scheduleNext();
       }, delay);
     };
