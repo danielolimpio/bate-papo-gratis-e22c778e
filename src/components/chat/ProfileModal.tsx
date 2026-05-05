@@ -99,7 +99,13 @@ export default function ProfileModal({ userId, onClose, onStartChat, isMatched, 
             <div className="mt-5 flex items-center gap-3">
               <motion.button
                 whileTap={{ scale: 0.9 }}
-                onClick={() => setMatched((v) => !v)}
+                onClick={() => {
+                  setMatched((v) => {
+                    const nv = !v;
+                    if (nv && onMatch && user) onMatch(user.id);
+                    return nv;
+                  });
+                }}
                 className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
                   matched
                     ? "bg-destructive text-destructive-foreground"
