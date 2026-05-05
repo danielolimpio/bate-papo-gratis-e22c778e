@@ -1,9 +1,10 @@
-import { Search, MoreHorizontal, Edit } from "lucide-react";
+import { Search, MoreHorizontal, Edit, Heart } from "lucide-react";
 import { conversations, users, type Conversation } from "@/data/mockData";
 import StackedAvatars from "./StackedAvatars";
 import { useMemo } from "react";
+import type { MatchEntry } from "@/hooks/useMatches";
 
-type TabType = "tudo" | "nao-lidas" | "grupos";
+type TabType = "tudo" | "nao-lidas" | "grupos" | "matchs";
 
 interface Props {
   activeConversationId: string | null;
@@ -15,6 +16,8 @@ interface Props {
   readConversations: Set<string>;
   isGeneralActive?: boolean;
   onSelectGeneral?: () => void;
+  matches: MatchEntry[];
+  onSelectMatchUser: (userId: string) => void;
 }
 
 export default function ConversationList({ activeConversationId, onSelect, searchQuery, onSearchChange, activeTab, onTabChange, readConversations, isGeneralActive, onSelectGeneral }: Props) {
