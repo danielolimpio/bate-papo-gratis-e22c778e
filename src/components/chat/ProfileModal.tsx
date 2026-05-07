@@ -8,10 +8,11 @@ interface Props {
   onClose: () => void;
   onStartChat?: (userId: string) => void;
   isMatched?: boolean;
-  onMatch?: (userId: string) => void;
+  canMatch?: boolean;
+  onMatch?: (userId: string) => boolean | void;
 }
 
-export default function ProfileModal({ userId, onClose, onStartChat, isMatched, onMatch }: Props) {
+export default function ProfileModal({ userId, onClose, onStartChat, isMatched, canMatch = true, onMatch }: Props) {
   const user = users.find((u) => u.id === userId);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [matched, setMatched] = useState(!!isMatched);
