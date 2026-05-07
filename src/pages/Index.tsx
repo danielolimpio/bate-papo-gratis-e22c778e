@@ -19,7 +19,7 @@ export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
   const { user, profile, refreshProfile } = useCurrentUser();
-  const { matches, addMatch, hasMatch } = useMatches(user?.id ?? null);
+  const { matches, addMatch, hasMatch, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -119,6 +119,7 @@ export default function Index() {
           userId={profileUserId}
           onClose={() => setProfileUserId(null)}
           isMatched={hasMatch(profileUserId)}
+          canMatch={canMatch(profileUserId)}
           onMatch={(userId) => addMatch(userId, "given")}
           onStartChat={(userId) => {
             const conv = conversations.find((c) => c.participantId === userId);
