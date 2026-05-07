@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Phone, Video, Smile, Image, Mic, Send, User, ArrowLeft } from "lucide-react";
 import EmojiPicker from "./EmojiPicker";
+import MessageReactions from "./MessageReactions";
 import { useMessages, type ChatMessage } from "@/hooks/useMessages";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useFakeReplies } from "@/hooks/useFakeReplies";
@@ -216,6 +217,7 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
                     {formatTime(msg.created_at)}
                   </span>
                 </div>
+                <MessageReactions messageId={msg.id} align={isMe ? "right" : "left"} />
               </div>
             </div>
           );
