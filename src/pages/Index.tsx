@@ -119,6 +119,7 @@ export default function Index() {
           userId={profileUserId}
           onClose={() => setProfileUserId(null)}
           isMatched={hasMatch(profileUserId)}
+          canMatch={canMatch(profileUserId)}
           onMatch={(userId) => addMatch(userId, "given")}
           onStartChat={(userId) => {
             const conv = conversations.find((c) => c.participantId === userId);
