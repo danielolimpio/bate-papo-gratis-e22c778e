@@ -40,16 +40,18 @@ export default function Landing() {
 
             <button
               onClick={() => handleGenderSelect("masculino")}
-              className="w-full mb-4 rounded-full bg-blue-600 py-3.5 text-base font-semibold text-white hover:bg-blue-700 transition-colors"
+              className="group relative w-full mb-4 overflow-hidden rounded-full py-3.5 text-base font-semibold text-white transition-all duration-300 shadow-[0_8px_24px_-6px_rgba(37,99,235,0.55)] hover:shadow-[0_14px_36px_-8px_rgba(37,99,235,0.75)] hover:-translate-y-0.5 active:translate-y-0 bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-700 bg-[length:200%_200%] hover:bg-[position:100%_0%]"
             >
-              Homem
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative">Homem</span>
             </button>
 
             <button
               onClick={() => handleGenderSelect("feminino")}
-              className="w-full mb-6 rounded-full bg-amber-500 py-3.5 text-base font-semibold text-white hover:bg-amber-600 transition-colors"
+              className="group relative w-full mb-6 overflow-hidden rounded-full py-3.5 text-base font-semibold text-white transition-all duration-300 shadow-[0_8px_24px_-6px_rgba(245,158,11,0.55)] hover:shadow-[0_14px_36px_-8px_rgba(245,158,11,0.75)] hover:-translate-y-0.5 active:translate-y-0 bg-gradient-to-br from-yellow-300 via-amber-500 to-orange-600 bg-[length:200%_200%] hover:bg-[position:100%_0%]"
             >
-              Mulher
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative">Mulher</span>
             </button>
 
             <div className="flex items-center gap-3 mb-5">
