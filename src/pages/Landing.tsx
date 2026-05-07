@@ -69,8 +69,9 @@ export default function Landing() {
           </div>
 
           {/* Free environment text */}
-          <p className="mt-5 text-white text-base font-medium drop-shadow-md tracking-wide">
-            💚 Ambiente 100% gratuito.
+          <p className="mt-5 text-white text-base font-medium drop-shadow-md tracking-wide flex items-center justify-center gap-1.5">
+            <span className="inline-block animate-[heartbeat_1.4s_ease-in-out_infinite] text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.7)]">💚</span>
+            Ambiente 100% gratuito.
           </p>
         </div>
       </div>
