@@ -100,17 +100,25 @@ export default function ProfileModal({ userId, onClose, onStartChat, isMatched, 
             <div className="mt-5 flex items-center gap-3">
               <motion.button
                 whileTap={{ scale: 0.9 }}
+                disabled={!canMatch && !matched}
+                title={!canMatch && !matched ? "Match disponível apenas entre gêneros opostos" : undefined}
                 onClick={() => {
+                  if (!canMatch && !matched) return;
                   setMatched((v) => {
                     const nv = !v;
-                    if (nv && onMatch && user) onMatch(user.id);
+                    if (nv && onMatch && user) {
+                      const ok = onMatch(user.id);
+                      if (ok === false) return false;
+                    }
                     return nv;
                   });
                 }}
                 className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
                   matched
                     ? "bg-destructive text-destructive-foreground"
-                    : "bg-secondary text-foreground hover:bg-chat-hover"
+                    : canMatch
+                      ? "bg-secondary text-foreground hover:bg-chat-hover"
+                      : "bg-secondary/50 text-muted-foreground cursor-not-allowed"
                 }`}
               >
                 <motion.div
