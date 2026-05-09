@@ -59,8 +59,18 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     messages,
   });
 
+  // Instantly jump to the bottom whenever the room changes or finishes loading,
+  // so users always see the most recent messages first.
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const id = requestAnimationFrame(() => {
+      bottomRef.current?.scrollIntoView({ behavior: "auto", block: "end" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [room, loading]);
+
+  // Smooth-scroll for incoming messages after the initial render.
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages.length]);
 
   const handleSend = async () => {

@@ -10,9 +10,10 @@ interface Props {
   isMatched?: boolean;
   canMatch?: boolean;
   onMatch?: (userId: string) => boolean | void;
+  onUnmatch?: (userId: string) => void;
 }
 
-export default function ProfileModal({ userId, onClose, onStartChat, isMatched, canMatch = true, onMatch }: Props) {
+export default function ProfileModal({ userId, onClose, onStartChat, isMatched, canMatch = true, onMatch, onUnmatch }: Props) {
   const user = users.find((u) => u.id === userId);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [matched, setMatched] = useState(!!isMatched);
@@ -109,6 +110,9 @@ export default function ProfileModal({ userId, onClose, onStartChat, isMatched, 
                     if (nv && onMatch && user) {
                       const ok = onMatch(user.id);
                       if (ok === false) return false;
+                    }
+                    if (!nv && onUnmatch && user) {
+                      onUnmatch(user.id);
                     }
                     return nv;
                   });
