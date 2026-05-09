@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Moon, Sun, ArrowLeft } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import ConversationList from "@/components/chat/ConversationList";
 import ChatArea from "@/components/chat/ChatArea";
 import RightPanel from "@/components/chat/RightPanel";
@@ -10,7 +10,9 @@ import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useMatches } from "@/hooks/useMatches";
-import { conversations } from "@/data/mockData";
+import { useUserConversations } from "@/hooks/useUserConversations";
+import { useGroups } from "@/hooks/useGroups";
+import { toast } from "@/hooks/use-toast";
 import logo from "@/assets/logo-batepapo.png";
 
 type TabType = "tudo" | "nao-lidas" | "grupos" | "matchs";
@@ -19,41 +21,54 @@ export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
   const { user, profile, refreshProfile } = useCurrentUser();
-  const { matches, addMatch, hasMatch, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
+  const { matches, addMatch, removeMatch, hasMatch, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
+  const { conversations: savedConvs, upsertConversation, removeConversation } = useUserConversations(user?.id ?? null);
+  const { groups, invites, createGroup, removeGroup, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [readConversations, setReadConversations] = useState<Set<string>>(new Set());
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
-  const chatMode = activeTab === "tudo" && !activeConversation ? "general" : "private";
+  const chatMode = !activeConversation ? "general" : "private";
 
-  // On mobile, when a conversation/general is open, hide sidebar and show chat full-screen.
-  // We treat "any selected room" as: activeConversation !== null OR user explicitly opened general.
   const [mobileView, setMobileView] = useState<"list" | "chat">("list");
 
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
-    if (tab === "tudo") {
-      setActiveConversation(null);
-      setMobileView("list");
-    }
   };
 
-  const handleSelectConversation = (id: string) => {
+  const handleSelectConversation = (id: string, userId: string) => {
     setActiveConversation(id);
     setReadConversations((prev) => new Set(prev).add(id));
+    upsertConversation(userId);
     setMobileView("chat");
   };
 
   const handleSelectGeneral = () => {
-    setActiveTab("tudo");
     setActiveConversation(null);
     setMobileView("chat");
   };
 
   const handleBackToList = () => {
     setMobileView("list");
+  };
+
+  const handleStartChat = (userId: string) => {
+    const convId = `temp-${userId}`;
+    setActiveConversation(convId);
+    setReadConversations((prev) => new Set(prev).add(convId));
+    upsertConversation(userId);
+    setProfileUserId(null);
+    setMobileView("chat");
+  };
+
+  const handleCreateGroup = (name: string, memberIds: string[]) => {
+    createGroup(name, memberIds);
+    toast({
+      title: "Grupo criado",
+      description: `Convites enviados para ${memberIds.length} pessoa(s).`,
+    });
   };
 
   return (
@@ -85,9 +100,18 @@ export default function Index() {
           isGeneralActive={chatMode === "general"}
           onSelectGeneral={handleSelectGeneral}
           matches={matches}
-          onSelectMatchUser={(userId) => {
-            setProfileUserId(userId);
+          onSelectMatchUser={(userId) => setProfileUserId(userId)}
+          savedConversations={savedConvs}
+          onRemoveConversation={(uid) => {
+            removeConversation(uid);
+            if (activeConversation === `temp-${uid}`) setActiveConversation(null);
           }}
+          groups={groups}
+          invites={invites}
+          onCreateGroup={handleCreateGroup}
+          onAcceptInvite={acceptInvite}
+          onDeclineInvite={declineInvite}
+          onRemoveGroup={removeGroup}
         />
       </div>
 
@@ -121,16 +145,8 @@ export default function Index() {
           isMatched={hasMatch(profileUserId)}
           canMatch={canMatch(profileUserId)}
           onMatch={(userId) => addMatch(userId, "given")}
-          onStartChat={(userId) => {
-            const conv = conversations.find((c) => c.participantId === userId);
-            if (conv) {
-              setActiveConversation(conv.id);
-            } else {
-              setActiveConversation(`temp-${userId}`);
-            }
-            setProfileUserId(null);
-            setMobileView("chat");
-          }}
+          onUnmatch={(userId) => removeMatch(userId)}
+          onStartChat={handleStartChat}
         />
       )}
     </div>
