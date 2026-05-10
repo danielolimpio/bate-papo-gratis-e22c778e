@@ -30,7 +30,10 @@ export default function Index() {
   const [readConversations, setReadConversations] = useState<Set<string>>(new Set());
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
-  const chatMode = !activeConversation ? "general" : "private";
+  const chatMode = !activeConversation ? "general" : activeConversation.startsWith("group-") ? "group" : "private";
+  const activeGroup = activeConversation?.startsWith("group-")
+    ? groups.find((g) => `group-${g.id}` === activeConversation) ?? null
+    : null;
 
   const [mobileView, setMobileView] = useState<"list" | "chat">("list");
 
@@ -111,7 +114,14 @@ export default function Index() {
           onCreateGroup={handleCreateGroup}
           onAcceptInvite={acceptInvite}
           onDeclineInvite={declineInvite}
-          onRemoveGroup={removeGroup}
+          onRemoveGroup={(id) => {
+            removeGroup(id);
+            if (activeConversation === `group-${id}`) setActiveConversation(null);
+          }}
+          onSelectGroup={(id) => {
+            setActiveConversation(`group-${id}`);
+            setMobileView("chat");
+          }}
         />
       </div>
 
@@ -123,6 +133,7 @@ export default function Index() {
         <ChatArea
           conversationId={activeConversation}
           chatMode={chatMode}
+          groupInfo={activeGroup ? { name: activeGroup.name, memberCount: activeGroup.memberIds.length } : null}
           onInfoClick={() => {}}
           onAvatarClick={setProfileUserId}
           onBack={handleBackToList}
