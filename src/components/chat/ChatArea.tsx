@@ -127,6 +127,16 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
                 <p className="text-xs text-muted-foreground truncate">Chat em tempo real</p>
               </div>
             </div>
+          ) : isGroup ? (
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary flex-shrink-0">
+                <User size={20} />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-foreground truncate">{groupInfo?.name ?? "Grupo"}</h3>
+                <p className="text-xs text-muted-foreground truncate">{groupInfo?.memberCount ?? 0} membros</p>
+              </div>
+            </div>
           ) : (
             <div className="flex items-center gap-3 cursor-pointer min-w-0" onClick={() => onAvatarClick(participant!.id)}>
               <div className="relative flex-shrink-0">
