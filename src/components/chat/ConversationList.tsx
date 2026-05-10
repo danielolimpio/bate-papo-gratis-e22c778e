@@ -232,6 +232,7 @@ export default function ConversationList(props: Props) {
           onCreate={(name, ids) => {
             onCreateGroup(name, ids);
             setCreatingGroup(false);
+            onTabChange("grupos");
           }}
         />
       )}
