@@ -223,12 +223,12 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
                   )}
                 </div>
               )}
-              <div>
+              <div className="max-w-[calc(100vw-6rem)] sm:max-w-[66%] min-w-0">
                 {!isMe && (
                   <p className="text-[11px] text-muted-foreground mb-0.5 ml-1">{msg.sender_name}</p>
                 )}
                 <div
-                  className={`max-w-[78%] sm:max-w-[65%] break-words rounded-2xl px-3 py-2 text-sm ${
+                  className={`inline-block break-words whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm ${
                     isMe
                       ? "bg-chat-bubble-sent text-chat-bubble-sent-fg rounded-br-sm"
                       : "bg-chat-bubble-received text-chat-bubble-received-fg rounded-bl-sm"
