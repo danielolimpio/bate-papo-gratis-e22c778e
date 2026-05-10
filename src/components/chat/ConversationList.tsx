@@ -28,6 +28,7 @@ interface Props {
   onAcceptInvite: (id: string) => void;
   onDeclineInvite: (id: string) => void;
   onRemoveGroup: (id: string) => void;
+  onSelectGroup: (groupId: string) => void;
 }
 
 export default function ConversationList(props: Props) {
@@ -35,7 +36,7 @@ export default function ConversationList(props: Props) {
     activeConversationId, onSelect, searchQuery, onSearchChange, activeTab,
     onTabChange, readConversations, isGeneralActive, onSelectGeneral, matches,
     onSelectMatchUser, savedConversations, onRemoveConversation, groups, invites,
-    onCreateGroup, onAcceptInvite, onDeclineInvite, onRemoveGroup,
+    onCreateGroup, onAcceptInvite, onDeclineInvite, onRemoveGroup, onSelectGroup,
   } = props;
 
   const [creatingGroup, setCreatingGroup] = useState(false);
@@ -204,24 +205,34 @@ export default function ConversationList(props: Props) {
                 Meus grupos
               </div>
             )}
-            {groups.map((g) => (
-              <div key={g.id} className="group flex items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md hover:bg-chat-hover">
-                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Users size={22} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[13px] font-semibold text-foreground truncate">{g.name}</p>
-                  <p className="text-[11px] text-muted-foreground truncate">{g.memberIds.length} membros</p>
-                </div>
-                <button
-                  onClick={() => onRemoveGroup(g.id)}
-                  className="opacity-0 group-hover:opacity-100 rounded-full p-1.5 hover:bg-secondary"
-                  aria-label="Remover grupo"
+            {groups.map((g) => {
+              const convId = `group-${g.id}`;
+              const isActive = activeConversationId === convId;
+              return (
+                <div
+                  key={g.id}
+                  onClick={() => onSelectGroup(g.id)}
+                  className={`group flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md transition-colors ${
+                    isActive ? "bg-chat-active" : "hover:bg-chat-hover"
+                  }`}
                 >
-                  <X size={14} className="text-muted-foreground" />
-                </button>
-              </div>
-            ))}
+                  <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Users size={22} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[13px] font-semibold text-foreground truncate">{g.name}</p>
+                    <p className="text-[11px] text-muted-foreground truncate">{g.memberIds.length} membros</p>
+                  </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onRemoveGroup(g.id); }}
+                    className="opacity-0 group-hover:opacity-100 rounded-full p-1.5 hover:bg-secondary"
+                    aria-label="Remover grupo"
+                  >
+                    <X size={14} className="text-muted-foreground" />
+                  </button>
+                </div>
+              );
+            })}
           </>
         )}
       </div>

@@ -11,25 +11,27 @@ import StackedAvatars from "./StackedAvatars";
 
 interface Props {
   conversationId: string | null;
-  chatMode: "general" | "private";
+  chatMode: "general" | "private" | "group";
+  groupInfo?: { name: string; memberCount: number } | null;
   onInfoClick: () => void;
   onAvatarClick: (userId: string) => void;
   onBack?: () => void;
 }
 
-export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvatarClick, onBack }: Props) {
+export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const isGeneral = chatMode === "general";
+  const isGroup = chatMode === "group";
   const room = isGeneral ? "general" : conversationId || "general";
 
   const { messages, loading, sendMessage, injectLocalMessage } = useMessages(room);
   const { user, profile } = useCurrentUser();
 
-  const conv = !isGeneral ? conversations.find((c) => c.id === conversationId) : null;
-  const tempUserId = !conv && conversationId?.startsWith("temp-") ? conversationId.replace("temp-", "") : null;
+  const conv = !isGeneral && !isGroup ? conversations.find((c) => c.id === conversationId) : null;
+  const tempUserId = !conv && !isGroup && conversationId?.startsWith("temp-") ? conversationId.replace("temp-", "") : null;
   const participant = conv
     ? users.find((u) => u.id === conv.participantId)
     : tempUserId
@@ -84,8 +86,8 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
     await sendMessage("👍", user.id);
   };
 
-  // No conversation selected and not general
-  if (!isGeneral && (!conversationId || !participant)) {
+  // No conversation selected and not general/group
+  if (!isGeneral && !isGroup && (!conversationId || !participant)) {
     return (
       <div className="flex flex-1 items-center justify-center bg-chat-bg">
         <div className="text-center">
@@ -123,6 +125,16 @@ export default function ChatArea({ conversationId, chatMode, onInfoClick, onAvat
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold text-foreground truncate">Sala de Bate Papo</h3>
                 <p className="text-xs text-muted-foreground truncate">Chat em tempo real</p>
+              </div>
+            </div>
+          ) : isGroup ? (
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary flex-shrink-0">
+                <User size={20} />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-foreground truncate">{groupInfo?.name ?? "Grupo"}</h3>
+                <p className="text-xs text-muted-foreground truncate">{groupInfo?.memberCount ?? 0} membros</p>
               </div>
             </div>
           ) : (
