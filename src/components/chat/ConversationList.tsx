@@ -448,12 +448,16 @@ function CreateGroupModal({
         </div>
 
         <div className="flex justify-end gap-2 p-3 border-t border-chat-divider">
-          <button onClick={onClose} className="rounded-full px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary">
+          <button type="button" onClick={onClose} className="rounded-full px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary">
             Cancelar
           </button>
           <button
+            type="button"
             disabled={!canCreate}
-            onClick={() => onCreate(name, Array.from(selected))}
+            onClick={() => {
+              if (!canCreate) return;
+              onCreate(name.trim(), Array.from(selected));
+            }}
             className={`rounded-full px-4 py-2 text-sm font-semibold ${
               canCreate ? "bg-primary text-primary-foreground hover:opacity-90" : "bg-secondary text-muted-foreground cursor-not-allowed"
             }`}
