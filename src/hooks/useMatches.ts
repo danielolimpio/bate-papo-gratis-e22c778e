@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { users } from "@/data/mockData";
 
 export type MatchType = "given" | "received";
@@ -7,31 +8,6 @@ export interface MatchEntry {
   userId: string;
   type: MatchType;
   timestamp: number;
-}
-
-const STORAGE_PREFIX = "bpg:matches:";
-
-function storageKey(currentUserId: string | null) {
-  return `${STORAGE_PREFIX}${currentUserId ?? "guest"}`;
-}
-
-function loadMatches(currentUserId: string | null): MatchEntry[] {
-  try {
-    const raw = localStorage.getItem(storageKey(currentUserId));
-    if (!raw) return [];
-    const parsed = JSON.parse(raw) as MatchEntry[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveMatches(currentUserId: string | null, matches: MatchEntry[]) {
-  try {
-    localStorage.setItem(storageKey(currentUserId), JSON.stringify(matches));
-  } catch {
-    /* ignore */
-  }
 }
 
 /** Normalize gender labels from auth profile / mock data to "M" | "F" | null. */
@@ -68,38 +44,97 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
   const [matches, setMatches] = useState<MatchEntry[]>([]);
   const gender = normalizeGender(currentUserGender);
 
+  // Load from DB and subscribe to realtime changes for cross-device sync
   useEffect(() => {
-    const existing = loadMatches(currentUserId);
-    // Filter out any same-gender matches from previously seeded/saved data.
-    const cleaned = existing.filter((m) => {
-      const target = users.find((u) => u.id === m.userId);
-      return isOppositeGender(gender, target?.gender);
-    });
-    if (cleaned.length !== existing.length) {
-      saveMatches(currentUserId, cleaned);
+    if (!currentUserId) {
+      setMatches([]);
+      return;
     }
-    if (cleaned.length === 0 && currentUserId) {
-      const seeded = seedReceivedMatches(gender);
-      saveMatches(currentUserId, seeded);
-      setMatches(seeded);
-    } else {
-      setMatches(cleaned);
-    }
+
+    let cancelled = false;
+
+    const load = async () => {
+      const { data, error } = await supabase
+        .from("user_matches")
+        .select("target_user_id, match_type, created_at")
+        .eq("user_id", currentUserId)
+        .order("created_at", { ascending: false });
+      if (cancelled || error || !data) return;
+
+      let entries: MatchEntry[] = data
+        .map((r: any) => ({
+          userId: r.target_user_id,
+          type: r.match_type as MatchType,
+          timestamp: new Date(r.created_at).getTime(),
+        }))
+        // drop any same-gender legacy rows
+        .filter((m) => {
+          const target = users.find((u) => u.id === m.userId);
+          return isOppositeGender(gender, target?.gender);
+        });
+
+      // Seed initial received matches once if user has none
+      if (entries.length === 0) {
+        const seeded = seedReceivedMatches(gender);
+        if (seeded.length > 0) {
+          await supabase.from("user_matches").insert(
+            seeded.map((s) => ({
+              user_id: currentUserId,
+              target_user_id: s.userId,
+              match_type: s.type,
+              created_at: new Date(s.timestamp).toISOString(),
+            }))
+          );
+          entries = seeded;
+        }
+      }
+
+      if (!cancelled) setMatches(entries);
+    };
+
+    load();
+
+    const channel = supabase
+      .channel(`user_matches-${currentUserId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "user_matches", filter: `user_id=eq.${currentUserId}` },
+        () => {
+          load();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      cancelled = true;
+      supabase.removeChannel(channel);
+    };
   }, [currentUserId, gender]);
 
   const addMatch = useCallback(
     (userId: string, type: MatchType = "given") => {
+      if (!currentUserId) return false;
       const target = users.find((u) => u.id === userId);
-      if (!isOppositeGender(gender, target?.gender)) {
-        // Block same-gender match (only opposite-gender allowed for fictional matches).
-        return false;
-      }
-      setMatches((prev) => {
-        const filtered = prev.filter((m) => m.userId !== userId);
-        const next = [{ userId, type, timestamp: Date.now() }, ...filtered];
-        saveMatches(currentUserId, next);
-        return next;
-      });
+      if (!isOppositeGender(gender, target?.gender)) return false;
+
+      const entry: MatchEntry = { userId, type, timestamp: Date.now() };
+      setMatches((prev) => [entry, ...prev.filter((m) => m.userId !== userId)]);
+
+      supabase
+        .from("user_matches")
+        .upsert(
+          {
+            user_id: currentUserId,
+            target_user_id: userId,
+            match_type: type,
+            created_at: new Date(entry.timestamp).toISOString(),
+          },
+          { onConflict: "user_id,target_user_id" }
+        )
+        .then(({ error }) => {
+          if (error) console.error("addMatch error", error);
+        });
+
       return true;
     },
     [currentUserId, gender]
@@ -107,11 +142,16 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
 
   const removeMatch = useCallback(
     (userId: string) => {
-      setMatches((prev) => {
-        const next = prev.filter((m) => m.userId !== userId);
-        saveMatches(currentUserId, next);
-        return next;
-      });
+      if (!currentUserId) return;
+      setMatches((prev) => prev.filter((m) => m.userId !== userId));
+      supabase
+        .from("user_matches")
+        .delete()
+        .eq("user_id", currentUserId)
+        .eq("target_user_id", userId)
+        .then(({ error }) => {
+          if (error) console.error("removeMatch error", error);
+        });
     },
     [currentUserId]
   );

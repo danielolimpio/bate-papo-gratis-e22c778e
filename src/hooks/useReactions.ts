@@ -4,16 +4,13 @@ export const REACTION_EMOJIS = ["👍", "❤️", "😂", "😮", "😢", "😭"
 export type ReactionEmoji = (typeof REACTION_EMOJIS)[number];
 
 export interface ReactionMap {
-  // emoji -> count (incluindo a do próprio usuário)
   counts: Partial<Record<ReactionEmoji, number>>;
-  // emoji escolhido pelo usuário atual (apenas 1)
   mine: ReactionEmoji | null;
 }
 
-const KEY = "bpg:reactions:v1";
+const KEY = "bpg:reactions:v2";
 
 interface Stored {
-  // msgId -> { emoji -> count, mine: emoji|null }
   [msgId: string]: { counts: Partial<Record<ReactionEmoji, number>>; mine: ReactionEmoji | null };
 }
 
@@ -33,19 +30,18 @@ function write(s: Stored) {
   }
 }
 
-/** Gera contagem fictícia inicial, determinística por msgId, para parecer que outros já reagiram. */
-function seedCounts(msgId: string): Partial<Record<ReactionEmoji, number>> {
-  // hash simples
+/** Deterministic simulated reactions for fictional General Room messages. */
+function simulatedCounts(msgId: string): Partial<Record<ReactionEmoji, number>> {
   let h = 0;
   for (let i = 0; i < msgId.length; i++) h = (h * 31 + msgId.charCodeAt(i)) | 0;
   h = Math.abs(h);
-  // 60% das mensagens não têm reações iniciais
-  if (h % 10 < 6) return {};
+  // ~70% das mensagens sem reação simulada
+  if (h % 10 < 7) return {};
   const out: Partial<Record<ReactionEmoji, number>> = {};
-  const n = 1 + (h % 3); // 1-3 emojis distintos
+  const n = 1 + (h % 2); // 1-2 emojis distintos
   for (let i = 0; i < n; i++) {
     const e = REACTION_EMOJIS[(h >> (i * 3)) % REACTION_EMOJIS.length];
-    out[e] = (out[e] || 0) + 1 + (((h >> (i * 5)) % 4));
+    out[e] = (out[e] || 0) + 1 + (((h >> (i * 5)) % 3));
   }
   return out;
 }
@@ -63,21 +59,23 @@ export function useReactions() {
     };
   }, []);
 
-  const get = useCallback((msgId: string): ReactionMap => {
+  /** Get reactions. If `simulate` is true and there is no real entry,
+   *  return deterministic simulated counts (used only in the General Room). */
+  const get = useCallback((msgId: string, simulate = false): ReactionMap => {
     const all = read();
-    if (!all[msgId]) {
-      all[msgId] = { counts: seedCounts(msgId), mine: null };
-      write(all);
-    }
-    return { counts: { ...all[msgId].counts }, mine: all[msgId].mine };
+    const real = all[msgId];
+    if (real) return { counts: { ...real.counts }, mine: real.mine };
+    if (simulate) return { counts: simulatedCounts(msgId), mine: null };
+    return { counts: {}, mine: null };
   }, []);
 
-  const toggle = useCallback((msgId: string, emoji: ReactionEmoji) => {
+  const toggle = useCallback((msgId: string, emoji: ReactionEmoji, simulate = false) => {
     const all = read();
-    const cur = all[msgId] || { counts: seedCounts(msgId), mine: null };
+    const cur =
+      all[msgId] ||
+      { counts: simulate ? simulatedCounts(msgId) : {}, mine: null as ReactionEmoji | null };
     const counts = { ...cur.counts };
 
-    // remove anterior do usuário (apenas 1 reação por usuário)
     if (cur.mine) {
       const prev = counts[cur.mine] || 0;
       if (prev <= 1) delete counts[cur.mine];
@@ -85,7 +83,7 @@ export function useReactions() {
     }
     let mine: ReactionEmoji | null;
     if (cur.mine === emoji) {
-      mine = null; // toggle off
+      mine = null;
     } else {
       counts[emoji] = (counts[emoji] || 0) + 1;
       mine = emoji;

@@ -5,11 +5,13 @@ import { REACTION_EMOJIS, useReactions, type ReactionEmoji } from "@/hooks/useRe
 interface Props {
   messageId: string;
   align?: "left" | "right";
+  /** When true, show simulated reactions (used only in the General Room). */
+  simulate?: boolean;
 }
 
-export default function MessageReactions({ messageId, align = "left" }: Props) {
+export default function MessageReactions({ messageId, align = "left", simulate = false }: Props) {
   const { get, toggle } = useReactions();
-  const data = get(messageId);
+  const data = get(messageId, simulate);
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +61,7 @@ export default function MessageReactions({ messageId, align = "left" }: Props) {
               key={e}
               type="button"
               onClick={() => {
-                toggle(messageId, e);
+                toggle(messageId, e, simulate);
                 setOpen(false);
               }}
               className={`text-base leading-none transition-transform hover:scale-125 ${data.mine === e ? "scale-125" : ""}`}
