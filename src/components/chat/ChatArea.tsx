@@ -239,7 +239,7 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
                     {formatTime(msg.created_at)}
                   </span>
                 </div>
-                <MessageReactions messageId={msg.id} align={isMe ? "right" : "left"} />
+                <MessageReactions messageId={msg.id} align={isMe ? "right" : "left"} simulate={isGeneral} />
               </div>
             </div>
           );

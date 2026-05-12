@@ -88,6 +88,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_matches: {
+        Row: {
+          created_at: string
+          id: string
+          match_type: string
+          target_user_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          match_type: string
+          target_user_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          match_type?: string
+          target_user_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
