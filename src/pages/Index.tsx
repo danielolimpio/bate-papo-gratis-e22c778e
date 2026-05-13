@@ -6,6 +6,7 @@ import RightPanel from "@/components/chat/RightPanel";
 import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
 import UserProfileMenu from "@/components/chat/UserProfileMenu";
+import ManageGroupModal from "@/components/chat/ManageGroupModal";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
