@@ -24,7 +24,8 @@ export default function Index() {
   const { user, profile, refreshProfile } = useCurrentUser();
   const { matches, addMatch, removeMatch, hasMatch, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
   const { conversations: savedConvs, upsertConversation, removeConversation } = useUserConversations(user?.id ?? null);
-  const { groups, invites, createGroup, removeGroup, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
+  const { groups, invites, createGroup, removeGroup, addMembers, removeMember, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
+  const [manageGroupId, setManageGroupId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
