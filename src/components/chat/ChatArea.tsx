@@ -16,9 +16,10 @@ interface Props {
   onInfoClick: () => void;
   onAvatarClick: (userId: string) => void;
   onBack?: () => void;
+  onManageGroup?: () => void;
 }
 
-export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack }: Props) {
+export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
