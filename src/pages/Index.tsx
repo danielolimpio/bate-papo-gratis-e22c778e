@@ -165,6 +165,15 @@ export default function Index() {
           onStartChat={handleStartChat}
         />
       )}
+
+      {manageGroup && (
+        <ManageGroupModal
+          group={manageGroup}
+          onClose={() => setManageGroupId(null)}
+          onAddMembers={addMembers}
+          onRemoveMember={removeMember}
+        />
+      )}
     </div>
   );
 }
