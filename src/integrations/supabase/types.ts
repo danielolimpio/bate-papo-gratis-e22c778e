@@ -141,6 +141,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_interaction: string
+          target_user_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_interaction?: string
+          target_user_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_interaction?: string
+          target_user_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_matches: {
         Row: {
           created_at: string
