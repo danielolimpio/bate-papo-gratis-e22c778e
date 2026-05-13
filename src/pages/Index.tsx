@@ -68,13 +68,15 @@ export default function Index() {
     setMobileView("chat");
   };
 
-  const handleCreateGroup = (name: string, memberIds: string[]) => {
-    createGroup(name, memberIds);
+  const handleCreateGroup = async (name: string, memberIds: string[]) => {
+    await createGroup(name, memberIds);
     toast({
       title: "Grupo criado",
-      description: `Convites enviados para ${memberIds.length} pessoa(s).`,
+      description: `${memberIds.length} pessoa(s) adicionadas.`,
     });
   };
+
+  const manageGroup = manageGroupId ? groups.find((g) => g.id === manageGroupId) ?? null : null;
 
   return (
     <div className="flex h-[100dvh] w-screen overflow-hidden bg-chat-bg">
