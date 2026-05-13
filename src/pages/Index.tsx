@@ -141,6 +141,7 @@ export default function Index() {
           onInfoClick={() => {}}
           onAvatarClick={setProfileUserId}
           onBack={handleBackToList}
+          onManageGroup={activeGroup ? () => setManageGroupId(activeGroup.id) : undefined}
         />
       </div>
 
