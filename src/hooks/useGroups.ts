@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface Group {
   id: string;
@@ -14,98 +15,111 @@ export interface GroupInvite {
   createdAt: number;
 }
 
-const GKEY = "bpg:groups:";
-const IKEY = "bpg:groupInvites:";
-
-const gk = (id: string | null) => `${GKEY}${id ?? "guest"}`;
-const ik = (id: string | null) => `${IKEY}${id ?? "guest"}`;
-
-function read<T>(k: string): T[] {
-  try {
-    const raw = localStorage.getItem(k);
-    return raw ? (JSON.parse(raw) as T[]) : [];
-  } catch {
-    return [];
-  }
-}
-function write<T>(k: string, v: T[]) {
-  try {
-    localStorage.setItem(k, JSON.stringify(v));
-  } catch {
-    /* ignore */
-  }
-}
-
 export function useGroups(currentUserId: string | null) {
   const [groups, setGroups] = useState<Group[]>([]);
-  const [invites, setInvites] = useState<GroupInvite[]>([]);
+  const [invites] = useState<GroupInvite[]>([]);
 
-  useEffect(() => {
-    setGroups(read<Group>(gk(currentUserId)));
-    setInvites(read<GroupInvite>(ik(currentUserId)));
+  const load = useCallback(async () => {
+    if (!currentUserId) {
+      setGroups([]);
+      return;
+    }
+    const { data: gs } = await supabase
+      .from("groups")
+      .select("id, name, created_at")
+      .eq("created_by", currentUserId)
+      .order("created_at", { ascending: false });
+    if (!gs) {
+      setGroups([]);
+      return;
+    }
+    const ids = gs.map((g) => g.id);
+    let membersByGroup: Record<string, string[]> = {};
+    if (ids.length) {
+      const { data: ms } = await supabase
+        .from("group_members")
+        .select("group_id, member_user_id")
+        .in("group_id", ids);
+      (ms ?? []).forEach((m: any) => {
+        (membersByGroup[m.group_id] ??= []).push(m.member_user_id);
+      });
+    }
+    setGroups(
+      gs.map((g) => ({
+        id: g.id,
+        name: g.name,
+        memberIds: membersByGroup[g.id] ?? [],
+        createdAt: new Date(g.created_at).getTime(),
+      }))
+    );
   }, [currentUserId]);
 
+  useEffect(() => {
+    load();
+    if (!currentUserId) return;
+    const ch = supabase
+      .channel(`groups-${currentUserId}`)
+      .on("postgres_changes", { event: "*", schema: "public", table: "groups" }, () => load())
+      .on("postgres_changes", { event: "*", schema: "public", table: "group_members" }, () => load())
+      .subscribe();
+    return () => {
+      supabase.removeChannel(ch);
+    };
+  }, [currentUserId, load]);
+
   const createGroup = useCallback(
-    (name: string, memberIds: string[]) => {
-      const g: Group = {
-        id: `g-${Date.now()}`,
-        name: name.trim() || "Novo Grupo",
-        memberIds,
-        createdAt: Date.now(),
-      };
-      setGroups((prev) => {
-        const next = [g, ...prev];
-        write(gk(currentUserId), next);
-        return next;
-      });
-      return g;
+    async (name: string, memberIds: string[]) => {
+      if (!currentUserId) return null;
+      const { data, error } = await supabase
+        .from("groups")
+        .insert({ name: name.trim() || "Novo Grupo", created_by: currentUserId })
+        .select("id, name, created_at")
+        .single();
+      if (error || !data) return null;
+      if (memberIds.length) {
+        await supabase.from("group_members").insert(
+          memberIds.map((m) => ({ group_id: data.id, member_user_id: m }))
+        );
+      }
+      await load();
+      return { id: data.id, name: data.name, memberIds, createdAt: Date.now() } as Group;
     },
-    [currentUserId]
+    [currentUserId, load]
   );
 
   const removeGroup = useCallback(
-    (groupId: string) => {
-      setGroups((prev) => {
-        const next = prev.filter((g) => g.id !== groupId);
-        write(gk(currentUserId), next);
-        return next;
-      });
+    async (groupId: string) => {
+      await supabase.from("groups").delete().eq("id", groupId);
+      await load();
     },
-    [currentUserId]
+    [load]
   );
 
-  const acceptInvite = useCallback(
-    (inviteId: string) => {
-      setInvites((prev) => {
-        const inv = prev.find((i) => i.id === inviteId);
-        const next = prev.filter((i) => i.id !== inviteId);
-        write(ik(currentUserId), next);
-        if (inv) {
-          setGroups((g) => {
-            const ng = [
-              { id: `g-${Date.now()}`, name: inv.groupName, memberIds: [], createdAt: Date.now() },
-              ...g,
-            ];
-            write(gk(currentUserId), ng);
-            return ng;
-          });
-        }
-        return next;
-      });
+  const addMembers = useCallback(
+    async (groupId: string, memberIds: string[]) => {
+      if (!memberIds.length) return;
+      await supabase
+        .from("group_members")
+        .insert(memberIds.map((m) => ({ group_id: groupId, member_user_id: m })));
+      await load();
     },
-    [currentUserId]
+    [load]
   );
 
-  const declineInvite = useCallback(
-    (inviteId: string) => {
-      setInvites((prev) => {
-        const next = prev.filter((i) => i.id !== inviteId);
-        write(ik(currentUserId), next);
-        return next;
-      });
+  const removeMember = useCallback(
+    async (groupId: string, memberUserId: string) => {
+      await supabase
+        .from("group_members")
+        .delete()
+        .eq("group_id", groupId)
+        .eq("member_user_id", memberUserId);
+      await load();
     },
-    [currentUserId]
+    [load]
   );
 
-  return { groups, invites, createGroup, removeGroup, acceptInvite, declineInvite };
+  const acceptInvite = useCallback((_id: string) => {}, []);
+  const declineInvite = useCallback((_id: string) => {}, []);
+
+  return { groups, invites, createGroup, removeGroup, addMembers, removeMember, acceptInvite, declineInvite };
 }

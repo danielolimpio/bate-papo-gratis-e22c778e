@@ -6,6 +6,7 @@ import RightPanel from "@/components/chat/RightPanel";
 import ProfileModal from "@/components/chat/ProfileModal";
 import NewUserCard from "@/components/chat/NewUserCard";
 import UserProfileMenu from "@/components/chat/UserProfileMenu";
+import ManageGroupModal from "@/components/chat/ManageGroupModal";
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineUsers } from "@/hooks/useOnlineUsers";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
@@ -23,7 +24,8 @@ export default function Index() {
   const { user, profile, refreshProfile } = useCurrentUser();
   const { matches, addMatch, removeMatch, hasMatch, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
   const { conversations: savedConvs, upsertConversation, removeConversation } = useUserConversations(user?.id ?? null);
-  const { groups, invites, createGroup, removeGroup, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
+  const { groups, invites, createGroup, removeGroup, addMembers, removeMember, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
+  const [manageGroupId, setManageGroupId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -66,13 +68,15 @@ export default function Index() {
     setMobileView("chat");
   };
 
-  const handleCreateGroup = (name: string, memberIds: string[]) => {
-    createGroup(name, memberIds);
+  const handleCreateGroup = async (name: string, memberIds: string[]) => {
+    await createGroup(name, memberIds);
     toast({
       title: "Grupo criado",
-      description: `Convites enviados para ${memberIds.length} pessoa(s).`,
+      description: `${memberIds.length} pessoa(s) adicionadas.`,
     });
   };
+
+  const manageGroup = manageGroupId ? groups.find((g) => g.id === manageGroupId) ?? null : null;
 
   return (
     <div className="flex h-[100dvh] w-screen overflow-hidden bg-chat-bg">
@@ -137,6 +141,7 @@ export default function Index() {
           onInfoClick={() => {}}
           onAvatarClick={setProfileUserId}
           onBack={handleBackToList}
+          onManageGroup={activeGroup ? () => setManageGroupId(activeGroup.id) : undefined}
         />
       </div>
 
@@ -158,6 +163,15 @@ export default function Index() {
           onMatch={(userId) => addMatch(userId, "given")}
           onUnmatch={(userId) => removeMatch(userId)}
           onStartChat={handleStartChat}
+        />
+      )}
+
+      {manageGroup && (
+        <ManageGroupModal
+          group={manageGroup}
+          onClose={() => setManageGroupId(null)}
+          onAddMembers={addMembers}
+          onRemoveMember={removeMember}
         />
       )}
     </div>

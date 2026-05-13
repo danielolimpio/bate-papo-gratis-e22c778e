@@ -16,9 +16,10 @@ interface Props {
   onInfoClick: () => void;
   onAvatarClick: (userId: string) => void;
   onBack?: () => void;
+  onManageGroup?: () => void;
 }
 
-export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack }: Props) {
+export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -128,13 +129,17 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
               </div>
             </div>
           ) : isGroup ? (
-            <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="flex items-center gap-3 min-w-0 cursor-pointer"
+              onClick={onManageGroup}
+              title="Gerenciar grupo"
+            >
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary flex-shrink-0">
                 <User size={20} />
               </div>
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold text-foreground truncate">{groupInfo?.name ?? "Grupo"}</h3>
-                <p className="text-xs text-muted-foreground truncate">{groupInfo?.memberCount ?? 0} membros</p>
+                <p className="text-xs text-muted-foreground truncate">{groupInfo?.memberCount ?? 0} membros · Gerenciar</p>
               </div>
             </div>
           ) : (
