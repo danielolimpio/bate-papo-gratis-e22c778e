@@ -1,63 +1,94 @@
 import { useCallback, useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface SavedConversation {
   userId: string;
   lastInteraction: number;
 }
 
-const PREFIX = "bpg:userconvs:";
 const TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
-
-const key = (id: string | null) => `${PREFIX}${id ?? "guest"}`;
-
-function load(id: string | null): SavedConversation[] {
-  try {
-    const raw = localStorage.getItem(key(id));
-    if (!raw) return [];
-    const arr = JSON.parse(raw) as SavedConversation[];
-    const cutoff = Date.now() - TTL;
-    return arr.filter((c) => c.lastInteraction >= cutoff);
-  } catch {
-    return [];
-  }
-}
-
-function save(id: string | null, list: SavedConversation[]) {
-  try {
-    localStorage.setItem(key(id), JSON.stringify(list));
-  } catch {
-    /* ignore */
-  }
-}
 
 export function useUserConversations(currentUserId: string | null) {
   const [list, setList] = useState<SavedConversation[]>([]);
 
-  useEffect(() => {
-    const cleaned = load(currentUserId);
-    save(currentUserId, cleaned);
-    setList(cleaned);
+  const load = useCallback(async () => {
+    if (!currentUserId) {
+      setList([]);
+      return;
+    }
+    const { data, error } = await supabase
+      .from("user_conversations")
+      .select("target_user_id, last_interaction")
+      .eq("user_id", currentUserId)
+      .order("last_interaction", { ascending: false });
+
+    if (error || !data) return;
+
+    const cutoff = Date.now() - TTL;
+    const mapped: SavedConversation[] = data
+      .map((r) => ({
+        userId: r.target_user_id as string,
+        lastInteraction: new Date(r.last_interaction as string).getTime(),
+      }))
+      .filter((c) => c.lastInteraction >= cutoff);
+
+    setList(mapped);
   }, [currentUserId]);
 
+  useEffect(() => {
+    load();
+    if (!currentUserId) return;
+
+    const channel = supabase
+      .channel(`user_conversations:${currentUserId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "user_conversations",
+          filter: `user_id=eq.${currentUserId}`,
+        },
+        () => load()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [currentUserId, load]);
+
   const upsert = useCallback(
-    (userId: string) => {
+    async (userId: string) => {
+      if (!currentUserId) return;
+      // Optimistic
       setList((prev) => {
         const filtered = prev.filter((c) => c.userId !== userId);
-        const next = [{ userId, lastInteraction: Date.now() }, ...filtered];
-        save(currentUserId, next);
-        return next;
+        return [{ userId, lastInteraction: Date.now() }, ...filtered];
       });
+      await supabase
+        .from("user_conversations")
+        .upsert(
+          {
+            user_id: currentUserId,
+            target_user_id: userId,
+            last_interaction: new Date().toISOString(),
+          },
+          { onConflict: "user_id,target_user_id" }
+        );
     },
     [currentUserId]
   );
 
   const remove = useCallback(
-    (userId: string) => {
-      setList((prev) => {
-        const next = prev.filter((c) => c.userId !== userId);
-        save(currentUserId, next);
-        return next;
-      });
+    async (userId: string) => {
+      if (!currentUserId) return;
+      setList((prev) => prev.filter((c) => c.userId !== userId));
+      await supabase
+        .from("user_conversations")
+        .delete()
+        .eq("user_id", currentUserId)
+        .eq("target_user_id", userId);
     },
     [currentUserId]
   );
