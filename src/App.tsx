@@ -13,7 +13,14 @@ import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import QuemSomos from "./pages/QuemSomos";
 import NamoroSeguro from "./pages/NamoroSeguro";
+import SyncStatus from "./pages/SyncStatus";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useAutoResync } from "./hooks/useAutoResync";
+
+function GlobalEffects() {
+  useAutoResync();
+  return null;
+}
 
 const queryClient = new QueryClient();
 
@@ -23,6 +30,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GlobalEffects />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/saladebatepapo" element={<ProtectedRoute><Index /></ProtectedRoute>} />
@@ -33,6 +41,7 @@ const App = () => (
           <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
           <Route path="/quem-somos" element={<QuemSomos />} />
           <Route path="/namoro-seguro" element={<NamoroSeguro />} />
+          <Route path="/status-sincronizacao" element={<ProtectedRoute><SyncStatus /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
