@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useChatNotification } from "./useChatNotification";
 import { toast } from "@/hooks/use-toast";
+import { onSync } from "@/lib/syncBus";
 
 export interface ChatMessage {
   id: string;
