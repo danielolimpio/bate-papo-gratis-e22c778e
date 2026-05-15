@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { onSync } from "@/lib/syncBus";
 
 export interface SavedConversation {
   userId: string;
@@ -53,8 +54,10 @@ export function useUserConversations(currentUserId: string | null) {
       )
       .subscribe();
 
+    const off = onSync(() => load());
     return () => {
       supabase.removeChannel(channel);
+      off();
     };
   }, [currentUserId, load]);
 

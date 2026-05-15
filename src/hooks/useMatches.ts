@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { users } from "@/data/mockData";
+import { onSync } from "@/lib/syncBus";
 
 export type MatchType = "given" | "received";
 
@@ -105,9 +106,11 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
       )
       .subscribe();
 
+    const off = onSync(() => load());
     return () => {
       cancelled = true;
       supabase.removeChannel(channel);
+      off();
     };
   }, [currentUserId, gender]);
 
