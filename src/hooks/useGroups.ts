@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { onSync } from "@/lib/syncBus";
 
 export interface Group {
   id: string;
@@ -62,8 +63,10 @@ export function useGroups(currentUserId: string | null) {
       .on("postgres_changes", { event: "*", schema: "public", table: "groups" }, () => load())
       .on("postgres_changes", { event: "*", schema: "public", table: "group_members" }, () => load())
       .subscribe();
+    const off = onSync(() => load());
     return () => {
       supabase.removeChannel(ch);
+      off();
     };
   }, [currentUserId, load]);
 

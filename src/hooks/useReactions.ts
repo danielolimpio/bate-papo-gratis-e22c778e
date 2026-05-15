@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { onSync } from "@/lib/syncBus";
 
 export const REACTION_EMOJIS = ["👍", "❤️", "😂", "😮", "😢", "😭", "😡"] as const;
 export type ReactionEmoji = (typeof REACTION_EMOJIS)[number];
@@ -77,6 +78,10 @@ async function init() {
   await refresh();
 
   supabase.auth.onAuthStateChange(() => {
+    refresh();
+  });
+
+  onSync(() => {
     refresh();
   });
 

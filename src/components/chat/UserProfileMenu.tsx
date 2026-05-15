@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Camera, Lock, LogOut, Pencil, User, X, Eye, EyeOff } from "lucide-react";
+import { Camera, Lock, LogOut, Pencil, RefreshCw, User, X, Eye, EyeOff } from "lucide-react";
 import type { UserProfile } from "@/hooks/useCurrentUser";
 import { toast } from "@/components/ui/use-toast";
 
@@ -195,6 +195,14 @@ export default function UserProfileMenu({ profile, email, onProfileUpdated }: Pr
               >
                 <Lock size={16} className="text-primary" />
                 Trocar senha
+              </button>
+
+              <button
+                onClick={() => { setShowMenu(false); navigate("/status-sincronizacao"); }}
+                className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
+              >
+                <RefreshCw size={16} className="text-primary" />
+                Status de sincronização
               </button>
 
               <div className="border-t border-chat-divider my-1" />
