@@ -179,8 +179,10 @@ export function useMessages(room: string) {
       )
       .subscribe();
 
+    const off = onSync(() => fetchMessages());
     return () => {
       supabase.removeChannel(channel);
+      off();
     };
   }, [room, fetchMessages]);
 
