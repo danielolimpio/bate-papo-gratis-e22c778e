@@ -1,4 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import heroCouple from "@/assets/hero-couple.jpg";
 import logo from "@/assets/logo-batepapo.png";
 
