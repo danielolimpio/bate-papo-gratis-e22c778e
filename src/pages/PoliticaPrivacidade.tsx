@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { Shield, Eye, Share2, Lock, UserCheck, Mail } from "lucide-react";
 

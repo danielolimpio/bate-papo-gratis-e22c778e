@@ -11,7 +11,7 @@ export default function Landing() {
   };
 
   return (
-    <>
+    <div className="relative min-h-screen w-full flex flex-col">
       <Helmet>
         <title>Bate-Papo Grátis — Sala de Conversa e Amizades Online</title>
         <meta name="description" content="Sala de bate-papo online gratuita para conversar e fazer novas amizades em tempo real. Encontre pessoas especiais." />
@@ -20,7 +20,6 @@ export default function Landing() {
         <meta property="og:description" content="Sala de bate-papo online gratuita para conversar e fazer novas amizades em tempo real." />
         <meta property="og:url" content="/" />
       </Helmet>
-    <div className="relative min-h-screen w-full flex flex-col">
       {/* Hero background - full screen */}
       <div className="absolute inset-0 z-0">
         <img
