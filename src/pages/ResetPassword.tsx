@@ -63,6 +63,11 @@ export default function ResetPassword() {
   if (!isRecovery) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-chat-bg px-4">
+        <Helmet>
+          <title>Redefinir Senha — Bate-Papo Grátis</title>
+          <meta name="description" content="Recupere o acesso à sua conta redefinindo sua senha de forma segura." />
+          <link rel="canonical" href="/reset-password" />
+        </Helmet>
         <button onClick={toggle} className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10">
           {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
         </button>
@@ -90,6 +95,11 @@ export default function ResetPassword() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-chat-bg px-4">
+      <Helmet>
+        <title>Redefinir Senha — Bate-Papo Grátis</title>
+        <meta name="description" content="Recupere o acesso à sua conta redefinindo sua senha de forma segura." />
+        <link rel="canonical" href="/reset-password" />
+      </Helmet>
       <button onClick={toggle} className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10">
         {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
       </button>

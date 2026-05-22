@@ -61,5 +61,6 @@ export default function PoliticaCookies() {
         <p className="font-semibold text-blue-600 mt-1">contato@batepapogratis.com</p>
       </div>
     </LegalLayout>
+  </>
   );
 }

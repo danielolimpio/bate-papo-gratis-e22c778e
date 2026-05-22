@@ -65,5 +65,6 @@ export default function QuemSomos() {
         <p className="text-white font-semibold text-lg">Bate-Papo Grátis — Onde corações se encontram.</p>
       </div>
     </LegalLayout>
+  </>
   );
 }

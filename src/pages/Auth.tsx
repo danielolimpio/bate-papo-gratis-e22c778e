@@ -123,6 +123,11 @@ export default function Auth() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-chat-bg px-4">
+      <Helmet>
+        <title>Login e Cadastro — Bate-Papo Grátis</title>
+        <meta name="description" content="Entre na sua conta ou cadastre-se gratuitamente no Bate-Papo Grátis. Comece a conversar e fazer amizades agora." />
+        <link rel="canonical" href="/auth" />
+      </Helmet>
       {/* Theme toggle */}
       <button
         onClick={toggle}

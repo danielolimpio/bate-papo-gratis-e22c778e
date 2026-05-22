@@ -65,5 +65,6 @@ export default function TermosDeUso() {
       <h2><RefreshCw size={18} className="text-blue-600 shrink-0" /> 8. Alterações nos Termos</h2>
       <p>O Bate-Papo Grátis pode alterar estes termos a qualquer momento. As alterações serão comunicadas por e-mail ou aviso na plataforma. O uso continuado após as alterações constitui aceitação dos novos termos.</p>
     </LegalLayout>
+  </>
   );
 }

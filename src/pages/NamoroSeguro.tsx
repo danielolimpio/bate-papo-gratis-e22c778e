@@ -136,5 +136,6 @@ export default function NamoroSeguro() {
         <p className="text-white/80 text-xs mt-2">Atenciosamente, Equipe de Suporte do Bate-Papo Grátis</p>
       </div>
     </LegalLayout>
+  </>
   );
 }
