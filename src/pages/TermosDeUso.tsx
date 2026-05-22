@@ -4,7 +4,13 @@ import { FileText, CheckCircle, UserCheck, MessageSquare, Key, Trash2, AlertTria
 
 export default function TermosDeUso() {
   return (
-    <LegalLayout title="Termos de Uso">
+    <>
+      <Helmet>
+        <title>Termos de Uso — Bate-Papo Grátis</title>
+        <meta name="description" content="Conheça as regras e condições de uso da plataforma Bate-Papo Grátis. Use de forma responsável." />
+        <link rel="canonical" href="/termos-de-uso" />
+      </Helmet>
+      <LegalLayout title="Termos de Uso">
       <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
         <FileText size={13} />
         Última atualização: Janeiro de 2026

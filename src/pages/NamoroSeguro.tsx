@@ -4,7 +4,13 @@ import { Shield, AlertTriangle, Ban, Eye, UserCheck, Lock, Heart, CheckCircle, X
 
 export default function NamoroSeguro() {
   return (
-    <LegalLayout title="Namoro Seguro">
+    <>
+      <Helmet>
+        <title>Namoro Seguro — Bate-Papo Grátis</title>
+        <meta name="description" content="Dicas e diretrizes para um namoro online seguro. Proteja-se enquanto conhece novas pessoas." />
+        <link rel="canonical" href="/namoro-seguro" />
+      </Helmet>
+      <LegalLayout title="Namoro Seguro">
       <div className="text-center mb-8">
         <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
           <Shield size={13} />
