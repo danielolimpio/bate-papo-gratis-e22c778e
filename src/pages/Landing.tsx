@@ -1,4 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import heroCouple from "@/assets/hero-couple.jpg";
 import logo from "@/assets/logo-batepapo.png";
 
@@ -11,6 +12,14 @@ export default function Landing() {
 
   return (
     <div className="relative min-h-screen w-full flex flex-col">
+      <Helmet>
+        <title>Bate-Papo Grátis — Sala de Conversa e Amizades Online</title>
+        <meta name="description" content="Sala de bate-papo online gratuita para conversar e fazer novas amizades em tempo real. Encontre pessoas especiais." />
+        <link rel="canonical" href="/" />
+        <meta property="og:title" content="Bate-Papo Grátis — Sala de Conversa e Amizades Online" />
+        <meta property="og:description" content="Sala de bate-papo online gratuita para conversar e fazer novas amizades em tempo real." />
+        <meta property="og:url" content="/" />
+      </Helmet>
       {/* Hero background - full screen */}
       <div className="absolute inset-0 z-0">
         <img

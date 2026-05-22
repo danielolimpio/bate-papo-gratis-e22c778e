@@ -1,9 +1,16 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { Cookie, Settings, Mail, Zap, BarChart3, Palette } from "lucide-react";
 
 export default function PoliticaCookies() {
   return (
-    <LegalLayout title="Política de Cookies">
+    <>
+      <Helmet>
+        <title>Política de Cookies — Bate-Papo Grátis</title>
+        <meta name="description" content="Entenda como utilizamos cookies para melhorar sua experiência no Bate-Papo Grátis." />
+        <link rel="canonical" href="/politica-de-cookies" />
+      </Helmet>
+      <LegalLayout title="Política de Cookies">
       <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
         <Cookie size={13} />
         Última atualização: Janeiro de 2026
@@ -54,5 +61,6 @@ export default function PoliticaCookies() {
         <p className="font-semibold text-blue-600 mt-1">contato@batepapogratis.com</p>
       </div>
     </LegalLayout>
+  </>
   );
 }

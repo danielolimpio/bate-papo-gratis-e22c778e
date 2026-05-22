@@ -1,9 +1,16 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { Shield, Eye, Share2, Lock, UserCheck, Mail } from "lucide-react";
 
 export default function PoliticaPrivacidade() {
   return (
-    <LegalLayout title="Política de Privacidade">
+    <>
+      <Helmet>
+        <title>Política de Privacidade — Bate-Papo Grátis</title>
+        <meta name="description" content="Saiba como protegemos seus dados e sua privacidade no Bate-Papo Grátis. Leia nossa política completa." />
+        <link rel="canonical" href="/politica-de-privacidade" />
+      </Helmet>
+      <LegalLayout title="Política de Privacidade">
       <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
         <Shield size={13} />
         Última atualização: Janeiro de 2026
@@ -65,5 +72,6 @@ export default function PoliticaPrivacidade() {
         <p className="font-semibold text-blue-600 mt-1">contato@batepapogratis.com</p>
       </div>
     </LegalLayout>
+  </>
   );
 }

@@ -1,9 +1,16 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { Heart, Target, Star, Sparkles, Users } from "lucide-react";
 
 export default function QuemSomos() {
   return (
-    <LegalLayout title="Quem Somos">
+    <>
+      <Helmet>
+        <title>Quem Somos — Bate-Papo Grátis</title>
+        <meta name="description" content="Conheça a história, missão e valores do Bate-Papo Grátis. Um espaço para conexões genuínas." />
+        <link rel="canonical" href="/quem-somos" />
+      </Helmet>
+      <LegalLayout title="Quem Somos">
       <div className="text-center mb-8">
         <p className="text-lg leading-relaxed text-gray-600">
           O <strong className="text-gray-900">Bate-Papo Grátis</strong> nasceu da vontade de criar um espaço online onde pessoas possam se conectar de forma genuína, segura e divertida.
@@ -58,5 +65,6 @@ export default function QuemSomos() {
         <p className="text-white font-semibold text-lg">Bate-Papo Grátis — Onde corações se encontram.</p>
       </div>
     </LegalLayout>
+  </>
   );
 }

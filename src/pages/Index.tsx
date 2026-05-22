@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Moon, Sun } from "lucide-react";
 import ConversationList from "@/components/chat/ConversationList";
 import ChatArea from "@/components/chat/ChatArea";
@@ -80,6 +81,11 @@ export default function Index() {
 
   return (
     <div className="flex h-[100dvh] w-screen overflow-hidden bg-chat-bg">
+      <Helmet>
+        <title>Sala de Bate-Papo — Bate-Papo Grátis</title>
+        <meta name="description" content="Converse em tempo real na sala de bate-papo. Chat privado, grupos e matchs para encontrar novas amizades." />
+        <link rel="canonical" href="/saladebatepapo" />
+      </Helmet>
       <div
         className={`${
           mobileView === "list" ? "flex" : "hidden"
