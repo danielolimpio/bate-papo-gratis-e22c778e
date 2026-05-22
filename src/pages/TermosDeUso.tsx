@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { FileText, CheckCircle, UserCheck, MessageSquare, Key, Trash2, AlertTriangle, RefreshCw } from "lucide-react";
 

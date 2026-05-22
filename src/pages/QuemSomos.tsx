@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { Heart, Target, Star, Sparkles, Users } from "lucide-react";
 

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
 import { Cookie, Settings, Mail, Zap, BarChart3, Palette } from "lucide-react";
 
