@@ -116,9 +116,10 @@ export default function ResetPassword() {
 
           <form onSubmit={handleReset} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">Nova senha</label>
+              <label htmlFor="reset-password" className="block text-xs font-medium text-muted-foreground mb-1">Nova senha</label>
               <div className="relative">
                 <input
+                  id="reset-password"
                   type={showPassword ? "text" : "password"}
                   required
                   minLength={6}
@@ -127,14 +128,15 @@ export default function ResetPassword() {
                   className="w-full rounded-lg border border-chat-divider bg-chat-input-bg px-3 py-2.5 text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/50 pr-10"
                   placeholder="Mínimo 6 caracteres"
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                <button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">Confirmar nova senha</label>
+              <label htmlFor="reset-confirm" className="block text-xs font-medium text-muted-foreground mb-1">Confirmar nova senha</label>
               <input
+                id="reset-confirm"
                 type={showPassword ? "text" : "password"}
                 required
                 minLength={6}

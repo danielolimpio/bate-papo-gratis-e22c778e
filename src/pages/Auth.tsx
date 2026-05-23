@@ -131,12 +131,14 @@ export default function Auth() {
       {/* Theme toggle */}
       <button
         onClick={toggle}
+        aria-label="Alternar tema"
         className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10"
       >
         {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
       </button>
 
       <div className="w-full max-w-md">
+        <h1 className="sr-only">Login e Cadastro — Bate-Papo Grátis</h1>
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <img src={logo} alt="Bate-Papo Grátis" className="h-12" />
