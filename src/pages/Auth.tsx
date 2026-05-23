@@ -175,8 +175,9 @@ export default function Auth() {
           {mode === "login" ? (
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
+                <label htmlFor="auth-email" className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
                 <input
+                  id="auth-email"
                   type="email"
                   required
                   value={email}
@@ -186,9 +187,10 @@ export default function Auth() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Senha</label>
+                <label htmlFor="auth-password" className="block text-xs font-medium text-muted-foreground mb-1">Senha</label>
                 <div className="relative">
                   <input
+                    id="auth-password"
                     type={showPassword ? "text" : "password"}
                     required
                     minLength={6}
@@ -200,6 +202,7 @@ export default function Auth() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -224,8 +227,9 @@ export default function Auth() {
           ) : (
             <form onSubmit={handleRegister} className="space-y-3">
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Nome completo</label>
+                <label htmlFor="auth-fullName" className="block text-xs font-medium text-muted-foreground mb-1">Nome completo</label>
                 <input
+                  id="auth-fullName"
                   type="text"
                   required
                   maxLength={100}
@@ -238,8 +242,9 @@ export default function Auth() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1">Idade</label>
+                  <label htmlFor="auth-age" className="block text-xs font-medium text-muted-foreground mb-1">Idade</label>
                   <input
+                    id="auth-age"
                     type="number"
                     required
                     min={18}
@@ -251,8 +256,9 @@ export default function Auth() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1">Gênero</label>
+                  <label htmlFor="auth-gender" className="block text-xs font-medium text-muted-foreground mb-1">Gênero</label>
                   <select
+                    id="auth-gender"
                     required
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
@@ -268,8 +274,9 @@ export default function Auth() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1">Estado civil</label>
+                  <label htmlFor="auth-relationship" className="block text-xs font-medium text-muted-foreground mb-1">Estado civil</label>
                   <select
+                    id="auth-relationship"
                     required
                     value={relationshipStatus}
                     onChange={(e) => setRelationshipStatus(e.target.value)}
@@ -282,8 +289,9 @@ export default function Auth() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1">Interesse</label>
+                  <label htmlFor="auth-preference" className="block text-xs font-medium text-muted-foreground mb-1">Interesse</label>
                   <select
+                    id="auth-preference"
                     required
                     value={sexualPreference}
                     onChange={(e) => setSexualPreference(e.target.value)}
