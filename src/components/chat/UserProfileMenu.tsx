@@ -305,7 +305,7 @@ function EditProfileModal({
         className="relative w-full max-w-md rounded-2xl border border-chat-divider bg-chat-sidebar p-6 shadow-2xl mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
+        <button onClick={onClose} aria-label="Fechar" className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
           <X size={18} />
         </button>
         <h2 className="text-lg font-semibold text-foreground mb-4">Editar perfil</h2>
@@ -316,8 +316,9 @@ function EditProfileModal({
 
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-muted-foreground mb-1">Nome completo</label>
+            <label htmlFor="edit-fullName" className="block text-xs font-medium text-muted-foreground mb-1">Nome completo</label>
             <input
+              id="edit-fullName"
               type="text"
               maxLength={100}
               value={fullName}
@@ -327,8 +328,9 @@ function EditProfileModal({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">Idade</label>
+              <label htmlFor="edit-age" className="block text-xs font-medium text-muted-foreground mb-1">Idade</label>
               <input
+                id="edit-age"
                 type="number"
                 min={18}
                 max={99}
@@ -338,8 +340,9 @@ function EditProfileModal({
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">Gênero</label>
+              <label htmlFor="edit-gender" className="block text-xs font-medium text-muted-foreground mb-1">Gênero</label>
               <select
+                id="edit-gender"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 className="w-full rounded-lg border border-chat-divider bg-chat-input-bg px-3 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/50"
@@ -352,8 +355,9 @@ function EditProfileModal({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">Estado civil</label>
+              <label htmlFor="edit-relationship" className="block text-xs font-medium text-muted-foreground mb-1">Estado civil</label>
               <select
+                id="edit-relationship"
                 value={relationshipStatus}
                 onChange={(e) => setRelationshipStatus(e.target.value)}
                 className="w-full rounded-lg border border-chat-divider bg-chat-input-bg px-3 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/50"
@@ -364,8 +368,9 @@ function EditProfileModal({
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">Interesse</label>
+              <label htmlFor="edit-preference" className="block text-xs font-medium text-muted-foreground mb-1">Interesse</label>
               <select
+                id="edit-preference"
                 value={sexualPreference}
                 onChange={(e) => setSexualPreference(e.target.value)}
                 className="w-full rounded-lg border border-chat-divider bg-chat-input-bg px-3 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/50"
@@ -377,8 +382,9 @@ function EditProfileModal({
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-muted-foreground mb-1">Cidade</label>
+            <label htmlFor="edit-city" className="block text-xs font-medium text-muted-foreground mb-1">Cidade</label>
             <input
+              id="edit-city"
               type="text"
               maxLength={100}
               value={city}
@@ -434,7 +440,7 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
         className="relative w-full max-w-sm rounded-2xl border border-chat-divider bg-chat-sidebar p-6 shadow-2xl mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
+        <button onClick={onClose} aria-label="Fechar" className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
           <X size={18} />
         </button>
         <h2 className="text-lg font-semibold text-foreground mb-4">Trocar senha</h2>
@@ -448,9 +454,10 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
 
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-muted-foreground mb-1">Nova senha</label>
+            <label htmlFor="change-password" className="block text-xs font-medium text-muted-foreground mb-1">Nova senha</label>
             <div className="relative">
               <input
+                id="change-password"
                 type={showPassword ? "text" : "password"}
                 minLength={6}
                 value={password}
@@ -461,6 +468,7 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -468,8 +476,9 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-muted-foreground mb-1">Confirmar senha</label>
+            <label htmlFor="change-confirm" className="block text-xs font-medium text-muted-foreground mb-1">Confirmar senha</label>
             <input
+              id="change-confirm"
               type={showPassword ? "text" : "password"}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
