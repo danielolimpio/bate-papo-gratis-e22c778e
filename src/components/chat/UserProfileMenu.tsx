@@ -454,9 +454,10 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
 
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-muted-foreground mb-1">Nova senha</label>
+            <label htmlFor="change-password" className="block text-xs font-medium text-muted-foreground mb-1">Nova senha</label>
             <div className="relative">
               <input
+                id="change-password"
                 type={showPassword ? "text" : "password"}
                 minLength={6}
                 value={password}
@@ -467,6 +468,7 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -474,8 +476,9 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-muted-foreground mb-1">Confirmar senha</label>
+            <label htmlFor="change-confirm" className="block text-xs font-medium text-muted-foreground mb-1">Confirmar senha</label>
             <input
+              id="change-confirm"
               type={showPassword ? "text" : "password"}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
