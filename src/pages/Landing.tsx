@@ -33,6 +33,7 @@ export default function Landing() {
       {/* Content */}
       <div className="relative z-10 flex flex-1 items-center justify-center px-4 md:justify-start md:px-0">
         <div className="flex flex-col items-center w-full md:w-1/2">
+          <h1 className="sr-only">Bate-Papo Grátis — Sala de Conversa e Amizades Online</h1>
           {/* Logo */}
           <img src={logo} alt="Bate-Papo Grátis" className="h-14 mb-3 drop-shadow-lg" />
 

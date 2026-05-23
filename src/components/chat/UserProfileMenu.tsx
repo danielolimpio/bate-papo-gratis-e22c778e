@@ -305,7 +305,7 @@ function EditProfileModal({
         className="relative w-full max-w-md rounded-2xl border border-chat-divider bg-chat-sidebar p-6 shadow-2xl mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
+        <button onClick={onClose} aria-label="Fechar" className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
           <X size={18} />
         </button>
         <h2 className="text-lg font-semibold text-foreground mb-4">Editar perfil</h2>
@@ -434,7 +434,7 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
         className="relative w-full max-w-sm rounded-2xl border border-chat-divider bg-chat-sidebar p-6 shadow-2xl mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
+        <button onClick={onClose} aria-label="Fechar" className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
           <X size={18} />
         </button>
         <h2 className="text-lg font-semibold text-foreground mb-4">Trocar senha</h2>

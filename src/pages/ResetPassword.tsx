@@ -68,9 +68,9 @@ export default function ResetPassword() {
           <meta name="description" content="Recupere o acesso à sua conta redefinindo sua senha de forma segura." />
           <link rel="canonical" href="/reset-password" />
         </Helmet>
-        <button onClick={toggle} className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10">
-          {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
-        </button>
+      <button onClick={toggle} aria-label="Alternar tema" className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10">
+        {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
+      </button>
         <div className="w-full max-w-md text-center">
           <div className="flex justify-center mb-6">
             <img src={logo} alt="Bate-Papo Grátis" className="h-12" />
@@ -100,7 +100,7 @@ export default function ResetPassword() {
         <meta name="description" content="Recupere o acesso à sua conta redefinindo sua senha de forma segura." />
         <link rel="canonical" href="/reset-password" />
       </Helmet>
-      <button onClick={toggle} className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10">
+      <button onClick={toggle} aria-label="Alternar tema" className="fixed top-4 right-4 rounded-full p-2 hover:bg-secondary transition-colors z-10">
         {isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />}
       </button>
       <div className="w-full max-w-md">
