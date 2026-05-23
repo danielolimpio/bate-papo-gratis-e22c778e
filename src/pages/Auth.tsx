@@ -306,8 +306,9 @@ export default function Auth() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Cidade</label>
+                <label htmlFor="auth-city" className="block text-xs font-medium text-muted-foreground mb-1">Cidade</label>
                 <input
+                  id="auth-city"
                   type="text"
                   required
                   maxLength={100}
@@ -319,8 +320,9 @@ export default function Auth() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
+                <label htmlFor="auth-register-email" className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
                 <input
+                  id="auth-register-email"
                   type="email"
                   required
                   value={email}
@@ -331,9 +333,10 @@ export default function Auth() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Senha</label>
+                <label htmlFor="auth-register-password" className="block text-xs font-medium text-muted-foreground mb-1">Senha</label>
                 <div className="relative">
                   <input
+                    id="auth-register-password"
                     type={showPassword ? "text" : "password"}
                     required
                     minLength={6}
@@ -345,6 +348,7 @@ export default function Auth() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -383,8 +387,9 @@ export default function Auth() {
             )}
             <form onSubmit={handleForgotPassword} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
+                <label htmlFor="auth-forgot-email" className="block text-xs font-medium text-muted-foreground mb-1">Email</label>
                 <input
+                  id="auth-forgot-email"
                   type="email"
                   required
                   value={forgotEmail}
