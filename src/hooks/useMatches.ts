@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { users } from "@/data/mockData";
 import { onSync } from "@/lib/syncBus";
 
-export type MatchType = "given" | "received";
+export type MatchType = "given" | "received" | "mutual";
 
 export interface MatchEntry {
   userId: string;
