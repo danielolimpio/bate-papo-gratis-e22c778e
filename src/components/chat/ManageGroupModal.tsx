@@ -8,9 +8,10 @@ interface Props {
   onClose: () => void;
   onAddMembers: (groupId: string, memberIds: string[]) => void | Promise<void>;
   onRemoveMember: (groupId: string, memberUserId: string) => void | Promise<void>;
+  onStartChat?: (userId: string) => void;
 }
 
-export default function ManageGroupModal({ group, onClose, onAddMembers, onRemoveMember }: Props) {
+export default function ManageGroupModal({ group, onClose, onAddMembers, onRemoveMember, onStartChat }: Props) {
   const [adding, setAdding] = useState(false);
   const [q, setQ] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
