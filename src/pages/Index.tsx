@@ -180,6 +180,10 @@ export default function Index() {
           onClose={() => setManageGroupId(null)}
           onAddMembers={addMembers}
           onRemoveMember={removeMember}
+          onStartChat={(userId) => {
+            setManageGroupId(null);
+            handleStartChat(userId);
+          }}
         />
       )}
     </div>
