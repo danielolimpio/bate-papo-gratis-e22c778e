@@ -83,8 +83,15 @@ export default function ManageGroupModal({ group, onClose, onAddMembers, onRemov
               )}
               {members.map((u) => (
                 <div key={u.id} className="flex items-center gap-3 rounded-md px-2 py-2 hover:bg-chat-hover">
-                  <img src={u.avatar} alt={u.name} className="h-9 w-9 rounded-full object-cover" />
-                  <p className="flex-1 truncate text-[13px] font-semibold text-foreground">{u.name}</p>
+                  <button
+                    type="button"
+                    onClick={() => onStartChat?.(u.id)}
+                    className="flex flex-1 items-center gap-3 min-w-0 text-left"
+                    aria-label={`Conversar com ${u.name}`}
+                  >
+                    <img src={u.avatar} alt={u.name} className="h-9 w-9 rounded-full object-cover" />
+                    <p className="flex-1 truncate text-[13px] font-semibold text-foreground hover:underline">{u.name}</p>
+                  </button>
                   <button
                     onClick={() => onRemoveMember(group.id, u.id)}
                     className="rounded-full p-1.5 text-muted-foreground hover:bg-secondary hover:text-destructive"
