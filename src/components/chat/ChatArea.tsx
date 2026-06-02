@@ -17,9 +17,10 @@ interface Props {
   onAvatarClick: (userId: string) => void;
   onBack?: () => void;
   onManageGroup?: () => void;
+  onStartChat?: (userId: string) => void;
 }
 
-export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup }: Props) {
+export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup, onStartChat }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -218,7 +219,11 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
             <div key={msg.id} className={`mb-2 flex ${isMe ? "justify-end" : "justify-start"}`}>
               {/* Avatar for others */}
               {!isMe && (
-                <div className="h-7 w-7 rounded-full overflow-hidden mr-2 mt-1 flex-shrink-0">
+                <button
+                  onClick={() => onStartChat?.(msg.user_id)}
+                  className="h-7 w-7 rounded-full overflow-hidden mr-2 mt-1 flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary/50 transition"
+                  title={`Conversar com ${msg.sender_name}`}
+                >
                   {msg.sender_avatar ? (
                     <img src={msg.sender_avatar} alt={msg.sender_name} className="h-full w-full object-cover" />
                   ) : (
@@ -226,11 +231,17 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
                       {msg.sender_name?.charAt(0)?.toUpperCase() || <User size={12} />}
                     </div>
                   )}
-                </div>
+                </button>
               )}
               <div className="max-w-[calc(100vw-6rem)] sm:max-w-[66%] min-w-0">
                 {!isMe && (
-                  <p className="text-[11px] text-muted-foreground mb-0.5 ml-1">{msg.sender_name}</p>
+                  <button
+                    onClick={() => onStartChat?.(msg.user_id)}
+                    className="block text-[11px] text-muted-foreground mb-0.5 ml-1 cursor-pointer hover:underline text-left"
+                    title={`Conversar com ${msg.sender_name}`}
+                  >
+                    {msg.sender_name}
+                  </button>
                 )}
                 <div
                   className={`inline-block break-words whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm ${

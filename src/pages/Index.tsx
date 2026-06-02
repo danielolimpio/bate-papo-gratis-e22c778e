@@ -149,6 +149,7 @@ export default function Index() {
           onAvatarClick={setProfileUserId}
           onBack={handleBackToList}
           onManageGroup={activeGroup ? () => setManageGroupId(activeGroup.id) : undefined}
+          onStartChat={handleStartChat}
         />
       </div>
 
