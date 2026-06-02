@@ -120,7 +120,12 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
       const target = users.find((u) => u.id === userId);
       if (!isOppositeGender(gender, target?.gender)) return false;
 
-      const entry: MatchEntry = { userId, type, timestamp: Date.now() };
+      const existing = matches.find((m) => m.userId === userId);
+      let finalType: MatchType = type;
+      if (type === "given" && existing?.type === "received") finalType = "mutual";
+      if (type === "received" && existing?.type === "given") finalType = "mutual";
+
+      const entry: MatchEntry = { userId, type: finalType, timestamp: Date.now() };
       setMatches((prev) => [entry, ...prev.filter((m) => m.userId !== userId)]);
 
       supabase
@@ -129,7 +134,7 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
           {
             user_id: currentUserId,
             target_user_id: userId,
-            match_type: type,
+            match_type: finalType,
             created_at: new Date(entry.timestamp).toISOString(),
           },
           { onConflict: "user_id,target_user_id" }
@@ -140,7 +145,7 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
 
       return true;
     },
-    [currentUserId, gender]
+    [currentUserId, gender, matches]
   );
 
   const removeMatch = useCallback(
@@ -164,6 +169,16 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
     [matches]
   );
 
+  const getMatchType = useCallback(
+    (userId: string): MatchType | null => matches.find((m) => m.userId === userId)?.type ?? null,
+    [matches]
+  );
+
+  const isMutual = useCallback(
+    (userId: string) => matches.some((m) => m.userId === userId && m.type === "mutual"),
+    [matches]
+  );
+
   const canMatch = useCallback(
     (userId: string) => {
       const target = users.find((u) => u.id === userId);
@@ -172,5 +187,5 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
     [gender]
   );
 
-  return { matches, addMatch, removeMatch, hasMatch, canMatch };
+  return { matches, addMatch, removeMatch, hasMatch, getMatchType, isMutual, canMatch };
 }
