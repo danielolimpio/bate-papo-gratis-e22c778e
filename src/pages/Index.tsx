@@ -23,7 +23,7 @@ export default function Index() {
   const { isDark, toggle } = useTheme();
   const onlineIds = useOnlineUsers();
   const { user, profile, refreshProfile } = useCurrentUser();
-  const { matches, addMatch, removeMatch, hasMatch, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
+  const { matches, addMatch, removeMatch, getMatchType, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
   const { conversations: savedConvs, upsertConversation, removeConversation } = useUserConversations(user?.id ?? null);
   const { groups, invites, createGroup, removeGroup, addMembers, removeMember, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
   const [manageGroupId, setManageGroupId] = useState<string | null>(null);
