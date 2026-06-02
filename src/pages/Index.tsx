@@ -166,7 +166,7 @@ export default function Index() {
         <ProfileModal
           userId={profileUserId}
           onClose={() => setProfileUserId(null)}
-          isMatched={hasMatch(profileUserId)}
+          matchType={getMatchType(profileUserId)}
           canMatch={canMatch(profileUserId)}
           onMatch={(userId) => addMatch(userId, "given")}
           onUnmatch={(userId) => removeMatch(userId)}
