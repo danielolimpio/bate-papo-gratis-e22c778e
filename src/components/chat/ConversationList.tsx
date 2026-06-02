@@ -334,32 +334,53 @@ function MatchesList({ matches, onSelect }: { matches: MatchEntry[]; onSelect: (
         const u = users.find((x) => x.id === m.userId);
         if (!u) return null;
         const isGiven = m.type === "given";
+        const isMutual = m.type === "mutual";
         return (
           <div
             key={m.userId}
             onClick={() => onSelect(m.userId)}
-            className="flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md hover:bg-chat-hover transition-colors"
+            className={`flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md transition-colors ${
+              isMutual
+                ? "bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-fuchsia-500/10 hover:from-pink-500/20 hover:to-fuchsia-500/20 ring-1 ring-pink-500/40"
+                : "hover:bg-chat-hover"
+            }`}
           >
             <div className="relative flex-shrink-0">
-              <img src={u.avatar} alt={u.name} className="h-[48px] w-[48px] rounded-full object-cover" />
+              <img
+                src={u.avatar}
+                alt={u.name}
+                className={`h-[48px] w-[48px] rounded-full object-cover ${isMutual ? "ring-2 ring-pink-500" : ""}`}
+              />
               <span
                 className={`absolute -bottom-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-chat-sidebar ${
-                  isGiven ? "bg-primary" : "bg-pink-500"
+                  isMutual
+                    ? "bg-gradient-to-br from-pink-500 to-fuchsia-500 animate-pulse"
+                    : isGiven
+                      ? "bg-primary"
+                      : "bg-pink-500"
                 }`}
               >
                 <Heart size={10} className="text-white" fill="currentColor" />
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <span className="text-[13px] font-semibold text-foreground truncate block">{u.name}</span>
               <span
-                className={`inline-block mt-0.5 rounded-full px-2 py-[2px] text-[10px] font-semibold ${
-                  isGiven
-                    ? "bg-primary/15 text-primary"
-                    : "bg-pink-500/15 text-pink-600 dark:text-pink-400"
+                className={`text-[13px] font-semibold truncate block ${
+                  isMutual ? "bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent" : "text-foreground"
                 }`}
               >
-                {isGiven ? "Você deu Match" : "Você recebeu Match"}
+                {u.name}
+              </span>
+              <span
+                className={`inline-block mt-0.5 rounded-full px-2 py-[2px] text-[10px] font-semibold ${
+                  isMutual
+                    ? "bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white"
+                    : isGiven
+                      ? "bg-primary/15 text-primary"
+                      : "bg-pink-500/15 text-pink-600 dark:text-pink-400"
+                }`}
+              >
+                {isMutual ? "💞 Apaixonados" : isGiven ? "Você deu Match" : "Você recebeu Match"}
               </span>
             </div>
           </div>
