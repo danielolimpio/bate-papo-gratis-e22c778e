@@ -17,6 +17,7 @@ interface Props {
   onAvatarClick: (userId: string) => void;
   onBack?: () => void;
   onManageGroup?: () => void;
+  onStartChat?: (userId: string) => void;
 }
 
 export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup }: Props) {
