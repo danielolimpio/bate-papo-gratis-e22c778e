@@ -88,27 +88,14 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* SEO links footer */}
+      {/* Footer */}
       <footer className="relative z-10 w-full py-6 text-center">
-        <nav aria-label="Explorar" className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mb-3 text-xs text-white/80 px-4">
-          <Link to="/bate-papo-sem-cadastro" className="hover:text-white transition-colors">Bate-Papo Sem Cadastro</Link>
-          <span className="text-white/40">·</span>
-          <Link to="/sala-de-bate-papo" className="hover:text-white transition-colors">Sala de Bate-Papo</Link>
-          <span className="text-white/40">·</span>
-          <Link to="/chat-gratis" className="hover:text-white transition-colors">Chat Grátis</Link>
-          <span className="text-white/40">·</span>
-          <Link to="/bate-papo-webcam" className="hover:text-white transition-colors">Bate-Papo Webcam</Link>
-          <span className="text-white/40">·</span>
-          <Link to="/bate-papo-amizade-namoro" className="hover:text-white transition-colors">Amizade e Namoro</Link>
-        </nav>
         <nav className="flex flex-wrap items-center justify-center gap-4 mb-3 text-sm text-white/80">
           <Link to="/politica-de-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
           <span className="text-white/40">|</span>
           <Link to="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</Link>
           <span className="text-white/40">|</span>
           <Link to="/politica-de-cookies" className="hover:text-white transition-colors">Política de Cookies</Link>
-          <span className="text-white/40">|</span>
-          <Link to="/quem-somos" className="hover:text-white transition-colors">Quem Somos</Link>
           <span className="text-white/40">|</span>
           <Link to="/namoro-seguro" className="hover:text-white transition-colors">Namoro Seguro</Link>
         </nav>
