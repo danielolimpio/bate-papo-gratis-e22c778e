@@ -13,12 +13,12 @@ export default function Landing() {
   return (
     <div className="relative min-h-screen w-full flex flex-col">
       <Helmet>
-        <title>Bate-Papo Grátis — Sala de Conversa e Amizades Online</title>
-        <meta name="description" content="Sala de bate-papo online gratuita para conversar e fazer novas amizades em tempo real. Encontre pessoas especiais." />
-        <link rel="canonical" href="/" />
-        <meta property="og:title" content="Bate-Papo Grátis — Sala de Conversa e Amizades Online" />
-        <meta property="og:description" content="Sala de bate-papo online gratuita para conversar e fazer novas amizades em tempo real." />
-        <meta property="og:url" content="/" />
+        <title>Bate-Papo Grátis — Sala de Bate-Papo Online Sem Cadastro</title>
+        <meta name="description" content="Bate papo grátis e online sem cadastro complicado. Entre na sala de bate papo gratis 24h e converse com pessoas do Brasil inteiro. Chat gratuito e seguro." />
+        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/" />
+        <meta property="og:title" content="Bate-Papo Grátis — Sala de Bate-Papo Online Sem Cadastro" />
+        <meta property="og:description" content="Bate papo grátis e online. Sala de bate papo 24h, sem cadastro complicado, com chat ao vivo." />
+        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/" />
       </Helmet>
       {/* Hero background - full screen */}
       <div className="absolute inset-0 z-0">
@@ -33,7 +33,7 @@ export default function Landing() {
       {/* Content */}
       <div className="relative z-10 flex flex-1 items-center justify-center px-4 md:justify-start md:px-0">
         <div className="flex flex-col items-center w-full md:w-1/2">
-          <h1 className="sr-only">Bate-Papo Grátis — Sala de Conversa e Amizades Online</h1>
+          <h1 className="sr-only">Bate-Papo Grátis — Sala de Bate-Papo Online Sem Cadastro</h1>
           {/* Logo */}
           <img src={logo} alt="Bate-Papo Grátis" className="h-14 mb-3 drop-shadow-lg" />
 
