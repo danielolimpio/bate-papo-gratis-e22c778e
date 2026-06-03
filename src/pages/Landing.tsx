@@ -28,6 +28,11 @@ export default function Landing() {
         <img
           src={heroCouple}
           alt="Casal feliz"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40" />
