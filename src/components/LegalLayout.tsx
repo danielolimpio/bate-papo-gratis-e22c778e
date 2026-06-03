@@ -1,31 +1,18 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Shield, FileText, Cookie, Users, Heart } from "lucide-react";
-import logo from "@/assets/logo-batepapo.png";
+import { Shield, FileText, Cookie, Heart } from "lucide-react";
+import PremiumHeader from "@/components/PremiumHeader";
 
 const navItems = [
   { to: "/politica-de-privacidade", label: "Privacidade", icon: Shield },
   { to: "/termos-de-uso", label: "Termos", icon: FileText },
   { to: "/politica-de-cookies", label: "Cookies", icon: Cookie },
-  { to: "/quem-somos", label: "Quem Somos", icon: Users },
   { to: "/namoro-seguro", label: "Namoro Seguro", icon: Heart },
 ];
 
 function LegalLayout({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors text-sm font-medium">
-            <ArrowLeft size={16} />
-            Voltar
-          </Link>
-          <Link to="/" className="inline-block">
-            <img src={logo} alt="Bate-Papo Grátis" className="h-9" />
-          </Link>
-          <div className="w-16" />
-        </div>
-      </header>
+      <PremiumHeader variant="light" />
 
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-amber-500 py-12 px-6">
