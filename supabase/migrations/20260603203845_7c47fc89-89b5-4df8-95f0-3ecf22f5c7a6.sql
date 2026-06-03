@@ -1,0 +1,2 @@
+ALTER TABLE public.user_matches DROP CONSTRAINT user_matches_match_type_check;
+ALTER TABLE public.user_matches ADD CONSTRAINT user_matches_match_type_check CHECK (match_type = ANY (ARRAY['given'::text, 'received'::text, 'mutual'::text]));
