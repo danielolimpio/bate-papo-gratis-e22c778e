@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Shield, FileText, Cookie, Users, Heart } from "lucide-react";
-import logo from "@/assets/logo-batepapo.png";
+import { Shield, FileText, Cookie, Heart } from "lucide-react";
+import PremiumHeader from "@/components/PremiumHeader";
 
 const navItems = [
   { to: "/politica-de-privacidade", label: "Privacidade", icon: Shield },
   { to: "/termos-de-uso", label: "Termos", icon: FileText },
   { to: "/politica-de-cookies", label: "Cookies", icon: Cookie },
-  { to: "/quem-somos", label: "Quem Somos", icon: Users },
   { to: "/namoro-seguro", label: "Namoro Seguro", icon: Heart },
 ];
 
