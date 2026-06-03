@@ -6,17 +6,31 @@ export default function QuemSomos() {
   return (
     <>
       <Helmet>
-        <title>Quem Somos — Bate-Papo Grátis</title>
-        <meta name="description" content="Conheça a história, missão e valores do Bate-Papo Grátis. Um espaço para conexões genuínas." />
-        <link rel="canonical" href="/quem-somos" />
+        <title>Quem Somos — Bate-Papo Grátis | Melhor Site de Bate-Papo Gratuito</title>
+        <meta name="description" content="Conheça o Bate-Papo Grátis: o melhor bate papo gratis e gratuito do Brasil. Site bate papo gratuito, portal de bate papo e comunidade online gratuita." />
+        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/quem-somos" />
       </Helmet>
       <LegalLayout title="Quem Somos">
       <div className="text-center mb-8">
         <p className="text-lg leading-relaxed text-gray-600">
           O <strong className="text-gray-900">Bate-Papo Grátis</strong> nasceu da vontade de criar um espaço online onde pessoas possam se conectar de forma genuína, segura e divertida.
-          Acreditamos que todo mundo merece encontrar alguém especial.
+          Acreditamos que todo mundo merece encontrar alguém especial — por isso construímos o que consideramos o
+          <strong> melhor bate papo gratis</strong> do Brasil.
         </p>
       </div>
+
+      <h2><Star size={18} className="text-blue-600 shrink-0" /> Por que escolher o Bate-Papo Grátis</h2>
+      <p>
+        Existem dezenas de sites por aí, mas poucos entregam um <strong>site bate papo gratuito</strong> de verdade,
+        sem cobranças escondidas, sem propagandas invasivas e com uma <strong>comunidade online gratuita</strong> ativa.
+        Somos um <strong>portal de bate papo gratuito</strong> brasileiro, pensado para quem quer conversar com gente real.
+      </p>
+      <ul className="list-disc pl-5 space-y-1">
+        <li>Um <strong>bate papo gratuito</strong> 100% sem mensalidade ou assinatura.</li>
+        <li>Uma <strong>rede social de bate papo</strong> com perfis ricos, álbum de fotos e sistema de matchs.</li>
+        <li>Um <strong>site gratuito de bate papo</strong> com mensagens em tempo real, áudios e fotos.</li>
+        <li>Comunidade brasileira ativa 24h — o <strong>bate papo grátis brasil</strong> que você procurava.</li>
+      </ul>
 
       <h2><Target size={18} className="text-blue-600 shrink-0" /> Nossa Missão</h2>
       <div className="bg-blue-50 rounded-xl p-5 mt-3 border border-blue-100 text-center">

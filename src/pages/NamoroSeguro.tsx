@@ -6,9 +6,9 @@ export default function NamoroSeguro() {
   return (
     <>
       <Helmet>
-        <title>Namoro Seguro — Bate-Papo Grátis</title>
-        <meta name="description" content="Dicas e diretrizes para um namoro online seguro. Proteja-se enquanto conhece novas pessoas." />
-        <link rel="canonical" href="/namoro-seguro" />
+        <title>Namoro Seguro — Bate-Papo de Namoro, Amizade e Paquera Grátis</title>
+        <meta name="description" content="Bate papo de namoro e amizade com segurança. Bate papo paquera gratis, chat para amizade e site de relacionamento gratuito com dicas de proteção." />
+        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/namoro-seguro" />
       </Helmet>
       <LegalLayout title="Namoro Seguro">
       <div className="text-center mb-8">
