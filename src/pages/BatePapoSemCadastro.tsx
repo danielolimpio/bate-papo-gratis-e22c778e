@@ -28,10 +28,10 @@ export default function BatePapoSemCadastro() {
       <Helmet>
         <title>Bate-Papo Sem Cadastro — Chat Grátis e Online Sem Registro</title>
         <meta name="description" content="Bate papo sem cadastro grátis e online. Entre na sala de bate papo sem login, sem conta e sem registrar. Chat gratuito 24h para conversar agora." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/bate-papo-sem-cadastro" />
+        <link rel="canonical" href="https://batepapogratis.com/bate-papo-sem-cadastro" />
         <meta property="og:title" content="Bate-Papo Sem Cadastro — Chat Grátis Online" />
         <meta property="og:description" content="Sala de bate papo sem cadastro, grátis e ao vivo. Comece a conversar em segundos." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/bate-papo-sem-cadastro" />
+        <meta property="og:url" content="https://batepapogratis.com/bate-papo-sem-cadastro" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

@@ -87,7 +87,7 @@ export default function Index() {
         <link rel="canonical" href="/saladebatepapo" />
         <meta property="og:title" content="Sala de Bate-Papo — Bate-Papo Grátis" />
         <meta property="og:description" content="Converse em tempo real na sala de bate-papo. Chat privado, grupos e matchs para encontrar novas amizades." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/saladebatepapo" />
+        <meta property="og:url" content="https://batepapogratis.com/saladebatepapo" />
         <meta property="og:type" content="website" />
       </Helmet>
       <div

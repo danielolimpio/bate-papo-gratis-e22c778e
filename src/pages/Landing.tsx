@@ -16,10 +16,10 @@ export default function Landing() {
       <Helmet>
         <title>Bate-Papo Grátis — Sala de Bate-Papo Online Sem Cadastro</title>
         <meta name="description" content="Bate papo grátis e online sem cadastro complicado. Entre na sala de bate papo gratis 24h e converse com pessoas do Brasil inteiro. Chat gratuito e seguro." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/" />
+        <link rel="canonical" href="https://batepapogratis.com/" />
         <meta property="og:title" content="Bate-Papo Grátis — Sala de Bate-Papo Online Sem Cadastro" />
         <meta property="og:description" content="Bate papo grátis e online. Sala de bate papo 24h, sem cadastro complicado, com chat ao vivo." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/" />
+        <meta property="og:url" content="https://batepapogratis.com/" />
         <meta property="og:type" content="website" />
       </Helmet>
       <PremiumHeader variant="dark" />

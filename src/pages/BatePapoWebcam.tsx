@@ -28,10 +28,10 @@ export default function BatePapoWebcam() {
       <Helmet>
         <title>Bate-Papo com Webcam Grátis — Chat com Foto e Áudio Online</title>
         <meta name="description" content="Bate papo com webcam grátis: perfis com fotos, álbum, áudio na sala e fotos no privado. Chat com webcam gratuito, brasileiro e ao vivo." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/bate-papo-webcam" />
+        <link rel="canonical" href="https://batepapogratis.com/bate-papo-webcam" />
         <meta property="og:title" content="Bate-Papo com Webcam Grátis" />
         <meta property="og:description" content="Chat com fotos, áudio e perfis visuais ricos — bate papo webcam gratis." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/bate-papo-webcam" />
+        <meta property="og:url" content="https://batepapogratis.com/bate-papo-webcam" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

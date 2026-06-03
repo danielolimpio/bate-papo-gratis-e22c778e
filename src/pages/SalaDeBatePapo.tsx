@@ -28,10 +28,10 @@ export default function SalaDeBatePapo() {
       <Helmet>
         <title>Sala de Bate-Papo Grátis — Salas Online Para Conversar Agora</title>
         <meta name="description" content="Sala de bate papo gratis e online 24h. Entre em salas bate papo gratuita com pessoas de todo o Brasil. Sala de bate papo online gratis e segura." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/sala-de-bate-papo" />
+        <link rel="canonical" href="https://batepapogratis.com/sala-de-bate-papo" />
         <meta property="og:title" content="Sala de Bate-Papo Grátis — Conversas ao Vivo" />
         <meta property="og:description" content="Salas de bate papo online gratuito com gente de todo o Brasil." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/sala-de-bate-papo" />
+        <meta property="og:url" content="https://batepapogratis.com/sala-de-bate-papo" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

@@ -28,10 +28,10 @@ export default function ChatGratis() {
       <Helmet>
         <title>Chat Grátis — Chat Online Gratuito de Bate-Papo 24 Horas</title>
         <meta name="description" content="Chat gratis online 24 horas. Chat de bate papo gratuito com pessoas do Brasil inteiro. Chat gratis amizade, paquera e relacionamento — tudo gratuito." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/chat-gratis" />
+        <link rel="canonical" href="https://batepapogratis.com/chat-gratis" />
         <meta property="og:title" content="Chat Grátis — Chat Online Gratuito 24h" />
         <meta property="og:description" content="Chat bate papo gratuito com mensagens em tempo real, áudio e fotos." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/chat-gratis" />
+        <meta property="og:url" content="https://batepapogratis.com/chat-gratis" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

@@ -8,10 +8,10 @@ export default function QuemSomos() {
       <Helmet>
         <title>Quem Somos — Bate-Papo Grátis | Melhor Site de Bate-Papo Gratuito</title>
         <meta name="description" content="Conheça o Bate-Papo Grátis: o melhor bate papo gratis e gratuito do Brasil. Site bate papo gratuito, portal de bate papo e comunidade online gratuita." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/quem-somos" />
+        <link rel="canonical" href="https://batepapogratis.com/quem-somos" />
         <meta property="og:title" content="Quem Somos — Bate-Papo Grátis | Melhor Site de Bate-Papo Gratuito" />
         <meta property="og:description" content="Conheça o Bate-Papo Grátis: o melhor bate papo gratis e gratuito do Brasil. Site bate papo gratuito, portal de bate papo e comunidade online gratuita." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/quem-somos" />
+        <meta property="og:url" content="https://batepapogratis.com/quem-somos" />
         <meta property="og:type" content="website" />
       </Helmet>
       <LegalLayout title="Quem Somos">
