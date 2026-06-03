@@ -1,0 +1,19 @@
+# Bate-Papo Grátis
+
+> Bate-papo grátis e online sem cadastro complicado. Sala de bate-papo ao vivo 24h para conversar, fazer amizade, paquerar e namorar com pessoas de todo o Brasil.
+
+Bate-Papo Grátis é uma plataforma brasileira de chat online que conecta pessoas para conversas por texto, áudio e webcam. O serviço é 100% gratuito e permite o acesso rápido à sala de bate-papo sem burocracia de cadastros extensos. A comunidade reúne homens e mulheres de todas as regiões do Brasil interessados em amizade, namoro, paquera e bate-papo casual.
+
+## Pages
+
+- [Home](/): Página inicial com acesso à sala de bate-papo ao vivo. Escolha seu perfil e comece a conversar gratuitamente.
+- [Quem Somos](/quem-somos): Conheça a história, missão e valores da comunidade Bate-Papo Grátis.
+- [Bate-Papo Sem Cadastro](/bate-papo-sem-cadastro): Saiba como acessar o chat grátis sem cadastro complicado e começar a conversar em segundos.
+- [Sala de Bate-Papo](/sala-de-bate-papo): Conheça a sala de bate-papo online com conversas por texto, áudio e interação em tempo real.
+- [Chat Grátis](/chat-gratis): Descubra como usar o chat grátis 24h, com recursos de mensagens, áudio e webcam.
+- [Bate-Papo Webcam](/bate-papo-webcam): Informações sobre bate-papo com webcam, compartilhamento de fotos e conversas por áudio.
+- [Amizade e Namoro](/bate-papo-amizade-namoro): Encontre pessoas para amizade, namoro e paquera na comunidade de bate-papo online.
+- [Namoro Seguro](/namoro-seguro): Dicas e diretrizes de segurança para namoro online, proteção de dados e conversas seguras.
+- [Política de Privacidade](/politica-de-privacidade): Como coletamos, usamos e protegemos seus dados pessoais na plataforma.
+- [Termos de Uso](/termos-de-uso): Regras e condições de uso do serviço de bate-papo gratuito.
+- [Política de Cookies](/politica-de-cookies): Informações sobre o uso de cookies e tecnologias de rastreamento no site.
