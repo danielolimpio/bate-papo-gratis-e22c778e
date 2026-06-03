@@ -9,6 +9,10 @@ export default function PoliticaPrivacidade() {
         <title>Política de Privacidade — Bate-Papo Grátis</title>
         <meta name="description" content="Saiba como protegemos seus dados e sua privacidade no Bate-Papo Grátis. Leia nossa política completa." />
         <link rel="canonical" href="/politica-de-privacidade" />
+        <meta property="og:title" content="Política de Privacidade — Bate-Papo Grátis" />
+        <meta property="og:description" content="Saiba como protegemos seus dados e sua privacidade no Bate-Papo Grátis. Leia nossa política completa." />
+        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/politica-de-privacidade" />
+        <meta property="og:type" content="website" />
       </Helmet>
       <LegalLayout title="Política de Privacidade">
       <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
