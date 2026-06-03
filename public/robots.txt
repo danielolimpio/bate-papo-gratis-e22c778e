@@ -10,4 +10,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://bate-papo-gratis.lovable.app/sitemap.xml
+Sitemap: https://batepapogratis.com/sitemap.xml

@@ -28,10 +28,10 @@ export default function BatePapoAmizadeNamoro() {
       <Helmet>
         <title>Bate-Papo para Amizade e Namoro — Conheça Pessoas Grátis</title>
         <meta name="description" content="Bate papo para amizade e namoro gratis. Chat para amizade, paquera e relacionamento, com sistema de matchs. Site de relacionamento gratuito e seguro." />
-        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/bate-papo-amizade-namoro" />
+        <link rel="canonical" href="https://batepapogratis.com/bate-papo-amizade-namoro" />
         <meta property="og:title" content="Bate-Papo para Amizade e Namoro" />
         <meta property="og:description" content="Conheça pessoas reais no bate papo de namoro e amizade — comunidade brasileira e gratuita." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/bate-papo-amizade-namoro" />
+        <meta property="og:url" content="https://batepapogratis.com/bate-papo-amizade-namoro" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

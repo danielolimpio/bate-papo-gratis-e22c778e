@@ -11,7 +11,7 @@ export default function PoliticaCookies() {
         <link rel="canonical" href="/politica-de-cookies" />
         <meta property="og:title" content="Política de Cookies — Bate-Papo Grátis" />
         <meta property="og:description" content="Entenda como utilizamos cookies para melhorar sua experiência no Bate-Papo Grátis." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/politica-de-cookies" />
+        <meta property="og:url" content="https://batepapogratis.com/politica-de-cookies" />
         <meta property="og:type" content="website" />
       </Helmet>
       <LegalLayout title="Política de Cookies">

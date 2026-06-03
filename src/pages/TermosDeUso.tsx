@@ -11,7 +11,7 @@ export default function TermosDeUso() {
         <link rel="canonical" href="/termos-de-uso" />
         <meta property="og:title" content="Termos de Uso — Bate-Papo Grátis" />
         <meta property="og:description" content="Conheça as regras e condições de uso da plataforma Bate-Papo Grátis. Use de forma responsável." />
-        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/termos-de-uso" />
+        <meta property="og:url" content="https://batepapogratis.com/termos-de-uso" />
         <meta property="og:type" content="website" />
       </Helmet>
       <LegalLayout title="Termos de Uso">
