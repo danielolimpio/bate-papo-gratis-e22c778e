@@ -32,6 +32,7 @@ export default function BatePapoAmizadeNamoro() {
         <meta property="og:title" content="Bate-Papo para Amizade e Namoro" />
         <meta property="og:description" content="Conheça pessoas reais no bate papo de namoro e amizade — comunidade brasileira e gratuita." />
         <meta property="og:url" content="https://bate-papo-gratis.lovable.app/bate-papo-amizade-namoro" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
