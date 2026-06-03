@@ -32,6 +32,7 @@ export default function ChatGratis() {
         <meta property="og:title" content="Chat Grátis — Chat Online Gratuito 24h" />
         <meta property="og:description" content="Chat bate papo gratuito com mensagens em tempo real, áudio e fotos." />
         <meta property="og:url" content="https://bate-papo-gratis.lovable.app/chat-gratis" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",

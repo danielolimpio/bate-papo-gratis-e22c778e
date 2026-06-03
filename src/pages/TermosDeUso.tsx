@@ -9,6 +9,10 @@ export default function TermosDeUso() {
         <title>Termos de Uso — Bate-Papo Grátis</title>
         <meta name="description" content="Conheça as regras e condições de uso da plataforma Bate-Papo Grátis. Use de forma responsável." />
         <link rel="canonical" href="/termos-de-uso" />
+        <meta property="og:title" content="Termos de Uso — Bate-Papo Grátis" />
+        <meta property="og:description" content="Conheça as regras e condições de uso da plataforma Bate-Papo Grátis. Use de forma responsável." />
+        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/termos-de-uso" />
+        <meta property="og:type" content="website" />
       </Helmet>
       <LegalLayout title="Termos de Uso">
       <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">

@@ -32,6 +32,7 @@ export default function SalaDeBatePapo() {
         <meta property="og:title" content="Sala de Bate-Papo Grátis — Conversas ao Vivo" />
         <meta property="og:description" content="Salas de bate papo online gratuito com gente de todo o Brasil." />
         <meta property="og:url" content="https://bate-papo-gratis.lovable.app/sala-de-bate-papo" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",

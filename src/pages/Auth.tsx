@@ -127,6 +127,10 @@ export default function Auth() {
         <title>Login e Cadastro — Bate-Papo Grátis</title>
         <meta name="description" content="Entre na sua conta ou cadastre-se gratuitamente no Bate-Papo Grátis. Comece a conversar e fazer amizades agora." />
         <link rel="canonical" href="/auth" />
+        <meta property="og:title" content="Login e Cadastro — Bate-Papo Grátis" />
+        <meta property="og:description" content="Entre na sua conta ou cadastre-se gratuitamente no Bate-Papo Grátis. Comece a conversar e fazer amizades agora." />
+        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/auth" />
+        <meta property="og:type" content="website" />
       </Helmet>
       {/* Theme toggle */}
       <button

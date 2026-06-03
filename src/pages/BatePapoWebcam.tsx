@@ -32,6 +32,7 @@ export default function BatePapoWebcam() {
         <meta property="og:title" content="Bate-Papo com Webcam Grátis" />
         <meta property="og:description" content="Chat com fotos, áudio e perfis visuais ricos — bate papo webcam gratis." />
         <meta property="og:url" content="https://bate-papo-gratis.lovable.app/bate-papo-webcam" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",

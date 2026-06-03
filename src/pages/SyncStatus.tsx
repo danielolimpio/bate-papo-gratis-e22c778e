@@ -190,6 +190,10 @@ export default function SyncStatus() {
         <title>Status de Sincronização — Bate-Papo Grátis</title>
         <meta name="description" content="Verifique se seus dados estão sincronizados entre dispositivos no Bate-Papo Grátis." />
         <link rel="canonical" href="/status-sincronizacao" />
+        <meta property="og:title" content="Status de Sincronização — Bate-Papo Grátis" />
+        <meta property="og:description" content="Verifique se seus dados estão sincronizados entre dispositivos no Bate-Papo Grátis." />
+        <meta property="og:url" content="https://bate-papo-gratis.lovable.app/status-sincronizacao" />
+        <meta property="og:type" content="website" />
       </Helmet>
       <header className="border-b border-chat-divider px-4 py-3 flex items-center justify-between">
         <Link to="/saladebatepapo" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">

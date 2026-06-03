@@ -32,6 +32,7 @@ export default function BatePapoSemCadastro() {
         <meta property="og:title" content="Bate-Papo Sem Cadastro — Chat Grátis Online" />
         <meta property="og:description" content="Sala de bate papo sem cadastro, grátis e ao vivo. Comece a conversar em segundos." />
         <meta property="og:url" content="https://bate-papo-gratis.lovable.app/bate-papo-sem-cadastro" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
