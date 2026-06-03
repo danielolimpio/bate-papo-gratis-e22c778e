@@ -21,6 +21,7 @@ export default function Landing() {
         <meta property="og:description" content="Bate papo grátis e online. Sala de bate papo 24h, sem cadastro complicado, com chat ao vivo." />
         <meta property="og:url" content="https://bate-papo-gratis.lovable.app/" />
       </Helmet>
+      <PremiumHeader variant="dark" />
       {/* Hero background - full screen */}
       <div className="absolute inset-0 z-0">
         <img
