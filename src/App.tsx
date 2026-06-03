@@ -13,6 +13,11 @@ import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import QuemSomos from "./pages/QuemSomos";
 import NamoroSeguro from "./pages/NamoroSeguro";
+import BatePapoSemCadastro from "./pages/BatePapoSemCadastro";
+import SalaDeBatePapo from "./pages/SalaDeBatePapo";
+import ChatGratis from "./pages/ChatGratis";
+import BatePapoWebcam from "./pages/BatePapoWebcam";
+import BatePapoAmizadeNamoro from "./pages/BatePapoAmizadeNamoro";
 import SyncStatus from "./pages/SyncStatus";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAutoResync } from "./hooks/useAutoResync";
@@ -41,6 +46,11 @@ const App = () => (
           <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
           <Route path="/quem-somos" element={<QuemSomos />} />
           <Route path="/namoro-seguro" element={<NamoroSeguro />} />
+          <Route path="/bate-papo-sem-cadastro" element={<BatePapoSemCadastro />} />
+          <Route path="/sala-de-bate-papo" element={<SalaDeBatePapo />} />
+          <Route path="/chat-gratis" element={<ChatGratis />} />
+          <Route path="/bate-papo-webcam" element={<BatePapoWebcam />} />
+          <Route path="/bate-papo-amizade-namoro" element={<BatePapoAmizadeNamoro />} />
           <Route path="/status-sincronizacao" element={<ProtectedRoute><SyncStatus /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

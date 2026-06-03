@@ -6,9 +6,9 @@ export default function NamoroSeguro() {
   return (
     <>
       <Helmet>
-        <title>Namoro Seguro — Bate-Papo Grátis</title>
-        <meta name="description" content="Dicas e diretrizes para um namoro online seguro. Proteja-se enquanto conhece novas pessoas." />
-        <link rel="canonical" href="/namoro-seguro" />
+        <title>Namoro Seguro — Bate-Papo de Namoro, Amizade e Paquera Grátis</title>
+        <meta name="description" content="Bate papo de namoro e amizade com segurança. Bate papo paquera gratis, chat para amizade e site de relacionamento gratuito com dicas de proteção." />
+        <link rel="canonical" href="https://bate-papo-gratis.lovable.app/namoro-seguro" />
       </Helmet>
       <LegalLayout title="Namoro Seguro">
       <div className="text-center mb-8">
@@ -17,7 +17,10 @@ export default function NamoroSeguro() {
           Sua segurança é nossa prioridade
         </div>
         <p className="text-gray-600">
-          No Bate-Papo Grátis, trabalhamos para que você tenha a melhor experiência ao conhecer novas pessoas. Confira nossas dicas e políticas para um namoro online seguro.
+          O <strong>bate papo de namoro</strong> e o <strong>bate papo para amizade</strong> só fazem sentido em um ambiente seguro.
+          No Bate-Papo Grátis, construímos um <strong>site de relacionamento gratuito</strong> com moderação ativa, dicas
+          de proteção e ferramentas que valorizam <strong>bate papo paquera gratis</strong> respeitoso. Aqui estão nossas
+          diretrizes para você curtir o <strong>chat para amizade</strong>, paquera e relacionamento com tranquilidade.
         </p>
       </div>
 
