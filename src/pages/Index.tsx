@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Moon, Sun } from "lucide-react";
 import ConversationList from "@/components/chat/ConversationList";
@@ -26,6 +26,18 @@ export default function Index() {
   const { matches, addMatch, removeMatch, getMatchType, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
   const { conversations: savedConvs, upsertConversation, removeConversation } = useUserConversations(user?.id ?? null);
   const { groups, invites, createGroup, removeGroup, addMembers, removeMember, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
+
+  // Persist mutual matches ("Apaixonados") into the sidebar conversations list
+  useEffect(() => {
+    if (!user?.id) return;
+    matches
+      .filter((m) => m.type === "mutual")
+      .forEach((m) => {
+        if (!savedConvs.some((c) => c.userId === m.userId)) {
+          upsertConversation(m.userId);
+        }
+      });
+  }, [matches, savedConvs, upsertConversation, user?.id]);
   const [manageGroupId, setManageGroupId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>("tudo");
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
