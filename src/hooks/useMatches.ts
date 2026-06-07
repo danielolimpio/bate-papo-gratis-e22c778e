@@ -128,20 +128,36 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
       const entry: MatchEntry = { userId, type: finalType, timestamp: Date.now() };
       setMatches((prev) => [entry, ...prev.filter((m) => m.userId !== userId)]);
 
-      supabase
-        .from("user_matches")
-        .upsert(
-          {
-            user_id: currentUserId,
-            target_user_id: userId,
-            match_type: finalType,
-            created_at: new Date(entry.timestamp).toISOString(),
-          },
-          { onConflict: "user_id,target_user_id" }
-        )
-        .then(({ error }) => {
-          if (error) console.error("addMatch error", error);
-        });
+      const payload = {
+        user_id: currentUserId,
+        target_user_id: userId,
+        match_type: finalType,
+        created_at: new Date(entry.timestamp).toISOString(),
+      };
+
+      if (existing) {
+        supabase
+          .from("user_matches")
+          .delete()
+          .eq("user_id", currentUserId)
+          .eq("target_user_id", userId)
+          .then(async ({ error: deleteError }) => {
+            if (deleteError) {
+              console.error("delete existing match error", deleteError);
+              return;
+            }
+
+            const { error: insertError } = await supabase.from("user_matches").insert(payload);
+            if (insertError) console.error("insert updated match error", insertError);
+          });
+      } else {
+        supabase
+          .from("user_matches")
+          .insert(payload)
+          .then(({ error }) => {
+            if (error) console.error("addMatch error", error);
+          });
+      }
 
       return true;
     },
