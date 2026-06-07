@@ -167,7 +167,39 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
   const removeMatch = useCallback(
     (userId: string) => {
       if (!currentUserId) return;
-      setMatches((prev) => prev.filter((m) => m.userId !== userId));
+      const existing = matches.find((m) => m.userId === userId);
+      const shouldKeepAsReceived = existing?.type === "mutual";
+
+      setMatches((prev) => {
+        const remaining = prev.filter((m) => m.userId !== userId);
+        if (!shouldKeepAsReceived) return remaining;
+
+        return [
+          {
+            userId,
+            type: "received",
+            timestamp: Date.now(),
+          },
+          ...remaining,
+        ];
+      });
+
+      if (shouldKeepAsReceived) {
+        supabase
+          .from("user_matches")
+          .update({
+            match_type: "received",
+            created_at: new Date().toISOString(),
+          })
+          .eq("user_id", currentUserId)
+          .eq("target_user_id", userId)
+          .then(({ error }) => {
+            if (error) console.error("downgrade mutual match error", error);
+          });
+
+        return;
+      }
+
       supabase
         .from("user_matches")
         .delete()
@@ -177,7 +209,7 @@ export function useMatches(currentUserId: string | null, currentUserGender?: str
           if (error) console.error("removeMatch error", error);
         });
     },
-    [currentUserId]
+    [currentUserId, matches]
   );
 
   const hasMatch = useCallback(
