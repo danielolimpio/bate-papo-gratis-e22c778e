@@ -40,6 +40,10 @@ export default function ConversationList(props: Props) {
   } = props;
 
   const [creatingGroup, setCreatingGroup] = useState(false);
+  const mutualMatchIds = useMemo(
+    () => new Set(matches.filter((m) => m.type === "mutual").map((m) => m.userId)),
+    [matches]
+  );
 
   const savedFiltered = useMemo(() => {
     if (!searchQuery) return savedConversations;
@@ -115,6 +119,7 @@ export default function ConversationList(props: Props) {
                 <SavedConvItem
                   key={c.userId}
                   user={u}
+                  isMutual={mutualMatchIds.has(u.id)}
                   isActive={activeConversationId === convId}
                   isRead={readConversations.has(convId)}
                   onSelect={() => onSelect(convId, u.id)}
@@ -148,6 +153,7 @@ export default function ConversationList(props: Props) {
                   <SavedConvItem
                     key={c.userId}
                     user={u}
+                    isMutual={mutualMatchIds.has(u.id)}
                     isActive={activeConversationId === convId}
                     isRead={false}
                     onSelect={() => onSelect(convId, u.id)}
@@ -272,9 +278,10 @@ function PinnedSala({ active, onClick }: { active: boolean; onClick?: () => void
 }
 
 function SavedConvItem({
-  user, isActive, isRead, onSelect, onDelete,
+  user, isMutual, isActive, isRead, onSelect, onDelete,
 }: {
   user: typeof users[number];
+  isMutual: boolean;
   isActive: boolean;
   isRead: boolean;
   onSelect: () => void;
@@ -284,19 +291,36 @@ function SavedConvItem({
     <div
       onClick={onSelect}
       className={`group flex cursor-pointer items-center gap-3 px-2 py-[7px] mx-[6px] rounded-md transition-colors ${
-        isActive ? "bg-chat-active" : "hover:bg-chat-hover"
+        isActive
+          ? isMutual
+            ? "bg-gradient-to-r from-pink-500/20 via-rose-500/15 to-fuchsia-500/20 ring-1 ring-pink-500/40"
+            : "bg-chat-active"
+          : isMutual
+            ? "bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-fuchsia-500/10 hover:from-pink-500/20 hover:to-fuchsia-500/20 ring-1 ring-pink-500/30"
+            : "hover:bg-chat-hover"
       }`}
     >
       <div className="relative flex-shrink-0">
-        <img src={user.avatar} alt={user.name} className="h-[48px] w-[48px] rounded-full object-cover" />
+        <img
+          src={user.avatar}
+          alt={user.name}
+          className={`h-[48px] w-[48px] rounded-full object-cover ${isMutual ? "ring-2 ring-pink-500" : ""}`}
+        />
         {user.isOnline && (
           <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-chat-sidebar bg-online" />
         )}
+        {isMutual && (
+          <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500 px-1 text-[10px] text-white shadow-lg shadow-pink-500/30">
+            ❤
+          </span>
+        )}
       </div>
       <div className="flex-1 min-w-0">
-        <span className="text-[13px] font-semibold text-foreground truncate block">{user.name}</span>
-        <p className="text-[12px] text-muted-foreground truncate mt-[1px]">
-          {user.isOnline ? "Online agora" : "Toque para conversar"}
+        <span className={`text-[13px] font-semibold truncate block ${isMutual ? "bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent" : "text-foreground"}`}>
+          {user.name}
+        </span>
+        <p className={`text-[12px] truncate mt-[1px] ${isMutual ? "text-pink-600 dark:text-pink-400" : "text-muted-foreground"}`}>
+          {isMutual ? "💞 Apaixonados" : user.isOnline ? "Online agora" : "Toque para conversar"}
         </p>
       </div>
       {!isRead && (
