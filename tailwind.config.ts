@@ -69,6 +69,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "telegram-glow": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(42,171,238,0), 0 4px 12px rgba(0,0,0,0.25)" },
+          "50%": { boxShadow: "0 0 18px 2px rgba(42,171,238,0.45), 0 6px 16px rgba(0,0,0,0.3)" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
