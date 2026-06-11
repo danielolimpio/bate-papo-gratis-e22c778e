@@ -1,7 +1,36 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
+import LongTailTopics from "@/components/LongTailTopics";
 import { Smile, Image as ImageIcon, Mic, Users } from "lucide-react";
+
+const longTailTerms = [
+  "chat gratis online brasileiro 24 horas",
+  "chat gratis sem baixar nada no celular",
+  "chat gratis para fazer novas amizades",
+  "chat gratis para conversar com mulheres",
+  "chat gratis para conversar com homens",
+  "chat online gratis em português do brasil",
+  "chat gratuito ao vivo direto no navegador",
+  "chat gratis com áudio de voz brasileiro",
+  "chat gratis com troca de fotos no privado",
+  "chat online gratuito sem mensalidade",
+  "melhor chat gratis brasileiro 2026",
+  "chat bate papo gratuito para celular android",
+  "chat de internet gratis para conhecer pessoas",
+  "chat online gratis seguro e moderado",
+  "chat gratis sem precisar baixar aplicativo",
+  "chat na internet gratis brasileiro ao vivo",
+  "chat gratuito para amizade e paquera",
+  "chat gratis com pessoas reais do brasil",
+  "chat online grátis para namoro sério",
+  "chat gratis para iphone e android",
+  "chat de bate papo gratuito brasileiro",
+  "chat web grátis em português 2026",
+  "chat gratis com emojis e reações",
+  "chat online gratuito com fotos e áudio",
+  "chat gratis para solteiros e solteiras brasil",
+];
 
 export default function ChatGratis() {
   const faq = [
@@ -99,6 +128,11 @@ export default function ChatGratis() {
             </details>
           ))}
         </div>
+
+        <LongTailTopics
+          intro="Termos populares para chat grátis no Brasil — clique em um para identificar com o que você procura:"
+          terms={longTailTerms}
+        />
 
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
