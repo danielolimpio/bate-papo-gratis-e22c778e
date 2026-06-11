@@ -1,7 +1,7 @@
 import { Search, X, Send } from "lucide-react";
 import { users } from "@/data/mockData";
 import { useState } from "react";
-import telegramBanner from "@/assets/telegram-banner.asset.json";
+
 
 
 interface Props {
