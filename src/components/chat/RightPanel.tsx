@@ -28,15 +28,16 @@ export default function RightPanel({ onProfileClick, onlineIds }: Props) {
           className="group relative block w-full overflow-hidden rounded-lg shadow-md"
         >
           <img
-            src={telegramBanner.url}
+            src="/telegram-vip-banner.webp"
             alt="Grupo VIP Telegram"
-            className="w-full h-auto object-cover aspect-square transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-auto object-cover aspect-square transition-transform duration-[1200ms] ease-out group-hover:scale-105"
             loading="lazy"
           />
           <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
             <div
-              className="flex items-center justify-center gap-2 w-full rounded-md py-2 px-3 text-white text-[12px] font-semibold shadow-lg ring-1 ring-white/20 animate-[pulse_2.4s_ease-in-out_infinite] transition-all duration-300 group-hover:brightness-110 group-hover:-translate-y-0.5"
+              className="flex items-center justify-center gap-2 w-full rounded-md py-2 px-3 text-white text-[12px] font-semibold shadow-lg ring-1 ring-white/20 animate-[telegram-glow_4.5s_ease-in-out_infinite] transition-all duration-300 group-hover:brightness-110 group-hover:-translate-y-0.5"
               style={{ background: "linear-gradient(135deg, #229ED9 0%, #2AABEE 100%)" }}
+
             >
               <Send size={14} fill="white" className="-rotate-12" />
               <span>Entrar no Grupo Vip</span>
