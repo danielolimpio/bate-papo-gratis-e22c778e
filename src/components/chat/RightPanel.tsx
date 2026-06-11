@@ -1,6 +1,8 @@
-import { Search, X } from "lucide-react";
+import { Search, X, Send } from "lucide-react";
 import { users } from "@/data/mockData";
 import { useState } from "react";
+import telegramBanner from "@/assets/telegram-banner.asset.json";
+
 
 interface Props {
   onProfileClick: (userId: string) => void;
@@ -17,6 +19,32 @@ export default function RightPanel({ onProfileClick, onlineIds }: Props) {
 
   return (
     <div className="flex h-full flex-col bg-chat-right-panel border-l border-chat-divider overflow-y-auto">
+      <div className="px-3 pt-2 pb-3 border-b border-chat-divider">
+        <p className="text-[9px] uppercase tracking-wider text-muted-foreground/70 mb-1 text-right">Patrocinado</p>
+        <a
+          href="https://t.me/onlyfever"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="group relative block w-full overflow-hidden rounded-lg shadow-md"
+        >
+          <img
+            src={telegramBanner.url}
+            alt="Grupo VIP Telegram"
+            className="w-full h-auto object-cover aspect-square transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
+            <div
+              className="flex items-center justify-center gap-2 w-full rounded-md py-2 px-3 text-white text-[12px] font-semibold shadow-lg ring-1 ring-white/20 animate-[pulse_2.4s_ease-in-out_infinite] transition-all duration-300 group-hover:brightness-110 group-hover:-translate-y-0.5"
+              style={{ background: "linear-gradient(135deg, #229ED9 0%, #2AABEE 100%)" }}
+            >
+              <Send size={14} fill="white" className="-rotate-12" />
+              <span>Entrar no Grupo Vip</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
       <div className="flex items-center justify-between px-4 py-[10px] border-b border-chat-divider gap-2">
         {searchOpen ? (
           <div className="flex items-center gap-2 flex-1 rounded-full bg-secondary px-3 py-[6px]">
