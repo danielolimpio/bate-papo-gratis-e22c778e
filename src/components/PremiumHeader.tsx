@@ -41,7 +41,7 @@ export default function PremiumHeader({ variant = "light" }: PremiumHeaderProps)
 
   return (
     <header
-      className={`${isDark ? "absolute top-0 left-0 right-0 z-50" : "sticky top-0 z-50"} lg:border-b ${borderColor} lg:${bgClass}`}
+      className={`${isDark ? "absolute top-0 left-0 right-0 z-50" : "sticky top-0 z-50"} lg:border-b lg:${borderColor} ${bgClass} max-lg:!bg-transparent max-lg:!border-0 max-lg:!backdrop-blur-0`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop bar */}
