@@ -1,15 +1,17 @@
 import { Search, X, Send } from "lucide-react";
 import { users } from "@/data/mockData";
 import { useState } from "react";
-
-
+import type { PresenceUser } from "@/hooks/useRealPresence";
 
 interface Props {
   onProfileClick: (userId: string) => void;
   onlineIds: Set<string>;
+  realOnline?: PresenceUser[];
+  currentUserId?: string | null;
+  onStartRealChat?: (userId: string) => void;
 }
 
-export default function RightPanel({ onProfileClick, onlineIds }: Props) {
+export default function RightPanel({ onProfileClick, onlineIds, realOnline = [], currentUserId, onStartRealChat }: Props) {
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
 
