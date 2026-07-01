@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { users, getRandomFreshUser } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRealNewUsers } from "@/hooks/useRealNewUsers";
 
 type CardType = "register" | "online";
 
@@ -10,6 +11,7 @@ interface DisplayUser {
   age: number;
   city: string;
   avatar: string;
+  real?: boolean;
 }
 
 const cities = [
@@ -19,9 +21,12 @@ const cities = [
   "Niterói", "Santos", "Ribeirão Preto", "Sorocaba", "Joinville",
 ];
 
+function firstName(full?: string) {
+  if (!full) return "Usuário";
+  return full.trim().split(/\s+/)[0];
+}
+
 function pickRandomDisplayUser(type: CardType): DisplayUser {
-  // For "register" -> fresh random name + photo of the SAME gender (no mismatches)
-  // For "online" -> pick an existing profile coming online
   if (type === "register") {
     const fresh = getRandomFreshUser();
     return {
