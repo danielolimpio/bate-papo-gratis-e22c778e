@@ -14,6 +14,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useMatches } from "@/hooks/useMatches";
 import { useUserConversations } from "@/hooks/useUserConversations";
 import { useGroups } from "@/hooks/useGroups";
+import { useRealPresence } from "@/hooks/useRealPresence";
 import { toast } from "@/hooks/use-toast";
 import logo from "@/assets/logo-batepapo.png";
 
