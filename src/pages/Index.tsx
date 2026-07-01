@@ -14,6 +14,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useMatches } from "@/hooks/useMatches";
 import { useUserConversations } from "@/hooks/useUserConversations";
 import { useGroups } from "@/hooks/useGroups";
+import { useRealPresence } from "@/hooks/useRealPresence";
 import { toast } from "@/hooks/use-toast";
 import logo from "@/assets/logo-batepapo.png";
 
@@ -26,6 +27,17 @@ export default function Index() {
   const { matches, addMatch, removeMatch, getMatchType, canMatch } = useMatches(user?.id ?? null, profile?.gender ?? null);
   const { conversations: savedConvs, upsertConversation, removeConversation } = useUserConversations(user?.id ?? null);
   const { groups, invites, createGroup, removeGroup, addMembers, removeMember, acceptInvite, declineInvite } = useGroups(user?.id ?? null);
+  const realOnline = useRealPresence(
+    user && profile
+      ? {
+          id: user.id,
+          full_name: profile.full_name,
+          avatar_url: profile.avatar_url,
+          city: profile.city,
+          age: profile.age,
+        }
+      : null
+  );
 
   // Persist mutual matches ("Apaixonados") into the sidebar conversations list
   useEffect(() => {
@@ -173,6 +185,9 @@ export default function Index() {
         <RightPanel
           onProfileClick={setProfileUserId}
           onlineIds={onlineIds}
+          realOnline={realOnline}
+          currentUserId={user?.id ?? null}
+          onStartRealChat={handleStartChat}
         />
       </div>
 

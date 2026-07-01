@@ -1,15 +1,17 @@
 import { Search, X, Send } from "lucide-react";
 import { users } from "@/data/mockData";
 import { useState } from "react";
-
-
+import type { PresenceUser } from "@/hooks/useRealPresence";
 
 interface Props {
   onProfileClick: (userId: string) => void;
   onlineIds: Set<string>;
+  realOnline?: PresenceUser[];
+  currentUserId?: string | null;
+  onStartRealChat?: (userId: string) => void;
 }
 
-export default function RightPanel({ onProfileClick, onlineIds }: Props) {
+export default function RightPanel({ onProfileClick, onlineIds, realOnline = [], currentUserId, onStartRealChat }: Props) {
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -80,6 +82,38 @@ export default function RightPanel({ onProfileClick, onlineIds }: Props) {
       </div>
 
       <div className="py-1 px-1">
+        {realOnline
+          .filter((u) => u.id !== currentUserId && u.full_name?.toLowerCase().includes(search.toLowerCase()))
+          .map((u) => (
+            <div
+              key={`real-${u.id}`}
+              className="flex items-center gap-[10px] cursor-pointer hover:bg-chat-hover rounded-md px-[10px] py-[6px] transition-colors"
+              onClick={() => onStartRealChat?.(u.id)}
+              title="Usuário real online"
+            >
+              <div className="relative flex-shrink-0">
+                {u.avatar_url ? (
+                  <img src={u.avatar_url} alt={u.full_name} className="h-8 w-8 rounded-full object-cover" />
+                ) : (
+                  <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[11px] font-semibold">
+                    {u.full_name?.charAt(0).toUpperCase() || "?"}
+                  </div>
+                )}
+                <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online" />
+              </div>
+              <div className="min-w-0 flex-1 flex items-center gap-1.5">
+                <span className="text-[13px] truncate text-foreground font-medium">{u.full_name}</span>
+                <span className="rounded-full bg-primary/15 text-primary px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-wide flex-shrink-0">
+                  Real
+                </span>
+              </div>
+            </div>
+          ))}
+
+        {realOnline.filter((u) => u.id !== currentUserId).length > 0 && (
+          <div className="my-1 mx-2 border-t border-chat-divider" />
+        )}
+
         {users.filter(filterFn).sort((a, b) => {
           const aOnline = onlineIds.has(a.id);
           const bOnline = onlineIds.has(b.id);
@@ -113,6 +147,7 @@ export default function RightPanel({ onProfileClick, onlineIds }: Props) {
           );
         })}
       </div>
+
     </div>
   );
 }
