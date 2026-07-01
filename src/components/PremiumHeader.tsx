@@ -145,7 +145,6 @@ export default function PremiumHeader({ variant = "light" }: PremiumHeaderProps)
                 </div>
               </SheetContent>
             </Sheet>
-          </div>
         </div>
       </div>
     </header>
