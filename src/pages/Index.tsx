@@ -185,6 +185,9 @@ export default function Index() {
         <RightPanel
           onProfileClick={setProfileUserId}
           onlineIds={onlineIds}
+          realOnline={realOnline}
+          currentUserId={user?.id ?? null}
+          onStartRealChat={handleStartChat}
         />
       </div>
 
