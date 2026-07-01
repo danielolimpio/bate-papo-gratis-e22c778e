@@ -41,12 +41,11 @@ export default function PremiumHeader({ variant = "light" }: PremiumHeaderProps)
 
   return (
     <header
-      className={`${bgClass} border-b ${borderColor} ${
-        isDark ? "absolute top-0 left-0 right-0 z-50" : "sticky top-0 z-50"
-      }`}
+      className={`${isDark ? "absolute top-0 left-0 right-0 z-50" : "sticky top-0 z-50"} lg:border-b lg:${borderColor} ${bgClass} max-lg:!bg-transparent max-lg:!border-0 max-lg:!backdrop-blur-0`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        {/* Desktop bar */}
+        <div className="hidden lg:flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img
@@ -57,7 +56,7 @@ export default function PremiumHeader({ variant = "light" }: PremiumHeaderProps)
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.to;
               return (
@@ -75,18 +74,19 @@ export default function PremiumHeader({ variant = "light" }: PremiumHeaderProps)
               );
             })}
           </nav>
+        </div>
 
-          {/* Mobile Menu */}
-          <div className="lg:hidden">
-            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-              <SheetTrigger asChild>
-                <button
-                  aria-label="Abrir menu"
-                  className={`p-2 rounded-lg transition-colors ${
-                    isDark
-                      ? "text-white/90 hover:bg-white/10"
-                      : "text-gray-600 hover:bg-gray-100"
-                  }`}
+        {/* Mobile: floating hamburger only, no header bar */}
+        <div className="lg:hidden absolute top-3 right-3 z-50">
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <button
+                aria-label="Abrir menu"
+                className={`p-2 rounded-lg backdrop-blur-md shadow-md transition-colors ${
+                  isDark
+                    ? "bg-black/40 text-white hover:bg-black/60"
+                    : "bg-white/90 text-gray-700 hover:bg-white"
+                }`}
                 >
                   <Menu size={22} />
                 </button>
@@ -145,7 +145,6 @@ export default function PremiumHeader({ variant = "light" }: PremiumHeaderProps)
                 </div>
               </SheetContent>
             </Sheet>
-          </div>
         </div>
       </div>
     </header>
