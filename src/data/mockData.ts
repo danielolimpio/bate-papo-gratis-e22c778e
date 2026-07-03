@@ -448,3 +448,26 @@ export function getRandomProfilePhoto(): string {
   return allProfilePhotos[Math.floor(Math.random() * allProfilePhotos.length)];
 }
 
+/** Simple deterministic hash from a string id. */
+function hashId(id: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/**
+ * Deterministic gender-matched fallback avatar for real profiles that don't
+ * have their own uploaded photo. Same id + gender always yields the same photo,
+ * so different users don't collide on the same portrait between renders.
+ */
+export function getGenderFallbackAvatar(id: string, gender?: string | null): string {
+  const g = (gender || "").toLowerCase();
+  const isFemale = g.startsWith("f") || g.startsWith("mulher");
+  const pool = isFemale ? femaleProfilePhotos : maleProfilePhotos;
+  return pool[hashId(id) % pool.length];
+}
+
+
