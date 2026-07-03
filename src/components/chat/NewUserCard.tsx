@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
-import { users, getRandomFreshUser } from "@/data/mockData";
+import { users, getRandomFreshUser, getGenderFallbackAvatar } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRealNewUsers } from "@/hooks/useRealNewUsers";
+import { useRealNewUsers, resolveProfileAvatarUrl } from "@/hooks/useRealNewUsers";
+
 
 type CardType = "register" | "online";
 
