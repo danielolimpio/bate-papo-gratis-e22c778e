@@ -101,8 +101,8 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
       </div>
 
       <div className="py-1 px-1">
-        {realOnline
-          .filter((u) => u.id !== currentUserId && u.full_name?.toLowerCase().includes(search.toLowerCase()))
+        {mergedReal
+          .filter((u) => u.full_name?.toLowerCase().includes(search.toLowerCase()))
           .map((u) => (
             <div
               key={`real-${u.id}`}
@@ -111,13 +111,16 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
               title="Usuário real online"
             >
               <div className="relative flex-shrink-0">
-                {u.avatar_url ? (
-                  <img src={u.avatar_url} alt={u.full_name} className="h-8 w-8 rounded-full object-cover" />
-                ) : (
-                  <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[11px] font-semibold">
-                    {u.full_name?.charAt(0).toUpperCase() || "?"}
-                  </div>
-                )}
+                <img
+                  src={u.avatar_url || getRandomFreshUser().avatar}
+                  alt={u.full_name}
+                  className="h-8 w-8 rounded-full object-cover bg-secondary"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    const fb = getRandomFreshUser().avatar;
+                    if (img.src !== fb) img.src = fb;
+                  }}
+                />
                 <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online" />
               </div>
               <div className="min-w-0 flex-1 flex items-center gap-1.5">
@@ -129,7 +132,8 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
             </div>
           ))}
 
-        {realOnline.filter((u) => u.id !== currentUserId).length > 0 && (
+        {mergedReal.length > 0 && (
+
           <div className="my-1 mx-2 border-t border-chat-divider" />
         )}
 
