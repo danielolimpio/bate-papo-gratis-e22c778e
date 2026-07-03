@@ -6,8 +6,20 @@ export interface RealProfile {
   full_name: string;
   age: number;
   city: string;
+  gender: string | null;
   avatar_url: string | null;
   created_at: string;
+}
+
+/** Resolves a profiles.avatar_url value to a usable public URL. */
+export function resolveProfileAvatarUrl(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  if (raw.startsWith("http://") || raw.startsWith("https://") || raw.startsWith("data:")) {
+    return raw;
+  }
+  // Storage path inside the public `avatars` bucket
+  const { data } = supabase.storage.from("avatars").getPublicUrl(raw);
+  return data.publicUrl || null;
 }
 
 /**
@@ -23,7 +35,7 @@ export function useRealNewUsers(limit = 20) {
     const load = async () => {
       const { data } = await supabase
         .from("profiles")
-        .select("id, full_name, age, city, avatar_url, created_at")
+        .select("id, full_name, age, city, gender, avatar_url, created_at")
         .order("created_at", { ascending: false })
         .limit(limit);
       if (mounted && data) setProfiles(data as RealProfile[]);
