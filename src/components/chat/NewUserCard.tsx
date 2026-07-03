@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
-import { users, getRandomFreshUser } from "@/data/mockData";
+import { users, getRandomFreshUser, getGenderFallbackAvatar } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRealNewUsers } from "@/hooks/useRealNewUsers";
+import { useRealNewUsers, resolveProfileAvatarUrl } from "@/hooks/useRealNewUsers";
+
 
 type CardType = "register" | "online";
 
@@ -65,12 +66,13 @@ export default function NewUserCard() {
         name: firstName(brandNew.full_name),
         age: brandNew.age || 18,
         city: brandNew.city || "Brasil",
-        avatar: brandNew.avatar_url || getRandomFreshUser().avatar,
+        avatar: resolveProfileAvatarUrl(brandNew.avatar_url) || getGenderFallbackAvatar(brandNew.id, brandNew.gender),
         real: true,
       });
       setCardType("register");
       setVisible(true);
     }
+
   }, [realProfiles]);
 
   useEffect(() => {
@@ -86,9 +88,10 @@ export default function NewUserCard() {
         name: firstName(p.full_name),
         age: p.age || 18,
         city: p.city || "Brasil",
-        avatar: p.avatar_url || getRandomFreshUser().avatar,
+        avatar: resolveProfileAvatarUrl(p.avatar_url) || getGenderFallbackAvatar(p.id, p.gender),
         real: true,
       };
+
     };
 
     const show = () => {
