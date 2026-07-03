@@ -7,8 +7,10 @@ export interface PresenceUser {
   avatar_url: string | null;
   city?: string;
   age?: number;
+  gender?: string | null;
   online_at: string;
 }
+
 
 /**
  * Tracks real online users across devices using Supabase Realtime presence.
