@@ -131,7 +131,16 @@ export default function NewUserCard() {
           transition={{ type: "spring", damping: 20, stiffness: 300 }}
           className="fixed bottom-4 left-4 z-40 flex items-center gap-3 rounded-xl bg-new-user-card px-4 py-3 shadow-lg border border-chat-divider max-w-[280px]"
         >
-          <img src={user.avatar} alt={user.name} className="h-11 w-11 rounded-full object-cover flex-shrink-0" />
+          <img
+            src={user.avatar}
+            alt={user.name}
+            className="h-11 w-11 rounded-full object-cover flex-shrink-0 bg-secondary"
+            onError={(e) => {
+              const img = e.currentTarget;
+              const fallback = getRandomFreshUser().avatar;
+              if (img.src !== fallback) img.src = fallback;
+            }}
+          />
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground flex items-center gap-1">
               {cardType === "register" ? "Novo registro ✨" : "Acabou de entrar 🟢"}

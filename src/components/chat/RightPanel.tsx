@@ -1,7 +1,8 @@
 import { Search, X, Send } from "lucide-react";
-import { users } from "@/data/mockData";
+import { users, getRandomFreshUser } from "@/data/mockData";
 import { useState } from "react";
 import type { PresenceUser } from "@/hooks/useRealPresence";
+import { useRealNewUsers } from "@/hooks/useRealNewUsers";
 
 interface Props {
   onProfileClick: (userId: string) => void;
@@ -14,6 +15,24 @@ interface Props {
 export default function RightPanel({ onProfileClick, onlineIds, realOnline = [], currentUserId, onStartRealChat }: Props) {
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const recentReal = useRealNewUsers(20);
+
+  // Merge presence users with recently registered real profiles (dedup by id)
+  const mergedReal: Array<{ id: string; full_name: string; avatar_url: string | null }> = [];
+  const seen = new Set<string>();
+  for (const u of realOnline) {
+    if (u.id === currentUserId) continue;
+    if (seen.has(u.id)) continue;
+    seen.add(u.id);
+    mergedReal.push({ id: u.id, full_name: u.full_name, avatar_url: u.avatar_url });
+  }
+  for (const p of recentReal) {
+    if (p.id === currentUserId) continue;
+    if (seen.has(p.id)) continue;
+    seen.add(p.id);
+    mergedReal.push({ id: p.id, full_name: p.full_name, avatar_url: p.avatar_url });
+  }
+
 
 
   const filterFn = (u: typeof users[0]) =>
@@ -82,8 +101,8 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
       </div>
 
       <div className="py-1 px-1">
-        {realOnline
-          .filter((u) => u.id !== currentUserId && u.full_name?.toLowerCase().includes(search.toLowerCase()))
+        {mergedReal
+          .filter((u) => u.full_name?.toLowerCase().includes(search.toLowerCase()))
           .map((u) => (
             <div
               key={`real-${u.id}`}
@@ -92,13 +111,16 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
               title="Usuário real online"
             >
               <div className="relative flex-shrink-0">
-                {u.avatar_url ? (
-                  <img src={u.avatar_url} alt={u.full_name} className="h-8 w-8 rounded-full object-cover" />
-                ) : (
-                  <div className="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[11px] font-semibold">
-                    {u.full_name?.charAt(0).toUpperCase() || "?"}
-                  </div>
-                )}
+                <img
+                  src={u.avatar_url || getRandomFreshUser().avatar}
+                  alt={u.full_name}
+                  className="h-8 w-8 rounded-full object-cover bg-secondary"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    const fb = getRandomFreshUser().avatar;
+                    if (img.src !== fb) img.src = fb;
+                  }}
+                />
                 <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online" />
               </div>
               <div className="min-w-0 flex-1 flex items-center gap-1.5">
@@ -110,7 +132,8 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
             </div>
           ))}
 
-        {realOnline.filter((u) => u.id !== currentUserId).length > 0 && (
+        {mergedReal.length > 0 && (
+
           <div className="my-1 mx-2 border-t border-chat-divider" />
         )}
 
