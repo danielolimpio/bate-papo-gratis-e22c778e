@@ -1,8 +1,8 @@
 import { Search, X, Send } from "lucide-react";
-import { users, getRandomFreshUser } from "@/data/mockData";
+import { users, getGenderFallbackAvatar } from "@/data/mockData";
 import { useState } from "react";
 import type { PresenceUser } from "@/hooks/useRealPresence";
-import { useRealNewUsers } from "@/hooks/useRealNewUsers";
+import { useRealNewUsers, resolveProfileAvatarUrl } from "@/hooks/useRealNewUsers";
 
 interface Props {
   onProfileClick: (userId: string) => void;
@@ -12,26 +12,47 @@ interface Props {
   onStartRealChat?: (userId: string) => void;
 }
 
+interface MergedRealUser {
+  id: string;
+  full_name: string;
+  avatar_url: string | null;
+  gender: string | null;
+  city: string;
+}
+
 export default function RightPanel({ onProfileClick, onlineIds, realOnline = [], currentUserId, onStartRealChat }: Props) {
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const recentReal = useRealNewUsers(20);
 
   // Merge presence users with recently registered real profiles (dedup by id)
-  const mergedReal: Array<{ id: string; full_name: string; avatar_url: string | null }> = [];
+  const mergedReal: MergedRealUser[] = [];
   const seen = new Set<string>();
   for (const u of realOnline) {
     if (u.id === currentUserId) continue;
     if (seen.has(u.id)) continue;
     seen.add(u.id);
-    mergedReal.push({ id: u.id, full_name: u.full_name, avatar_url: u.avatar_url });
+    mergedReal.push({
+      id: u.id,
+      full_name: u.full_name,
+      avatar_url: u.avatar_url,
+      gender: (u as unknown as { gender?: string }).gender ?? null,
+      city: u.city ?? "",
+    });
   }
   for (const p of recentReal) {
     if (p.id === currentUserId) continue;
     if (seen.has(p.id)) continue;
     seen.add(p.id);
-    mergedReal.push({ id: p.id, full_name: p.full_name, avatar_url: p.avatar_url });
+    mergedReal.push({
+      id: p.id,
+      full_name: p.full_name,
+      avatar_url: p.avatar_url,
+      gender: p.gender,
+      city: p.city ?? "",
+    });
   }
+
 
 
 
