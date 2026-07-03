@@ -1,7 +1,8 @@
 import { Search, X, Send } from "lucide-react";
-import { users } from "@/data/mockData";
+import { users, getRandomFreshUser } from "@/data/mockData";
 import { useState } from "react";
 import type { PresenceUser } from "@/hooks/useRealPresence";
+import { useRealNewUsers } from "@/hooks/useRealNewUsers";
 
 interface Props {
   onProfileClick: (userId: string) => void;
@@ -14,6 +15,24 @@ interface Props {
 export default function RightPanel({ onProfileClick, onlineIds, realOnline = [], currentUserId, onStartRealChat }: Props) {
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const recentReal = useRealNewUsers(20);
+
+  // Merge presence users with recently registered real profiles (dedup by id)
+  const mergedReal: Array<{ id: string; full_name: string; avatar_url: string | null }> = [];
+  const seen = new Set<string>();
+  for (const u of realOnline) {
+    if (u.id === currentUserId) continue;
+    if (seen.has(u.id)) continue;
+    seen.add(u.id);
+    mergedReal.push({ id: u.id, full_name: u.full_name, avatar_url: u.avatar_url });
+  }
+  for (const p of recentReal) {
+    if (p.id === currentUserId) continue;
+    if (seen.has(p.id)) continue;
+    seen.add(p.id);
+    mergedReal.push({ id: p.id, full_name: p.full_name, avatar_url: p.avatar_url });
+  }
+
 
 
   const filterFn = (u: typeof users[0]) =>
