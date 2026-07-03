@@ -66,12 +66,13 @@ export default function NewUserCard() {
         name: firstName(brandNew.full_name),
         age: brandNew.age || 18,
         city: brandNew.city || "Brasil",
-        avatar: brandNew.avatar_url || getRandomFreshUser().avatar,
+        avatar: resolveProfileAvatarUrl(brandNew.avatar_url) || getGenderFallbackAvatar(brandNew.id, brandNew.gender),
         real: true,
       });
       setCardType("register");
       setVisible(true);
     }
+
   }, [realProfiles]);
 
   useEffect(() => {
