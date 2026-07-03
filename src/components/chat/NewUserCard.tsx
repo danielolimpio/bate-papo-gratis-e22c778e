@@ -88,9 +88,10 @@ export default function NewUserCard() {
         name: firstName(p.full_name),
         age: p.age || 18,
         city: p.city || "Brasil",
-        avatar: p.avatar_url || getRandomFreshUser().avatar,
+        avatar: resolveProfileAvatarUrl(p.avatar_url) || getGenderFallbackAvatar(p.id, p.gender),
         real: true,
       };
+
     };
 
     const show = () => {
