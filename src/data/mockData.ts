@@ -410,7 +410,7 @@ const freshLastNames = [
   "Carvalho", "Araújo", "Fernandes", "Barbosa", "Cardoso", "Rocha", "Dias", "Nascimento", "Moreira", "Mendes",
 ];
 
-const femaleProfilePhotos = [
+export const femaleProfilePhotos = [
   profileF1, profileF2, profileF3, profileF4, profileF5, profileF6, profileF7, profileF8, profileF9, profileF10,
   profileF11, profileF12, profileF13, profileF14, profileF15, profileF16, profileF17, profileF18, profileF19, profileF20,
   profileF21, profileF22, profileF23, profileF24, profileF25, profileF26, profileF27, profileF28, profileF29, profileF30,
@@ -422,7 +422,7 @@ const femaleProfilePhotos = [
   profileF82, profileF83, profileF84, profileF85, profileF86, profileF87, profileF88, profileF89, profileF90, profileF91,
   profileF92, profileF93, profileF94, profileF95, profileF96, profileF97, profileF98, profileF99, profileF100, profileF101,
 ];
-const maleProfilePhotos = [
+export const maleProfilePhotos = [
   profileM1, profileM2, profileM3, profileM4, profileM5, profileM6, profileM7, profileM8, profileM9, profileM10,
   profileM11, profileM12, profileM13, profileM14, profileM15, profileM16, profileM17, profileM18, profileM19,
 ];
@@ -468,6 +468,55 @@ export function getGenderFallbackAvatar(id: string, gender?: string | null): str
   const isFemale = g.startsWith("f") || g.startsWith("mulher");
   const pool = isFemale ? femaleProfilePhotos : maleProfilePhotos;
   return pool[hashId(id) % pool.length];
+}
+
+function initialsFromName(name?: string | null): string {
+  const parts = (name || "Usuário")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  const initials = `${parts[0]?.[0] || "U"}${parts[1]?.[0] || ""}`.toUpperCase();
+  return initials.replace(/[^A-ZÀ-Ú]/g, "") || "U";
+}
+
+function makeUniqueInitialAvatar(id: string, gender?: string | null, name?: string | null): string {
+  const g = (gender || "").toLowerCase();
+  const isFemale = g.startsWith("f") || g.startsWith("mulher");
+  const hue = hashId(id) % 360;
+  const accent = isFemale ? `hsl(${(hue + 330) % 360} 72% 52%)` : `hsl(${(hue + 205) % 360} 70% 44%)`;
+  const base = isFemale ? `hsl(${(hue + 350) % 360} 56% 28%)` : `hsl(${(hue + 220) % 360} 54% 24%)`;
+  const text = encodeURIComponent(initialsFromName(name));
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${base}"/><stop offset="1" stop-color="${accent}"/></linearGradient></defs><rect width="96" height="96" rx="48" fill="url(#g)"/><circle cx="70" cy="25" r="18" fill="rgba(255,255,255,.16)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="white">${text}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+/**
+ * Picks a gender-matched fallback without reusing an avatar already visible in
+ * the same list. If the gender pool is exhausted, returns a unique initials
+ * avatar so the UI never repeats the same image or shows a broken portrait.
+ */
+export function getUniqueGenderFallbackAvatar(
+  id: string,
+  gender: string | null | undefined,
+  usedAvatars: Set<string>,
+  name?: string | null
+): string {
+  const g = (gender || "").toLowerCase();
+  const isFemale = g.startsWith("f") || g.startsWith("mulher");
+  const pool = isFemale ? femaleProfilePhotos : maleProfilePhotos;
+  const start = hashId(id) % pool.length;
+
+  for (let i = 0; i < pool.length; i++) {
+    const candidate = pool[(start + i) % pool.length];
+    if (!usedAvatars.has(candidate)) {
+      usedAvatars.add(candidate);
+      return candidate;
+    }
+  }
+
+  const generated = makeUniqueInitialAvatar(id, gender, name);
+  usedAvatars.add(generated);
+  return generated;
 }
 
 

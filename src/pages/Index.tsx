@@ -35,6 +35,7 @@ export default function Index() {
           avatar_url: profile.avatar_url,
           city: profile.city,
           age: profile.age,
+          gender: profile.gender,
         }
       : null
   );
@@ -191,7 +192,7 @@ export default function Index() {
         />
       </div>
 
-      <NewUserCard />
+      <NewUserCard onlineIds={onlineIds} />
 
       {profileUserId && (
         <ProfileModal

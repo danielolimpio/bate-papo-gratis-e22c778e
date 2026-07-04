@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
-import { users, getRandomFreshUser, getGenderFallbackAvatar } from "@/data/mockData";
+import { users, getGenderFallbackAvatar } from "@/data/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRealNewUsers, resolveProfileAvatarUrl } from "@/hooks/useRealNewUsers";
 
@@ -8,10 +8,12 @@ import { useRealNewUsers, resolveProfileAvatarUrl } from "@/hooks/useRealNewUser
 type CardType = "register" | "online";
 
 interface DisplayUser {
+  id?: string;
   name: string;
   age: number;
   city: string;
   avatar: string;
+  gender?: string | null;
   real?: boolean;
 }
 
@@ -27,21 +29,16 @@ function firstName(full?: string) {
   return full.trim().split(/\s+/)[0];
 }
 
-function pickRandomDisplayUser(type: CardType): DisplayUser {
-  if (type === "register") {
-    const fresh = getRandomFreshUser();
-    return {
-      name: fresh.name,
-      age: Math.floor(Math.random() * 22) + 19,
-      city: cities[Math.floor(Math.random() * cities.length)],
-      avatar: fresh.avatar,
-    };
-  }
-  const u = users[Math.floor(Math.random() * users.length)];
-  return { name: u.name, age: u.age, city: u.city, avatar: u.avatar };
+function pickRandomDisplayUser(onlineIds?: Set<string>): DisplayUser {
+  const onlinePool = users.filter((u) => onlineIds?.has(u.id));
+  const pool = onlinePool.length > 0 ? onlinePool : users;
+  const women = pool.filter((u) => u.gender === "Feminino");
+  const source = women.length > 0 && Math.random() < 0.7 ? women : pool;
+  const u = source[Math.floor(Math.random() * source.length)];
+  return { id: u.id, name: u.name, age: u.age, city: u.city, avatar: u.avatar, gender: u.gender };
 }
 
-export default function NewUserCard() {
+export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) {
   const [user, setUser] = useState<DisplayUser | null>(null);
   const [cardType, setCardType] = useState<CardType>("register");
   const [visible, setVisible] = useState(false);
@@ -63,10 +60,12 @@ export default function NewUserCard() {
       seenRealIds.current.add(brandNew.id);
       shownRealIds.current.add(brandNew.id);
       setUser({
+        id: brandNew.id,
         name: firstName(brandNew.full_name),
         age: brandNew.age || 18,
         city: brandNew.city || "Brasil",
         avatar: resolveProfileAvatarUrl(brandNew.avatar_url) || getGenderFallbackAvatar(brandNew.id, brandNew.gender),
+        gender: brandNew.gender,
         real: true,
       });
       setCardType("register");
@@ -85,10 +84,12 @@ export default function NewUserCard() {
       const p = pool[Math.floor(Math.random() * pool.length)];
       shownRealIds.current.add(p.id);
       return {
+        id: p.id,
         name: firstName(p.full_name),
         age: p.age || 18,
         city: p.city || "Brasil",
         avatar: resolveProfileAvatarUrl(p.avatar_url) || getGenderFallbackAvatar(p.id, p.gender),
+        gender: p.gender,
         real: true,
       };
 
@@ -98,7 +99,7 @@ export default function NewUserCard() {
       const type: CardType = Math.random() > 0.5 ? "register" : "online";
       // Prefer real users ~60% of the time when available
       const real = Math.random() < 0.6 ? pickReal() : null;
-      setUser(real ?? pickRandomDisplayUser(type));
+      setUser(real ?? pickRandomDisplayUser(onlineIds));
       setCardType(type);
       setVisible(true);
       hideTimer = setTimeout(() => setVisible(false), 5000);
@@ -122,7 +123,7 @@ export default function NewUserCard() {
       clearTimeout(hideTimer);
       clearTimeout(nextTimer);
     };
-  }, [realProfiles]);
+  }, [realProfiles, onlineIds]);
 
   return (
     <AnimatePresence>
@@ -140,7 +141,7 @@ export default function NewUserCard() {
             className="h-11 w-11 rounded-full object-cover flex-shrink-0 bg-secondary"
             onError={(e) => {
               const img = e.currentTarget;
-              const fallback = getRandomFreshUser().avatar;
+              const fallback = getGenderFallbackAvatar(user.id || user.name, user.gender);
               if (img.src !== fallback) img.src = fallback;
             }}
           />

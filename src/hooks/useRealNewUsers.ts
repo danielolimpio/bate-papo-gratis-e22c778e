@@ -17,8 +17,9 @@ export function resolveProfileAvatarUrl(raw: string | null | undefined): string 
   if (raw.startsWith("http://") || raw.startsWith("https://") || raw.startsWith("data:")) {
     return raw;
   }
+  const path = raw.replace(/^\/+/, "").replace(/^avatars\//, "");
   // Storage path inside the public `avatars` bucket
-  const { data } = supabase.storage.from("avatars").getPublicUrl(raw);
+  const { data } = supabase.storage.from("avatars").getPublicUrl(path);
   return data.publicUrl || null;
 }
 
@@ -50,6 +51,21 @@ export function useRealNewUsers(limit = 20) {
         (payload) => {
           const p = payload.new as RealProfile;
           setProfiles((prev) => [p, ...prev.filter((x) => x.id !== p.id)].slice(0, limit));
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "profiles" },
+        (payload) => {
+          const p = payload.new as RealProfile;
+          setProfiles((prev) => {
+            const next = prev.some((x) => x.id === p.id)
+              ? prev.map((x) => (x.id === p.id ? { ...x, ...p } : x))
+              : [p, ...prev];
+            return next
+              .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
+              .slice(0, limit);
+          });
         }
       )
       .subscribe();
