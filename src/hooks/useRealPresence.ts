@@ -23,6 +23,7 @@ export function useRealPresence(currentUser: {
   avatar_url: string | null;
   city?: string;
   age?: number;
+  gender?: string | null;
 } | null) {
   const [online, setOnline] = useState<PresenceUser[]>([]);
 
@@ -59,6 +60,7 @@ export function useRealPresence(currentUser: {
             avatar_url: currentUser.avatar_url,
             city: currentUser.city,
             age: currentUser.age,
+            gender: currentUser.gender,
             online_at: new Date().toISOString(),
           });
         }
@@ -67,7 +69,7 @@ export function useRealPresence(currentUser: {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [currentUser?.id, currentUser?.full_name, currentUser?.avatar_url, currentUser?.city, currentUser?.age]);
+  }, [currentUser?.id, currentUser?.full_name, currentUser?.avatar_url, currentUser?.city, currentUser?.age, currentUser?.gender]);
 
   return online;
 }

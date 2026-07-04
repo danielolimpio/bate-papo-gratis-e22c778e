@@ -1,5 +1,5 @@
 import { Search, X, Send } from "lucide-react";
-import { users, getGenderFallbackAvatar } from "@/data/mockData";
+import { users, getUniqueGenderFallbackAvatar } from "@/data/mockData";
 import { useState } from "react";
 import type { PresenceUser } from "@/hooks/useRealPresence";
 import { useRealNewUsers, resolveProfileAvatarUrl } from "@/hooks/useRealNewUsers";
@@ -18,6 +18,15 @@ interface MergedRealUser {
   avatar_url: string | null;
   gender: string | null;
   city: string;
+  created_at?: string;
+}
+
+const invalidSingleNames = new Set(["natural", "masculino", "feminino", "homem", "mulher", "teste", "usuario", "usuário"]);
+
+function displayRealName(fullName: string | null | undefined, city?: string) {
+  const cleaned = (fullName || "").trim().replace(/\s+/g, " ");
+  const isInvalidSingle = !cleaned.includes(" ") && invalidSingleNames.has(cleaned.toLowerCase());
+  return cleaned.length > 1 && !isInvalidSingle ? cleaned : `Usuário${city ? ` de ${city}` : ""}`;
 }
 
 export default function RightPanel({ onProfileClick, onlineIds, realOnline = [], currentUserId, onStartRealChat }: Props) {
@@ -40,7 +49,11 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
       city: u.city ?? "",
     });
   }
-  for (const p of recentReal) {
+  const recentPrioritized = [
+    ...recentReal.slice(0, 4),
+    ...recentReal.filter((p) => p.avatar_url).slice(0, 6),
+  ];
+  for (const p of recentPrioritized) {
     if (p.id === currentUserId) continue;
     if (seen.has(p.id)) continue;
     seen.add(p.id);
@@ -50,7 +63,9 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
       avatar_url: p.avatar_url,
       gender: p.gender,
       city: p.city ?? "",
+      created_at: p.created_at,
     });
+    if (mergedReal.length >= 8) break;
   }
 
 
@@ -122,11 +137,34 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
       </div>
 
       <div className="py-1 px-1">
-        {mergedReal
-          .filter((u) => u.full_name?.toLowerCase().includes(search.toLowerCase()))
-          .map((u) => {
-            const fallback = getGenderFallbackAvatar(u.id, u.gender);
-            const primary = resolveProfileAvatarUrl(u.avatar_url) || fallback;
+        {(() => {
+          const usedAvatars = new Set<string>();
+          const realRows = mergedReal
+            .filter((u) => displayRealName(u.full_name, u.city).toLowerCase().includes(search.toLowerCase()))
+            .map((u) => {
+              const uploaded = resolveProfileAvatarUrl(u.avatar_url);
+              const fallback = getUniqueGenderFallbackAvatar(u.id, u.gender, usedAvatars, u.full_name);
+              const primary = uploaded && !usedAvatars.has(uploaded) ? uploaded : fallback;
+              usedAvatars.add(primary);
+              return { ...u, displayName: displayRealName(u.full_name, u.city), primary, fallback };
+            });
+
+          const onlineOrder = Array.from(onlineIds);
+          const syntheticRows = users
+            .filter(filterFn)
+            .filter((u) => !usedAvatars.has(u.avatar))
+            .sort((a, b) => {
+              const aOnline = onlineIds.has(a.id);
+              const bOnline = onlineIds.has(b.id);
+              if (aOnline && bOnline) return onlineOrder.indexOf(a.id) - onlineOrder.indexOf(b.id);
+              if (aOnline && !bOnline) return -1;
+              if (!aOnline && bOnline) return 1;
+              return 0;
+            });
+
+          return (
+            <>
+              {realRows.map((u) => {
             return (
               <div
                 key={`real-${u.id}`}
@@ -136,18 +174,18 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
               >
                 <div className="relative flex-shrink-0">
                   <img
-                    src={primary}
-                    alt={u.full_name}
+                    src={u.primary}
+                    alt={u.displayName}
                     className="h-8 w-8 rounded-full object-cover bg-secondary"
                     onError={(e) => {
                       const img = e.currentTarget;
-                      if (img.src !== fallback) img.src = fallback;
+                      if (img.src !== u.fallback) img.src = u.fallback;
                     }}
                   />
                   <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online" />
                 </div>
                 <div className="min-w-0 flex-1 flex items-center gap-1.5">
-                  <span className="text-[13px] truncate text-foreground font-medium">{u.full_name}</span>
+                  <span className="text-[13px] truncate text-foreground font-medium">{u.displayName}</span>
                   <span className="rounded-full bg-online/15 text-online px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-wide flex-shrink-0">
                     Online
                   </span>
@@ -157,18 +195,12 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
           })}
 
 
-        {mergedReal.length > 0 && (
+        {realRows.length > 0 && (
 
           <div className="my-1 mx-2 border-t border-chat-divider" />
         )}
 
-        {users.filter(filterFn).sort((a, b) => {
-          const aOnline = onlineIds.has(a.id);
-          const bOnline = onlineIds.has(b.id);
-          if (aOnline && !bOnline) return -1;
-          if (!aOnline && bOnline) return 1;
-          return 0;
-        }).map((u) => {
+        {syntheticRows.map((u) => {
           const isOnline = onlineIds.has(u.id);
           return (
             <div
@@ -194,6 +226,9 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
             </div>
           );
         })}
+            </>
+          );
+        })()}
       </div>
 
     </div>

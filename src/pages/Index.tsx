@@ -35,6 +35,7 @@ export default function Index() {
           avatar_url: profile.avatar_url,
           city: profile.city,
           age: profile.age,
+          gender: profile.gender,
         }
       : null
   );
@@ -178,6 +179,7 @@ export default function Index() {
           onBack={handleBackToList}
           onManageGroup={activeGroup ? () => setManageGroupId(activeGroup.id) : undefined}
           onStartChat={handleStartChat}
+          onlineIds={onlineIds}
         />
       </div>
 
@@ -191,7 +193,7 @@ export default function Index() {
         />
       </div>
 
-      <NewUserCard />
+      <NewUserCard onlineIds={onlineIds} />
 
       {profileUserId && (
         <ProfileModal
@@ -202,6 +204,7 @@ export default function Index() {
           onMatch={(userId) => addMatch(userId, "given")}
           onUnmatch={(userId) => removeMatch(userId)}
           onStartChat={handleStartChat}
+          onlineIds={onlineIds}
         />
       )}
 
