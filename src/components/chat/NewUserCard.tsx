@@ -45,7 +45,7 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
   const onlineIdsRef = useRef(onlineIds);
   onlineIdsRef.current = onlineIds;
 
-  const realProfiles = useRealNewUsers(30);
+  const realProfiles = useRealNewUsers(20);
   const shownRealIds = useRef<Set<string>>(new Set());
   const seenRealIds = useRef<Set<string>>(new Set());
   const isFirstRealSync = useRef(true);
