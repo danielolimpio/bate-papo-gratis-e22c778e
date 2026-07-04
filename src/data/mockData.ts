@@ -485,7 +485,7 @@ function makeUniqueInitialAvatar(id: string, gender?: string | null, name?: stri
   const hue = hashId(id) % 360;
   const accent = isFemale ? `hsl(${(hue + 330) % 360} 72% 52%)` : `hsl(${(hue + 205) % 360} 70% 44%)`;
   const base = isFemale ? `hsl(${(hue + 350) % 360} 56% 28%)` : `hsl(${(hue + 220) % 360} 54% 24%)`;
-  const text = encodeURIComponent(initialsFromName(name));
+  const text = initialsFromName(name);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${base}"/><stop offset="1" stop-color="${accent}"/></linearGradient></defs><rect width="96" height="96" rx="48" fill="url(#g)"/><circle cx="70" cy="25" r="18" fill="rgba(255,255,255,.16)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="white">${text}</text></svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
