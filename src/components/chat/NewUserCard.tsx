@@ -84,7 +84,7 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
       const visibleReal = [
         ...realProfiles.slice(0, 4),
         ...realProfiles.filter((p) => p.avatar_url).slice(0, 6),
-      ].filter((p, index, arr) => arr.findIndex((x) => x.id === p.id) === index);
+      ].filter((p, index, arr) => arr.findIndex((x) => x.id === p.id) === index).slice(0, 8);
       const pool = visibleReal.filter((p) => !shownRealIds.current.has(p.id));
       if (pool.length === 0) return null;
       const p = pool[Math.floor(Math.random() * pool.length)];
