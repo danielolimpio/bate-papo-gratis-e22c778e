@@ -335,28 +335,28 @@ export const generalChatMessages: Message[] = [
   { id: "g8", conversationId: "general", senderId: "10", text: "Goiânia! Prazer 🤝", timestamp: "13:14", isRead: true },
   { id: "g9", conversationId: "general", senderId: "12", text: "Eae galera, bom dia pra quem tá chegando agora!", timestamp: "13:20", isRead: true },
   { id: "g10", conversationId: "general", senderId: "9", text: "Bom diaa! ☀️ Primeira vez aqui no Bate-Papo Grátis", timestamp: "13:22", isRead: true },
-  { id: "g11", conversationId: "general", senderId: "1", text: "Bem-vinda Beatriz! Aqui é muito legal 💜", timestamp: "13:25", isRead: true },
+  { id: "g11", conversationId: "general", senderId: "1", text: "Bem-vinda Milena! Aqui é muito legal 💜", timestamp: "13:25", isRead: true },
   { id: "g12", conversationId: "general", senderId: "4", text: "Alguém de Curitiba? Bora marcar um café ☕", timestamp: "13:30", isRead: true },
 ];
 
 export const messagesByConversation: Record<string, Message[]> = {
   c1: [
     { id: "m1", conversationId: "c1", senderId: "1", text: "Oi! Vi seu perfil e achei super interessante 😊", timestamp: "14:30", isRead: true },
-    { id: "m2", conversationId: "c1", senderId: "me", text: "Oi Camila! Obrigado, o seu também é muito legal!", timestamp: "14:32", isRead: true },
+    { id: "m2", conversationId: "c1", senderId: "me", text: "Oi Gislaine! Obrigado, o seu também é muito legal!", timestamp: "14:32", isRead: true },
     { id: "m3", conversationId: "c1", senderId: "1", text: "Você é de São Paulo mesmo?", timestamp: "14:33", isRead: true },
     { id: "m4", conversationId: "c1", senderId: "me", text: "Sim! E você do Rio, né? Adoro o Rio!", timestamp: "14:35", isRead: true },
     { id: "m5", conversationId: "c1", senderId: "1", text: "Sim! Aqui é maravilhoso. Você deveria visitar 😄", timestamp: "14:36", isRead: true },
     { id: "m6", conversationId: "c1", senderId: "1", text: "Oi, tudo bem? 😊", timestamp: "14:50", isRead: false },
   ],
   c2: [
-    { id: "m7", conversationId: "c2", senderId: "me", text: "E aí Aline, como vai?", timestamp: "12:00", isRead: true },
+    { id: "m7", conversationId: "c2", senderId: "me", text: "E aí Lucimara, como vai?", timestamp: "12:00", isRead: true },
     { id: "m8", conversationId: "c2", senderId: "3", text: "Tudo ótimo! E você?", timestamp: "12:05", isRead: true },
     { id: "m9", conversationId: "c2", senderId: "me", text: "Também! O que vai fazer hoje?", timestamp: "12:10", isRead: true },
     { id: "m10", conversationId: "c2", senderId: "3", text: "Vamos sair hoje?", timestamp: "12:15", isRead: true },
   ],
   c3: [
     { id: "m11", conversationId: "c3", senderId: "5", text: "Oi! Adorei suas fotos!", timestamp: "11:00", isRead: true },
-    { id: "m12", conversationId: "c3", senderId: "me", text: "Obrigado Fernanda! As suas também são lindas!", timestamp: "11:05", isRead: true },
+    { id: "m12", conversationId: "c3", senderId: "me", text: "Obrigado Adriele! As suas também são lindas!", timestamp: "11:05", isRead: true },
     { id: "m13", conversationId: "c3", senderId: "5", text: "Que foto linda!", timestamp: "11:30", isRead: false },
   ],
 };
