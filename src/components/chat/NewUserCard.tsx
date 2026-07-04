@@ -42,6 +42,8 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
   const [user, setUser] = useState<DisplayUser | null>(null);
   const [cardType, setCardType] = useState<CardType>("register");
   const [visible, setVisible] = useState(false);
+  const onlineIdsRef = useRef(onlineIds);
+  onlineIdsRef.current = onlineIds;
 
   const realProfiles = useRealNewUsers(30);
   const shownRealIds = useRef<Set<string>>(new Set());
@@ -79,7 +81,11 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
     let nextTimer: ReturnType<typeof setTimeout>;
 
     const pickReal = (): DisplayUser | null => {
-      const pool = realProfiles.filter((p) => !shownRealIds.current.has(p.id));
+      const visibleReal = [
+        ...realProfiles.slice(0, 4),
+        ...realProfiles.filter((p) => p.avatar_url).slice(0, 6),
+      ].filter((p, index, arr) => arr.findIndex((x) => x.id === p.id) === index);
+      const pool = visibleReal.filter((p) => !shownRealIds.current.has(p.id));
       if (pool.length === 0) return null;
       const p = pool[Math.floor(Math.random() * pool.length)];
       shownRealIds.current.add(p.id);
@@ -99,7 +105,7 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
       const type: CardType = Math.random() > 0.5 ? "register" : "online";
       // Prefer real users ~60% of the time when available
       const real = Math.random() < 0.6 ? pickReal() : null;
-      setUser(real ?? pickRandomDisplayUser(onlineIds));
+      setUser(real ?? pickRandomDisplayUser(onlineIdsRef.current));
       setCardType(type);
       setVisible(true);
       hideTimer = setTimeout(() => setVisible(false), 5000);
@@ -123,7 +129,7 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
       clearTimeout(hideTimer);
       clearTimeout(nextTimer);
     };
-  }, [realProfiles, onlineIds]);
+  }, [realProfiles]);
 
   return (
     <AnimatePresence>
