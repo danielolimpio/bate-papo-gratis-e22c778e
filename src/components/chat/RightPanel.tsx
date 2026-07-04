@@ -142,9 +142,9 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
           const realRows = mergedReal
             .filter((u) => displayRealName(u.full_name, u.city).toLowerCase().includes(search.toLowerCase()))
             .map((u) => {
-              const fallback = getUniqueGenderFallbackAvatar(u.id, u.gender, usedAvatars, u.full_name);
               const uploaded = resolveProfileAvatarUrl(u.avatar_url);
-              const primary = uploaded || fallback;
+              const fallback = getUniqueGenderFallbackAvatar(u.id, u.gender, usedAvatars, u.full_name);
+              const primary = uploaded && !usedAvatars.has(uploaded) ? uploaded : fallback;
               usedAvatars.add(primary);
               return { ...u, displayName: displayRealName(u.full_name, u.city), primary, fallback };
             });

@@ -150,7 +150,7 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
               {cardType === "register" ? "Novo registro ✨" : "Acabou de entrar 🟢"}
               {user.real && (
                 <span className="ml-1 rounded-full bg-primary/15 text-primary px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-wide">
-                  Real
+                  Online
                 </span>
               )}
             </p>
