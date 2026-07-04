@@ -12,9 +12,10 @@ interface Props {
   canMatch?: boolean;
   onMatch?: (userId: string) => boolean | void;
   onUnmatch?: (userId: string) => void;
+  onlineIds?: Set<string>;
 }
 
-export default function ProfileModal({ userId, onClose, onStartChat, matchType = null, canMatch = true, onMatch, onUnmatch }: Props) {
+export default function ProfileModal({ userId, onClose, onStartChat, matchType = null, canMatch = true, onMatch, onUnmatch, onlineIds }: Props) {
   const user = users.find((u) => u.id === userId);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [localType, setLocalType] = useState<MatchType | null>(matchType);
@@ -30,6 +31,7 @@ export default function ProfileModal({ userId, onClose, onStartChat, matchType =
   const isMutual = localType === "mutual";
   const isReceived = localType === "received";
   const isGiven = localType === "given";
+  const isOnline = onlineIds?.has(user.id) ?? user.isOnline;
 
   const handleMatchClick = () => {
     if (isMutual) {
@@ -169,7 +171,7 @@ export default function ProfileModal({ userId, onClose, onStartChat, matchType =
               )}
             </div>
 
-            {user.isOnline && (
+            {isOnline && (
               <div className="mt-4 flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-online" />
                 <span className="text-xs text-muted-foreground">Online agora</span>

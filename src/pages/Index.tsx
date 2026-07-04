@@ -179,6 +179,7 @@ export default function Index() {
           onBack={handleBackToList}
           onManageGroup={activeGroup ? () => setManageGroupId(activeGroup.id) : undefined}
           onStartChat={handleStartChat}
+          onlineIds={onlineIds}
         />
       </div>
 
@@ -203,6 +204,7 @@ export default function Index() {
           onMatch={(userId) => addMatch(userId, "given")}
           onUnmatch={(userId) => removeMatch(userId)}
           onStartChat={handleStartChat}
+          onlineIds={onlineIds}
         />
       )}
 

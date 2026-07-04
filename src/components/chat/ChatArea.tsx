@@ -18,9 +18,10 @@ interface Props {
   onBack?: () => void;
   onManageGroup?: () => void;
   onStartChat?: (userId: string) => void;
+  onlineIds?: Set<string>;
 }
 
-export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup, onStartChat }: Props) {
+export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoClick, onAvatarClick, onBack, onManageGroup, onStartChat, onlineIds }: Props) {
   const [input, setInput] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -39,6 +40,7 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
     : tempUserId
     ? users.find((u) => u.id === tempUserId)
     : null;
+  const participantOnline = participant ? onlineIds?.has(participant.id) ?? participant.isOnline : false;
 
   // Schedule fake replies from fictional participants in private chats
   useFakeReplies(
@@ -147,14 +149,14 @@ export default function ChatArea({ conversationId, chatMode, groupInfo, onInfoCl
             <div className="flex items-center gap-3 cursor-pointer min-w-0" onClick={() => onAvatarClick(participant!.id)}>
               <div className="relative flex-shrink-0">
                 <img src={participant!.avatar} alt={participant!.name} className="h-10 w-10 rounded-full object-cover" />
-                {participant!.isOnline && (
+                {participantOnline && (
                   <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-chat-bg bg-online" />
                 )}
               </div>
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold text-foreground truncate">{participant!.name}</h3>
                 <p className="text-xs text-muted-foreground truncate">
-                  {participant!.isOnline ? "Online agora" : `Online ${participant!.lastSeen}`}
+                  {participantOnline ? "Online agora" : `Online ${participant!.lastSeen}`}
                 </p>
               </div>
             </div>
