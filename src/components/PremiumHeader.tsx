@@ -12,6 +12,7 @@ import logo from "@/assets/logo-batepapo.png";
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/quem-somos", label: "Quem Somos" },
+  { to: "/blog", label: "Blog" },
   { to: "/bate-papo-sem-cadastro", label: "Bate-Papo Sem Cadastro" },
   { to: "/sala-de-bate-papo", label: "Sala de Bate-Papo" },
   { to: "/chat-gratis", label: "Chat Grátis" },
