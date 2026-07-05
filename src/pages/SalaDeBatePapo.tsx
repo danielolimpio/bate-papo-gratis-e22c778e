@@ -20,6 +20,30 @@ export default function SalaDeBatePapo() {
     {
       q: "Quantas pessoas ficam na sala bate papo gratis ao mesmo tempo?",
       a: "Temos centenas de usuários ativos diariamente. Sempre tem alguém online para conversar, a qualquer hora."
+    },
+    {
+      q: "A sala de bate papo brasileira funciona ao vivo 24 horas?",
+      a: "Sim. Nossa sala de bate papo online 24 horas grátis fica sempre disponível. Você encontra brasileiros ativos de madrugada, pela manhã e nos fins de semana, com mensagens em tempo real."
+    },
+    {
+      q: "Tem sala de bate papo para conhecer gente da minha região?",
+      a: "Sim. Além da sala geral, o perfil de cada usuário mostra a cidade e estado, funcionando como uma sala de bate papo regional brasileira para quem quer conversar com gente próxima."
+    },
+    {
+      q: "Posso usar áudios e ver fotos dos perfis na sala?",
+      a: "Pode. Na sala geral é possível enviar áudios de voz, e cada perfil traz fotos verificáveis — uma experiência de sala de bate papo com áudios, fotos e reações, sem custo."
+    },
+    {
+      q: "Existe sala de bate papo para adultos brasileiros e para solteiros?",
+      a: "Nossa sala de bate papo é aberta a adultos brasileiros que buscam amizade, paquera e conversa saudável. É bastante procurada por solteiros e solteiras que querem conhecer gente nova sem propaganda invasiva."
+    },
+    {
+      q: "Existe sistema de matchs dentro da sala?",
+      a: "Sim. Nossa sala de bate papo online tem sistema de matchs: quando o interesse é mútuo, a conversa entre os dois ganha destaque com o efeito Apaixonados."
+    },
+    {
+      q: "É uma sala de bate papo com moderação?",
+      a: "Sim. A sala de bate papo brasileira do Bate-Papo Grátis tem moderação ativa 24h, denúncia rápida e regras claras — mantendo o ambiente respeitoso para todos."
     }
   ];
 
