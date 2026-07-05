@@ -1,36 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { CheckCircle, Lock, Zap, Users, MessageCircle, Shield } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo sem cadastro grátis brasileiro",
-  "chat online sem cadastro e sem instalação",
-  "bate papo sem cadastro para celular android",
-  "bate papo sem cadastro no iphone",
-  "chat sem cadastro sem login no navegador",
-  "sala de bate papo sem registrar email",
-  "bate papo grátis sem precisar fazer cadastro",
-  "chat anônimo brasileiro sem cadastro",
-  "bate papo sem cadastro para mulheres conversar",
-  "bate papo sem cadastro para homens conversar",
-  "bate papo online ao vivo sem cadastro 2026",
-  "chat sem cadastro para fazer amizade rápido",
-  "bate papo sem cadastro com apelido livre",
-  "conversar online sem cadastro grátis",
-  "chat web sem cadastro brasileiro",
-  "bate papo sem cadastro com pessoas reais",
-  "chat gratis sem cadastro e sem login",
-  "bate papo sem se cadastrar em listas pagas",
-  "chat na internet sem cadastro brasileiro",
-  "bate papo livre sem cadastro online",
-  "sala de chat sem cadastro brasileira 24h",
-  "bate papo sem registrar conta de email",
-  "chat gratis sem registro e sem download",
-  "bate papo express sem cadastro complicado",
-  "chat online sem cadastro com moderação ativa",
-];
 
 export default function BatePapoSemCadastro() {
   const faq = [
@@ -148,12 +119,6 @@ export default function BatePapoSemCadastro() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          intro="Variações de busca que levam ao nosso bate-papo sem cadastro — sinônimos comuns no Brasil:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/sala-de-bate-papo" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Sala de Bate-Papo Grátis</Link></li>

@@ -1,36 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Users, MessageCircle, Globe, Heart } from "lucide-react";
-
-const longTailTerms = [
-  "sala de bate papo grátis brasileira ao vivo",
-  "sala de bate papo online 24 horas grátis",
-  "sala de bate papo brasileira ativa hoje",
-  "sala de bate papo gratis com áudio de voz",
-  "sala de bate papo grátis para conhecer gente",
-  "entrar em sala de bate papo agora mesmo",
-  "salas de bate papo gratuitas em português",
-  "sala de bate papo grátis para adultos brasileiros",
-  "sala de bate papo para amizade gratis 2026",
-  "sala de bate papo regional brasileira",
-  "sala de bate papo com mensagens em tempo real",
-  "sala bate papo online com sistema de matchs",
-  "sala de bate papo para flertar gratis",
-  "sala bate papo grátis com fotos no perfil",
-  "sala de papo online brasileira ao vivo",
-  "sala de bate papo gratis para fazer amigos",
-  "sala bate papo brasileira sem propaganda",
-  "sala de chat online gratis em português",
-  "sala de bate papo para paquerar brasil",
-  "sala bate papo online com moderação 24h",
-  "sala de bate papo grátis com pessoas reais",
-  "sala de bate papo nacional brasileira",
-  "sala bate papo grátis com áudios e reações",
-  "sala de bate papo para solteiros brasileiros",
-  "sala de bate papo gratuita com efeito apaixonados",
-];
 
 export default function SalaDeBatePapo() {
   const faq = [
@@ -139,13 +110,6 @@ export default function SalaDeBatePapo() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          accent="amber"
-          intro="Pesquisas reais que levam à nossa sala de bate-papo — escolha a sua e entre agora:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/bate-papo-sem-cadastro" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Bate-Papo Sem Cadastro</Link></li>

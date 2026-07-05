@@ -1,41 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Heart, Sparkles, Users, MessageCircle } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo grátis para namoro sério brasileiro",
-  "chat para namoro gratis com pessoas reais",
-  "bate papo de paquera grátis brasileiro 2026",
-  "chat para fazer amizade online grátis",
-  "bate papo para encontrar o amor da vida",
-  "site de relacionamento gratuito 100% brasileiro",
-  "chat para casal feliz e duradouro",
-  "bate papo casal apaixonado online",
-  "chat para encontrar alma gêmea grátis",
-  "bate papo grátis para solteiros e solteiras",
-  "chat para namorar de verdade online",
-  "bate papo para flertar com segurança",
-  "chat para conhecer mulheres solteiras brasileiras",
-  "chat para conhecer homens solteiros brasileiros",
-  "bate papo grátis para relacionamento à distância",
-  "chat para casais felizes e românticos",
-  "bate papo namoro online com sistema de matchs",
-  "chat para conversa romântica online gratis",
-  "bate papo de amor brasileiro grátis",
-  "chat de paquera online brasileiro 2026",
-  "bate papo para encontrar par perfeito",
-  "chat para namoro sério e duradouro grátis",
-  "bate papo para amizade verdadeira online",
-  "chat de relacionamento com efeito apaixonados",
-  "bate papo grátis para casais felizes brasileiros",
-  "chat para casal feliz e apaixonado online",
-  "bate papo para flerte brasileiro grátis",
-  "chat para conhecer pessoas para namorar",
-  "bate papo para casais que se conheceram online",
-  "chat romântico gratis para brasileiros",
-];
 
 export default function BatePapoAmizadeNamoro() {
   const faq = [
@@ -131,14 +97,6 @@ export default function BatePapoAmizadeNamoro() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          accent="pink"
-          title="Para casais felizes e quem busca o amor"
-          intro="Termos de cauda longa que conectam pessoas reais — amizade, paquera, namoro sério e casais felizes que se conheceram aqui:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/bate-papo-sem-cadastro" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Bate-Papo Sem Cadastro</Link></li>

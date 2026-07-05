@@ -1,36 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Camera, Image as ImageIcon, Mic, ShieldCheck } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo com webcam gratis brasileiro",
-  "chat com webcam gratis sem cadastro complicado",
-  "bate papo com câmera online ao vivo gratuito",
-  "chat com fotos no perfil grátis brasil",
-  "bate papo com álbum de fotos gratis",
-  "chat com áudio e fotos brasileiro gratis",
-  "bate papo web cam grátis brasil 2026",
-  "chat com webcam alternativa segura e moderada",
-  "bate papo com imagem de perfil gratuita",
-  "chat com fotos privadas entre dois usuários",
-  "bate papo webcam moderado e seguro",
-  "chat com vídeo de perfil gratis brasileiro",
-  "bate papo com galeria de imagens grátis",
-  "chat com fotos para paquera online",
-  "bate papo webcam sem nudez e sem golpe",
-  "chat de webcam brasileiro com perfil completo",
-  "bate papo com câmera grátis para celular",
-  "chat com foto e áudio em tempo real",
-  "bate papo visual gratis com brasileiros",
-  "chat com imagens privadas seguras",
-  "bate papo webcam alternativa moderna 2026",
-  "chat com webcam grátis para amizade",
-  "bate papo com foto de perfil verificada",
-  "chat com fotos e bio detalhada gratis",
-  "bate papo com áudio na sala brasileira",
-];
 
 export default function BatePapoWebcam() {
   const faq = [
@@ -137,12 +108,6 @@ export default function BatePapoWebcam() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          intro="Buscas comuns no nicho de bate-papo com webcam — todas atendidas pela nossa proposta visual e segura:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/bate-papo-sem-cadastro" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Bate-Papo Sem Cadastro</Link></li>

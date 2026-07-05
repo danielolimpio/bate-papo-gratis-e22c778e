@@ -1,30 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Shield, AlertTriangle, Ban, Eye, UserCheck, Lock, Heart, CheckCircle, XCircle } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo de namoro seguro brasileiro",
-  "chat para amizade segura online grátis",
-  "site de relacionamento gratuito e seguro",
-  "bate papo paquera grátis com moderação",
-  "dicas de segurança em bate papo online",
-  "como namorar online com segurança grátis",
-  "bate papo grátis com pessoas verificadas",
-  "chat seguro para casal feliz e duradouro",
-  "bate papo para amizade real e segura",
-  "chat na internet seguro para mulheres",
-  "chat na internet seguro para homens",
-  "namoro online seguro para casais felizes",
-  "bate papo grátis com denúncia e moderação",
-  "chat seguro para encontrar alma gêmea",
-  "bate papo grátis sem golpes brasileiros",
-  "chat para namoro à distância seguro",
-  "dicas para encontro presencial seguro",
-  "bate papo grátis com regras claras de convivência",
-  "site de namoro grátis com proteção de dados",
-  "chat grátis com tolerância zero a golpes",
-];
 
 export default function NamoroSeguro() {
   return (
@@ -160,14 +136,6 @@ export default function NamoroSeguro() {
           <span className="text-sm text-gray-700">Evite encontrar-se pessoalmente sem precauções: informe um amigo, encontre-se em local público e garanta transporte seguro.</span>
         </div>
       </div>
-
-      <LongTailTopics
-        accent="pink"
-        title="Namoro seguro & casais felizes — termos relacionados"
-        intro="Variações de busca que ajudam pessoas a encontrar amor e amizade com segurança no Brasil:"
-        terms={longTailTerms}
-      />
-
       <div className="mt-10 bg-gradient-to-r from-blue-600 to-amber-500 rounded-2xl p-6 text-center shadow-lg">
         <Heart className="mx-auto text-white/80 mb-2" size={28} />
         <p className="text-white font-medium text-sm">Nossa plataforma está comprometida em promover uma comunidade segura, respeitosa e confiável.</p>
