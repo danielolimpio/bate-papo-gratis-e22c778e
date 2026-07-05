@@ -19,6 +19,7 @@ import ChatGratis from "./pages/ChatGratis";
 import BatePapoWebcam from "./pages/BatePapoWebcam";
 import BatePapoAmizadeNamoro from "./pages/BatePapoAmizadeNamoro";
 import SyncStatus from "./pages/SyncStatus";
+import Blog from "./pages/Blog";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAutoResync } from "./hooks/useAutoResync";
 
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/chat-gratis" element={<ChatGratis />} />
           <Route path="/bate-papo-webcam" element={<BatePapoWebcam />} />
           <Route path="/bate-papo-amizade-namoro" element={<BatePapoAmizadeNamoro />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/status-sincronizacao" element={<ProtectedRoute><SyncStatus /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

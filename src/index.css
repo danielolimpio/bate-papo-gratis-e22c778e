@@ -113,3 +113,14 @@
   45% { transform: scale(1.18); }
   60% { transform: scale(1); }
 }
+
+/* Premium editorial typography for content pages */
+.legal-content {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+.legal-content h1,
+.legal-content h2,
+.legal-content h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
+}

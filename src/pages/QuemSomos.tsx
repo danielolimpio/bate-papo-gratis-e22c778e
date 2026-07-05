@@ -1,30 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Heart, Target, Star, Sparkles, Users } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo grátis brasileiro 24 horas",
-  "site de bate papo gratis sem mensalidade",
-  "melhor bate papo grátis do brasil 2026",
-  "comunidade online gratuita para conversar",
-  "portal de bate papo brasileiro nacional",
-  "rede social brasileira de bate papo gratuito",
-  "alternativa moderna ao bate papo uol gratis",
-  "site de chat online gratis confiável",
-  "bate papo grátis para conhecer pessoas novas",
-  "chat na internet gratis em português",
-  "bate papo online ao vivo brasileiro",
-  "site de bate papo grátis sem propaganda invasiva",
-  "história do bate papo na internet brasileira",
-  "bate papo grátis com pessoas reais e ativas",
-  "comunidade de bate papo gratis online",
-  "chat brasileiro gratuito para todas as idades",
-  "bate papo gratis com moderação ativa",
-  "site de bate papo seguro e respeitoso",
-  "bate papo gratis com perfis verificáveis",
-  "portal de chat gratuito brasileiro 2026",
-];
 
 export default function QuemSomos() {
   return (
@@ -101,12 +77,6 @@ export default function QuemSomos() {
 
       <h2><Users size={18} className="text-blue-600 shrink-0" /> Nossa Equipe</h2>
       <p>Somos uma equipe apaixonada por tecnologia e relacionamentos humanos. Trabalhamos todos os dias para criar a melhor experiência de conexão online do Brasil.</p>
-
-      <LongTailTopics
-        intro="Aqui você encontra o que as pessoas mais procuram quando pesquisam por bate-papo, chat online e comunidade brasileira gratuita:"
-        terms={longTailTerms}
-      />
-
       <div className="mt-10 bg-gradient-to-r from-blue-600 to-amber-500 rounded-2xl p-6 text-center shadow-lg">
         <Heart className="mx-auto text-white/80 mb-2" size={28} />
         <p className="text-white font-semibold text-lg">Bate-Papo Grátis — Onde corações se encontram.</p>

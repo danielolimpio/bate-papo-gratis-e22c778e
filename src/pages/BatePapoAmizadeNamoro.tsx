@@ -1,41 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Heart, Sparkles, Users, MessageCircle } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo grátis para namoro sério brasileiro",
-  "chat para namoro gratis com pessoas reais",
-  "bate papo de paquera grátis brasileiro 2026",
-  "chat para fazer amizade online grátis",
-  "bate papo para encontrar o amor da vida",
-  "site de relacionamento gratuito 100% brasileiro",
-  "chat para casal feliz e duradouro",
-  "bate papo casal apaixonado online",
-  "chat para encontrar alma gêmea grátis",
-  "bate papo grátis para solteiros e solteiras",
-  "chat para namorar de verdade online",
-  "bate papo para flertar com segurança",
-  "chat para conhecer mulheres solteiras brasileiras",
-  "chat para conhecer homens solteiros brasileiros",
-  "bate papo grátis para relacionamento à distância",
-  "chat para casais felizes e românticos",
-  "bate papo namoro online com sistema de matchs",
-  "chat para conversa romântica online gratis",
-  "bate papo de amor brasileiro grátis",
-  "chat de paquera online brasileiro 2026",
-  "bate papo para encontrar par perfeito",
-  "chat para namoro sério e duradouro grátis",
-  "bate papo para amizade verdadeira online",
-  "chat de relacionamento com efeito apaixonados",
-  "bate papo grátis para casais felizes brasileiros",
-  "chat para casal feliz e apaixonado online",
-  "bate papo para flerte brasileiro grátis",
-  "chat para conhecer pessoas para namorar",
-  "bate papo para casais que se conheceram online",
-  "chat romântico gratis para brasileiros",
-];
 
 export default function BatePapoAmizadeNamoro() {
   const faq = [
@@ -54,6 +20,30 @@ export default function BatePapoAmizadeNamoro() {
     {
       q: "O que é o efeito 'Apaixonados'?",
       a: "Quando você dá match em alguém que também deu match em você, a conversa ganha um destaque especial 'Apaixonados', com efeito visual exclusivo na lista de conversas."
+    },
+    {
+      q: "Consigo encontrar alguém para namoro sério brasileiro pelo chat?",
+      a: "Muita gente já se conheceu aqui e virou casal feliz. O bate papo grátis para namoro sério brasileiro funciona porque a conversa acontece ao vivo antes do interesse — você conhece a pessoa de verdade, não só a foto."
+    },
+    {
+      q: "É um chat para paquera com pessoas reais do Brasil?",
+      a: "Sim. Diferente de listas pagas, é um chat de paquera online brasileiro com perfis verificáveis, cidade visível e conversa natural. Ideal para quem procura conhecer mulheres solteiras brasileiras ou homens solteiros brasileiros sem burocracia."
+    },
+    {
+      q: "Funciona para relacionamento à distância?",
+      a: "Funciona muito bem. O bate papo grátis para relacionamento à distância aproxima pessoas de estados diferentes com áudios, fotos no privado e sistema de matchs — a conversa evolui no seu ritmo."
+    },
+    {
+      q: "Existe um chat para conversa romântica online grátis?",
+      a: "Existe sim. No privado entre dois usuários você tem um ambiente de chat romântico grátis para brasileiros — troca de áudios, fotos e mensagens em tempo real, com privacidade."
+    },
+    {
+      q: "Tem gente aqui buscando alma gêmea ou só aventura?",
+      a: "Temos os dois perfis, e por isso o sistema de matchs é útil: ele ajuda quem quer encontrar alma gêmea grátis a se conectar com pessoas que buscam a mesma coisa, e separa dos que só querem bate papo casual."
+    },
+    {
+      q: "É gratuito mesmo? Vira mensalidade depois?",
+      a: "Não. É um site de relacionamento gratuito 100% brasileiro. Sem trial que expira, sem cobrança escondida — bate papo namoro online com sistema de matchs, áudios e fotos, sempre grátis."
     }
   ];
 
@@ -131,14 +121,6 @@ export default function BatePapoAmizadeNamoro() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          accent="pink"
-          title="Para casais felizes e quem busca o amor"
-          intro="Termos de cauda longa que conectam pessoas reais — amizade, paquera, namoro sério e casais felizes que se conheceram aqui:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/bate-papo-sem-cadastro" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Bate-Papo Sem Cadastro</Link></li>

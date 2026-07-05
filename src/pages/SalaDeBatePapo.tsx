@@ -1,36 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Users, MessageCircle, Globe, Heart } from "lucide-react";
-
-const longTailTerms = [
-  "sala de bate papo grátis brasileira ao vivo",
-  "sala de bate papo online 24 horas grátis",
-  "sala de bate papo brasileira ativa hoje",
-  "sala de bate papo gratis com áudio de voz",
-  "sala de bate papo grátis para conhecer gente",
-  "entrar em sala de bate papo agora mesmo",
-  "salas de bate papo gratuitas em português",
-  "sala de bate papo grátis para adultos brasileiros",
-  "sala de bate papo para amizade gratis 2026",
-  "sala de bate papo regional brasileira",
-  "sala de bate papo com mensagens em tempo real",
-  "sala bate papo online com sistema de matchs",
-  "sala de bate papo para flertar gratis",
-  "sala bate papo grátis com fotos no perfil",
-  "sala de papo online brasileira ao vivo",
-  "sala de bate papo gratis para fazer amigos",
-  "sala bate papo brasileira sem propaganda",
-  "sala de chat online gratis em português",
-  "sala de bate papo para paquerar brasil",
-  "sala bate papo online com moderação 24h",
-  "sala de bate papo grátis com pessoas reais",
-  "sala de bate papo nacional brasileira",
-  "sala bate papo grátis com áudios e reações",
-  "sala de bate papo para solteiros brasileiros",
-  "sala de bate papo gratuita com efeito apaixonados",
-];
 
 export default function SalaDeBatePapo() {
   const faq = [
@@ -49,6 +20,30 @@ export default function SalaDeBatePapo() {
     {
       q: "Quantas pessoas ficam na sala bate papo gratis ao mesmo tempo?",
       a: "Temos centenas de usuários ativos diariamente. Sempre tem alguém online para conversar, a qualquer hora."
+    },
+    {
+      q: "A sala de bate papo brasileira funciona ao vivo 24 horas?",
+      a: "Sim. Nossa sala de bate papo online 24 horas grátis fica sempre disponível. Você encontra brasileiros ativos de madrugada, pela manhã e nos fins de semana, com mensagens em tempo real."
+    },
+    {
+      q: "Tem sala de bate papo para conhecer gente da minha região?",
+      a: "Sim. Além da sala geral, o perfil de cada usuário mostra a cidade e estado, funcionando como uma sala de bate papo regional brasileira para quem quer conversar com gente próxima."
+    },
+    {
+      q: "Posso usar áudios e ver fotos dos perfis na sala?",
+      a: "Pode. Na sala geral é possível enviar áudios de voz, e cada perfil traz fotos verificáveis — uma experiência de sala de bate papo com áudios, fotos e reações, sem custo."
+    },
+    {
+      q: "Existe sala de bate papo para adultos brasileiros e para solteiros?",
+      a: "Nossa sala de bate papo é aberta a adultos brasileiros que buscam amizade, paquera e conversa saudável. É bastante procurada por solteiros e solteiras que querem conhecer gente nova sem propaganda invasiva."
+    },
+    {
+      q: "Existe sistema de matchs dentro da sala?",
+      a: "Sim. Nossa sala de bate papo online tem sistema de matchs: quando o interesse é mútuo, a conversa entre os dois ganha destaque com o efeito Apaixonados."
+    },
+    {
+      q: "É uma sala de bate papo com moderação?",
+      a: "Sim. A sala de bate papo brasileira do Bate-Papo Grátis tem moderação ativa 24h, denúncia rápida e regras claras — mantendo o ambiente respeitoso para todos."
     }
   ];
 
@@ -139,13 +134,6 @@ export default function SalaDeBatePapo() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          accent="amber"
-          intro="Pesquisas reais que levam à nossa sala de bate-papo — escolha a sua e entre agora:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/bate-papo-sem-cadastro" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Bate-Papo Sem Cadastro</Link></li>

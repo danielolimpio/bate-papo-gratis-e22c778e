@@ -1,36 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { Camera, Image as ImageIcon, Mic, ShieldCheck } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo com webcam gratis brasileiro",
-  "chat com webcam gratis sem cadastro complicado",
-  "bate papo com câmera online ao vivo gratuito",
-  "chat com fotos no perfil grátis brasil",
-  "bate papo com álbum de fotos gratis",
-  "chat com áudio e fotos brasileiro gratis",
-  "bate papo web cam grátis brasil 2026",
-  "chat com webcam alternativa segura e moderada",
-  "bate papo com imagem de perfil gratuita",
-  "chat com fotos privadas entre dois usuários",
-  "bate papo webcam moderado e seguro",
-  "chat com vídeo de perfil gratis brasileiro",
-  "bate papo com galeria de imagens grátis",
-  "chat com fotos para paquera online",
-  "bate papo webcam sem nudez e sem golpe",
-  "chat de webcam brasileiro com perfil completo",
-  "bate papo com câmera grátis para celular",
-  "chat com foto e áudio em tempo real",
-  "bate papo visual gratis com brasileiros",
-  "chat com imagens privadas seguras",
-  "bate papo webcam alternativa moderna 2026",
-  "chat com webcam grátis para amizade",
-  "bate papo com foto de perfil verificada",
-  "chat com fotos e bio detalhada gratis",
-  "bate papo com áudio na sala brasileira",
-];
 
 export default function BatePapoWebcam() {
   const faq = [
@@ -49,6 +20,34 @@ export default function BatePapoWebcam() {
     {
       q: "É seguro usar chat com webcam sem cadastro?",
       a: "Por isso mantemos um cadastro express obrigatório: garante que perfis sejam moderáveis. Veja nossas dicas na página Namoro Seguro antes de qualquer chamada externa."
+    },
+    {
+      q: "É um bate papo com câmera online ao vivo gratuito?",
+      a: "Nossa proposta é um bate papo visual gratuito brasileiro baseado em perfis com fotos verificadas, álbum e vídeo de perfil — mais seguro do que abrir a câmera para desconhecidos, e igualmente rico visualmente."
+    },
+    {
+      q: "Tem álbum de fotos e galeria por usuário?",
+      a: "Tem. Bate papo com álbum de fotos grátis: cada perfil tem foto principal, galeria de imagens adicionais e bio detalhada. É um chat com fotos e bio detalhada grátis, sem esconder nada."
+    },
+    {
+      q: "Existe troca de fotos privadas entre dois usuários?",
+      a: "Existe. No privado é um chat com fotos privadas entre dois usuários, com privacidade e sem exposição pública. Perfeito para quem quer chat com imagens privadas seguras."
+    },
+    {
+      q: "É moderado contra nudez e golpes?",
+      a: "Sim. Bate papo webcam moderado e seguro: temos regras claras contra nudez indevida, denúncia rápida e uma alternativa segura e moderada aos chats de webcam abertos, onde golpes são comuns."
+    },
+    {
+      q: "Serve para paquera e amizade?",
+      a: "Serve. Chat com fotos para paquera online e também chat com webcam grátis para amizade — o perfil visual ajuda a criar afinidade rápido, sem depender só de texto."
+    },
+    {
+      q: "Funciona no celular e no computador?",
+      a: "Funciona. Bate papo com câmera grátis para celular e desktop, direto no navegador, sem app. O bate papo webcam alternativa moderna 2026 acontece dentro do navegador, com foto e áudio em tempo real."
+    },
+    {
+      q: "É preciso ter câmera para participar?",
+      a: "Não. Você pode participar só com foto de perfil e áudio, ou incluir vídeo de perfil se quiser. Um chat de webcam brasileiro com perfil completo, mas sem pressão para expor a câmera ao vivo."
     }
   ];
 
@@ -137,12 +136,6 @@ export default function BatePapoWebcam() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          intro="Buscas comuns no nicho de bate-papo com webcam — todas atendidas pela nossa proposta visual e segura:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/bate-papo-sem-cadastro" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Bate-Papo Sem Cadastro</Link></li>

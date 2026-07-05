@@ -1,36 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import LongTailTopics from "@/components/LongTailTopics";
 import { CheckCircle, Lock, Zap, Users, MessageCircle, Shield } from "lucide-react";
-
-const longTailTerms = [
-  "bate papo sem cadastro grátis brasileiro",
-  "chat online sem cadastro e sem instalação",
-  "bate papo sem cadastro para celular android",
-  "bate papo sem cadastro no iphone",
-  "chat sem cadastro sem login no navegador",
-  "sala de bate papo sem registrar email",
-  "bate papo grátis sem precisar fazer cadastro",
-  "chat anônimo brasileiro sem cadastro",
-  "bate papo sem cadastro para mulheres conversar",
-  "bate papo sem cadastro para homens conversar",
-  "bate papo online ao vivo sem cadastro 2026",
-  "chat sem cadastro para fazer amizade rápido",
-  "bate papo sem cadastro com apelido livre",
-  "conversar online sem cadastro grátis",
-  "chat web sem cadastro brasileiro",
-  "bate papo sem cadastro com pessoas reais",
-  "chat gratis sem cadastro e sem login",
-  "bate papo sem se cadastrar em listas pagas",
-  "chat na internet sem cadastro brasileiro",
-  "bate papo livre sem cadastro online",
-  "sala de chat sem cadastro brasileira 24h",
-  "bate papo sem registrar conta de email",
-  "chat gratis sem registro e sem download",
-  "bate papo express sem cadastro complicado",
-  "chat online sem cadastro com moderação ativa",
-];
 
 export default function BatePapoSemCadastro() {
   const faq = [
@@ -49,6 +20,34 @@ export default function BatePapoSemCadastro() {
     {
       q: "É seguro usar uma sala de bate papo sem cadastro?",
       a: "Sim. Investimos em moderação ativa, denúncias rápidas e regras claras de convivência. Veja nossa página de Namoro Seguro para dicas de segurança."
+    },
+    {
+      q: "Funciona no Android e no iPhone?",
+      a: "Funciona nos dois. O bate papo sem cadastro para celular Android e o bate papo sem cadastro no iPhone rodam direto no navegador — sem baixar app, sem ocupar espaço no telefone."
+    },
+    {
+      q: "Consigo entrar sem informar meu e-mail?",
+      a: "Praticamente. O cadastro é reduzido ao mínimo essencial — bem próximo de um bate papo sem registrar conta de e-mail formal. Não pedimos documentos, telefone nem dados financeiros."
+    },
+    {
+      q: "Posso escolher qualquer apelido?",
+      a: "Pode sim. É um bate papo sem cadastro com apelido livre: escolha um nome que combine com você, dentro das regras de respeito da comunidade."
+    },
+    {
+      q: "É um chat anônimo brasileiro?",
+      a: "É bem próximo disso. Nosso chat funciona como um chat anônimo brasileiro sem cadastro tradicional — você aparece apenas com apelido, foto opcional e cidade. Nada além disso é exposto."
+    },
+    {
+      q: "Serve tanto para mulheres quanto para homens conversarem?",
+      a: "Sim. Muitas usuárias procuram bate papo sem cadastro para mulheres conversar em ambiente respeitoso, e muitos homens buscam bate papo sem cadastro para homens conversar sem julgamento. Todos são bem-vindos."
+    },
+    {
+      q: "É um chat sem download e sem instalação?",
+      a: "É. Um chat grátis sem registro e sem download: tudo acontece no navegador. Nada de baixar aplicativo, nada de instalação."
+    },
+    {
+      q: "Tem moderação ativa mesmo sem cadastro pesado?",
+      a: "Tem. Somos um chat online sem cadastro com moderação ativa 24h — o cadastro mínimo existe justamente para permitir que a moderação funcione contra abusos e perfis falsos."
     }
   ];
 
@@ -148,12 +147,6 @@ export default function BatePapoSemCadastro() {
             </details>
           ))}
         </div>
-
-        <LongTailTopics
-          intro="Variações de busca que levam ao nosso bate-papo sem cadastro — sinônimos comuns no Brasil:"
-          terms={longTailTerms}
-        />
-
         <h2 className="mt-12">Veja também</h2>
         <ul className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
           <li><Link to="/sala-de-bate-papo" className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-gray-700 transition-colors">→ Sala de Bate-Papo Grátis</Link></li>
