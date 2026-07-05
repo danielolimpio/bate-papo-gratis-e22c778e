@@ -19,6 +19,7 @@ import ChatGratis from "./pages/ChatGratis";
 import BatePapoWebcam from "./pages/BatePapoWebcam";
 import BatePapoAmizadeNamoro from "./pages/BatePapoAmizadeNamoro";
 import SyncStatus from "./pages/SyncStatus";
+import Blog from "./pages/Blog";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAutoResync } from "./hooks/useAutoResync";
 
