@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import LegalLayout from "@/components/LegalLayout";
-import { Calendar, Clock, ArrowRight, BookOpen, Sparkles, MessageCircle, Heart, Shield, Users, Camera } from "lucide-react";
+import { Calendar, Clock, ArrowRight, BookOpen, Sparkles, MessageCircle, Heart, Shield, Users, Camera, type LucideIcon } from "lucide-react";
 
 interface Post {
   slug: string;
@@ -10,7 +10,7 @@ interface Post {
   date: string;
   readTime: string;
   category: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: LucideIcon;
   accent: string;
   to: string;
 }

@@ -52,6 +52,7 @@ const App = () => (
           <Route path="/chat-gratis" element={<ChatGratis />} />
           <Route path="/bate-papo-webcam" element={<BatePapoWebcam />} />
           <Route path="/bate-papo-amizade-namoro" element={<BatePapoAmizadeNamoro />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/status-sincronizacao" element={<ProtectedRoute><SyncStatus /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
