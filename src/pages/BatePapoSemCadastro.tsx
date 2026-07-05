@@ -20,6 +20,34 @@ export default function BatePapoSemCadastro() {
     {
       q: "É seguro usar uma sala de bate papo sem cadastro?",
       a: "Sim. Investimos em moderação ativa, denúncias rápidas e regras claras de convivência. Veja nossa página de Namoro Seguro para dicas de segurança."
+    },
+    {
+      q: "Funciona no Android e no iPhone?",
+      a: "Funciona nos dois. O bate papo sem cadastro para celular Android e o bate papo sem cadastro no iPhone rodam direto no navegador — sem baixar app, sem ocupar espaço no telefone."
+    },
+    {
+      q: "Consigo entrar sem informar meu e-mail?",
+      a: "Praticamente. O cadastro é reduzido ao mínimo essencial — bem próximo de um bate papo sem registrar conta de e-mail formal. Não pedimos documentos, telefone nem dados financeiros."
+    },
+    {
+      q: "Posso escolher qualquer apelido?",
+      a: "Pode sim. É um bate papo sem cadastro com apelido livre: escolha um nome que combine com você, dentro das regras de respeito da comunidade."
+    },
+    {
+      q: "É um chat anônimo brasileiro?",
+      a: "É bem próximo disso. Nosso chat funciona como um chat anônimo brasileiro sem cadastro tradicional — você aparece apenas com apelido, foto opcional e cidade. Nada além disso é exposto."
+    },
+    {
+      q: "Serve tanto para mulheres quanto para homens conversarem?",
+      a: "Sim. Muitas usuárias procuram bate papo sem cadastro para mulheres conversar em ambiente respeitoso, e muitos homens buscam bate papo sem cadastro para homens conversar sem julgamento. Todos são bem-vindos."
+    },
+    {
+      q: "É um chat sem download e sem instalação?",
+      a: "É. Um chat grátis sem registro e sem download: tudo acontece no navegador. Nada de baixar aplicativo, nada de instalação."
+    },
+    {
+      q: "Tem moderação ativa mesmo sem cadastro pesado?",
+      a: "Tem. Somos um chat online sem cadastro com moderação ativa 24h — o cadastro mínimo existe justamente para permitir que a moderação funcione contra abusos e perfis falsos."
     }
   ];
 

@@ -20,6 +20,34 @@ export default function ChatGratis() {
     {
       q: "Como funciona o chat sem cadastro aqui?",
       a: "O cadastro é express e gratuito, só para garantir a segurança. Veja a página Bate-Papo Sem Cadastro para entender por que escolhemos esse modelo."
+    },
+    {
+      q: "Funciona sem baixar nada no celular?",
+      a: "Sim. É um chat grátis sem baixar nada no celular: abre direto no navegador do Android ou iPhone. Não ocupa espaço e não pede permissões estranhas."
+    },
+    {
+      q: "Serve para conversar com mulheres e com homens?",
+      a: "Sim. Muitos usuários buscam chat grátis para conversar com mulheres em ambiente respeitoso, e muitas usuárias buscam chat grátis para conversar com homens sem exposição. A comunidade é equilibrada e moderada."
+    },
+    {
+      q: "Tem áudio de voz e troca de fotos?",
+      a: "Tem. Na sala geral existe áudio de voz brasileiro, e no privado a troca de fotos entre dois usuários é permitida. Um chat online gratuito com fotos e áudio real."
+    },
+    {
+      q: "Custa alguma coisa depois de um tempo?",
+      a: "Não. É um chat online gratuito sem mensalidade: nada de trial que expira nem cobrança futura. O melhor chat grátis brasileiro 2026 não pode virar armadilha paga — nosso compromisso é permanecer gratuito."
+    },
+    {
+      q: "Serve para namoro sério ou só para amizade?",
+      a: "Serve para os dois. É um chat gratuito para amizade e paquera, e também um chat online grátis para namoro sério — o sistema de matchs ajuda a sinalizar a intenção."
+    },
+    {
+      q: "É seguro e moderado?",
+      a: "Sim. Chat online grátis seguro e moderado 24h, com denúncia rápida, bloqueio e regras claras. Prezamos por um chat de bate papo gratuito brasileiro respeitoso."
+    },
+    {
+      q: "Tem emojis e reações?",
+      a: "Tem. Chat grátis com emojis e reações completas: seletor de emojis, reações rápidas nas mensagens e áudio. Experiência moderna, sem parecer um chat antigo."
     }
   ];
 

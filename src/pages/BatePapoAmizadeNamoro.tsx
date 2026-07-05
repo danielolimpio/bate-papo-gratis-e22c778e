@@ -20,6 +20,30 @@ export default function BatePapoAmizadeNamoro() {
     {
       q: "O que é o efeito 'Apaixonados'?",
       a: "Quando você dá match em alguém que também deu match em você, a conversa ganha um destaque especial 'Apaixonados', com efeito visual exclusivo na lista de conversas."
+    },
+    {
+      q: "Consigo encontrar alguém para namoro sério brasileiro pelo chat?",
+      a: "Muita gente já se conheceu aqui e virou casal feliz. O bate papo grátis para namoro sério brasileiro funciona porque a conversa acontece ao vivo antes do interesse — você conhece a pessoa de verdade, não só a foto."
+    },
+    {
+      q: "É um chat para paquera com pessoas reais do Brasil?",
+      a: "Sim. Diferente de listas pagas, é um chat de paquera online brasileiro com perfis verificáveis, cidade visível e conversa natural. Ideal para quem procura conhecer mulheres solteiras brasileiras ou homens solteiros brasileiros sem burocracia."
+    },
+    {
+      q: "Funciona para relacionamento à distância?",
+      a: "Funciona muito bem. O bate papo grátis para relacionamento à distância aproxima pessoas de estados diferentes com áudios, fotos no privado e sistema de matchs — a conversa evolui no seu ritmo."
+    },
+    {
+      q: "Existe um chat para conversa romântica online grátis?",
+      a: "Existe sim. No privado entre dois usuários você tem um ambiente de chat romântico grátis para brasileiros — troca de áudios, fotos e mensagens em tempo real, com privacidade."
+    },
+    {
+      q: "Tem gente aqui buscando alma gêmea ou só aventura?",
+      a: "Temos os dois perfis, e por isso o sistema de matchs é útil: ele ajuda quem quer encontrar alma gêmea grátis a se conectar com pessoas que buscam a mesma coisa, e separa dos que só querem bate papo casual."
+    },
+    {
+      q: "É gratuito mesmo? Vira mensalidade depois?",
+      a: "Não. É um site de relacionamento gratuito 100% brasileiro. Sem trial que expira, sem cobrança escondida — bate papo namoro online com sistema de matchs, áudios e fotos, sempre grátis."
     }
   ];
 

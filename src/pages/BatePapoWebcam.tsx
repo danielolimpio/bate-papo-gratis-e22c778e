@@ -20,6 +20,34 @@ export default function BatePapoWebcam() {
     {
       q: "É seguro usar chat com webcam sem cadastro?",
       a: "Por isso mantemos um cadastro express obrigatório: garante que perfis sejam moderáveis. Veja nossas dicas na página Namoro Seguro antes de qualquer chamada externa."
+    },
+    {
+      q: "É um bate papo com câmera online ao vivo gratuito?",
+      a: "Nossa proposta é um bate papo visual gratuito brasileiro baseado em perfis com fotos verificadas, álbum e vídeo de perfil — mais seguro do que abrir a câmera para desconhecidos, e igualmente rico visualmente."
+    },
+    {
+      q: "Tem álbum de fotos e galeria por usuário?",
+      a: "Tem. Bate papo com álbum de fotos grátis: cada perfil tem foto principal, galeria de imagens adicionais e bio detalhada. É um chat com fotos e bio detalhada grátis, sem esconder nada."
+    },
+    {
+      q: "Existe troca de fotos privadas entre dois usuários?",
+      a: "Existe. No privado é um chat com fotos privadas entre dois usuários, com privacidade e sem exposição pública. Perfeito para quem quer chat com imagens privadas seguras."
+    },
+    {
+      q: "É moderado contra nudez e golpes?",
+      a: "Sim. Bate papo webcam moderado e seguro: temos regras claras contra nudez indevida, denúncia rápida e uma alternativa segura e moderada aos chats de webcam abertos, onde golpes são comuns."
+    },
+    {
+      q: "Serve para paquera e amizade?",
+      a: "Serve. Chat com fotos para paquera online e também chat com webcam grátis para amizade — o perfil visual ajuda a criar afinidade rápido, sem depender só de texto."
+    },
+    {
+      q: "Funciona no celular e no computador?",
+      a: "Funciona. Bate papo com câmera grátis para celular e desktop, direto no navegador, sem app. O bate papo webcam alternativa moderna 2026 acontece dentro do navegador, com foto e áudio em tempo real."
+    },
+    {
+      q: "É preciso ter câmera para participar?",
+      a: "Não. Você pode participar só com foto de perfil e áudio, ou incluir vídeo de perfil se quiser. Um chat de webcam brasileiro com perfil completo, mas sem pressão para expor a câmera ao vivo."
     }
   ];
 
