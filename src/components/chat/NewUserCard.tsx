@@ -152,13 +152,8 @@ export default function NewUserCard({ onlineIds }: { onlineIds?: Set<string> }) 
             }}
           />
           <div className="min-w-0 flex-1">
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
+            <p className="text-xs text-muted-foreground">
               {cardType === "register" ? "Novo registro ✨" : "Acabou de entrar 🟢"}
-              {user.real && (
-                <span className="ml-1 rounded-full bg-primary/15 text-primary px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-wide">
-                  Online
-                </span>
-              )}
             </p>
             <p className="text-sm font-semibold text-foreground truncate">{user.name}</p>
             <p className="text-xs text-muted-foreground">{user.age} anos • {user.city}</p>
