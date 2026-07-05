@@ -184,11 +184,8 @@ export default function RightPanel({ onProfileClick, onlineIds, realOnline = [],
                   />
                   <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-[1.5px] border-chat-right-panel bg-online" />
                 </div>
-                <div className="min-w-0 flex-1 flex items-center gap-1.5">
+                <div className="min-w-0 flex-1">
                   <span className="text-[13px] truncate text-foreground font-medium">{u.displayName}</span>
-                  <span className="rounded-full bg-online/15 text-online px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-wide flex-shrink-0">
-                    Online
-                  </span>
                 </div>
               </div>
             );
